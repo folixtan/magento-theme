@@ -1,0 +1,226 @@
+//
+//  Folix Game Theme - Buttons Styles
+//  _____________________________________________
+
+& when (@media-common = true) {
+    //
+    //  Base Button
+    //  ---------------------------------------------
+
+    button,
+    .action.primary,
+    .action.secondary,
+    button.action {
+        font-family: @font-family__base;
+        font-weight: @button__font-weight;
+        border-radius: @button__border-radius;
+        transition: @transition__base;
+        cursor: pointer;
+    }
+
+    //
+    //  Primary Button
+    //  ---------------------------------------------
+
+    button,
+    button.action.primary,
+    .action.primary {
+        background: @color-blue-gradient;
+        color: @color-white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        box-shadow: @shadow-md;
+
+        &:hover,
+        &:focus {
+            background: linear-gradient(135deg, #357ABD, #5A4FCF);
+            transform: translateY(-2px);
+            box-shadow: @shadow-lg;
+            color: @color-white;
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+
+        &:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+
+            &:hover {
+                background: #9CA3AF;
+                transform: none;
+            }
+        }
+    }
+
+    //
+    //  Secondary Button
+    //  ---------------------------------------------
+
+    .action.secondary,
+    button.action.secondary {
+        background: transparent;
+        color: @theme__color__primary;
+        border: 2px solid @theme__color__primary;
+        padding: 10px 22px;
+        font-size: 16px;
+
+        &:hover,
+        &:focus {
+            background: @theme__color__primary;
+            color: @color-white;
+            transform: translateY(-2px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+
+    //
+    //  Action Links
+    //  ---------------------------------------------
+
+    a.action {
+        display: inline-block;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    //
+    //  Small Button
+    //  ---------------------------------------------
+
+    button.small,
+    .action.small {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    //
+    //  Large Button
+    //  ---------------------------------------------
+
+    button.large,
+    .action.large {
+        padding: 16px 32px;
+        font-size: 18px;
+    }
+
+    //
+    //  Full Width Button
+    //  ---------------------------------------------
+
+    button.full-width,
+    .action.full-width {
+        width: 100%;
+    }
+
+    //
+    //  Icon Button
+    //  ---------------------------------------------
+
+    button.icon,
+    .action.icon {
+        padding: 8px;
+        background: transparent;
+        border: 1px solid #E5E7EB;
+        color: #6B7280;
+        box-shadow: none;
+
+        &:hover {
+            border-color: @theme__color__primary;
+            color: @theme__color__primary;
+            background: transparent;
+            transform: none;
+        }
+    }
+
+    //
+    //  Danger Button
+    //  ---------------------------------------------
+
+    button.danger,
+    .action.danger {
+        background: linear-gradient(135deg, #EF4444, #DC2626);
+
+        &:hover {
+            background: linear-gradient(135deg, #DC2626, #B91C1C);
+        }
+    }
+
+    //
+    //  Success Button
+    //  ---------------------------------------------
+
+    button.success,
+    .action.success {
+        background: @color-green-gradient;
+
+        &:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+    }
+
+    //
+    //  Warning Button
+    //  ---------------------------------------------
+
+    button.warning,
+    .action.warning {
+        background: linear-gradient(135deg, #F59E0B, #D97706);
+
+        &:hover {
+            background: linear-gradient(135deg, #D97706, #B45309);
+        }
+    }
+
+    //
+    //  Button Group
+    //  ---------------------------------------------
+
+    .button-group {
+        display: flex;
+        gap: 12px;
+
+        button {
+            flex: 1;
+        }
+    }
+
+    //
+    //  Button Toolbar
+    //  ---------------------------------------------
+
+    .toolbar .action {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+//
+//  Mobile Styles
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .button-group {
+        flex-direction: column;
+
+        button {
+            width: 100%;
+        }
+    }
+
+    button.large,
+    .action.large {
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+}

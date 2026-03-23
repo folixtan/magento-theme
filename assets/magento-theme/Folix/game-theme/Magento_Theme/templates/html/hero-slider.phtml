@@ -1,0 +1,45 @@
+<?php
+/**
+ * Folix Game Theme - Hero Slider Template
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<div class="hero-slider">
+    <button class="slider-arrow slider-arrow--prev">‹</button>
+    <button class="slider-arrow slider-arrow--next">›</button>
+    
+    <div class="slider-container">
+        <!-- Slide 1 -->
+        <div class="slide" style="background-image: url('<?= $block->getViewFileUrl('images/slider/slide-1.jpg') ?>');">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+                <span class="slide__badge"><?= /* @escapeNotVerified */ __('Limited Time Offer') ?></span>
+                <h2 class="slide__title"><?= /* @escapeNotVerified */ __('Mobile Legends Diamond Recharge') ?></span></h2>
+                <p class="slide__description"><?= /* @escapeNotVerified */ __('Direct charge mode, 5 minutes fast delivery, safe and reliable') ?></p>
+                <div class="slide__price"><?= /* @escapeNotVerified */ __('¥98.00 up') ?></div>
+                <button class="action slider-cta"><?= /* @escapeNotVerified */ __('Recharge Now') ?></button>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="slide" style="background-image: url('<?= $block->getViewFileUrl('images/slider/slide-2.jpg') ?>');">
+            <div class="slide__overlay"></div>
+            <div class="slide__content">
+                <span class="slide__badge"><?= /* @escapeNotVerified */ __('New Arrival') ?></span>
+                <h2 class="slide__title"><?= /* @escapeNotVerified */ __('PUBG Mobile UC Package') ?></span></h2>
+                <p class="slide__description"><?= /* @escapeNotVerified */ __('Great value packs, card key automatic delivery') ?></p>
+                <div class="slide__price"><?= /* @escapeNotVerified */ __('¥198.00 up') ?></div>
+                <button class="action slider-cta"><?= /* @escapeNotVerified */ __('View Details') ?></button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slider-dots">
+        <span class="slider-dot active"></span>
+        <span class="slider-dot"></span>
+    </div>
+</div>

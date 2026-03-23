@@ -1,0 +1,26 @@
+<?php
+/**
+ * Folix Game Theme - Store Switcher Template
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+
+/** @var \Magento\Store\Block\Switcher $block */
+?>
+<?php if ($block->getGroups()): ?>
+<div class="switcher">
+    <strong class="label"><span><?= /* @escapeNotVerified */ __('Language:') ?></span></strong>
+    <div class="actions dropdown options switcher-options">
+        <?php foreach ($block->getGroups() as $_group): ?>
+            <?php if ($_group->getId() == $block->getCurrentGroupId()): ?>
+                <span class="action switch"><?= /* @escapeNotVerified */ $block->escapeHtml($_group->getName()) ?></span>
+            <?php else: ?>
+                <a href="#" data-post='<?= /* @escapeNotVerified */ $block->getTargetStorePostData($_group->getDefaultStore()) ?>' class="action switch">
+                    <?= /* @escapeNotVerified */ $block->escapeHtml($_group->getName()) ?>
+                </a>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>

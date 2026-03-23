@@ -1,0 +1,25 @@
+<?php
+/**
+ * Folix Game Theme - Header Links Template
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<?php if ($links = $block->getLinks()): ?>
+<ul class="header links">
+    <?= $block->getChildHtml('top.links.before') ?>
+    <?php foreach ($links as $link): ?>
+        <li<?= $link->getIsHighlighted() ? ' class="highlighted"' : '' ?>>
+            <a href="<?= /* @escapeNotVerified */ $link->getUrl() ?>" 
+               title="<?= $block->escapeHtml($link->getTitle()) ?>"
+               <?= $link->getIsHighlighted() ? ' class="button-login"' : '' ?>>
+                <?= $block->escapeHtml($link->getLabel()) ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+    <?= $block->getChildHtml('top.links.after') ?>
+</ul>
+<?php endif; ?>

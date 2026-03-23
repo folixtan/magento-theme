@@ -1,0 +1,234 @@
+//
+//  Folix Game Theme - Footer Styles
+//  _____________________________________________
+
+& when (@media-common = true) {
+    //
+    //  Page Footer
+    //  ---------------------------------------------
+
+    .page-footer {
+        background: @footer__background-color;
+        color: #E2E8F0;
+        border-top: 4px solid @theme__color__secondary;
+        padding: 40px @layout-indent__width;
+        margin-top: auto;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .footer.content {
+        max-width: @layout__max-width;
+        margin: 0 auto;
+    }
+
+    //
+    //  Switcher (Language/Currency)
+    //  ---------------------------------------------
+
+    .switcher {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #334155;
+
+        .label {
+            font-weight: @font-weight__semibold;
+            color: #E2E8F0;
+        }
+
+        .action.switch {
+            color: #E2E8F0;
+            cursor: pointer;
+            padding: 6px 12px;
+            border: 1px solid #475569;
+            border-radius: 4px;
+            background: transparent;
+            transition: @transition__base;
+
+            &:hover {
+                border-color: @theme__color__secondary;
+                color: @theme__color__secondary;
+            }
+        }
+    }
+
+    //
+    //  Footer Links
+    //  ---------------------------------------------
+
+    .footer.links {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        a {
+            color: #94A3B8;
+            text-decoration: none;
+            transition: @transition__base;
+
+            &:hover {
+                color: @theme__color__secondary;
+                text-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
+            }
+        }
+    }
+
+    //
+    //  Copyright
+    //  ---------------------------------------------
+
+    .copyright {
+        background: @copyright__background-color;
+        color: #E2E8F0;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        a {
+            color: @theme__color__secondary;
+            text-decoration: none;
+
+            &:hover {
+                color: #FB923C;
+            }
+        }
+    }
+
+    //
+    //  Footer Newsletter
+    //  ---------------------------------------------
+
+    .footer.newsletter {
+        margin-bottom: 30px;
+
+        .title {
+            font-size: 20px;
+            font-weight: @font-weight__bold;
+            color: #E2E8F0;
+            margin-bottom: 15px;
+        }
+
+        .content {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #475569;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #E2E8F0;
+            outline: none;
+            transition: @transition__base;
+
+            &::placeholder {
+                color: #94A3B8;
+            }
+
+            &:focus {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: @theme__color__primary;
+            }
+        }
+
+        button {
+            padding: 12px 24px;
+            background: @color-orange-gradient;
+            color: @color-white;
+            border: none;
+            border-radius: 8px;
+            font-weight: @font-weight__semibold;
+            cursor: pointer;
+            transition: @transition__base;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            }
+        }
+    }
+
+    //
+    //  Footer Social Links
+    //  ---------------------------------------------
+
+    .footer.social {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 20px;
+
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #475569;
+            border-radius: 50%;
+            color: #E2E8F0;
+            text-decoration: none;
+            transition: @transition__base;
+            font-size: 18px;
+
+            &:hover {
+                background: @theme__color__primary;
+                border-color: @theme__color__primary;
+                transform: translateY(-3px);
+            }
+        }
+    }
+
+    //
+    //  Footer Contact Info
+    //  ---------------------------------------------
+
+    .footer.contact {
+        margin-bottom: 20px;
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #94A3B8;
+
+            .icon {
+                font-size: 18px;
+            }
+        }
+    }
+}
+
+//
+//  Mobile Styles
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .footer.links {
+        flex-direction: column;
+        gap: 12px;
+
+        a {
+            display: block;
+            padding: 16px 0;
+            font-size: 16px;
+            border-bottom: 1px solid #334155;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
+
+    .footer.newsletter .content {
+        flex-direction: column;
+    }
+}

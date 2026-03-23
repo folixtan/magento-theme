@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Folix Game Theme - Default Layout
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Header Configuration -->
+        <referenceContainer name="header.container">
+            <block class="Magento\Theme\Block\Html\Header" name="theme.header" template="Magento_Theme::html/header.phtml" before="-">
+                <block class="Magento\Theme\Block\Html\Header\Logo" name="logo" template="Magento_Theme::html/logo.phtml">
+                    <arguments>
+                        <argument name="logoPathResolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoPathResolver</argument>
+                        <argument name="logo_size_resolver" xsi:type="object">Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolver</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" ttl="3600"/>
+            </block>
+        </referenceContainer>
+
+        <!-- Search Form -->
+        <referenceBlock name="top.search">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Search::form.mini.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- Header Links -->
+        <referenceBlock name="header.links">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Magento_Theme::html/links.phtml</argument>
+            </action>
+        </referenceBlock>
+
+        <!-- Remove default blocks -->
+        <referenceBlock name="header" remove="true"/>
+        <referenceBlock name="header.panel" remove="true"/>
+        <referenceBlock name="header.wrapper" remove="true"/>
+
+        <!-- Footer Configuration -->
+        <referenceContainer name="footer-container">
+            <block class="Magento\Theme\Block\Html\Footer" name="theme.footer" template="Magento_Theme::html/footer.phtml" after="-">
+                <block class="Magento\Store\Block\Switcher" name="store_switcher" as="store_switcher" template="Magento_Store::switch/stores.phtml"/>
+            </block>
+        </referenceContainer>
+
+        <!-- Remove default footer blocks -->
+        <referenceBlock name="footer" remove="true"/>
+
+        <!-- Add Theme CSS -->
+        <referenceContainer name="head.additional">
+            <block class="Magento\Framework\View\Element\Template" name="theme.css" template="Magento_Theme::html/css.phtml"/>
+        </referenceContainer>
+
+        <!-- Add Theme JavaScript -->
+        <referenceContainer name="before.body.end">
+            <block class="Magento\Framework\View\Element\Template" name="theme.js" template="Magento_Theme::html/js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

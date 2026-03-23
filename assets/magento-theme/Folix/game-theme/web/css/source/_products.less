@@ -1,0 +1,349 @@
+//
+//  Folix Game Theme - Products Styles
+//  _____________________________________________
+
+& when (@media-common = true) {
+    //
+    //  Products Grid
+    //  ---------------------------------------------
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: @product-grid__gap;
+        margin-bottom: 40px;
+    }
+
+    //
+    //  Product Item
+    //  ---------------------------------------------
+
+    .product-item {
+        background: @color-white;
+        border: 1px solid #E5E7EB;
+        border-radius: @product-item__border-radius;
+        overflow: hidden;
+        transition: @transition__smooth;
+        box-shadow: @shadow-sm;
+        position: relative;
+
+        &:hover {
+            transform: translateY(-6px);
+            border-color: @theme__color__primary;
+            box-shadow: @product-item__hover__shadow;
+        }
+    }
+
+    //
+    //  Product Photo
+    //  ---------------------------------------------
+
+    .product-item-photo {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        background: @color-blue-gradient;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: @transition__base;
+        }
+    }
+
+    .product-item:hover .product-item-photo img {
+        transform: scale(1.1);
+    }
+
+    //
+    //  Game Badge
+    //  ---------------------------------------------
+
+    .game-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: @font-weight__bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+        &--direct {
+            background: @color-blue-gradient;
+            color: @color-white;
+        }
+
+        &--hot::before {
+            content: '🔥';
+            margin-right: 4px;
+        }
+    }
+
+    //
+    //  Product Details
+    //  ---------------------------------------------
+
+    .product-item-name {
+        font-size: 18px;
+        font-weight: @font-weight__semibold;
+        color: @heading__color;
+        margin: 0;
+        padding: 16px 16px 8px;
+
+        a {
+            color: @heading__color;
+            text-decoration: none;
+
+            &:hover {
+                color: @theme__color__primary;
+            }
+        }
+    }
+
+    .product-item-details {
+        padding: 16px;
+    }
+
+    .product-item-description {
+        color: #6B7280;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 16px;
+    }
+
+    //
+    //  Price Box
+    //  ---------------------------------------------
+
+    .price-box {
+        margin-bottom: 16px;
+    }
+
+    .price {
+        font-size: 24px;
+        font-weight: @font-weight__heavy;
+        color: @theme__color__secondary;
+        text-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
+    }
+
+    .old-price {
+        text-decoration: line-through;
+        color: #9CA3AF;
+        font-size: 16px;
+        margin-left: 8px;
+    }
+
+    .special-price .price {
+        color: @theme__color__secondary;
+    }
+
+    //
+    //  Game Stock Status
+    //  ---------------------------------------------
+
+    .game-stock-status {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: @font-weight__bold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 12px;
+
+        &--available {
+            background: @color-green-gradient;
+            color: @color-white;
+        }
+
+        &--unavailable {
+            background: @color-gray-gradient;
+            color: @color-white;
+        }
+    }
+
+    //
+    //  Product Actions
+    //  ---------------------------------------------
+
+    .product-item-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+
+        .action {
+            flex: 1;
+        }
+    }
+
+    .action.primary {
+        display: block;
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: @font-weight__semibold;
+        text-align: center;
+        background: @color-blue-gradient;
+        color: @color-white;
+        border: none;
+        border-radius: @button__border-radius;
+        cursor: pointer;
+        box-shadow: @shadow-md;
+        text-decoration: none;
+        transition: @transition__base;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: @shadow-lg;
+            text-decoration: none;
+            color: @color-white;
+        }
+
+        &:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+    }
+
+    .action.secondary {
+        display: block;
+        width: 100%;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: @font-weight__semibold;
+        text-align: center;
+        background: transparent;
+        color: @theme__color__primary;
+        border: 2px solid @theme__color__primary;
+        border-radius: @button__border-radius;
+        cursor: pointer;
+        text-decoration: none;
+        transition: @transition__base;
+
+        &:hover {
+            background: @theme__color__primary;
+            color: @color-white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+    }
+
+    //
+    //  Add to Cart Button
+    //  ---------------------------------------------
+
+    .action.tocart {
+        &:extend(.action.primary all);
+    }
+
+    //
+    //  Wishlist & Compare
+    //  ---------------------------------------------
+
+    .actions-secondary {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+
+        .action {
+            padding: 8px 12px;
+            background: transparent;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+            color: #6B7280;
+            text-decoration: none;
+            transition: @transition__base;
+
+            &:hover {
+                border-color: @theme__color__primary;
+                color: @theme__color__primary;
+            }
+        }
+    }
+
+    //
+    //  Product Listing Toolbar
+    //  ---------------------------------------------
+
+    .toolbar {
+        margin-bottom: 30px;
+
+        &-amount {
+            color: #6B7280;
+            font-size: 14px;
+        }
+
+        .sorter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .sorter-label {
+                font-weight: @font-weight__semibold;
+                color: @heading__color;
+            }
+
+            select {
+                padding: 8px 16px;
+                border: 1px solid #E5E7EB;
+                border-radius: 4px;
+                background: @color-white;
+                color: @text__color;
+                cursor: pointer;
+
+                &:focus {
+                    border-color: @theme__color__primary;
+                    outline: none;
+                }
+            }
+        }
+
+        .modes {
+            display: flex;
+            gap: 8px;
+
+            .modes-mode {
+                padding: 8px 12px;
+                border: 1px solid #E5E7EB;
+                border-radius: 4px;
+                color: #6B7280;
+                cursor: pointer;
+                transition: @transition__base;
+
+                &:hover,
+                &.active {
+                    background: @theme__color__primary;
+                    border-color: @theme__color__primary;
+                    color: @color-white;
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile Styles
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        .sorter {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Folix Game Theme - Home Page Layout
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Main Content Area -->
+        <referenceContainer name="main">
+            
+            <!-- Hero Slider -->
+            <block class="Magento\Framework\View\Element\Template" name="hero.slider" template="Magento_Theme::html/hero-slider.phtml" before="-"/>
+            
+            <!-- Hot Products Section -->
+            <block class="Magento\Catalog\Block\Product\ListProduct" name="home.products.hot" template="Magento_Catalog::product/list.phtml" after="hero.slider">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">🔥 Hot Products</argument>
+                </arguments>
+            </block>
+            
+            <!-- Promo Banner -->
+            <block class="Magento\Framework\View\Element\Template" name="promo.banner" template="Magento_Theme::html/promo-banner.phtml" after="home.products.hot"/>
+            
+            <!-- New Products Section -->
+            <block class="Magento\Catalog\Block\Product\ListProduct" name="home.products.new" template="Magento_Catalog::product/list.phtml" after="promo.banner">
+                <arguments>
+                    <argument name="title" xsi:type="string" translate="true">✨ New Arrivals</argument>
+                </arguments>
+            </block>
+            
+        </referenceContainer>
+    </body>
+</page>

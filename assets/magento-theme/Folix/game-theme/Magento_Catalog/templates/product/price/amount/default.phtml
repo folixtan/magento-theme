@@ -1,0 +1,90 @@
+<?php
+/**
+ * Folix Game Theme - Product Price Template
+ * 
+ * @category  Design
+ * @package   Folix_GameTheme
+ */
+
+/** @var \Magento\Catalog\Pricing\Render\FinalPriceBox $block */
+
+/** ex: \Magento\Catalog\Pricing\Price\RegularPrice */
+$priceModel = $block->getPriceType('regular_price');
+/** ex: \Magento\Catalog\Pricing\Price\FinalPrice */
+$finalPriceModel = $block->getPriceType('final_price');
+$idSuffix = $block->getIdSuffix() ?: '';
+$schema = ($block->getZone() == 'item_view') ? true : false;
+?>
+<?php if ($block->hasSpecialPrice()): ?>
+    <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?= /* @escapeNotVerified */ $block->getProductId() ?>" <?= $schema ? 'itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+        <?php if ($block->getShowMinimalPrice() && $block->getMinimalPrice() < $block->getFinalPrice()): ?>
+            <span class="old-price">
+                <?= /* @escapeNotVerified */ $block->renderAmount($priceModel->getAmount(), [
+                    'display_label'     => __('Regular Price'),
+                    'price_id'          => $block->getPriceId('old-price-' . $idSuffix),
+                    'price_type'        => 'oldPrice',
+                    'include_container' => true,
+                    'skip_adjustments'  => true
+                ]); ?>
+            </span>
+        <?php else: ?>
+            <span class="old-price">
+                <?= /* @escapeNotVerified */ $block->renderAmount($priceModel->getAmount(), [
+                    'display_label'     => __('Regular Price'),
+                    'price_id'          => $block->getPriceId('old-price-' . $idSuffix),
+                    'price_type'        => 'oldPrice',
+                    'include_container' => true,
+                    'skip_adjustments'  => true
+                ]); ?>
+            </span>
+        <?php endif; ?>
+        
+        <span class="special-price">
+            <?= /* @escapeNotVerified */ $block->renderAmount($finalPriceModel->getAmount(), [
+                'display_label'     => __('Special Price'),
+                'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                'price_type'        => 'finalPrice',
+                'include_container' => true,
+                'schema'            => $schema
+            ]); ?>
+        </span>
+        
+        <?php if ($block->getShowMinimalPrice()): ?>
+            <?php if ($block->getMinimalPrice() < $block->getFinalPrice()): ?>
+                <span class="minimal-price-link">
+                    <?= /* @escapeNotVerified */ $block->renderAmount($block->getMinimalPriceAmount(), [
+                        'display_label'     => __('As low as'),
+                        'price_id'          => $block->getPriceId('minimal-price-' . $idSuffix),
+                        'price_type'        => 'minimalPrice',
+                        'include_container' => true
+                    ]); ?>
+                </span>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+<?php else: ?>
+    <div class="price-box price-final_price" data-role="priceBox" data-product-id="<?= /* @escapeNotVerified */ $block->getProductId() ?>" <?= $schema ? 'itemprop="offers" itemscope itemtype="http://schema.org/Offer"' : '' ?>>
+        <span class="price-container <?= /* @escapeNotVerified */ $block->getPriceDisplayClass() ?>">
+            <?= /* @escapeNotVerified */ $block->renderAmount($finalPriceModel->getAmount(), [
+                'display_label'     => $block->getDisplayLabel(),
+                'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                'price_type'        => 'finalPrice',
+                'include_container' => true,
+                'schema'            => $schema
+            ]); ?>
+        </span>
+        
+        <?php if ($block->getShowMinimalPrice()): ?>
+            <?php if ($block->getMinimalPrice() < $block->getFinalPrice()): ?>
+                <span class="minimal-price-link">
+                    <?= /* @escapeNotVerified */ $block->renderAmount($block->getMinimalPriceAmount(), [
+                        'display_label'     => __('As low as'),
+                        'price_id'          => $block->getPriceId('minimal-price-' . $idSuffix),
+                        'price_type'        => 'minimalPrice',
+                        'include_container' => true
+                    ]); ?>
+                </span>
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>

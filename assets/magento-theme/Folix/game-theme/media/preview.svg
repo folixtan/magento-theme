@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#F8F9FA"/>
+  
+  <!-- Header -->
+  <rect width="800" height="80" fill="url(#headerGradient)"/>
+  <rect y="77" width="800" height="3" fill="#FF6B35"/>
+  
+  <!-- Logo -->
+  <text x="40" y="50" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    <tspan fill="#1E293B">SE</tspan>
+    <tspan fill="#FF6B35">AGM</tspan>
+  </text>
+  
+  <!-- Navigation -->
+  <text x="180" y="50" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">🎮 游戏</text>
+  <text x="280" y="50" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">💳 点卡</text>
+  <text x="380" y="50" font-family="Arial, sans-serif" font-size="14" fill="#1E293B">⚡ 游戏直充</text>
+  
+  <!-- Search Bar -->
+  <rect x="500" y="30" width="220" height="35" rx="8" fill="#F9FAFB" stroke="#E5E7EB" stroke-width="2"/>
+  <text x="520" y="53" font-family="Arial, sans-serif" font-size="12" fill="#9CA3AF">搜索游戏、商品...</text>
+  
+  <!-- Hero Slider -->
+  <rect x="20" y="100" width="760" height="200" rx="12" fill="url(#heroGradient)"/>
+  <text x="400" y="180" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Mobile Legends 钻石充值</text>
+  <text x="400" y="210" font-family="Arial, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle">直充模式，5 分钟快速到账</text>
+  <text x="400" y="250" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFD700" text-anchor="middle">¥98.00 起</text>
+  
+  <!-- Product Cards -->
+  <g transform="translate(20, 320)">
+    <!-- Card 1 -->
+    <rect width="180" height="240" rx="8" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <rect width="180" height="100" fill="url(#productGradient1)"/>
+    <text x="90" y="60" font-family="Arial, sans-serif" font-size="40" fill="#FFFFFF" text-anchor="middle">🎮</text>
+    <text x="10" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E293B">Mobile Legends</text>
+    <text x="10" y="140" font-family="Arial, sans-serif" font-size="12" fill="#6B7280">直充模式，快速到账</text>
+    <text x="10" y="170" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FF6B35">¥98.00</text>
+    <rect x="10" y="190" width="160" height="30" rx="8" fill="url(#buttonGradient)"/>
+    <text x="90" y="210" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">立即购买</text>
+    
+    <!-- Card 2 -->
+    <rect x="200" width="180" height="240" rx="8" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <rect x="200" width="180" height="100" fill="url(#productGradient2)"/>
+    <text x="290" y="60" font-family="Arial, sans-serif" font-size="40" fill="#FFFFFF" text-anchor="middle">🎁</text>
+    <text x="210" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E293B">PUBG Mobile UC</text>
+    <text x="210" y="140" font-family="Arial, sans-serif" font-size="12" fill="#6B7280">卡密自动发货</text>
+    <text x="210" y="170" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FF6B35">¥198.00</text>
+    <rect x="210" y="190" width="160" height="30" rx="8" fill="url(#buttonGradient)"/>
+    <text x="290" y="210" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">立即购买</text>
+    
+    <!-- Card 3 -->
+    <rect x="400" width="180" height="240" rx="8" fill="#FFFFFF" stroke="#E5E7EB"/>
+    <rect x="400" width="180" height="100" fill="url(#productGradient3)"/>
+    <text x="490" y="60" font-family="Arial, sans-serif" font-size="40" fill="#FFFFFF" text-anchor="middle">💎</text>
+    <text x="410" y="120" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1E293B">VIP 会员月卡</text>
+    <text x="410" y="140" font-family="Arial, sans-serif" font-size="12" fill="#6B7280">尊享专属折扣</text>
+    <text x="410" y="170" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#FF6B35">¥298.00</text>
+    <rect x="410" y="190" width="160" height="30" rx="8" fill="url(#buttonGradient)"/>
+    <text x="490" y="210" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">立即开通</text>
+  </g>
+  
+  <!-- Footer -->
+  <rect y="570" width="800" height="30" fill="url(#footerGradient)"/>
+  <text x="400" y="590" font-family="Arial, sans-serif" font-size="12" fill="#E2E8F0" text-anchor="middle">© 2026 Folix Game. All rights reserved. Powered by Magento</text>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="headerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E293B"/>
+      <stop offset="100%" style="stop-color:#0F172A"/>
+    </linearGradient>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#6C5CE7"/>
+    </linearGradient>
+    <linearGradient id="productGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#6C5CE7"/>
+    </linearGradient>
+    <linearGradient id="productGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:#EA580C"/>
+    </linearGradient>
+    <linearGradient id="productGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#059669"/>
+    </linearGradient>
+    <linearGradient id="buttonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#6C5CE7"/>
+    </linearGradient>
+    <linearGradient id="footerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E293B"/>
+      <stop offset="100%" style="stop-color:#0F172A"/>
+    </linearGradient>
+  </defs>
+</svg>
