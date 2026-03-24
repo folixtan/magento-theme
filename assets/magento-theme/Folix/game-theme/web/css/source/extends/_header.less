@@ -690,13 +690,12 @@
     //  ========================================================================
     
     .header.content {
-        height: 60px;  // 固定高度
-        min-height: 60px;
-        padding: 0 15px;
+        height: auto;  // 自适应高度
+        min-height: 50px;
+        padding: 10px 15px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        position: relative;  // 为绝对定位的子元素提供参考
+        position: relative;
         
         // 清除浮动
         &:before,
@@ -705,18 +704,19 @@
         }
         
         // ====================================================================
-        //  导航切换按钮 - 左上角绝对定位
+        //  导航切换按钮 - 左上角
         //  ====================================================================
         
         .nav-toggle {
             display: block;
-            position: absolute;  // 绝对定位
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);  // 垂直居中
+            position: relative;  // 使用相对定位
+            left: auto;
+            top: auto;
+            transform: none;
             z-index: 14;
             margin: 0;
             padding: 0;
+            order: 0;  // 放在最左边
             
             &:before {
                 color: #1E293B;
@@ -734,12 +734,11 @@
         //  ====================================================================
         
         .logo {
-            position: absolute;  // 绝对定位
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);  // 水平垂直居中
+            flex: 1;  // 占据剩余空间
             margin: 0;
             float: none;
+            text-align: center;
+            order: 1;  // 放在中间
             
             img {
                 height: 35px;
@@ -756,25 +755,15 @@
         }
         
         // ====================================================================
-        //  右侧按钮组 - 使用 flex 布局
-        //  ====================================================================
-        
-        // 创建右侧容器（使用伪元素或直接排列）
-        > .block-search,
-        > .minicart-wrapper,
-        > .header-login-button {
-            position: relative;
-            z-index: 10;
-        }
-        
-        // ====================================================================
-        //  搜索框 - 移动端特殊处理
+        //  搜索框 - 移动端显示为图标
         //  ====================================================================
         
         .block-search {
-            order: 1;
-            width: auto;  // 宽度自适应
+            order: 2;  // 放在右侧
+            width: auto;
             margin: 0;
+            position: relative;
+            z-index: 10;
             
             .block-title {
                 display: none;
@@ -785,12 +774,12 @@
             }
             
             .form.minisearch {
-                display: block;  // 改为块级显示
+                display: block;
             }
             
             // 搜索图标按钮
             .label {
-                display: inline-block;  // 显示图标按钮
+                display: inline-block;
                 cursor: pointer;
                 padding: 10px;
                 
@@ -816,38 +805,35 @@
                 &:hover:before {
                     color: #FF6B35;
                 }
-                
-                &.active + .control input {
-                    position: static;  // 点击后显示输入框
-                }
             }
             
-            // 搜索输入框 - 默认隐藏
+            // 搜索输入框 - 点击图标后在下方展开
             .control {
                 border-top: 1px solid #E2E8F0;
                 clear: both;
-                margin: 0 -15px -1px;
+                margin: 0 -15px;  // 通栏
                 padding: 0 15px;
-                position: fixed;  // 固定在底部
-                bottom: 0;
-                left: 0;
-                right: 0;
                 background: #FFFFFF;
-                z-index: 100;
                 display: none;  // 默认隐藏
                 
                 input {
                     width: 100%;
                     height: 44px;
-                    padding: 0 60px 0 16px;  // 右侧留出按钮空间
+                    padding: 0 16px;
                     font-size: 16px;
                     border: 2px solid #E5E7EB;
                     border-radius: 6px;
                     margin: 15px 0;
+                    background: #F9FAFB;
+                    
+                    &:focus {
+                        border-color: #4A90E2;
+                        background: #FFFFFF;
+                    }
                 }
             }
             
-            // 点击后显示搜索框
+            // 点击图标后显示搜索框
             .label.active + .control {
                 display: block;
             }
@@ -859,23 +845,23 @@
         }
         
         // ====================================================================
-        //  购物车 - 移动端调整
+        //  购物车 - 移动端调整（线性图标）
         //  ====================================================================
         
         .minicart-wrapper {
-            order: 2;
+            order: 3;  // 放在最右边
             margin: 0 0 0 10px;
             
             .action.showcart {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: 44px;  // 固定宽度
-                height: 44px;  // 固定高度
-                padding: 0;  // 移除内边距
+                width: auto;
+                height: auto;
+                padding: 10px;
                 background: transparent;
-                border: none;  // 移除边框
-                border-radius: 50%;  // 圆形
+                border: none;  // 无边框
+                border-radius: 0;  // 无圆角
                 
                 &:before {
                     content: '\e611';  // Luma 购物车图标
@@ -891,8 +877,8 @@
                 
                 .counter {
                     position: absolute;
-                    top: 0;
-                    right: 0;
+                    top: 5px;
+                    right: 5px;
                     background: #FF6B35;
                     color: #FFFFFF;
                     border-radius: 10px;
@@ -907,48 +893,15 @@
                         color: #FFFFFF;
                     }
                 }
-                
-                &:hover {
-                    background: rgba(255, 107, 53, 0.1);
-                }
             }
         }
         
         // ====================================================================
-        //  登录按钮 - 移动端调整
+        //  登录按钮 - 移动端隐藏（在菜单中显示）
         //  ====================================================================
         
         .header-login-button {
-            order: 3;
-            margin: 0 0 0 10px;
-            
-            .action.login-primary {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 44px;  // 固定宽度
-                height: 44px;  // 固定高度
-                padding: 0;  // 移除内边距
-                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-                color: #FFFFFF;
-                border: none;
-                border-radius: 50%;  // 圆形
-                font-size: 20px;
-                
-                span {
-                    font-size: 0;  // 隐藏文字
-                    
-                    &:before {
-                        content: '👤';  // 用户图标
-                        font-size: 20px;
-                    }
-                }
-                
-                &:hover {
-                    transform: none;
-                    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
-                }
-            }
+            display: none;  // 移动端隐藏登录按钮
         }
     }
 }
