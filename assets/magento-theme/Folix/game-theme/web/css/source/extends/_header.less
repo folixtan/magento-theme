@@ -43,6 +43,7 @@
     // ========================================================================
     //  PANEL HEADER - Top Bar 内容
     //  Flex布局：左 | 中 | 右
+    //  通过 padding 控制高度（约60px）
     //  ========================================================================
     
     .panel.header {
@@ -51,9 +52,8 @@
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 20px;
-        height: 40px;
-        min-height: 40px;
+        padding: 22px 20px;  // 上下22px + 文字14px ≈ 58px（接近60px）
+        min-height: 60px;
         
         // 清除浮动
         &:before,
@@ -323,7 +323,7 @@
                         font-weight: 600;
                         font-size: 15px;
                         text-decoration: none;
-                        transition: color 0.2s ease;
+                        transition: all 0.3s ease;
                         border-radius: 4px;
                         white-space: nowrap;
                         
@@ -333,8 +333,8 @@
                         }
                         
                         &:hover {
-                            color: #FF6B35;
-                            background: rgba(255, 107, 53, 0.05);
+                            color: #FFFFFF;
+                            background: linear-gradient(135deg, #EA580C, #C2410C);
                         }
                     }
                     
@@ -343,10 +343,10 @@
                     }
                 }
                 
-                // 子菜单
+                // 二级菜单（不重叠一级导航）
                 .level0.submenu {
                     position: absolute;
-                    top: 100%;
+                    top: calc(100% + 5px);  // 增加间距，避免重叠
                     left: 0;
                     background: #FFFFFF;
                     border: 1px solid #E5E7EB;
@@ -357,19 +357,57 @@
                     z-index: 100;
                     
                     .level1 {
+                        position: relative;  // 为三级菜单定位
+                        
                         a {
-                            display: block;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
                             padding: 10px 16px;
                             color: #1E293B;
                             font-size: 14px;
                             text-decoration: none;
+                            transition: all 0.2s ease;
                             
                             &:hover {
-                                background: #F8FAFC;
+                                background: #DBEAFE;  // 浅蓝高亮
                                 color: #4A90E2;
                             }
                         }
+                        
+                        // 三级菜单（在右侧展开）
+                        .submenu {
+                            position: absolute;
+                            top: 0;
+                            left: 100%;  // 在右侧展开
+                            background: #FFFFFF;
+                            border: 1px solid #E5E7EB;
+                            border-radius: 6px;
+                            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+                            min-width: 150px;
+                            padding: 8px 0;
+                            margin-left: 5px;  // 间距
+                            z-index: 101;
+                            
+                            .level2 {
+                                a {
+                                    padding: 10px 16px;
+                                    color: #1E293B;
+                                    font-size: 14px;
+                                    
+                                    &:hover {
+                                        background: #DBEAFE;
+                                        color: #4A90E2;
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+                
+                // 悬停显示子菜单
+                .level0:hover > .submenu {
+                    display: block;
                 }
             }
         }
@@ -385,6 +423,8 @@
             clear: none;
             float: none;
             margin: 0;
+            position: relative;  // 确保相对定位
+            z-index: 10;  // 提高层级，确保按钮可点击
             
             .block-title {
                 display: none;
@@ -396,6 +436,7 @@
             
             .form.minisearch {
                 display: flex;
+                position: relative;  // 确保相对定位
             }
             
             .field.search {
@@ -416,6 +457,7 @@
                     margin: 0;
                     padding: 0;
                     background: #F9FAFB;
+                    transition: all 0.3s ease;  // 添加过渡效果
                     
                     input {
                         width: 100%;
@@ -434,6 +476,14 @@
                         }
                     }
                     
+                    // 聚焦时整个控制框外发光
+                    &:focus-within {
+                        border-color: #4A90E2;
+                        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2),  // 蓝色外发光
+                                    0 0 0 1px rgba(74, 144, 226, 0.1);  // 内发光
+                        background: #FFFFFF;
+                    }
+                    
                     .nested,
                     .search-autocomplete {
                         display: none;
@@ -443,6 +493,8 @@
             
             .actions {
                 display: flex;
+                position: relative;  // 确保相对定位
+                z-index: 10;  // 提高层级，确保按钮可点击
                 
                 .action.search {
                     height: 36px;
@@ -453,6 +505,9 @@
                     color: #FFFFFF;
                     font-size: 14px;
                     cursor: pointer;
+                    position: relative;  // 确保相对定位
+                    z-index: 10;  // 提高层级，确保可点击
+                    transition: all 0.3s ease;
                     
                     span {
                         display: none;
@@ -464,7 +519,9 @@
                     }
                     
                     &:hover {
-                        opacity: 0.9;
+                        background: linear-gradient(135deg, #EA580C, #C2410C);
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
                     }
                     
                     &:disabled {
