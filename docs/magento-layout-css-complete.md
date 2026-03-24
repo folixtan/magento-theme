@@ -431,9 +431,9 @@ PHP Less编译器编译
 ├── source/
 │   ├── _variables.less       # 自定义变量
 │   ├── _theme.less           # 覆盖父主题变量
-│   ├── _extends.less         # 样式扩展
+│   ├── _extend.less          # ⚠️ 样式扩展（单数！不是 _extends.less）
 │   ├── _module.less          # 模块样式入口
-│   └── extends/
+│   └── extends/              # 自定义子目录（可以是任意名称）
 │       ├── _header.less      # 头部样式
 │       ├── _footer.less      # 底部样式
 │       ├── _navigation.less  # 导航样式
@@ -445,6 +445,16 @@ PHP Less编译器编译
 └── print.less                # 打印样式
 ```
 
+**⚠️ 重要提示：**
+
+根据 Magento 官方文档，样式扩展文件名必须是 **`_extend.less`**（单数），不是 `_extends.less`（复数）。
+
+参考：https://developer.adobe.com/commerce/frontend-core/guide/css/quickstart/customize-styles/
+
+> Create a `_extend.less` file there.
+
+如果使用错误的文件名（`_extends.less`），Magento 不会加载该文件，导致样式不生效！
+
 #### 2.2 文件加载顺序
 
 ```
@@ -454,8 +464,26 @@ PHP Less编译器编译
 4. Magento/luma: _theme.less                    # Luma主题变量
 5. <your_theme>: _variables.less                # 你的变量
 6. <your_theme>: _theme.less                    # 覆盖父主题变量
-7. <your_theme>: _extends.less                  # 样式扩展
+7. <your_theme>: _extend.less                   # 样式扩展（⚠️ 单数！）
 ```
+
+**⚠️ 关键发现：**
+
+Magento 官方文档明确规定样式扩展文件名必须是 `_extend.less`（单数形式）。
+
+**错误示例：**
+```
+❌ _extends.less  (复数 - 不会被加载)
+```
+
+**正确示例：**
+```
+✅ _extend.less   (单数 - 正确)
+```
+
+参考官方文档：
+- [Customize theme styles](https://developer.adobe.com/commerce/frontend-core/guide/css/quickstart/customize-styles/)
+- 原文：Create a `_extend.less` file there.
 
 ---
 
