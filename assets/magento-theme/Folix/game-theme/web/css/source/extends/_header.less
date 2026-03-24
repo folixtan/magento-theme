@@ -847,9 +847,26 @@
                 display: block !important;
             }
             
-            // 搜索按钮 - 移动端隐藏
+            // 搜索按钮 - 移动端也要显示
             .actions {
-                display: none !important;
+                position: absolute !important;
+                right: 15px !important;
+                top: 15px !important;
+                
+                button {
+                    background: @folix-primary !important;
+                    color: @folix-bg-card !important;
+                    border: none !important;
+                    padding: 10px 20px !important;
+                    border-radius: 6px !important;
+                    font-size: 14px !important;
+                    font-weight: 500 !important;
+                    cursor: pointer !important;
+                    
+                    &:active {
+                        background: @folix-secondary !important;
+                    }
+                }
             }
         }
         
@@ -1055,16 +1072,15 @@
                         background: @folix-bg-page !important;
                     }
                     
-                    // 展开图标
+                    // 展开图标（由jQuery UI Menu控制）
                     .ui-menu-icon {
                         color: @folix-text-light !important;
                         font-size: 12px !important;
                     }
                 }
                 
-                // 子菜单
+                // 子菜单（由jQuery UI Menu控制展开/折叠）
                 .submenu {
-                    display: none !important;
                     background: @folix-bg-page !important;
                     
                     li {
@@ -1081,12 +1097,6 @@
                             }
                         }
                     }
-                }
-                
-                // 展开子菜单
-                &.active > .submenu,
-                &.parent > .submenu {
-                    display: block !important;
                 }
             }
         }
@@ -1136,15 +1146,15 @@
         }
     }
     
-    // 导航遮罩层
+    // 导航遮罩层（覆盖右侧露出的区域）
     .nav-overlay {
         position: fixed !important;
         top: 0 !important;
-        left: 0 !important;
         right: 0 !important;
-        bottom: 0 !important;
+        width: 54px !important;  // 只覆盖右侧露出的54px
+        height: 100% !important;
         background: rgba(0, 0, 0, 0.5) !important;
-        z-index: 98 !important;
+        z-index: 100 !important;  // 高于导航，确保可以点击
         display: none !important;
         cursor: pointer !important;
         
