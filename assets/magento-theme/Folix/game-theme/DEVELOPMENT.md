@@ -173,6 +173,82 @@ php bin/magento dev:source-theme:deploy
 
 ---
 
+## 头部布局详细说明
+
+### 原生结构（Magento Luma）
+
+```
+header.container (header.page-header)
+├── header.panel.wrapper (div.panel.wrapper)
+│   └── header.panel (div.panel.header) - Top Bar
+│       ├── skip_to_content (无障碍跳转链接)
+│       ├── currency (货币选择器)
+│       ├── store_language (语言选择器)
+│       ├── header.links (用户链接)
+│       │   ├── customer (客户菜单)
+│       │   └── authorization-link-login (登录链接)
+│       └── top.links (原始链接，被移到customer中)
+└── header-wrapper (div.header.content) - Main Bar
+    ├── logo
+    ├── minicart (购物车图标)
+    ├── top.search (搜索框)
+    └── compare-link-wrapper (比较链接)
+```
+
+### Folix扩展结构
+
+**Top Bar (`.panel.header`)**：
+- 背景：深蓝渐变 (`#1E293B` → `#0F172A`)
+- 左侧：辅助链接（新闻、奖励、支持）
+- 中间：跑马灯公告
+- 右侧：APP下载链接
+
+**Main Bar (`.header.content`)**：
+- 背景：白色 (`#FFFFFF`)
+- 底部边框：橙色 3px (`#FF6B35`)
+- 内容：Logo | 导航菜单 | 搜索框 | 登录按钮 | 购物车
+
+### 响应式设计
+
+**桌面端 (>= 768px)**：
+- Top Bar：完整显示所有元素
+- Main Bar：Logo | 导航 | 搜索 | 登录 | 购物车
+- 头部sticky定位
+
+**移动端 (< 768px)**：
+- Top Bar：仅显示跑马灯
+- Main Bar：导航按钮 | Logo | 登录/购物车 | 搜索框(全宽)
+- 隐藏桌面导航
+
+### 关键选择器
+
+| 原生选择器 | 用途 |
+|-----------|------|
+| `.page-header` | 整个头部容器 |
+| `.panel.wrapper` | Top Bar外层容器 |
+| `.panel.header` | Top Bar内容区 |
+| `.header.content` | Main Bar内容区 |
+| `.logo` | Logo容器 |
+| `.minicart-wrapper` | 购物车容器 |
+| `.block-search` | 搜索框容器 |
+| `.nav-toggle` | 移动端导航按钮 |
+
+### 验证方法
+
+在Magento环境中：
+1. 部署主题：`php bin/magento setup:static-content:deploy --theme=Folix/game-theme`
+2. 清除缓存：`php bin/magento cache:clean`
+3. 前台验证：打开浏览器查看首页头部布局
+
+检查项：
+- [ ] Top Bar背景是否为深蓝渐变
+- [ ] Main Bar底部是否有橙色边框
+- [ ] Logo、搜索框、登录按钮、购物车是否正确显示
+- [ ] 移动端响应式布局是否正确
+- [ ] 导航菜单悬停效果（渐变下划线）
+
+---
+
 **开发时间**: 2024年
 **Magento版本**: 2.4.8-p4
 **主题版本**: 1.0.0
