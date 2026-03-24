@@ -1,0 +1,945 @@
+// /**
+//  * Folix Game Theme - Page Specific Styles
+//  * 
+//  * 包含：
+//  * - 头部样式
+//  * - 尾部样式
+//  * - 跑马灯样式
+//  * - Hero Slider样式
+//  * - 登录弹窗样式
+//  * - 产品列表样式
+//  * - 产品详情样式
+//  */
+
+// ============================================================================
+//  HEADER - 头部样式
+//  ============================================================================
+
+& when (@media-common = true) {
+    
+    //
+    //  Page Header - 页面头部
+    //  _____________________________________________
+    
+    .page-header {
+        background: #FFFFFF;
+        border-bottom: 3px solid @theme__color__secondary;
+        box-shadow: @folix-shadow;
+        position: sticky;
+        top: 0;
+        z-index: @folix-z-sticky;
+    }
+    
+    //
+    //  Header Panel - 头部面板
+    //  _____________________________________________
+    
+    .panel.wrapper {
+        background: @folix-gradient-dark;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .panel.header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        
+        .header.links {
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+            
+            > li {
+                > a {
+                    color: #F8FAFC;
+                    font-size: 14px;
+                    font-weight: 500;
+                    
+                    &:hover {
+                        color: @theme__color__secondary;
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    //  Header Marquee - 头部跑马灯
+    //  _____________________________________________
+    
+    .header-marquee {
+        flex: 1;
+        overflow: hidden;
+        margin: 0 20px;
+        
+        .marquee-container {
+            overflow: hidden;
+        }
+        
+        .marquee-content {
+            display: inline-flex;
+            white-space: nowrap;
+            will-change: transform;
+        }
+        
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #F8FAFC;
+            font-size: 13px;
+        }
+        
+        .marquee-separator {
+            margin: 0 15px;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .marquee-icon {
+            font-size: 14px;
+        }
+    }
+    
+    //
+    //  Header Content - 头部内容
+    //  _____________________________________________
+    
+    .header.content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        gap: 30px;
+    }
+    
+    //
+    //  Logo
+    //  _____________________________________________
+    
+    .logo {
+        img {
+            max-height: 40px;
+        }
+    }
+    
+    //
+    //  Header Search - 头部搜索
+    //  _____________________________________________
+    
+    .block-search-header {
+        flex: 1;
+        max-width: 450px;
+        
+        .form.minisearch {
+            display: flex;
+            gap: 0;
+        }
+        
+        .field.search {
+            display: flex;
+            flex: 1;
+        }
+        
+        .control {
+            flex: 1;
+        }
+        
+        .input-text {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 15px;
+            border: 2px solid @border-color__base;
+            border-right: none;
+            border-radius: @folix-radius-md 0 0 @folix-radius-md;
+            background: @page__background-color;
+            outline: none;
+            transition: @folix-transition;
+            
+            &::placeholder {
+                color: @primary__color__lighter;
+            }
+            
+            &:focus {
+                background: #FFFFFF;
+                border-color: @theme__color__primary;
+            }
+        }
+        
+        .actions {
+            .action.search {
+                padding: 12px 24px;
+                background: @folix-gradient-secondary;
+                color: #FFFFFF;
+                font-size: 15px;
+                font-weight: 600;
+                border: none;
+                border-radius: 0 @folix-radius-md @folix-radius-md 0;
+                cursor: pointer;
+                transition: @folix-transition;
+                
+                &:hover {
+                    box-shadow: @folix-shadow-secondary;
+                }
+            }
+        }
+    }
+    
+    //
+    //  Header Login Button - 头部登录按钮
+    //  _____________________________________________
+    
+    .header-login-button {
+        .action.login-primary {
+            padding: 12px 32px;
+            background: @folix-gradient-primary;
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: @folix-radius-md;
+            cursor: pointer;
+            transition: @folix-transition;
+            box-shadow: @folix-shadow-primary;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
+            }
+        }
+    }
+    
+    //
+    //  Navigation - 导航
+    //  _____________________________________________
+    
+    .navigation {
+        background: transparent;
+        
+        .level0 {
+            > .level-top {
+                font-weight: 600;
+                color: @primary__color;
+                border-radius: @folix-radius-sm;
+                transition: @folix-transition;
+                
+                &:hover {
+                    color: @theme__color__secondary;
+                    background: rgba(255, 107, 53, 0.05);
+                }
+            }
+            
+            &.active > .level-top {
+                color: @theme__color__secondary;
+            }
+            
+            .submenu {
+                border: 1px solid @border-color__base;
+                box-shadow: @folix-shadow-md;
+                border-radius: @folix-radius-md;
+                
+                a {
+                    &:hover {
+                        color: @theme__color__secondary;
+                        padding-left: 25px;
+                    }
+                }
+            }
+        }
+    }
+    
+    // ============================================================================
+    //  HERO SLIDER - 主页轮播
+    //  ============================================================================
+    
+    .hero-slider {
+        position: relative;
+        margin-bottom: @indent__xl;
+        border-radius: @folix-radius-lg;
+        overflow: hidden;
+        box-shadow: @folix-shadow-lg;
+        
+        .slider-wrapper {
+            position: relative;
+        }
+        
+        .slide {
+            position: relative;
+            height: 400px;
+            display: none;
+            
+            &.active {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        .slide-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
+        }
+        
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: #F8FAFC;
+            max-width: 600px;
+            padding: @indent__xl;
+        }
+        
+        .slide-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: @folix-gradient-secondary;
+            color: #FFFFFF;
+            border-radius: @folix-radius-full;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: @indent__base;
+            box-shadow: @folix-shadow-secondary;
+        }
+        
+        .slide-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: @indent__base;
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .slide-description {
+            font-size: 18px;
+            margin-bottom: @indent__base;
+            opacity: 0.95;
+        }
+        
+        .slide-price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #FFD700;
+            text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+            margin-bottom: @indent__base;
+        }
+        
+        .action.slider-cta {
+            display: inline-block;
+            padding: 16px 40px;
+            background: @folix-gradient-primary;
+            color: #FFFFFF;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: @folix-radius-md;
+            box-shadow: @folix-shadow-primary;
+            transition: @folix-transition;
+            
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 10px 30px rgba(74, 144, 226, 0.5);
+                color: #FFFFFF;
+                text-decoration: none;
+            }
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: none;
+            color: #FFFFFF;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: @folix-transition;
+            z-index: 2;
+            
+            &:hover {
+                background: rgba(255, 255, 255, 0.3);
+            }
+            
+            &.slider-arrow-prev {
+                left: 20px;
+            }
+            
+            &.slider-arrow-next {
+                right: 20px;
+            }
+        }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 2;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: @folix-transition;
+            
+            &.active {
+                background: #FFFFFF;
+                width: 32px;
+                border-radius: 6px;
+            }
+        }
+    }
+    
+    // ============================================================================
+    //  LOGIN MODAL - 登录弹窗
+    //  ============================================================================
+    
+    .login-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: @folix-z-modal;
+        
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+        }
+        
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #FFFFFF;
+            border-radius: @folix-radius-lg;
+            padding: 40px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: @folix-shadow-xl;
+            display: none;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            font-size: 24px;
+            color: @primary__color__lighter;
+            cursor: pointer;
+            transition: @folix-transition;
+            
+            &:hover {
+                color: @theme__color__secondary;
+            }
+        }
+        
+        .modal-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid @border-color__base;
+        }
+        
+        .modal-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: @primary__color__lighter;
+            cursor: pointer;
+            transition: @folix-transition;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            
+            &.active {
+                color: @theme__color__primary;
+                border-bottom-color: @theme__color__primary;
+            }
+        }
+        
+        .modal-panel {
+            display: none;
+            
+            &.active {
+                display: block;
+            }
+        }
+        
+        .field {
+            margin-bottom: 20px;
+            
+            .label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: @primary__color;
+            }
+            
+            .input-text {
+                width: 100%;
+                padding: 12px 16px;
+                font-size: 15px;
+                border: 2px solid @border-color__base;
+                border-radius: @folix-radius-md;
+                transition: @folix-transition;
+                
+                &:focus {
+                    border-color: @theme__color__primary;
+                    outline: none;
+                }
+            }
+        }
+        
+        .actions-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            
+            .action.primary {
+                padding: 12px 32px;
+                background: @folix-gradient-primary;
+                color: #FFFFFF;
+                font-weight: 600;
+                border: none;
+                border-radius: @folix-radius-md;
+                cursor: pointer;
+                transition: @folix-transition;
+                
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: @folix-shadow-primary;
+                }
+            }
+        }
+    }
+    
+    body.modal-open {
+        overflow: hidden;
+    }
+    
+    // ============================================================================
+    //  HOME PRODUCTS - 首页产品列表
+    //  ============================================================================
+    
+    .home-products-section {
+        margin-bottom: @indent__xl;
+        
+        .section-title-wrapper {
+            margin-bottom: @indent__base;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: @primary__color;
+            margin-bottom: 8px;
+        }
+        
+        .section-subtitle {
+            font-size: 16px;
+            color: @primary__color__lighter;
+        }
+    }
+    
+    .home-products-grid {
+        .product-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .product-item {
+            background: #FFFFFF;
+            border: 1px solid @border-color__base;
+            border-radius: @folix-radius-md;
+            overflow: hidden;
+            transition: @folix-transition;
+            position: relative;
+            
+            &:hover {
+                transform: translateY(-6px);
+                border-color: @theme__color__primary;
+                box-shadow: @folix-shadow-md;
+                
+                .product-image-photo {
+                    transform: scale(1.05);
+                }
+            }
+            
+            .product-item-photo {
+                display: block;
+                overflow: hidden;
+            }
+            
+            .product-image-photo {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+                transition: @folix-transition;
+            }
+            
+            .product-item-details {
+                padding: @indent__base;
+            }
+            
+            .product-item-name {
+                font-size: 18px;
+                font-weight: 600;
+                margin: 0 0 @indent__s;
+                
+                a {
+                    color: @primary__color;
+                    
+                    &:hover {
+                        color: @theme__color__primary;
+                    }
+                }
+            }
+            
+            .price-box {
+                margin-bottom: @indent__s;
+                
+                .price {
+                    font-size: 22px;
+                    font-weight: 700;
+                    color: @theme__color__secondary;
+                }
+            }
+            
+            .actions-primary {
+                .action.tocart {
+                    display: block;
+                    width: 100%;
+                    padding: 12px 24px;
+                    background: @folix-gradient-primary;
+                    color: #FFFFFF;
+                    font-weight: 600;
+                    border: none;
+                    border-radius: @folix-radius-md;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: @folix-transition;
+                    
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: @folix-shadow-primary;
+                    }
+                }
+            }
+            
+            .stock.unavailable {
+                display: block;
+                padding: 12px 24px;
+                background: @page__background-color;
+                color: @primary__color__lighter;
+                text-align: center;
+                border-radius: @folix-radius-md;
+            }
+        }
+    }
+    
+    // ============================================================================
+    //  PROMO BANNER - 促销横幅
+    //  ============================================================================
+    
+    .promo-banner {
+        background: @folix-gradient-secondary;
+        border-radius: @folix-radius-lg;
+        padding: 40px;
+        margin-bottom: @indent__xl;
+        box-shadow: @folix-shadow-secondary;
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .promo-banner__content {
+            position: relative;
+            z-index: 1;
+            color: #FFFFFF;
+            max-width: 600px;
+        }
+        
+        .promo-banner__title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: @indent__base;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .promo-banner__description {
+            font-size: 18px;
+            margin-bottom: @indent__base;
+            opacity: 0.95;
+        }
+        
+        .promo-banner__form {
+            display: flex;
+            gap: @indent__base;
+            max-width: 500px;
+            
+            .input-text {
+                flex: 1;
+                padding: 14px 20px;
+                font-size: 16px;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                border-radius: @folix-radius-md;
+                background: rgba(255, 255, 255, 0.2);
+                color: #FFFFFF;
+                
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+                
+                &:focus {
+                    background: rgba(255, 255, 255, 0.3);
+                    border-color: #FFFFFF;
+                    outline: none;
+                }
+            }
+            
+            .action.subscribe {
+                padding: 14px 32px;
+                background: #FFFFFF;
+                color: @theme__color__secondary;
+                font-weight: 700;
+                border: none;
+                border-radius: @folix-radius-md;
+                cursor: pointer;
+                transition: @folix-transition;
+                white-space: nowrap;
+                
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: @folix-shadow-lg;
+                }
+            }
+        }
+    }
+    
+    // ============================================================================
+    //  FOOTER - 尾部
+    //  ============================================================================
+    
+    .page-footer {
+        background: @folix-gradient-dark;
+        color: #F8FAFC;
+        border-top: 4px solid @theme__color__secondary;
+        padding: 40px 20px;
+        margin-top: auto;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .footer.content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .footer-links-custom {
+        margin-bottom: @indent__base;
+        
+        .footer.links.custom {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            .nav.item {
+                a {
+                    color: #94A3B8;
+                    text-decoration: none;
+                    transition: @folix-transition;
+                    
+                    &:hover {
+                        color: @theme__color__secondary;
+                    }
+                }
+            }
+        }
+    }
+    
+    .footer-marquee {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-top: 20px;
+        
+        .footer-marquee-content {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #94A3B8;
+            font-size: 14px;
+        }
+        
+        .marquee-separator {
+            color: rgba(255, 255, 255, 0.2);
+        }
+    }
+    
+    .copyright {
+        background: rgba(0, 0, 0, 0.2);
+        color: #F8FAFC;
+        padding: 20px;
+        border-radius: @folix-radius-md;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        
+        a {
+            color: @theme__color__secondary;
+            
+            &:hover {
+                color: #FB923C;
+            }
+        }
+    }
+}
+
+//
+//  Desktop (>= 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .hero-slider .slide-title {
+        font-size: 48px;
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .page-header {
+        .panel.header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .header-marquee {
+            display: none;
+        }
+    }
+    
+    .header.content {
+        padding: 12px 15px;
+        flex-wrap: wrap;
+    }
+    
+    .block-search-header {
+        order: 3;
+        max-width: 100%;
+        margin-top: 15px;
+    }
+    
+    .hero-slider {
+        .slide {
+            height: 300px;
+        }
+        
+        .slide-title {
+            font-size: 28px;
+        }
+        
+        .slide-price {
+            font-size: 24px;
+        }
+        
+        .slider-arrow {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+        }
+    }
+    
+    .promo-banner {
+        padding: @indent__base;
+        
+        .promo-banner__title {
+            font-size: 24px;
+        }
+        
+        .promo-banner__form {
+            flex-direction: column;
+            
+            .action.subscribe {
+                width: 100%;
+            }
+        }
+    }
+    
+    .home-products-grid {
+        .product-items {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    .footer-links-custom {
+        .footer.links.custom {
+            flex-direction: column;
+            gap: 12px;
+            
+            .nav.item a {
+                display: block;
+                padding: 12px 0;
+            }
+        }
+    }
+}

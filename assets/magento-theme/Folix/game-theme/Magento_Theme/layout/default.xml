@@ -1,34 +1,95 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Folix Game Theme - Default Layout Extensions
+ * Folix Game Theme - Default Layout
  * 
- * Extends Luma theme layout using reference blocks
+ * 扩展 Magento Luma 布局，不覆盖原有结构
+ * 遵循 XML 扩展机制：
+ * - referenceContainer: 引用容器，向其中添加内容
+ * - referenceBlock: 引用块，修改其属性
+ * - block: 创建新的块
+ * - move: 移动元素
+ * 
+ * 选择器命名规范：
+ * - name: XML内部标识符
+ * - as: 模板中 getChildHtml() 的别名
+ * - htmlClass: HTML class属性，与CSS选择器一致
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <!--
-            Header Extensions
-            Using referenceContainer to add custom blocks
-        -->
+        <!-- =================================================================
+             HEADER PANEL - 顶部面板（跑马灯 + 辅助链接）
+             扩展原有的 header.panel 容器
+             ================================================================= -->
         
-        <!-- Add hero slider to homepage -->
-        <referenceContainer name="main.content">
-            <block class="Magento\Cms\Block\Block" name="hero.slider" before="-">
+        <referenceContainer name="header.panel">
+            <!-- 跑马灯公告 - 放在最前面 -->
+            <block class="Magento\Framework\View\Element\Template" name="header.marquee" before="-" template="Magento_Theme::html/header/marquee.phtml"/>
+            
+            <!-- 商店/语言切换 - 放在最后 -->
+            <block class="Magento\Store\Block\Switcher" name="header.store.switcher" as="header_store_switcher" after="-" template="Magento_Store::switch/stores.phtml">
                 <arguments>
-                    <argument name="block_id" xsi:type="string">hero_slider</argument>
+                    <argument name="css_class" xsi:type="string">header-store-switcher</argument>
                 </arguments>
             </block>
         </referenceContainer>
         
-        <!-- Add promo banner -->
-        <referenceContainer name="content">
-            <block class="Magento\Cms\Block\Block" name="promo.banner" after="category.products.list">
+        <!-- =================================================================
+             HEADER WRAPPER - 头部内容区（Logo + 搜索 + 登录）
+             扩展原有的 header-wrapper 容器
+             ================================================================= -->
+        
+        <referenceContainer name="header-wrapper">
+            <!-- 搜索框 - Logo之后 -->
+            <block class="Magento\Framework\View\Element\Template" name="header.search.form" after="logo" template="Magento_Theme::html/header/search.phtml">
                 <arguments>
-                    <argument name="block_id" xsi:type="string">promo_banner</argument>
+                    <argument name="css_class" xsi:type="string">block block-search-header</argument>
                 </arguments>
             </block>
+            
+            <!-- 登录按钮 - 最后位置 -->
+            <block class="Magento\Framework\View\Element\Template" name="header.login.button" after="-" template="Magento_Theme::html/header/login-button.phtml"/>
         </referenceContainer>
+        
+        <!-- =================================================================
+             PAGE TOP - 页面顶部区域
+             在导航之前添加 Hero Slider
+             ================================================================= -->
+        
+        <referenceContainer name="page.top">
+            <!-- Hero Slider - 导航之前 -->
+            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml"/>
+        </referenceContainer>
+        
+        <!-- =================================================================
+             FOOTER - 尾部区域
+             扩展原有的 footer 容器
+             ================================================================= -->
+        
+        <referenceContainer name="footer">
+            <!-- 自定义链接块 - 在store_switcher之前 -->
+            <block class="Magento\Framework\View\Element\Template" name="footer.links.custom" before="store_switcher" template="Magento_Theme::html/footer/links.phtml"/>
+            
+            <!-- 尾部跑马灯 -->
+            <block class="Magento\Framework\View\Element\Template" name="footer.marquee" after="footer_links" template="Magento_Theme::html/footer/marquee.phtml"/>
+        </referenceContainer>
+        
+        <!-- =================================================================
+             LOGIN MODAL - 登录注册弹窗
+             添加到 before.body.end
+             ================================================================= -->
+        
+        <referenceContainer name="before.body.end">
+            <!-- 登录注册弹窗 -->
+            <block class="Magento\Framework\View\Element\Template" name="login.modal" template="Magento_Theme::html/modal/login.phtml"/>
+        </referenceContainer>
+        
+        <!-- =================================================================
+             BODY ATTRIBUTES - Body 属性
+             ================================================================= -->
+        
+        <attribute name="body" value="folix-theme"/>
+        
     </body>
 </page>

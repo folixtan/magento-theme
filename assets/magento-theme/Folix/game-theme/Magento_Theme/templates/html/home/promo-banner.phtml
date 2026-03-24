@@ -1,0 +1,31 @@
+<?php
+/**
+ * Folix Game Theme - Promo Banner
+ * 
+ * 首页促销横幅
+ */
+?>
+<div class="promo-banner">
+    <div class="promo-banner__content">
+        <h2 class="promo-banner__title">🎉 <?= $block->escapeHtml(__('New User Exclusive Offer')) ?></h2>
+        <p class="promo-banner__description"><?= $block->escapeHtml(__('Get ¥20 coupon on first registration, limited time offer!')) ?></p>
+        <form class="promo-banner__form"
+              action="<?= $block->escapeUrl($block->getUrl('newsletter/subscriber/new')) ?>"
+              method="post"
+              data-mage-init='{"validation": {}}'>
+            <input name="form_key" type="hidden" value="<?= $block->escapeHtmlAttr($block->getFormKey()) ?>" />
+            <div class="field email">
+                <input type="email"
+                       name="email"
+                       class="input-text"
+                       placeholder="<?= $block->escapeHtmlAttr(__('Enter your email address')) ?>"
+                       data-validate='{"required":true, "validate-email":true}'/>
+            </div>
+            <div class="actions">
+                <button type="submit" class="action subscribe">
+                    <span><?= $block->escapeHtml(__('Claim Now')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<?php
+/**
+ * Folix Game Theme - Header Login Button
+ * 
+ * 位置：header-wrapper 内，最后位置
+ * 选择器：.header-login-button
+ */
+?>
+<div class="header-login-button">
+    <button type="button"
+            class="action login-primary"
+            data-trigger="login-modal"
+            title="<?= $block->escapeHtmlAttr(__('Login')) ?>">
+        <span><?= $block->escapeHtml(__('Login')) ?></span>
+    </button>
+</div>

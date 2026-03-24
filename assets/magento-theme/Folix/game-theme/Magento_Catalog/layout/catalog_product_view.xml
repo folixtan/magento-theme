@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Folix Game Theme - Catalog Product View Layout
+ * 
+ * 产品详情页布局（支持可配置产品）
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- 产品详情主容器 -->
+        <referenceContainer name="content">
+            <block class="Magento\Catalog\Block\Product\View" name="product.info" template="Magento_Catalog::product/view.phtml" before="-">
+                <!-- 产品图片 -->
+                <block class="Magento\Catalog\Block\Product\View\Gallery" name="product.info.media.image" as="media" template="Magento_Catalog::product/view/gallery.phtml"/>
+                
+                <!-- 产品信息 -->
+                <block class="Magento\Catalog\Block\Product\View" name="product.info.main" as="product_info_main" template="Magento_Catalog::product/view/info.phtml">
+                    <!-- 产品名称 -->
+                    <block class="Magento\Catalog\Block\Product\View\Name" name="product.info.name" as="product_name" template="Magento_Catalog::product/view/name.phtml"/>
+                    
+                    <!-- 产品评价 -->
+                    <block class="Magento\Review\Block\Product\Review" name="product.info.review" as="product_review" template="Magento_Review::product/view/review.phtml"/>
+                    
+                    <!-- 价格 -->
+                    <block class="Magento\Catalog\Block\Product\View\Price" name="product.info.price" as="price" template="Magento_Catalog::product/view/price.phtml"/>
+                    
+                    <!-- 可配置产品选项 -->
+                    <block class="Magento\Swatches\Block\Product\Renderer\Configurable" name="product.info.options.swatches" as="swatch_options" template="Magento_Swatches::product/view/renderer.phtml" ifconfig="catalog/frontend/show_swatches_in_product_list">
+                        <arguments>
+                            <argument name="json_swatches_config" xsi:type="object">Magento\Swatches\Helper\Data</argument>
+                        </arguments>
+                    </block>
+                    
+                    <!-- 添加到购物车表单 -->
+                    <block class="Magento\Catalog\Block\Product\View" name="product.info.addtocart" as="addtocart" template="Magento_Catalog::product/view/addtocart.phtml">
+                        <block class="Magento\Catalog\Block\ShortcutButtons\InCatalog" name="addtocart.shortcut.buttons" as="shortcut_buttons"/>
+                    </block>
+                    
+                    <!-- 添加到愿望列表 -->
+                    <block class="Magento\Wishlist\Block\Catalog\Product\View\AddTo\Wishlist" name="product.info.addto.wishlist" as="addto_wishlist" template="Magento_Wishlist::catalog/product/view/addto/wishlist.phtml"/>
+                    
+                    <!-- 产品描述 -->
+                    <block class="Magento\Catalog\Block\Product\View\Description" name="product.info.description" as="description" template="Magento_Catalog::product/view/attribute.phtml">
+                        <arguments>
+                            <argument name="at_call" xsi:type="string">getDescription</argument>
+                            <argument name="at_code" xsi:type="string">description</argument>
+                            <argument name="css_class" xsi:type="string">description</argument>
+                            <argument name="at_label" xsi:type="string">none</argument>
+                            <argument name="title" translate="true" xsi:type="string">Description</argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+            
+            <!-- 产品详情标签页 -->
+            <block class="Magento\Catalog\Block\Product\View\Tabs" name="product.info.tabs" template="Magento_Catalog::product/view/tabs.phtml">
+                <!-- 详情标签 -->
+                <action method="addTab">
+                    <argument name="alias" xsi:type="string">description</argument>
+                    <argument name="title" translate="true" xsi:type="string">Details</argument>
+                    <argument name="block" xsi:type="string">product.info.description</argument>
+                </action>
+                
+                <!-- 更多信息标签 -->
+                <action method="addTab">
+                    <argument name="alias" xsi:type="string">additional</argument>
+                    <argument name="title" translate="true" xsi:type="string">More Information</argument>
+                    <argument name="block" xsi:type="string">product.info.additional</argument>
+                </action>
+                
+                <!-- 评价标签 -->
+                <action method="addTab">
+                    <argument name="alias" xsi:type="string">reviews</argument>
+                    <argument name="title" translate="true" xsi:type="string">Reviews</argument>
+                    <argument name="block" xsi:type="string">product.review.form</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
