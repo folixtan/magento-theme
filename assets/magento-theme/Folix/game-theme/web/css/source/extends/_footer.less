@@ -9,6 +9,8 @@
 //  * - copyright: Magento_Theme/templates/html/copyright.phtml
 //  */
 
+@import '../_variables.less';
+
 //
 //  Common (All devices)
 //  _____________________________________________
@@ -17,17 +19,15 @@
     
     //
     //  Page Footer - 页面底部
-    //  选择器来源: XML layout - <container name="footer-container" as="footer" after="main.content" htmlTag="footer" htmlClass="page-footer"/>
     //  _____________________________________________
     
     .page-footer {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        background: @folix-gradient-dark;
         margin-top: @indent__xl;
     }
     
     //
     //  Footer Container - 底部容器
-    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <div class="footer-container">
     //  _____________________________________________
     
     .footer-container {
@@ -36,19 +36,16 @@
     
     //
     //  Footer Content - 底部内容
-    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <div class="footer">
     //  _____________________________________________
     
     .footer.content {
-        border-top-color: @theme__color__primary;
+        border-top-color: @folix-primary;
         padding-top: @indent__xl;
         
-        //  Footer Links
-        //  选择器来源: Magento_Theme/templates/html/footer.phtml
         .links {
             a {
                 &:hover {
-                    color: @theme__color__secondary;
+                    color: @folix-footer-link-hover;
                 }
             }
         }
@@ -56,7 +53,6 @@
     
     //
     //  Footer Links - 底部链接列表
-    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <ul class="footer links">
     //  _____________________________________________
     
     .footer.links {
@@ -64,10 +60,10 @@
             margin-bottom: @indent__s;
             
             a {
-                color: #94A3B8;
+                color: @folix-footer-link;
                 
                 &:hover {
-                    color: @theme__color__secondary;
+                    color: @folix-footer-link-hover;
                 }
             }
         }
@@ -75,12 +71,11 @@
     
     //
     //  Copyright - 版权信息
-    //  选择器来源: Magento_Theme/templates/html/copyright.phtml - <small class="copyright">
     //  _____________________________________________
     
     .copyright {
         background: rgba(0, 0, 0, 0.2);
-        color: #94A3B8;
+        color: @folix-footer-text;
         padding: @indent__base;
         display: block;
         text-align: center;
@@ -88,29 +83,27 @@
     
     //
     //  Footer Bugs - Bug 报告链接
-    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <p class="bugs">
     //  _____________________________________________
     
     .bugs {
-        color: #94A3B8;
+        color: @folix-footer-text;
         
         a {
-            color: @theme__color__primary;
+            color: @folix-primary;
             
             &:hover {
-                color: @theme__color__secondary;
+                color: @folix-secondary;
             }
         }
     }
     
     //
     //  Newsletter - 订阅
-    //  选择器来源: Magento_Newsletter/templates/subscribe.phtml
     //  _____________________________________________
     
     .footer .block.newsletter {
         .title {
-            color: @color-white;
+            color: @folix-text-on-dark;
             font-weight: @font-weight__semibold;
             margin-bottom: @indent__base;
         }
@@ -118,20 +111,20 @@
         input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: @color-white;
+            color: @folix-text-on-dark;
             
             &::placeholder {
-                color: #94A3B8;
+                color: @folix-text-on-dark-muted;
             }
         }
         
         .action.subscribe {
-            background: @theme__color__primary;
+            background: @folix-primary;
             border: none;
-            color: @color-white;
+            color: @folix-text-on-dark;
             
             &:hover {
-                background: @theme__color__secondary;
+                background: @folix-secondary;
             }
         }
     }

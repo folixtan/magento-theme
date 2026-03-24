@@ -6,6 +6,8 @@
 //  * 使用方式：.my-class { &:extend(.abs-folix-* all); }
 //  */
 
+@import '../_variables.less';
+
 //
 //  Common (All devices)
 //  _____________________________________________
@@ -17,16 +19,16 @@
     //  _____________________________________________
     
     .abs-folix-button {
-        background: linear-gradient(135deg, @theme__color__primary, @theme__color__primary-alt);
+        background: @folix-gradient-primary;
         border: none;
-        color: @color-white;
+        color: @folix-text-on-dark;
         font-weight: @font-weight__semibold;
-        border-radius: @button__border-radius;
-        transition: all 0.2s ease;
+        border-radius: @folix-radius;
+        transition: @folix-transition;
         
         &:hover {
-            background: linear-gradient(135deg, @theme__color__secondary, darken(@theme__color__secondary, 10%));
-            color: @color-white;
+            background: @folix-gradient-secondary;
+            color: @folix-text-on-dark;
         }
     }
     
@@ -35,16 +37,16 @@
     //  _____________________________________________
     
     .abs-folix-card {
-        background: @color-white;
-        border: 1px solid @border-color__base;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        transition: all 0.2s ease;
+        background: @folix-card-bg;
+        border: 1px solid @folix-card-border;
+        border-radius: @folix-radius-md;
+        box-shadow: @folix-shadow-sm;
+        transition: @folix-transition;
         overflow: hidden;
         
         &:hover {
-            border-color: @theme__color__primary;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: @folix-card-hover-border;
+            box-shadow: @folix-card-hover-shadow;
         }
     }
     
@@ -60,7 +62,7 @@
         font-size: 12px;
         font-weight: @font-weight__bold;
         text-transform: uppercase;
-        border-radius: 4px;
+        border-radius: @folix-radius-sm;
         z-index: 2;
     }
     
@@ -70,8 +72,8 @@
     
     .abs-folix-badge-sale {
         &:extend(.abs-folix-badge all);
-        background: @theme__color__secondary;
-        color: @color-white;
+        background: @folix-secondary;
+        color: @folix-text-on-dark;
     }
     
     //
@@ -80,8 +82,8 @@
     
     .abs-folix-badge-new {
         &:extend(.abs-folix-badge all);
-        background: @theme__color__primary;
-        color: @color-white;
+        background: @folix-primary;
+        color: @folix-text-on-dark;
     }
     
     //
@@ -90,8 +92,8 @@
     
     .abs-folix-badge-hot {
         &:extend(.abs-folix-badge all);
-        background: linear-gradient(135deg, #EF4444, #DC2626);
-        color: @color-white;
+        background: @folix-gradient-secondary;
+        color: @folix-text-on-dark;
     }
     
     //
@@ -99,7 +101,7 @@
     //  _____________________________________________
     
     .abs-folix-price {
-        color: @theme__color__secondary;
+        color: @folix-price;
         font-weight: @font-weight__bold;
     }
     
@@ -108,7 +110,7 @@
     //  _____________________________________________
     
     .abs-folix-gradient-text {
-        background: linear-gradient(135deg, @theme__color__primary, @theme__color__primary-alt);
+        background: @folix-gradient-primary;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;

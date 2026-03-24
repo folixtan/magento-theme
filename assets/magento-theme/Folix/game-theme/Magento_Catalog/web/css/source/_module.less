@@ -3,25 +3,19 @@
 //  * 
 //  * IMPORTANT: _module.less completely overrides parent theme's _module.less
 //  * All parent theme variables MUST be copied before extending styles!
-//  * 
-//  * Inheritance: Magento/blank -> Magento/luma -> Folix/game-theme
 //  */
 
 @import 'module/_listings.less';
 @import 'module/_toolbar.less';
 
 //
-//  ============================================================
 //  Variables (Copied from parent theme: Magento/luma)
-//  ============================================================
-//
+//  _____________________________________________
 
-// Luma variables
 @product-info-price: @color-gray34;
 @product-h1-margin-bottom-desktop: @indent__s + @indent__xs;
 @product-price__muted__color: @color-gray40;
 
-// Blank variables (inherited)
 @product-grid-items-per-row-layout-default: 2;
 
 @product-grid-items-per-row-layout-1-screen-s: 3;
@@ -48,19 +42,18 @@
 
 @toolbar-mode-icon-font-size: 26px;
 
+@price-size: 22px;
+@price-size-desktop: 36px;
+
 //
-//  ============================================================
 //  Folix Custom Variables
-//  ============================================================
-//
+//  _____________________________________________
 
 @import '../_variables.less';
 
 //
-//  ============================================================
 //  Common Styles (All devices)
-//  ============================================================
-//
+//  _____________________________________________
 
 & when (@media-common = true) {
 
@@ -365,22 +358,21 @@
 
     .product-items {
         .product-item {
-            background: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: @folix-product-card-border-radius;
-            box-shadow: @folix-product-card-shadow;
+            background: @folix-card-bg;
+            border: 1px solid @folix-card-border;
+            border-radius: @folix-radius-md;
+            box-shadow: @folix-card-shadow;
             overflow: hidden;
-            transition: @folix-transition-smooth;
+            transition: @folix-transition;
             position: relative;
             margin-bottom: @indent__base;
             
             &:hover {
                 transform: translateY(-6px);
-                border-color: @folix-color-primary;
-                box-shadow: @folix-product-card-hover-shadow;
+                border-color: @folix-primary;
+                box-shadow: @folix-card-hover-shadow;
             }
             
-            // Product photo
             .product-item-photo {
                 position: relative;
                 display: block;
@@ -399,7 +391,7 @@
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
-                            transition: @folix-transition-base;
+                            transition: @folix-transition;
                         }
                     }
                 }
@@ -409,12 +401,10 @@
                 }
             }
             
-            // Product details
             .product-item-details {
                 padding: @indent__base;
             }
             
-            // Product name
             .product-item-name {
                 font-size: 18px;
                 font-weight: @font-weight__semibold;
@@ -422,26 +412,25 @@
                 
                 a {
                     .lib-link(
-                        @_link-color: #1E293B,
+                        @_link-color: @folix-text-primary,
                         @_link-text-decoration: none,
-                        @_link-color-hover: @folix-color-primary
+                        @_link-color-hover: @folix-primary
                     );
                 }
             }
             
-            // Price box
             .price-box {
                 margin-bottom: @indent__s;
                 
                 .price {
                     font-size: @price-size;
                     font-weight: @font-weight__bold;
-                    color: @folix-color-secondary;
+                    color: @folix-price;
                 }
                 
                 .old-price .price {
                     font-size: 16px;
-                    color: #9CA3AF;
+                    color: @folix-price-old;
                     text-decoration: line-through;
                 }
             }
@@ -459,10 +448,6 @@
             margin-bottom: @product-h1-margin-bottom-desktop;
         }
     }
-    
-    //
-    //  Product Items - Desktop
-    //  _____________________________________________
     
     .product-items {
         .product-item {

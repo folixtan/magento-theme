@@ -19,13 +19,13 @@
     .hero-slider {
         position: relative;
         margin-bottom: @indent__xl;
-        .lib-css(border-radius, 12px);
+        border-radius: @folix-radius-lg;
         overflow: hidden;
-        .lib-css(box-shadow, @folix-shadow-lg);
+        box-shadow: @folix-shadow-lg;
         
         .slider-container {
             display: flex;
-            transition: transform 0.5s ease;
+            transition: @folix-transition-slow;
         }
         
         .slide {
@@ -44,14 +44,14 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                .lib-css(background, linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%));
+                background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
             }
             
             .slide__content {
                 position: relative;
                 z-index: 1;
                 text-align: center;
-                color: #FFFFFF;
+                color: @folix-text-on-dark;
                 max-width: 600px;
                 padding: @indent__xl;
             }
@@ -59,15 +59,15 @@
             .slide__badge {
                 display: inline-block;
                 padding: 8px 20px;
-                .lib-css(background, @folix-gradient-orange);
-                color: #FFFFFF;
-                border-radius: 9999px;
+                background: @folix-gradient-secondary;
+                color: @folix-text-on-dark;
+                border-radius: @folix-radius-full;
                 font-size: 14px;
                 font-weight: @font-weight__bold;
                 text-transform: uppercase;
                 letter-spacing: 1px;
                 margin-bottom: @indent__base;
-                .lib-css(box-shadow, 0 4px 12px rgba(255, 107, 53, 0.4));
+                box-shadow: @folix-shadow-secondary;
             }
             
             .slide__title {
@@ -92,18 +92,18 @@
             }
             
             .action.slider-cta {
-                .lib-button();
-                .lib-css(background, @folix-gradient-blue);
+                background: @folix-gradient-primary;
                 display: inline-block;
                 padding: 16px 40px;
                 font-size: 18px;
                 font-weight: @font-weight__semibold;
-                .lib-css(border-radius, @button__border-radius);
-                .lib-css(box-shadow, 0 6px 20px rgba(74, 144, 226, 0.4));
+                border-radius: @folix-radius;
+                box-shadow: @folix-shadow-primary;
+                color: @folix-text-on-dark;
                 
                 &:hover {
                     transform: translateY(-3px);
-                    .lib-css(box-shadow, 0 10px 30px rgba(74, 144, 226, 0.5));
+                    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.5);
                 }
             }
         }
@@ -124,10 +124,10 @@
                 border-radius: 50%;
                 background: rgba(255, 255, 255, 0.5);
                 cursor: pointer;
-                transition: @folix-transition-base;
+                transition: @folix-transition;
                 
                 &.active {
-                    background: #FFFFFF;
+                    background: @folix-text-on-dark;
                     width: 32px;
                     border-radius: 6px;
                 }
@@ -141,13 +141,13 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: none;
-            color: #FFFFFF;
+            color: @folix-text-on-dark;
             font-size: 24px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             cursor: pointer;
-            transition: @folix-transition-base;
+            transition: @folix-transition;
             z-index: 2;
             
             &:hover {
@@ -169,11 +169,11 @@
     //  _____________________________________________
     
     .promo-banner {
-        .lib-css(background, @folix-gradient-orange);
-        .lib-css(border-radius, 12px);
+        background: @folix-gradient-secondary;
+        border-radius: @folix-radius-lg;
         padding: @indent__xl;
         margin-bottom: @indent__xl;
-        .lib-css(box-shadow, 0 8px 24px rgba(255, 107, 53, 0.3));
+        box-shadow: @folix-shadow-secondary;
         position: relative;
         overflow: hidden;
         
@@ -191,7 +191,7 @@
         .promo-banner__content {
             position: relative;
             z-index: 1;
-            color: #FFFFFF;
+            color: @folix-text-on-dark;
             max-width: 600px;
         }
         
@@ -218,9 +218,9 @@
                 padding: 14px 20px;
                 font-size: 16px;
                 border: 2px solid rgba(255, 255, 255, 0.3);
-                .lib-css(border-radius, @button__border-radius);
+                border-radius: @folix-radius;
                 background: rgba(255, 255, 255, 0.2);
-                color: #FFFFFF;
+                color: @folix-text-on-dark;
                 
                 &::placeholder {
                     color: rgba(255, 255, 255, 0.7);
@@ -228,25 +228,25 @@
                 
                 &:focus {
                     background: rgba(255, 255, 255, 0.3);
-                    border-color: #FFFFFF;
+                    border-color: @folix-text-on-dark;
                 }
             }
             
             button {
                 padding: 14px 32px;
-                background: #FFFFFF;
-                color: @folix-color-secondary;
+                background: @folix-text-on-dark;
+                color: @folix-secondary;
                 font-size: 16px;
                 font-weight: @font-weight__bold;
                 border: none;
-                .lib-css(border-radius, @button__border-radius);
+                border-radius: @folix-radius;
                 cursor: pointer;
-                transition: @folix-transition-base;
+                transition: @folix-transition;
                 white-space: nowrap;
                 
                 &:hover {
                     transform: translateY(-2px);
-                    .lib-css(box-shadow, 0 6px 20px rgba(0, 0, 0, 0.2));
+                    box-shadow: @folix-shadow-lg;
                 }
             }
         }
@@ -261,27 +261,27 @@
         top: 12px;
         right: 12px;
         padding: 6px 14px;
-        border-radius: 9999px;
+        border-radius: @folix-radius-full;
         font-size: 12px;
         font-weight: @font-weight__bold;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        .lib-css(box-shadow, 0 2px 8px rgba(0, 0, 0, 0.15));
+        box-shadow: @folix-shadow;
         z-index: 1;
         
         &--direct {
-            .lib-css(background, @folix-gradient-blue);
-            color: #FFFFFF;
+            background: @folix-gradient-primary;
+            color: @folix-text-on-dark;
         }
         
         &--hot {
-            .lib-css(background, @folix-gradient-orange);
-            color: #FFFFFF;
+            background: @folix-gradient-secondary;
+            color: @folix-text-on-dark;
         }
         
         &--new {
-            .lib-css(background, @folix-badge-new);
-            color: #FFFFFF;
+            background: @folix-badge-new-bg;
+            color: @folix-text-on-dark;
         }
     }
 }

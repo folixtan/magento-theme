@@ -9,6 +9,8 @@
 //  * - header.links: Magento_Customer/templates/account/link.phtml
 //  */
 
+@import '../_variables.less';
+
 //
 //  Common (All devices)
 //  _____________________________________________
@@ -17,32 +19,35 @@
     
     //
     //  Page Header - 页面头部
-    //  选择器来源: XML layout - <container name="header.container" as="header_container" label="Page Header Container" htmlTag="header" htmlClass="page-header"/>
+    //  选择器来源: XML layout
     //  _____________________________________________
     
     .page-header {
-        border-bottom: 3px solid @theme__color__secondary;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        background: @folix-header-bg;
+        border-bottom: 3px solid @folix-header-accent-border;
+        box-shadow: @folix-shadow;
         
         //  Header Panel Wrapper (top bar)
-        //  选择器来源: XML layout - <container name="header.panel" as="header_panel" htmlTag="div" htmlClass="panel wrapper"/>
         .panel.wrapper {
+            background: @folix-header-top-bg;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
     
     //
     //  Header Panel - 头部面板
-    //  选择器来源: XML layout - htmlClass="header panel"
     //  _____________________________________________
     
     .header.panel {
+        color: @folix-header-top-text;
+        
         > .header.links {
-            //  链接项
             > li {
                 > a {
+                    color: @folix-header-top-text;
+                    
                     &:hover {
-                        color: @theme__color__secondary;
+                        color: @folix-secondary;
                     }
                 }
             }
@@ -51,7 +56,6 @@
     
     //
     //  Header Content - 头部内容区
-    //  选择器来源: XML layout - <container name="header-wrapper" as="header_wrapper" htmlTag="div" htmlClass="header content"/>
     //  _____________________________________________
     
     .header.content {
@@ -60,7 +64,6 @@
     
     //
     //  Logo - Logo
-    //  选择器来源: Magento_Theme/templates/html/header/logo.phtml - <a class="logo">
     //  _____________________________________________
     
     .logo {
@@ -71,16 +74,15 @@
     
     //
     //  Nav Toggle - 移动端导航按钮
-    //  选择器来源: Magento_Theme/templates/html/header/logo.phtml - <span class="action nav-toggle">
     //  _____________________________________________
     
     .nav-toggle {
         &:before {
-            color: @theme__color__primary;
+            color: @folix-primary;
         }
         
         &:hover:before {
-            color: @theme__color__secondary;
+            color: @folix-secondary;
         }
     }
 }
@@ -90,14 +92,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    //
-    //  Sticky Header - 固定头部
-    //  _____________________________________________
-    
     .page-header {
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: @folix-z-sticky;
     }
     
     .logo {
