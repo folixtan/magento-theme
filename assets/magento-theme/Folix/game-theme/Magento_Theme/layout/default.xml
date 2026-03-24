@@ -38,7 +38,7 @@
         </referenceContainer>
         
         <!-- 移除不需要的原生元素 -->
-        <referenceBlock name="header.links" remove="true" />
+        <!-- 注意：不要移除 header.links，它在移动端会显示在 Account 标签页中 -->
         <referenceBlock name="skip_to_content" remove="true" />
         <referenceBlock name="catalog.compare.link" remove="true" />
         <referenceBlock name="currency" remove="true" />

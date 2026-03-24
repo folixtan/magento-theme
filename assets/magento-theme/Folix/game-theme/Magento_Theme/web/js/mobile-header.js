@@ -89,16 +89,24 @@ define([
             console.log('[Folix] Nav sections left:', $navSections.css('left'));  // 调试日志
         });
 
-        // 创建并添加导航遮罩
-        if ($('.nav-overlay').length === 0) {
-            var $navOverlay = $('<div class="nav-overlay"></div>');
-            $navOverlay.insertAfter($navSections);
-            
-            $navOverlay.on('click', function () {
-                console.log('[Folix] Overlay clicked');  // 调试日志
-                $body.removeClass('nav-open');
-            });
+        // 处理导航遮罩（确保遮罩存在并正确绑定事件）
+        var $navOverlay = $('.nav-overlay');
+        
+        // 如果遮罩不存在，创建它
+        if ($navOverlay.length === 0) {
+            $navOverlay = $('<div class="nav-overlay"></div>');
+            $body.append($navOverlay);
         }
+        
+        // 绑定点击事件（使用 off 确保不重复绑定）
+        $navOverlay.off('click.folixMobile').on('click.folixMobile', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('[Folix] Overlay clicked, closing nav');  // 调试日志
+            $body.removeClass('nav-open');
+        });
+        
+        console.log('[Folix] Nav overlay initialized, length:', $navOverlay.length);
     }
 
     /**
