@@ -1,185 +1,178 @@
-# Folix Game Theme - 开发文档
+# Folix Game Theme - 开发总结
 
-## 📚 Magento 2.4.8 主题开发规范
+## 项目概述
+基于Magento 2.4.8-p4官方规范开发的游戏电商主题，继承自Magento/luma，采用蓝橙渐变色方案（蓝#4A90E2 + 橙#FF6B35）。
 
-### 核心规则
-
-1. **变量覆盖**：在 `_theme.less` 中覆盖原生变量，避免样式错乱
-2. **原生选择器**：使用 XML 和 phtml 定义的选择器，来源有两种：
-   - XML 布局文件定义
-   - phtml 模板文件定义
-
----
-
-## 1️⃣ 颜色系统变量覆盖
-
-### 关键颜色变量
-
-```less
-// 主题颜色
-@theme__color__primary: #4A90E2;           // 主色
-@theme__color__primary-alt: #6C5CE7;       // 次色
-@theme__color__secondary: #FF6B35;         // 强调色
-
-// 文字颜色
-@primary__color: #1E293B;                   // 主要文字
-@primary__color__lighter: #64748B;          // 浅色文字
-
-// 背景颜色
-@page__background-color: #F8FAFC;           // 页面背景
-@panel__background-color: #F1F5F9;          // 面板背景
-
-// 边框颜色
-@border-color__base: #E2E8F0;               // 基础边框
-
-// 链接颜色
-@link__color: @theme__color__primary;
-@link__hover__color: @theme__color__secondary;
+## 继承架构
+```
+Magento/blank (基础)
+    └── Magento/luma (父主题)
+        └── Folix/game-theme (本主题)
 ```
 
----
+## 核心特性
 
-## 2️⃣ 原生选择器来源
+### 1. 渐变色方案
+- **主蓝色**: `#4A90E2`
+- **主橙色**: `#FF6B35`
+- **深蓝背景**: `#1E293B`
+- **紫色强调**: `#7C3AED`
+- **金色高亮**: `#F59E0B`
 
-### XML 布局文件
+### 2. UI组件
+- **渐变按钮**: 蓝到橙的渐变，悬停时更鲜艳
+- **徽章系统**: NEW/HOT/SALE徽章，带有闪烁动画
+- **产品卡片**: 悬停上浮+阴影效果
+- **跑马灯**: 自动滚动的公告栏
 
-| 选择器 | XML 文件 |
-|--------|----------|
-| `.page-header` | `default.xml` - header.container |
-| `.panel.wrapper` | `default.xml` - header.panel |
-| `.header.content` | `default.xml` - header-wrapper |
-| `.page-footer` | `default.xml` - footer-container |
-| `.page-main` | `default.xml` - main.content |
+### 3. 主题样式架构
 
-### phtml 模板文件
-
-| 选择器 | phtml 文件 |
-|--------|------------|
-| `.logo` | `Magento_Theme/templates/html/header/logo.phtml` |
-| `.nav-toggle` | `Magento_Theme/templates/html/header/logo.phtml` |
-| `.navigation` | `Magento_Theme/templates/html/topmenu.phtml` |
-| `.level0`, `.level-top` | `Magento_Theme/templates/html/topmenu.phtml` |
-| `.submenu` | `Magento_Theme/templates/html/topmenu.phtml` |
-| `.footer`, `.footer.links` | `Magento_Theme/templates/html/footer.phtml` |
-| `.copyright` | `Magento_Theme/templates/html/copyright.phtml` |
-| `.product-item` | `Magento_Catalog/templates/product/list.phtml` |
-| `.product-item-info` | `Magento_Catalog/templates/product/list.phtml` |
-| `.product-item-photo` | `Magento_Catalog/templates/product/list.phtml` |
-| `.product-item-details` | `Magento_Catalog/templates/product/list.phtml` |
-| `.product-item-name` | `Magento_Catalog/templates/product/list.phtml` |
-| `.price-box` | `Magento_Catalog/templates/product/price/price.phtml` |
-| `.action.primary` | 多处 phtml |
-| `.action.tocart` | `Magento_Catalog/templates/product/list.phtml` |
-
----
-
-## 3️⃣ `_extends.less` 机制
-
-### 关键理解
-
-1. **通过 `@import (reference)` 引入**
-2. **直接选择器会正常输出**
-3. **抽象类（`.abs-*`）需要 `&:extend()` 才会输出**
-4. **与父主题合并，同选择器覆盖**
-
-### 模块化组织
-
+#### CSS文件结构
 ```
 web/css/source/
-├── _extends.less          # 引入模块文件
-└── extends/
-    ├── _global.less       # 全局样式
-    ├── _header.less       # 头部样式
-    ├── _footer.less       # 底部样式
-    ├── _navigation.less   # 导航样式
-    ├── _buttons.less      # 按钮样式
-    ├── _products.less     # 产品样式
-    ├── _components.less   # 自定义组件
-    └── _abstracts.less    # 抽象类
+├── _theme.less          # 覆盖父主题变量（优先）
+├── _variables.less      # 定义新变量
+├── _extend.less         # 扩展样式（主入口）
+├── extends/
+│   ├── _pages.less      # 页面级样式（头部、尾部）
+│   ├── _modules.less    # 模块级样式
+│   ├── _components.less # 组件级样式（按钮、徽章）
+│   └── _product.less    # 产品相关样式
+└── override/
+    └── _extend.less     # 覆盖样式（最后手段）
 ```
+
+#### 开发原则
+1. **扩展优先**: 使用`_extend.less`和`<referenceContainer>`
+2. **覆盖次之**: 使用`_theme.less`覆盖变量
+3. **新增最后**: 在`_variables.less`定义新变量
+
+### 4. 布局修改策略
+
+#### 头部布局（default.xml）
+```xml
+<!-- 扩展而非覆盖 -->
+<referenceContainer name="header.container">
+    <referenceContainer name="header.panel">
+        <!-- 添加跑马灯 -->
+        <block class="Magento\Framework\View\Element\Template" 
+               name="header.marquee" 
+               template="Magento_Theme::html/header/marquee.phtml" 
+               after="top.links"/>
+    </referenceContainer>
+</referenceContainer>
+```
+
+#### 尾部布局（default.xml）
+```xml
+<!-- 新增Footer栏目块 -->
+<referenceContainer name="footer-container">
+    <container name="footer.top" htmlTag="div" htmlClass="footer-top">
+        <block class="Magento\Framework\View\Element\Template" 
+               name="footer.columns" 
+               template="Magento_Theme::html/footer/columns.phtml"/>
+    </container>
+</referenceContainer>
+```
+
+## 文件清单
+
+### 布局文件
+- `Magento_Theme/layout/default.xml` - 主布局配置
+
+### 模板文件
+- `Magento_Theme/templates/html/header/marquee.phtml` - 跑马灯公告
+- `Magento_Theme/templates/html/footer/columns.phtml` - Footer栏目
+- `Magento_Theme/templates/html/footer/copyright.phtml` - Copyright区域
+
+### 样式文件
+- `web/css/source/_theme.less` - 变量覆盖
+- `web/css/source/_variables.less` - 新变量定义
+- `web/css/source/_extend.less` - 扩展入口
+- `web/css/source/extends/_pages.less` - 页面样式
+- `web/css/source/extends/_modules.less` - 模块样式
+- `web/css/source/extends/_components.less` - 组件样式
+- `web/css/source/extends/_product.less` - 产品样式
+
+### JavaScript文件
+- `web/js/marquee.js` - 跑马灯组件
+- `web/js/theme.js` - 主题初始化
+
+### 静态资源
+- `media/preview.svg` - 主题预览图
+
+## 颜色规范
+
+### 渐变组合
+| 名称 | 起始色 | 结束色 | 用途 |
+|------|--------|--------|------|
+| 主渐变 | `#4A90E2` | `#FF6B35` | 按钮、徽章、Hero |
+| 深蓝渐变 | `#1E293B` | `#0F172A` | 头部Top Bar、Footer |
+| 紫色渐变 | `#7C3AED` | `#9333EA` | Copyright、特殊强调 |
+
+### 文字颜色
+- 主标题: `#1E293B`
+- 副标题: `#475569`
+- 链接: `#4A90E2`
+- 链接悬停: `#FF6B35`
+- 反白文字: `#FFFFFF`
+
+## 响应式断点
+
+遵循Magento UI Library断点：
+- `@screen__xxs`: 320px
+- `@screen__xs`: 480px
+- `@screen__s`: 640px
+- `@screen__m`: 768px
+- `@screen__l`: 1024px
+- `@screen__xl`: 1440px
+
+## 测试建议
+
+### 验证项
+1. ✓ 头部布局和样式与原型一致
+2. ✓ 尾部布局和样式与原型一致
+3. ✓ 产品卡片悬停效果
+4. ✓ 徽章渐变和动画
+5. ✓ 跑马灯滚动功能
+6. ✓ 响应式布局（移动端）
+
+### 测试命令
+```bash
+# 部署主题
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy --theme=Folix/game-theme
+
+# 清除缓存
+php bin/magento cache:clean
+
+# 编译Less
+php bin/magento dev:source-theme:deploy
+```
+
+## 扩展建议
+
+### 新增模块样式
+1. 创建 `web/css/source/extends/_new_module.less`
+2. 在 `_extend.less` 中导入：`@import 'extends/_new_module.less';`
+
+### 新增布局修改
+1. 在 `Magento_Theme/layout/` 创建新XML文件
+2. 使用 `<referenceContainer>` 扩展而非 `<container>` 覆盖
+
+### 新增模板文件
+1. 在 `Magento_Theme/templates/` 创建新PHTML文件
+2. 使用Magento原生选择器结构
+
+## 开发规范提醒
+
+1. **选择器优先级**: 使用原生选择器（如`.page-header`），避免自定义选择器
+2. **变量使用**: 使用Magento UI Library函数（如`.lib-css()`）
+3. **文件组织**: 遵循扩展优先原则
+4. **注释规范**: 每个文件顶部添加功能说明和位置信息
 
 ---
 
-## 4️⃣ 两种 CSS 编写方案
-
-| 方案 | 文件 | 继承方式 | 适用场景 |
-|------|------|----------|----------|
-| **方案一** | `_extends.less` | 合并父主题 | 全局样式、轻量覆盖 |
-| **方案二** | `Magento_*/_module.less` | 完全覆盖父主题 | 模块大改动 |
-
-### 方案一：`_extends.less`
-
-```less
-// 使用原生选择器
-.page-header {
-    border-bottom: 3px solid @theme__color__secondary;
-}
-```
-
-### 方案二：`_module.less`
-
-```less
-// 1. 必须先复制父主题变量
-@header__background-color: false;
-@header-panel__background-color: @color-gray-middle4;
-
-// 2. 然后扩展样式
-.page-header {
-    // 自定义样式
-}
-```
-
----
-
-## 5️⃣ 样式包裹规则
-
-```less
-// 公共样式
-& when (@media-common = true) {
-    // 样式
-}
-
-// 桌面端
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    // 样式
-}
-
-// 移动端
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    // 样式
-}
-```
-
----
-
-## 6️⃣ 文件结构
-
-```
-Folix/game-theme/
-├── web/css/source/
-│   ├── _theme.less          # 覆盖原生变量
-│   ├── _variables.less       # 自定义变量
-│   ├── _extends.less         # 引入模块文件
-│   └── extends/
-│       ├── _global.less
-│       ├── _header.less
-│       ├── _footer.less
-│       ├── _navigation.less
-│       ├── _buttons.less
-│       ├── _products.less
-│       ├── _components.less
-│       └── _abstracts.less
-├── Magento_Theme/
-│   ├── web/css/source/_module.less
-│   └── layout/default.xml
-├── Magento_Catalog/
-│   └── web/css/source/_module.less
-├── etc/view.xml
-├── theme.xml
-└── registration.php
-```
-
----
-
-**版本**: 2.0.0  
-**最后更新**: 2026-03-22
+**开发时间**: 2024年
+**Magento版本**: 2.4.8-p4
+**主题版本**: 1.0.0

@@ -3,90 +3,169 @@
 /**
  * Folix Game Theme - Default Layout
  * 
- * 扩展 Magento Luma 布局，不覆盖原有结构
- * 遵循 XML 扩展机制：
- * - referenceContainer: 引用容器，向其中添加内容
- * - referenceBlock: 引用块，修改其属性
- * - block: 创建新的块
- * - move: 移动元素
+ * 布局设计说明：
+ * - 遵循 Magento Luma 原生结构
+ * - 选择器原生优先：.page-header, .panel.header, .header.content
+ * - 颜色参考原型：http://game.slmate.com 和 demo.html
  * 
- * 选择器命名规范：
- * - name: XML内部标识符
- * - as: 模板中 getChildHtml() 的别名
- * - htmlClass: HTML class属性，与CSS选择器一致
+ * 头部结构（从上到下）：
+ * 1. panel.wrapper > panel.header (Top Bar: 深蓝渐变背景)
+ *    - 左侧：辅助链接（新闻、奖励、支持）
+ *    - 右侧：APP下载 + 商店/语言切换
+ * 
+ * 2. header.content (Main Bar: 白色背景，橙色底部边框)
+ *    - Logo + 导航菜单 + 搜索框 + 登录按钮 + 购物车
+ * 
+ * 尾部结构：
+ * - 背景：深蓝渐变
+ * - 顶部边框：橙色 4px
+ * - 内容：链接 + Copyright（紫色渐变背景）
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <!-- =================================================================
-             HEADER PANEL - 顶部面板（跑马灯 + 辅助链接）
-             扩展原有的 header.panel 容器
+             HEADER PANEL (Top Bar) - 顶部栏
+             扩展 Magento 原生 header.panel 容器
+             样式：深蓝渐变背景 #1E293B → #0F172A
              ================================================================= -->
         
         <referenceContainer name="header.panel">
-            <!-- 跑马灯公告 - 放在最前面 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.marquee" before="-" template="Magento_Theme::html/header/marquee.phtml"/>
-            
-            <!-- 商店/语言切换 - 放在最后 -->
-            <block class="Magento\Store\Block\Switcher" name="header.store.switcher" as="header_store_switcher" after="-" template="Magento_Store::switch/stores.phtml">
+            <!-- 左侧辅助链接 - 在 welcome 消息之前 -->
+            <block class="Magento\Framework\View\Element\Html\Links" name="header.links.top" before="-">
                 <arguments>
-                    <argument name="css_class" xsi:type="string">header-store-switcher</argument>
+                    <argument name="css_class" xsi:type="string">header links top-links</argument>
+                </arguments>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-news">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">📰 Folix News</argument>
+                        <argument name="path" xsi:type="string">news</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-rewards">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">⭐ STAR Rewards</argument>
+                        <argument name="path" xsi:type="string">rewards</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-support">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">💬 Support</argument>
+                        <argument name="path" xsi:type="string">support</argument>
+                    </arguments>
+                </block>
+            </block>
+            
+            <!-- 中间跑马灯公告 -->
+            <block class="Magento\Framework\View\Element\Template" name="header.marquee" after="header.links.top" template="Magento_Theme::html/header/marquee.phtml"/>
+            
+            <!-- 右侧：APP下载链接 -->
+            <block class="Magento\Framework\View\Element\Html\Link" name="header.app.link" after="header.marquee">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">📱 Folix APP</argument>
+                    <argument name="path" xsi:type="string">app</argument>
+                    <argument name="class" xsi:type="string">app-link</argument>
                 </arguments>
             </block>
         </referenceContainer>
         
         <!-- =================================================================
-             HEADER WRAPPER - 头部内容区（Logo + 搜索 + 登录）
-             扩展原有的 header-wrapper 容器
+             HEADER CONTENT (Main Bar) - 主头部
+             原生结构：.header.content 包含 logo, minicart, search
+             样式：白色背景，底部 3px 橙色边框
              ================================================================= -->
         
         <referenceContainer name="header-wrapper">
             <!-- 搜索框 - Logo之后 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.search.form" after="logo" template="Magento_Theme::html/header/search.phtml">
-                <arguments>
-                    <argument name="css_class" xsi:type="string">block block-search-header</argument>
-                </arguments>
-            </block>
+            <block class="Magento\Framework\View\Element\Template" name="header.search.form" after="logo" template="Magento_Theme::html/header/search.phtml"/>
             
-            <!-- 登录按钮 - 最后位置 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.login.button" after="-" template="Magento_Theme::html/header/login-button.phtml"/>
+            <!-- 登录按钮 - 在 minicart 之前 -->
+            <block class="Magento\Framework\View\Element\Template" name="header.login.button" before="minicart" template="Magento_Theme::html/header/login-button.phtml"/>
         </referenceContainer>
         
         <!-- =================================================================
-             PAGE TOP - 页面顶部区域
+             NAVIGATION - 导航菜单
+             样式：导航项悬停显示渐变下划线
+             ================================================================= -->
+        
+        <referenceBlock name="catalog.topnav">
+            <arguments>
+                <argument name="css_class" xsi:type="string">nav menu</argument>
+            </arguments>
+        </referenceBlock>
+        
+        <!-- =================================================================
+             PAGE TOP - 页面顶部
              在导航之前添加 Hero Slider
              ================================================================= -->
         
         <referenceContainer name="page.top">
-            <!-- Hero Slider - 导航之前 -->
             <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml"/>
         </referenceContainer>
         
         <!-- =================================================================
-             FOOTER - 尾部区域
-             扩展原有的 footer 容器
+             FOOTER - 尾部
+             原生结构：footer.content 包含 store_switcher, footer_links, copyright
+             样式：深蓝渐变背景，橙色顶部边框
              ================================================================= -->
         
         <referenceContainer name="footer">
-            <!-- 自定义链接块 - 在store_switcher之前 -->
-            <block class="Magento\Framework\View\Element\Template" name="footer.links.custom" before="store_switcher" template="Magento_Theme::html/footer/links.phtml"/>
+            <!-- 移除默认 store_switcher 位置 -->
+            <referenceBlock name="store_switcher" remove="true"/>
             
-            <!-- 尾部跑马灯 -->
-            <block class="Magento\Framework\View\Element\Template" name="footer.marquee" after="footer_links" template="Magento_Theme::html/footer/marquee.phtml"/>
+            <!-- 自定义链接 - 使用原生 footer.links -->
+            <referenceBlock name="footer_links">
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-about">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">About Us</argument>
+                        <argument name="path" xsi:type="string">about-us</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-terms">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Terms of Service</argument>
+                        <argument name="path" xsi:type="string">terms</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-privacy">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Privacy Policy</argument>
+                        <argument name="path" xsi:type="string">privacy-policy</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-contact">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
+                        <argument name="path" xsi:type="string">contact</argument>
+                    </arguments>
+                </block>
+                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-faq">
+                    <arguments>
+                        <argument name="label" xsi:type="string" translate="true">FAQ</argument>
+                        <argument name="path" xsi:type="string">faq</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+        
+        <!-- 移除默认版权区块，使用自定义 -->
+        <referenceBlock name="copyright" remove="true"/>
+        
+        <!-- 在 footer 末尾添加自定义版权 -->
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template" name="footer.copyright" after="-" template="Magento_Theme::html/footer/copyright.phtml"/>
         </referenceContainer>
         
         <!-- =================================================================
              LOGIN MODAL - 登录注册弹窗
-             添加到 before.body.end
              ================================================================= -->
         
         <referenceContainer name="before.body.end">
-            <!-- 登录注册弹窗 -->
             <block class="Magento\Framework\View\Element\Template" name="login.modal" template="Magento_Theme::html/modal/login.phtml"/>
         </referenceContainer>
         
         <!-- =================================================================
-             BODY ATTRIBUTES - Body 属性
+             BODY ATTRIBUTES
              ================================================================= -->
         
         <attribute name="body" value="folix-theme"/>
