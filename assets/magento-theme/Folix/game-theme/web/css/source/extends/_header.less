@@ -845,7 +845,7 @@
         }
         
         // ====================================================================
-        //  购物车 - 移动端调整（线性图标）
+        //  购物车 - 移动端调整（圆形图标）
         //  ====================================================================
         
         .minicart-wrapper {
@@ -856,12 +856,12 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                width: auto;
-                height: auto;
-                padding: 10px;
+                width: 44px;  // 固定宽度
+                height: 44px;  // 固定高度
+                padding: 0;
                 background: transparent;
-                border: none;  // 无边框
-                border-radius: 0;  // 无圆角
+                border: none;
+                border-radius: 50%;  // 圆形
                 
                 &:before {
                     content: '\e611';  // Luma 购物车图标
@@ -877,8 +877,8 @@
                 
                 .counter {
                     position: absolute;
-                    top: 5px;
-                    right: 5px;
+                    top: 0;
+                    right: 0;
                     background: #FF6B35;
                     color: #FFFFFF;
                     border-radius: 10px;
@@ -893,15 +893,47 @@
                         color: #FFFFFF;
                     }
                 }
+                
+                &:hover {
+                    background: rgba(255, 107, 53, 0.1);
+                }
             }
         }
         
         // ====================================================================
-        //  登录按钮 - 移动端隐藏（在菜单中显示）
+        //  登录按钮 - 移动端显示（未登录时）
         //  ====================================================================
         
         .header-login-button {
-            display: none;  // 移动端隐藏登录按钮
+            order: 4;  // 放在购物车后面
+            margin: 0 0 0 10px;
+            
+            .action.login-primary {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;  // 固定宽度
+                height: 44px;  // 固定高度
+                padding: 0;
+                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+                color: #FFFFFF;
+                border: none;
+                border-radius: 50%;  // 圆形
+                
+                span {
+                    font-size: 0;  // 隐藏文字
+                    
+                    &:before {
+                        content: '👤';  // 用户图标
+                        font-size: 20px;
+                    }
+                }
+                
+                &:hover {
+                    transform: none;
+                    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+                }
+            }
         }
     }
 }
