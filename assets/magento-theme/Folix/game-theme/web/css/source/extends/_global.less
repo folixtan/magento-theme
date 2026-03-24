@@ -1,6 +1,9 @@
 // /**
 //  * Folix Game Theme - Global Styles
-//  * 全局基础样式：body、html、通用元素
+//  * 
+//  * 原生选择器来源：
+//  * - phtml 模板: vendor/magento/module-theme/view/frontend/templates/
+//  * - XML 布局: vendor/magento/theme-frontend-blank/Magento_Theme/layout/
 //  */
 
 //
@@ -11,13 +14,31 @@
     
     //
     //  Body - 页面主体
+    //  选择器来源: 默认 HTML 元素
     //  _____________________________________________
     
     body {
-        background-color: #F8FAFC;
+        background-color: @page__background-color;
+        color: @primary__color;
         font-family: @font-family__base;
-        color: #1E293B;
-        line-height: 1.6;
+    }
+    
+    //
+    //  Page Wrapper - 页面容器
+    //  选择器来源: Magento_Theme/templates/html/container.phtml
+    //  _____________________________________________
+    
+    .page-wrapper {
+        background-color: @page__background-color;
+    }
+    
+    //
+    //  Page Main - 主内容区
+    //  选择器来源: XML layout default.xml
+    //  _____________________________________________
+    
+    .page-main {
+        padding-top: @indent__base;
     }
     
     //
@@ -25,12 +46,7 @@
     //  _____________________________________________
     
     a {
-        transition: @folix-transition-smooth;
-        color: @folix-color-primary;
-        
-        &:hover {
-            color: @folix-color-secondary;
-        }
+        transition: color 0.2s ease;
     }
     
     //
@@ -38,20 +54,7 @@
     //  _____________________________________________
     
     h1, h2, h3, h4, h5, h6 {
-        color: #1E293B;
-        font-weight: @font-weight__semibold;
-    }
-    
-    //
-    //  Page Wrapper - 页面容器
-    //  _____________________________________________
-    
-    .page-wrapper {
-        background-color: #F8FAFC;
-    }
-    
-    .page-main {
-        padding-top: @indent__base;
+        color: @primary__color;
     }
 }
 
@@ -61,7 +64,7 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     body {
-        font-size: 16px;
+        font-size: @font-size__base;
     }
 }
 
@@ -70,12 +73,8 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    body {
-        font-size: 14px;
-    }
-    
     .page-main {
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: @indent__s;
+        padding-right: @indent__s;
     }
 }

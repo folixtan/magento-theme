@@ -1,20 +1,15 @@
 // /**
 //  * Folix Game Theme - Theme Module Styles
 //  * 
-//  * IMPORTANT: _module.less completely overrides parent theme's _module.less
-//  * All parent theme variables MUST be copied before extending styles!
-//  * 
-//  * Inheritance: Magento/blank -> Magento/luma -> Folix/game-theme
+//  * 重要：_module.less 完全覆盖父主题同名文件
+//  * 必须复制父主题所有变量！
 //  */
 
 @import 'module/_collapsible_navigation.less';
 
 //
-//  ============================================================
-//  Theme variables (Copied from parent theme: Magento/luma)
-//  These are required for proper style inheritance
-//  ============================================================
-//
+//  变量复制（来自 Luma 主题）
+//  _____________________________________________
 
 //  Messages
 @message-global-note__color: @text__color;
@@ -44,12 +39,12 @@
 @minicart-icons-color: @header-icons-color;
 @minicart-icons-color-hover: @header-icons-color-hover;
 
-//  Price (Luma specific)
+//  Price
 @price-color: @color-gray34;
 @price-size: 22px;
 @price-size-desktop: 36px;
 
-//  Button shadow (Luma specific)
+//  Button shadow
 @button__shadow: inset 0 1px 0 0 rgba(255, 255, 255, 1), inset 0 -1px 0 0 fade(@border-color__base, 30);
 @button__shadow-active: inset 0 1px 0 0 fade(@border-color__base, 80), inset 0 -1px 0 0 fade(@border-color__base, 30);
 
@@ -69,18 +64,8 @@
 @filter-quantity: @color-gray46;
 
 //
-//  ============================================================
-//  Folix Custom Variables
-//  ============================================================
-//
-
-@import '../_variables.less';
-
-//
-//  ============================================================
-//  Common Styles (All devices)
-//  ============================================================
-//
+//  Common (All devices)
+//  _____________________________________________
 
 & when (@media-common = true) {
     body {
@@ -106,7 +91,7 @@
     }
 
     //
-    //  Header - Folix Extended Styles
+    //  Header
     //  _____________________________________________
 
     .page-header {
@@ -117,9 +102,6 @@
         .panel.wrapper {
             .lib-css(background-color, @header-panel__background-color);
             .lib-css(color, @header-panel__text-color);
-            // Folix customization
-            background: @folix-header-top-bg;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
 
@@ -150,10 +132,6 @@
                         @_link-color-active: @header-panel__text-color,
                         @_link-text-decoration-active: underline
                     );
-                    // Folix hover color
-                    &:hover {
-                        color: @folix-color-secondary;
-                    }
                 }
             }
         }
@@ -256,13 +234,11 @@
     }
 
     //
-    //  Footer - Folix Extended Styles
+    //  Footer
     //  _____________________________________________
 
     .page-footer {
         margin-top: @indent__m;
-        // Folix footer background
-        background: @folix-footer-bg;
     }
 
     .footer {
@@ -304,10 +280,6 @@
                         @_link-color-active: @footer-links-color-hover,
                         @_link-text-decoration-active: underline
                     );
-                    // Folix hover
-                    &:hover {
-                        color: @folix-color-secondary;
-                    }
                 }
             }
         }
@@ -385,7 +357,8 @@
 
     //
     //  Widgets
-    //  ---------------------------------------------
+    //  _____________________________________________
+    
     .sidebar {
         .widget.block:not(:last-child),
         .widget:not(:last-child) {
@@ -416,7 +389,7 @@
 
     //
     //  Calendar
-    //  ---------------------------------------------
+    //  _____________________________________________
 
     .ui-datepicker td {
         padding: 0;
@@ -438,15 +411,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    //
-    //  Header - Desktop styles
-    //  _____________________________________________
-    
     .page-header {
-        // Folix: Sticky header on desktop
         position: sticky;
         top: 0;
-        z-index: @folix-z-header;
+        z-index: 100;
     }
     
     .logo {

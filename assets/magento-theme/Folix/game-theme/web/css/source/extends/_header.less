@@ -1,6 +1,12 @@
 // /**
 //  * Folix Game Theme - Header Styles
-//  * 页面头部样式
+//  * 
+//  * 原生选择器来源：
+//  * - page-header: XML layout default.xml
+//  * - header.content: Magento_Theme/templates/html/header.phtml
+//  * - logo: Magento_Theme/templates/html/header/logo.phtml
+//  * - panel.wrapper: XML layout default.xml
+//  * - header.links: Magento_Customer/templates/account/link.phtml
 //  */
 
 //
@@ -11,29 +17,32 @@
     
     //
     //  Page Header - 页面头部
+    //  选择器来源: XML layout - <container name="header.container" as="header_container" label="Page Header Container" htmlTag="header" htmlClass="page-header"/>
     //  _____________________________________________
     
     .page-header {
-        border-bottom: 3px solid @folix-color-secondary;
-        box-shadow: @folix-shadow-sm;
+        border-bottom: 3px solid @theme__color__secondary;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         
-        // Header panel (top bar)
+        //  Header Panel Wrapper (top bar)
+        //  选择器来源: XML layout - <container name="header.panel" as="header_panel" htmlTag="div" htmlClass="panel wrapper"/>
         .panel.wrapper {
-            background: @folix-header-top-bg;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
     
     //
     //  Header Panel - 头部面板
+    //  选择器来源: XML layout - htmlClass="header panel"
     //  _____________________________________________
     
     .header.panel {
         > .header.links {
+            //  链接项
             > li {
                 > a {
                     &:hover {
-                        color: @folix-color-secondary;
+                        color: @theme__color__secondary;
                     }
                 }
             }
@@ -42,6 +51,7 @@
     
     //
     //  Header Content - 头部内容区
+    //  选择器来源: XML layout - <container name="header-wrapper" as="header_wrapper" htmlTag="div" htmlClass="header content"/>
     //  _____________________________________________
     
     .header.content {
@@ -50,65 +60,27 @@
     
     //
     //  Logo - Logo
+    //  选择器来源: Magento_Theme/templates/html/header/logo.phtml - <a class="logo">
     //  _____________________________________________
     
     .logo {
         img {
-            height: auto;
             max-height: 40px;
         }
     }
     
     //
-    //  Search - 搜索框
+    //  Nav Toggle - 移动端导航按钮
+    //  选择器来源: Magento_Theme/templates/html/header/logo.phtml - <span class="action nav-toggle">
     //  _____________________________________________
     
-    .block-search {
-        .control {
-            border: 2px solid @folix-color-primary;
-            border-radius: @button__border-radius;
-            overflow: hidden;
+    .nav-toggle {
+        &:before {
+            color: @theme__color__primary;
         }
         
-        input {
-            border: none;
-            padding: 10px 15px;
-            
-            &:focus {
-                outline: none;
-            }
-        }
-        
-        .action.search {
-            background: @folix-color-primary;
-            border: none;
-            
-            &:hover {
-                background: @folix-color-secondary;
-            }
-        }
-    }
-    
-    //
-    //  Minicart - 迷你购物车
-    //  _____________________________________________
-    
-    .minicart-wrapper {
-        .action.showcart {
-            &:before {
-                color: @folix-color-primary;
-                font-size: 28px;
-            }
-            
-            &:hover:before {
-                color: @folix-color-secondary;
-            }
-            
-            .counter {
-                background: @folix-color-secondary;
-                color: @color-white;
-                border-radius: 50%;
-            }
+        &:hover:before {
+            color: @theme__color__secondary;
         }
     }
 }
@@ -118,20 +90,20 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    //
+    //  Sticky Header - 固定头部
+    //  _____________________________________________
+    
     .page-header {
         position: sticky;
         top: 0;
-        z-index: @folix-z-header;
+        z-index: 100;
     }
     
     .logo {
         img {
             max-height: 45px;
         }
-    }
-    
-    .header.content {
-        padding: 16px 20px;
     }
 }
 

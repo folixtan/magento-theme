@@ -1,6 +1,11 @@
 // /**
 //  * Folix Game Theme - Navigation Styles
-//  * 导航样式
+//  * 
+//  * 原生选择器来源：
+//  * - navigation: Magento_Theme/templates/html/topmenu.phtml - <nav class="navigation">
+//  * - level0, level-top: Magento_Theme/templates/html/topmenu.phtml
+//  * - submenu: Magento_Theme/templates/html/topmenu.phtml
+//  * - nav-toggle: Magento_Theme/templates/html/header/logo.phtml
 //  */
 
 //
@@ -11,38 +16,43 @@
     
     //
     //  Navigation - 主导航
+    //  选择器来源: Magento_Theme/templates/html/topmenu.phtml - <nav class="navigation" data-action="navigation">
     //  _____________________________________________
     
     .navigation {
-        background: #FFFFFF;
+        background: @color-white;
         
+        //  Level 0 Items
+        //  选择器来源: topmenu.phtml - <li class="level0 nav-...">
         .level0 {
+            //  Level Top Links
+            //  选择器来源: topmenu.phtml - <a class="level-top">
             > .level-top {
                 font-weight: @font-weight__semibold;
                 border-radius: 4px;
-                transition: @folix-transition-smooth;
+                transition: all 0.2s ease;
                 
                 &:hover {
-                    background: rgba(255, 107, 53, 0.05);
-                    color: @folix-color-secondary;
+                    color: @theme__color__secondary;
                 }
             }
             
+            //  Active State
+            //  选择器来源: topmenu.phtml - <li class="level0 ... active">
             &.active > .level-top {
-                color: @folix-color-secondary;
-                border-bottom: 2px solid @folix-color-secondary;
+                color: @theme__color__secondary;
             }
             
-            // Submenu
+            //  Submenu
+            //  选择器来源: topmenu.phtml - <ul class="level0 submenu">
             .submenu {
-                border: 1px solid #E5E7EB;
-                box-shadow: @folix-shadow-lg;
+                border: 1px solid @border-color__base;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 border-radius: 8px;
                 
                 a {
                     &:hover {
-                        color: @folix-color-secondary;
-                        background: rgba(255, 107, 53, 0.05);
+                        color: @theme__color__secondary;
                     }
                 }
             }
@@ -51,34 +61,29 @@
     
     //
     //  Nav Toggle - 移动端导航按钮
+    //  选择器来源: Magento_Theme/templates/html/header/logo.phtml - <span class="action nav-toggle">
     //  _____________________________________________
     
     .nav-toggle {
         &:before {
-            color: @folix-color-primary;
             font-size: 28px;
-        }
-        
-        &:hover:before {
-            color: @folix-color-secondary;
         }
     }
     
     //
     //  Breadcrumbs - 面包屑
+    //  选择器来源: Magento_Theme/templates/html/breadcrumbs.phtml
     //  _____________________________________________
     
     .breadcrumbs {
         a {
-            color: @folix-color-primary;
-            
             &:hover {
-                color: @folix-color-secondary;
+                color: @theme__color__secondary;
             }
         }
         
         strong {
-            color: #64748B;
+            color: @primary__color__lighter;
         }
     }
 }
@@ -103,14 +108,13 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .navigation {
-        background: @folix-color-primary;
+        background: @theme__color__primary;
         
         .level0 {
             > .level-top {
                 color: @color-white;
                 
                 &:hover {
-                    background: rgba(255, 255, 255, 0.1);
                     color: @color-white;
                 }
             }

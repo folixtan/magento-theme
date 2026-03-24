@@ -1,7 +1,7 @@
 // /**
 //  * Folix Game Theme - Abstract Classes
-//  * 抽象类：需要通过 &:extend() 使用
 //  * 
+//  * 抽象类：需要通过 &:extend() 使用
 //  * 注意：这些类不会直接输出，必须被继承才生效
 //  * 使用方式：.my-class { &:extend(.abs-folix-* all); }
 //  */
@@ -17,18 +17,16 @@
     //  _____________________________________________
     
     .abs-folix-button {
-        background: @folix-gradient-primary;
+        background: linear-gradient(135deg, @theme__color__primary, @theme__color__primary-alt);
         border: none;
         color: @color-white;
         font-weight: @font-weight__semibold;
         border-radius: @button__border-radius;
-        transition: @folix-transition-smooth;
+        transition: all 0.2s ease;
         
         &:hover {
-            background: @folix-gradient-primary-hover;
+            background: linear-gradient(135deg, @theme__color__secondary, darken(@theme__color__secondary, 10%));
             color: @color-white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
         }
     }
     
@@ -37,22 +35,21 @@
     //  _____________________________________________
     
     .abs-folix-card {
-        background: #FFFFFF;
-        border: 1px solid #E5E7EB;
-        border-radius: @folix-product-card-border-radius;
-        box-shadow: @folix-product-card-shadow;
-        transition: @folix-transition-smooth;
+        background: @color-white;
+        border: 1px solid @border-color__base;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
         overflow: hidden;
         
         &:hover {
-            transform: translateY(-6px);
-            border-color: @folix-color-primary;
-            box-shadow: @folix-product-card-hover-shadow;
+            border-color: @theme__color__primary;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     }
     
     //
-    //  Folix Badge - 游戏徽章
+    //  Folix Badge - 游戏徽章基础
     //  _____________________________________________
     
     .abs-folix-badge {
@@ -68,27 +65,27 @@
     }
     
     //
-    //  Folix Badge - Sale
+    //  Folix Badge - Sale 促销
     //  _____________________________________________
     
     .abs-folix-badge-sale {
         &:extend(.abs-folix-badge all);
-        background: @folix-color-secondary;
+        background: @theme__color__secondary;
         color: @color-white;
     }
     
     //
-    //  Folix Badge - New
+    //  Folix Badge - New 新品
     //  _____________________________________________
     
     .abs-folix-badge-new {
         &:extend(.abs-folix-badge all);
-        background: @folix-color-primary;
+        background: @theme__color__primary;
         color: @color-white;
     }
     
     //
-    //  Folix Badge - Hot
+    //  Folix Badge - Hot 热销
     //  _____________________________________________
     
     .abs-folix-badge-hot {
@@ -102,7 +99,7 @@
     //  _____________________________________________
     
     .abs-folix-price {
-        color: @folix-color-secondary;
+        color: @theme__color__secondary;
         font-weight: @font-weight__bold;
     }
     
@@ -111,34 +108,9 @@
     //  _____________________________________________
     
     .abs-folix-gradient-text {
-        background: @folix-gradient-primary;
+        background: linear-gradient(135deg, @theme__color__primary, @theme__color__primary-alt);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }
-    
-    //
-    //  Folix Hover Scale - 悬停缩放
-    //  _____________________________________________
-    
-    .abs-folix-hover-scale {
-        transition: @folix-transition-smooth;
-        
-        &:hover {
-            transform: scale(1.05);
-        }
-    }
-    
-    //
-    //  Folix Hover Lift - 悬停上浮
-    //  _____________________________________________
-    
-    .abs-folix-hover-lift {
-        transition: @folix-transition-smooth;
-        
-        &:hover {
-            transform: translateY(-4px);
-            box-shadow: @folix-shadow-lg;
-        }
     }
 }

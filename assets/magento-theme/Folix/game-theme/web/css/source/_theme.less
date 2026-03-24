@@ -1,114 +1,145 @@
 // /**
-//  * Folix Game Theme - Variable Overrides
+//  * Folix Game Theme - Theme Variables Override
 //  * 
-//  * This file ONLY overrides existing Luma theme variables
-//  * New variables should be defined in _variables.less
+//  * 重要规则：
+//  * - 此文件只能覆盖已存在的变量，不能定义新变量
+//  * - 新变量必须在 _variables.less 中定义
+//  * - 否则主题将无法被其他主题嵌套继承
 //  */
 
 //
-//  Colors - Override Luma defaults
+//  Color System - 颜色系统覆盖
 //  _____________________________________________
 
-//  Primary colors
-@theme__color__primary: #4A90E2;
-@theme__color__primary-alt: #6C5CE7;
+//  Primary Theme Colors
+@theme__color__primary: #4A90E2;           // 主题主色 - 蓝色
+@theme__color__primary-alt: #6C5CE7;       // 主题次色 - 紫色
+@theme__color__secondary: #FF6B35;         // 主题强调色 - 橙色
 
-//  Link colors
+//  Text Colors
+@primary__color: #1E293B;                   // 主要文字颜色
+@primary__color__dark: #0F172A;             // 深色文字
+@primary__color__darker: #000000;           // 更深文字
+@primary__color__lighter: #64748B;          // 浅色文字
+@primary__color__light: #94A3B8;            // 更浅文字
+
+//  Background Colors
+@page__background-color: #F8FAFC;           // 页面背景
+@panel__background-color: #F1F5F9;          // 面板背景
+
+//  Secondary Colors
+@secondary__color: #E2E8F0;                 // 次要背景色
+@secondary__color__light: #F1F5F9;          // 次要背景浅色
+
+//  Active & Error Colors
+@active__color: @theme__color__secondary;   // 激活状态颜色
+@error__color: #EF4444;                     // 错误颜色
+
+//  Border Colors
+@border-color__base: #E2E8F0;               // 基础边框颜色
+
+//
+//  Typography - 排版覆盖
+//  _____________________________________________
+
+//  Font Family
+@font-family-name__base: 'Inter';
+@font-family__base: @font-family-name__base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+//  Links
 @link__color: @theme__color__primary;
-@link__hover__color: #FF6B35;
-@link__active__color: #EA580C;
+@link__text-decoration: none;
+@link__hover__color: @theme__color__secondary;
+@link__hover__text-decoration: underline;
+@link__active__color: @theme__color__secondary;
 
-//  Header colors
-@header-panel__background-color: #1E293B;
-@header-panel__text-color: #E2E8F0;
-@header-icons-color: #1E293B;
-@header-icons-color-hover: #FF6B35;
-
-//  Footer colors
-@footer__background-color: #F8F9FA;
-@footer-links-separator-border-color: #334155;
-@footer-links-color: #94A3B8;
-@footer-links-color-hover: #FF6B35;
-@copyright__background-color: linear-gradient(135deg, #2563EB, #7C3AED);
-
-//  Button colors
-@button__background: #6B7280;
-@button__border: 1px solid #6B7280;
-@button__color: #FFFFFF;
-@button__hover__background: #4B5563;
-@button__hover__color: #FFFFFF;
-
-//  Primary button
-@button-primary__background: linear-gradient(135deg, #4A90E2, #6C5CE7);
-@button-primary__border: 1px solid #4A90E2;
-@button-primary__color: #FFFFFF;
-@button-primary__hover__background: linear-gradient(135deg, #357ABD, #5A4FCF);
-@button-primary__hover__border: 1px solid #357ABD;
-@button-primary__hover__color: #FFFFFF;
-
-//
-//  Typography
-//  _____________________________________________
-
-@font-family-name__base: 'Open Sans';
-@font-family__base: @font-family-name__base, @font-family__sans-serif;
-
-@font-size__base: 16px;
-@font-size__l: 18px;
-@font-size__xl: 24px;
-
-@font-weight__regular: 400;
-@font-weight__semibold: 600;
-@font-weight__bold: 700;
-
+//  Headings
 @h1__font-weight: @font-weight__bold;
-@h2__font-weight: @font-weight__bold;
+@h2__font-weight: @font-weight__semibold;
 @h3__font-weight: @font-weight__semibold;
+@h3__margin-top: @indent__base;
+
+//  Focus
+@focus__color: @theme__color__primary;
 
 //
-//  Layout
+//  Buttons - 按钮覆盖
 //  _____________________________________________
 
-@layout__max-width: 1200px;
-@layout-indent__width: 20px;
+//  Primary Button
+@button-primary__background: @theme__color__primary;
+@button-primary__border: 1px solid @theme__color__primary;
+@button-primary__color: @color-white;
+@button-primary__hover__background: @theme__color__secondary;
+@button-primary__hover__border: 1px solid @theme__color__secondary;
+@button-primary__hover__color: @color-white;
 
-//
-//  Buttons
-//  _____________________________________________
-
-@button__border-radius: 8px;
+//  Button Base
+@button__border-radius: 6px;
 @button__font-weight: @font-weight__semibold;
 
 //
-//  Forms
+//  Navigation - 导航覆盖
 //  _____________________________________________
 
-@form-element-input__border-radius: 8px;
-@form-element-input__border-color: #E5E7EB;
-@form-element-input__background: #F9FAFB;
+//  Mobile Navigation
+@navigation__background: @color-white;
+@navigation-level0-item__color: @primary__color;
+@navigation-level0-item__active__color: @theme__color__secondary;
+@navigation-level0-item__hover__color: @theme__color__secondary;
+
+//  Desktop Navigation
+@navigation-desktop-level0-item__color: @primary__color;
+@navigation-desktop-level0-item__hover__color: @theme__color__secondary;
+@navigation-desktop-level0-item__active__color: @theme__color__secondary;
+@navigation-desktop-level0-item__active__border-color: @theme__color__secondary;
+
+//  Submenu
+@submenu-item__active__color: @theme__color__secondary;
+@submenu-desktop__background: @color-white;
+@submenu-desktop__border-color: @border-color__base;
+@submenu-desktop-item__active__color: @theme__color__secondary;
+
+//
+//  Layout - 布局覆盖
+//  _____________________________________________
+
+@layout-column__sidebar-width: 5;
+
+//
+//  Messages - 消息覆盖
+//  _____________________________________________
+
+@success__color: #10B981;
+@error__color: #EF4444;
+@notice__color: #F59E0B;
+
+//
+//  Forms - 表单覆盖
+//  _____________________________________________
+
+@form-element-input__border-color: @border-color__base;
 @form-element-input__focus__border-color: @theme__color__primary;
 
 //
-//  Navigation
+//  Tables - 表格覆盖
 //  _____________________________________________
 
-@navigation__background: #FFFFFF;
-@navigation-level0-item__color: #1E293B;
-@navigation-level0-item__hover__color: #FF6B35;
-@navigation-level0-item__active__color: #FF6B35;
-@navigation-level0-item__font-weight: @font-weight__semibold;
+@table-cell__padding-vertical: 12px;
+@table-cell-stripped__background-color: @panel__background-color;
 
 //
-//  Messages
+//  Tabs - 标签页覆盖
 //  _____________________________________________
 
-@message-global-note__background: #FEF3C7;
-@message-global-note__border-color: #F59E0B;
+@tab-control__color: @primary__color__lighter;
+@tab-control__font-weight: @font-weight__semibold;
+@tab-control__active__color: @theme__color__secondary;
 
 //
-//  Price
+//  Accordion - 手风琴覆盖
 //  _____________________________________________
 
-@price-color: #FF6B35;
-@price-size: 22px;
-@price-size-desktop: 28px;
+@accordion-control__font-weight: @font-weight__semibold;
+@accordion-control__color: @primary__color;
+@accordion-control__active__color: @theme__color__secondary;

@@ -1,6 +1,12 @@
 // /**
 //  * Folix Game Theme - Footer Styles
-//  * 页面底部样式
+//  * 
+//  * 原生选择器来源：
+//  * - page-footer: XML layout default.xml
+//  * - footer.content: Magento_Theme/templates/html/footer.phtml
+//  * - footer-container: Magento_Theme/templates/html/footer.phtml
+//  * - footer.links: Magento_Theme/templates/html/footer.phtml
+//  * - copyright: Magento_Theme/templates/html/copyright.phtml
 //  */
 
 //
@@ -11,45 +17,57 @@
     
     //
     //  Page Footer - 页面底部
+    //  选择器来源: XML layout - <container name="footer-container" as="footer" after="main.content" htmlTag="footer" htmlClass="page-footer"/>
     //  _____________________________________________
     
     .page-footer {
-        background: @folix-footer-bg;
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
         margin-top: @indent__xl;
     }
     
     //
+    //  Footer Container - 底部容器
+    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <div class="footer-container">
+    //  _____________________________________________
+    
+    .footer-container {
+        background: transparent;
+    }
+    
+    //
     //  Footer Content - 底部内容
+    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <div class="footer">
     //  _____________________________________________
     
     .footer.content {
-        border-top-color: @folix-color-primary;
+        border-top-color: @theme__color__primary;
         padding-top: @indent__xl;
         
+        //  Footer Links
+        //  选择器来源: Magento_Theme/templates/html/footer.phtml
         .links {
             a {
                 &:hover {
-                    color: @folix-color-secondary;
+                    color: @theme__color__secondary;
                 }
             }
         }
     }
     
     //
-    //  Footer Links - 底部链接
+    //  Footer Links - 底部链接列表
+    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <ul class="footer links">
     //  _____________________________________________
     
-    .footer {
-        &.links {
-            li {
-                margin-bottom: @indent__s;
+    .footer.links {
+        li {
+            margin-bottom: @indent__s;
+            
+            a {
+                color: #94A3B8;
                 
-                a {
-                    color: #94A3B8;
-                    
-                    &:hover {
-                        color: @folix-color-secondary;
-                    }
+                &:hover {
+                    color: @theme__color__secondary;
                 }
             }
         }
@@ -57,16 +75,37 @@
     
     //
     //  Copyright - 版权信息
+    //  选择器来源: Magento_Theme/templates/html/copyright.phtml - <small class="copyright">
     //  _____________________________________________
     
     .copyright {
-        background: @folix-copyright-bg;
+        background: rgba(0, 0, 0, 0.2);
         color: #94A3B8;
         padding: @indent__base;
+        display: block;
+        text-align: center;
+    }
+    
+    //
+    //  Footer Bugs - Bug 报告链接
+    //  选择器来源: Magento_Theme/templates/html/footer.phtml - <p class="bugs">
+    //  _____________________________________________
+    
+    .bugs {
+        color: #94A3B8;
+        
+        a {
+            color: @theme__color__primary;
+            
+            &:hover {
+                color: @theme__color__secondary;
+            }
+        }
     }
     
     //
     //  Newsletter - 订阅
+    //  选择器来源: Magento_Newsletter/templates/subscribe.phtml
     //  _____________________________________________
     
     .footer .block.newsletter {
@@ -87,11 +126,12 @@
         }
         
         .action.subscribe {
-            background: @folix-gradient-primary;
+            background: @theme__color__primary;
             border: none;
+            color: @color-white;
             
             &:hover {
-                background: @folix-gradient-primary-hover;
+                background: @theme__color__secondary;
             }
         }
     }

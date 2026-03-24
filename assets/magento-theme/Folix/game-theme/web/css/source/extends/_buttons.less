@@ -1,6 +1,11 @@
 // /**
 //  * Folix Game Theme - Button Styles
-//  * 按钮样式
+//  * 
+//  * 原生选择器来源：
+//  * - action.primary: XML layout, Magento_Catalog/templates/product/view/addtocart.phtml
+//  * - action.secondary: XML layout
+//  * - action.tocart: Magento_Catalog/templates/product/list.phtml
+//  * - abs-action-link-button: _extends.less (抽象类)
 //  */
 
 //
@@ -11,90 +16,87 @@
     
     //
     //  Primary Button - 主要按钮
+    //  选择器来源: 多处 phtml - <button class="action primary">
     //  _____________________________________________
     
     .action.primary,
-    button.action.primary {
-        background: @folix-gradient-primary;
-        border: none;
+    button.action.primary,
+    button.primary {
+        background: @theme__color__primary;
+        border: 1px solid @theme__color__primary;
         color: @color-white;
         font-weight: @font-weight__semibold;
         border-radius: @button__border-radius;
-        transition: @folix-transition-smooth;
+        transition: all 0.2s ease;
         
         &:hover,
         &:focus {
-            background: @folix-gradient-primary-hover;
+            background: @theme__color__secondary;
+            border-color: @theme__color__secondary;
             color: @color-white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
         }
         
         &:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
+            background: darken(@theme__color__secondary, 5%);
+            border-color: darken(@theme__color__secondary, 5%);
         }
     }
     
     //
     //  Secondary Button - 次要按钮
+    //  选择器来源: 多处 phtml - <button class="action secondary">
     //  _____________________________________________
     
     .action.secondary,
-    button.action.secondary {
+    button.action.secondary,
+    button.secondary {
         background: @color-white;
-        border: 2px solid @folix-color-primary;
-        color: @folix-color-primary;
+        border: 2px solid @theme__color__primary;
+        color: @theme__color__primary;
         font-weight: @font-weight__semibold;
         border-radius: @button__border-radius;
-        transition: @folix-transition-smooth;
+        transition: all 0.2s ease;
         
         &:hover,
         &:focus {
-            background: @folix-color-primary;
-            color: @color-white;
-        }
-    }
-    
-    //
-    //  Action Link Button - 链接按钮
-    //  _____________________________________________
-    
-    .abs-action-link-button {
-        background: @folix-gradient-primary;
-        border: none;
-        color: @color-white;
-        
-        &:hover {
-            background: @folix-gradient-primary-hover;
+            background: @theme__color__primary;
             color: @color-white;
         }
     }
     
     //
     //  Add to Cart Button - 加入购物车按钮
+    //  选择器来源: Magento_Catalog/templates/product/list.phtml - <button class="action tocart primary">
     //  _____________________________________________
     
     .action.tocart {
-        background: @folix-gradient-secondary;
-        border: none;
+        background: @theme__color__secondary;
+        border: 1px solid @theme__color__secondary;
         color: @color-white;
         font-weight: @font-weight__semibold;
+        border-radius: @button__border-radius;
         
-        &:hover {
-            background: linear-gradient(135deg, darken(#FF6B35, 10%), darken(#FF8C5A, 10%));
+        &:hover,
+        &:focus {
+            background: darken(@theme__color__secondary, 10%);
+            border-color: darken(@theme__color__secondary, 10%);
             color: @color-white;
         }
     }
     
     //
-    //  Small Buttons - 小按钮
+    //  Action Link Button - 链接样式按钮
+    //  选择器来源: _extends.less 抽象类
     //  _____________________________________________
     
-    .action {
-        &.small {
-            padding: 6px 12px;
-            font-size: 12px;
+    .abs-action-link-button {
+        background: @theme__color__primary;
+        border: none;
+        color: @color-white;
+        
+        &:hover {
+            background: @theme__color__secondary;
+            color: @color-white;
         }
     }
 }

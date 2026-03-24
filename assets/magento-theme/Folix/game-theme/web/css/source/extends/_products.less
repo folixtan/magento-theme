@@ -1,6 +1,15 @@
 // /**
 //  * Folix Game Theme - Product Styles
-//  * 产品样式
+//  * 
+//  * 原生选择器来源：
+//  * - products wrapper: Magento_Catalog/templates/product/list.phtml
+//  * - product-items: Magento_Catalog/templates/product/list.phtml
+//  * - product-item: Magento_Catalog/templates/product/list.phtml
+//  * - product-item-info: Magento_Catalog/templates/product/list.phtml
+//  * - product-item-photo: Magento_Catalog/templates/product/list.phtml
+//  * - product-item-details: Magento_Catalog/templates/product/list.phtml
+//  * - product-item-name: Magento_Catalog/templates/product/list.phtml
+//  * - price-box: Magento_Catalog/templates/product/price/price.phtml
 //  */
 
 //
@@ -10,123 +19,173 @@
 & when (@media-common = true) {
     
     //
-    //  Product Items - 产品列表项
+    //  Products Wrapper - 产品列表容器
+    //  选择器来源: Magento_Catalog/templates/product/list.phtml - <div class="products wrapper grid products-grid">
     //  _____________________________________________
     
-    .product-items {
-        .product-item {
-            background: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            border-radius: @folix-product-card-border-radius;
-            box-shadow: @folix-product-card-shadow;
+    .products.wrapper {
+        margin-bottom: @indent__base;
+    }
+    
+    //
+    //  Product Items - 产品列表项
+    //  选择器来源: Magento_Catalog/templates/product/list.phtml - <ol class="products list items product-items">
+    //  _____________________________________________
+    
+    .products.list.items.product-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    //
+    //  Product Item - 单个产品项
+    //  选择器来源: Magento_Catalog/templates/product/list.phtml - <li class="item product product-item">
+    //  _____________________________________________
+    
+    .product-item {
+        margin-bottom: @indent__base;
+        
+        //
+        //  Product Item Info - 产品信息容器
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <div class="product-item-info">
+        //  _____________________________________________
+        
+        .product-item-info {
+            background: @color-white;
+            border: 1px solid @border-color__base;
+            border-radius: 8px;
             overflow: hidden;
-            transition: @folix-transition-smooth;
-            position: relative;
+            transition: all 0.2s ease;
             
             &:hover {
-                transform: translateY(-6px);
-                border-color: @folix-color-primary;
-                box-shadow: @folix-product-card-hover-shadow;
+                border-color: @theme__color__primary;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
+        }
+        
+        //
+        //  Product Photo - 产品图片
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <a class="product photo product-item-photo">
+        //  _____________________________________________
+        
+        .product.photo.product-item-photo {
+            display: block;
+            overflow: hidden;
             
-            // Product photo
-            .product-item-photo {
-                display: block;
-                overflow: hidden;
+            img {
+                transition: transform 0.2s ease;
+            }
+        }
+        
+        &:hover {
+            .product.photo.product-item-photo img {
+                transform: scale(1.05);
+            }
+        }
+        
+        //
+        //  Product Details - 产品详情
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <div class="product details product-item-details">
+        //  _____________________________________________
+        
+        .product.details.product-item-details {
+            padding: @indent__base;
+        }
+        
+        //
+        //  Product Name - 产品名称
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <strong class="product name product-item-name">
+        //  _____________________________________________
+        
+        .product.name.product-item-name {
+            font-size: 16px;
+            font-weight: @font-weight__semibold;
+            margin: 0 0 @indent__s;
+            
+            a {
+                color: @primary__color;
                 
-                img {
-                    transition: @folix-transition-smooth;
+                &:hover {
+                    color: @theme__color__primary;
                 }
             }
+        }
+        
+        //
+        //  Product Item Link - 产品链接
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <a class="product-item-link">
+        //  _____________________________________________
+        
+        .product-item-link {
+            color: @primary__color;
             
             &:hover {
-                .product-item-photo img {
-                    transform: scale(1.1);
-                }
+                color: @theme__color__primary;
             }
-            
-            // Product details
-            .product-item-details {
-                padding: @indent__base;
-            }
-            
-            // Product name
-            .product-item-name {
-                font-size: 16px;
-                font-weight: @font-weight__semibold;
-                margin: 0 0 @indent__s;
-                
-                a {
-                    color: #1E293B;
-                    
-                    &:hover {
-                        color: @folix-color-primary;
-                    }
-                }
-            }
+        }
+        
+        //
+        //  Product Actions - 产品操作
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <div class="product actions product-item-actions">
+        //  _____________________________________________
+        
+        .product.actions.product-item-actions {
+            margin-top: @indent__s;
+        }
+        
+        //
+        //  Product Inner - 产品内部容器
+        //  选择器来源: Magento_Catalog/templates/product/list.phtml - <div class="product-item-inner">
+        //  _____________________________________________
+        
+        .product-item-inner {
+            padding: 0 @indent__base @indent__base;
         }
     }
     
     //
-    //  Price Box - 价格
+    //  Price Box - 价格容器
+    //  选择器来源: Magento_Catalog/templates/product/price/price.phtml - <div class="price-box">
     //  _____________________________________________
     
     .price-box {
         margin-bottom: @indent__s;
         
         .price {
-            color: @folix-color-secondary;
+            color: @theme__color__secondary;
             font-weight: @font-weight__bold;
         }
         
         .old-price .price {
-            color: #9CA3AF;
+            color: @primary__color__lighter;
             text-decoration: line-through;
             font-size: 14px;
         }
         
         .special-price .price {
-            color: @folix-color-secondary;
+            color: @theme__color__secondary;
         }
     }
     
     //
-    //  Product Labels - 产品标签
-    //  _____________________________________________
-    
-    .product-item {
-        .product-item-info {
-            position: relative;
-        }
-    }
-    
-    //
-    //  Product View - 产品详情页
-    //  _____________________________________________
-    
-    .product-info-main {
-        .page-title {
-            color: #1E293B;
-        }
-        
-        .product-info-price {
-            .price-wrapper {
-                .price {
-                    font-size: 28px;
-                    color: @folix-color-secondary;
-                }
-            }
-        }
-    }
-    
-    //
-    //  Product Image Container
+    //  Product Image Container - 产品图片容器
+    //  选择器来源: Magento_Catalog/templates/product/image.phtml
     //  _____________________________________________
     
     .product-image-container {
-        .product-image-wrapper {
-            border-radius: @folix-product-card-border-radius @folix-product-card-border-radius 0 0;
-        }
+        width: 100%;
+    }
+    
+    .product-image-wrapper {
+        height: auto;
+        padding: 0;
+    }
+    
+    .product-image-photo {
+        position: static;
+        width: 100%;
+        height: auto;
     }
 }
 
@@ -135,17 +194,15 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .product-items {
-        .product-item {
-            .product-item-name {
-                font-size: 18px;
-            }
+    .product-item {
+        .product.name.product-item-name {
+            font-size: 18px;
         }
     }
     
     .price-box {
         .price {
-            font-size: @price-size-desktop;
+            font-size: 22px;
         }
     }
 }
@@ -155,9 +212,7 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .product-items {
-        .product-item {
-            margin-bottom: @indent__base;
-        }
+    .product-item {
+        margin-bottom: @indent__base;
     }
 }
