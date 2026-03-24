@@ -16,24 +16,17 @@
 @theme__color__primary-alt: #6C5CE7;        // 紫色 - 搭配色
 @theme__color__secondary: #FF6B35;          // 橙色 - 强调色
 
-//  橙红色系 - 活力、促销、游戏
-@color-accent__primary: #FF6B35;            // 珊瑚橙（主强调色）
-@color-accent__orange: #FF6B35;             // 珊瑚橙（别名）
-@color-accent__coral: #FF8E72;              // 珊瑚粉
-@color-accent__gold: #FFA000;               // 金色（游戏货币）
+// 橙红色系 - 活力、促销、游戏
+@color-accent__primary: #FF6B35;        // 珊瑚橙（主强调色）
+@color-accent__orange: #FF6B35;         // 珊瑚橙（别名）
+@color-accent__coral: #FF8E72;          // 珊瑚粉
+@color-accent__gold: #FFA000;           // 金色（游戏货币）
 
 //  Text Colors
 @primary__color: #1E293B;                   // 主文字
 @primary__color__darker: #000000;           // 更深文字
 @primary__color__lighter: #64748B;          // 次文字
 @primary__color__light: #94A3B8;            // 弱化文字
-
-//  文字颜色系统
-@color-text__primary: #2D3436;              // 文字主色
-@color-text__secondary: #94A3B8;            // 文字次色
-@color-text__secondary-light: #E2E8F0;      // 文字浅色
-@color-text__tertiary: #9CA3AF;             // 文字三级色
-@color-text__white: #FFFFFF;                // 白色文字
 
 //  Background Colors
 @page__background-color: #F8FAFC;           // 页面背景
@@ -338,17 +331,29 @@
 @header-panel__text-color: #E2E8F0;
 
 //  Footer
-@footer__background-color: @color-gray-light01;
-@footer-links-color: @color-gray34;
-@footer-links-color-hover: @color-gray20;
+@footer__background-color: #1E293B;
+@footer-links-color: #E2E8F0;
+@footer-links-color-hover: @theme__color__secondary;
 @footer-links-color-current: @primary__color__light;
-@footer-links-separator-border-color: @color-gray-light4;
+@footer-links-separator-border-color: rgba(255, 255, 255, 0.2);
 
-//  Footer 新变量
+
+//
+//  文字颜色系统
+//  ---------------------------------------------
+@color-text__primary: #2D3436;
+@color-text__secondary: #94A3B8;
+@color-text__secondary-light: #E2E8F0;
+@color-text__tertiary: #9CA3AF;
+@color-text__white: #FFFFFF;
+
+//
+//  Footer - 页脚
+//  ---------------------------------------------
+@footer__background-color: @color-gray-light01;
 @footer-links__color: @color-text__secondary;
 @footer-links__hover__color: @color-accent__primary;
 
-//  Copyright
 @copyright__background-color: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
 @copyright__border-color: rgba(255, 255, 255, 0.1);
 @copyright__color: @color-text__secondary-light;
@@ -385,6 +390,25 @@
 
 @icons__font-path: '@{baseDir}fonts/Luma-Icons';
 @icons__font-name: 'luma-icons';
+@icon-wishlist-empty: false;
+@icon-comment-reflected: false;
+@icon-compare-empty: false;
+@icon-arrow-up-thin: false;
+@icon-arrow-right-thin: false;
+@icon-arrow-left-thin: false;
+@icon-arrow-down-thin: false;
+
+// ============================================================================
+//  BLOCK ITEMS - 区块项目
+//  ============================================================================
+
+@block-items__counter__color: @primary__color__lighter;
+
+//
+//  Icons - 图标
+//  ---------------------------------------------
+@icons__font-path: '@{baseDir}fonts/Luma-Icons';
+@icons__font-name: 'luma-icons';
 
 @icon-success: '\e60e';
 @icon-error: '\e61f';
@@ -402,9 +426,3 @@
 @icon-arrow-right-thin: false;
 @icon-arrow-left-thin: false;
 @icon-arrow-down-thin: false;
-
-// ============================================================================
-//  BLOCK ITEMS - 区块项目
-//  ============================================================================
-
-@block-items__counter__color: @primary__color__lighter;
