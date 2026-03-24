@@ -4,62 +4,151 @@
 
 ### 核心原则
 
-**优先级：变量覆盖 > 样式扩展 > 新增文件**
+**CSS 文件优先级：`_extends.less` > `_module.less`**
 
 ---
 
 ## 1️⃣ 文件作用详解
 
-### _theme.less
+### `_theme.less`
 **用途**：仅覆盖父主题（Luma）的现有变量
 
-**正确示例**：
 ```less
 // ✅ 正确：覆盖 Luma 变量
 @theme__color__primary: #4A90E2;
 @link__color: @theme__color__primary;
 @button__border-radius: 8px;
-```
 
-**错误示例**：
-```less
 // ❌ 错误：不能定义新变量
-@my-custom-color: #FF0000; // 这会导致主题无法嵌套
+@my-custom-color: #FF0000;
 ```
 
-### _variables.less
+### `_variables.less`
 **用途**：定义主题专用的新变量
 
-**正确示例**：
 ```less
 // ✅ 正确：定义新变量
 @folix-color-primary: #4A90E2;
 @folix-gradient-blue: linear-gradient(135deg, #4A90E2, #6C5CE7);
 ```
 
-### _module.less
-**用途**：扩展模块样式，使用原生选择器
+### `_extends.less`
+**用途**：基础公共样式和小改动
 
-**正确示例**：
 ```less
-& when (@media-common = true) {
-    // ✅ 正确：使用原生选择器
-    .page-header {
-        .lib-css(border-bottom, 3px solid @folix-color-secondary);
-    }
+// ✅ 全局样式
+body {
+    background-color: #F8FAFC;
 }
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    // ✅ 正确：响应式样式
+// ✅ 轻量覆盖（同选择器覆盖父主题）
+.page-header {
+    border-bottom: 3px solid @folix-color-secondary;
+}
+
+// ✅ 抽象类（可被继承）
+.abs-folix-button {
+    background: @folix-gradient-primary;
+}
+```
+
+### `_module.less`
+**用途**：模块特定样式（会完全覆盖父主题同名文件）
+
+```less
+// ⚠️ 必须先复制父主题变量！
+@header__background-color: false;
+@header-panel__background-color: @color-gray-middle4;
+// ... 其他父主题变量
+
+// 然后扩展样式
+& when (@media-common = true) {
     .page-header {
-        // 桌面端样式
+        // 自定义样式
     }
 }
 ```
 
 ---
 
-## 2️⃣ 样式包裹规则
+## 2️⃣ 两种 CSS 编写方案
+
+| 方案 | 适用场景 | 文件位置 | 做法 |
+|------|----------|----------|------|
+| **方案一** | 轻量覆盖、全局样式 | `web/css/source/_extends.less` | 通过 CSS 优先级覆盖父主题 |
+| **方案二** | 大改动、模块重构 | `Magento_*/web/css/source/_module.less` | 复制父主题所有变量 + 扩展 |
+
+### 方案一：`_extends.less`（推荐优先使用）
+
+```less
+// web/css/source/_extends.less
+
+& when (@media-common = true) {
+    // 全局样式
+    body {
+        background-color: #F8FAFC;
+    }
+    
+    // 轻量覆盖
+    .page-header {
+        border-bottom: 3px solid @folix-color-secondary;
+    }
+    
+    // 按钮样式
+    .action.primary {
+        background: @folix-gradient-primary;
+    }
+}
+```
+
+### 方案二：`_module.less`（大改动时使用）
+
+```less
+// Magento_Theme/web/css/source/_module.less
+
+// 1️⃣ 先复制父主题所有变量
+@message-global-note__color: @text__color;
+@header__background-color: false;
+@header-panel__background-color: @color-gray-middle4;
+// ... 更多变量
+
+// 2️⃣ 导入自定义变量
+@import '../_variables.less';
+
+// 3️⃣ 扩展样式
+& when (@media-common = true) {
+    .page-header {
+        // 完全控制头部样式
+    }
+}
+```
+
+---
+
+## 3️⃣ CSS 加载顺序
+
+从 Blank 主题 `styles-m.less`：
+
+```
+_reset.less 
+    ↓
+_styles.less 
+    ↓
+_sources.less → _extends.less (reference)
+    ↓
+@magento_import(_module.less) → 自动扫描所有模块
+    ↓
+_theme.less
+```
+
+**关键理解**：
+- `_extends.less` 通过 `(reference)` 引入，抽象类需通过 `&:extend()` 使用
+- `_module.less` 会完全覆盖父主题同名文件
+- 如果不在模块下写 CSS，就一定在 `_extends.less` 里写
+
+---
+
+## 4️⃣ 样式包裹规则
 
 ### 公共样式（所有设备）
 ```less
@@ -84,172 +173,92 @@
 
 ---
 
-## 3️⃣ Magento UI Library 常用函数
+## 5️⃣ 实际开发流程
 
-### 设置 CSS 属性
+### 需求：修改头部样式
+
+**步骤 1**：评估改动大小
+- 小改动 → 使用 `_extends.less`
+- 大改动 → 使用 `_module.less`
+
+**步骤 2（小改动）**：在 `_extends.less` 中覆盖
 ```less
-.lib-css(property, value);
-.lib-css(background, @folix-color-primary);
-.lib-css(border-radius, 8px);
-```
-
-### 按钮样式
-```less
-.lib-button(); // 基础按钮
-.lib-button-primary(); // 主要按钮
-```
-
-### 链接样式
-```less
-.lib-link(
-    @_link-color: #4A90E2,
-    @_link-text-decoration: none,
-    @_link-color-hover: #FF6B35
-);
-```
-
-### 表单样式
-```less
-.lib-form-element-input();
-.lib-form-fieldset();
-```
-
----
-
-## 4️⃣ 选择器优先级规则
-
-### 使用原生选择器
-```less
-// ✅ 正确：扩展原生选择器
 .page-header {
-    // 添加新样式
-    border-bottom: 3px solid #FF6B35;
-}
-
-.product-item {
-    // 扩展产品卡片样式
-    border-radius: 8px;
+    border-bottom: 3px solid @folix-color-secondary;
 }
 ```
 
-### 避免自定义选择器
+**步骤 2（大改动）**：复制变量到 `_module.less`
 ```less
-// ❌ 错误：创建自定义选择器会破坏继承
-.my-custom-header {
-    // 这会导致样式无法复用
+// 复制 Luma 的头部变量
+@header__background-color: false;
+@header-panel__background-color: @color-gray-middle4;
+@header-icons-color: @color-gray46;
+
+// 扩展样式
+.page-header {
+    // 完全自定义
 }
 ```
 
 ---
 
-## 5️⃣ 布局 XML 最佳实践
+## 6️⃣ 不需要创建的文件
 
-### 使用 referenceBlock/Container
-```xml
-<!-- ✅ 正确：扩展布局 -->
-<referenceContainer name="header.container">
-    <block class="..." name="custom.block" after="logo"/>
-</referenceContainer>
+| 文件 | 原因 |
+|------|------|
+| `styles-m.less` | 继承 Blank 主题 |
+| `styles-l.less` | 继承 Blank 主题 |
+| `default_head_blocks.xml` | 除非要添加额外资源（如字体） |
 
-<!-- ✅ 正确：修改现有块参数 -->
-<referenceBlock name="logo">
-    <arguments>
-        <argument name="logo_width" xsi:type="number">200</argument>
-    </arguments>
-</referenceBlock>
+---
+
+## 7️⃣ 常见错误
+
+### ❌ 错误 1：在 `_module.less` 中不复制父主题变量
+```less
+// 变量未定义会导致编译错误
+.page-header {
+    background: @header-panel__background-color; // ❌ 未定义
+}
 ```
 
-### 避免移除块
-```xml
-<!-- ❌ 避免：除非必要 -->
-<referenceBlock name="block.name" remove="true"/>
+### ❌ 错误 2：在 `_theme.less` 中定义新变量
+```less
+// 这会导致主题无法被其他主题继承
+@my-color: #FF0000; // ❌ 应该在 _variables.less 中定义
+```
+
+### ❌ 错误 3：不使用 `& when` 包裹样式
+```less
+// 样式会重复输出，导致冲突
+.page-header {
+    background: red; // ❌ 缺少 & when (@media-common = true)
+}
 ```
 
 ---
 
-## 6️⃣ 文件结构
+## 8️⃣ 文件结构
 
 ```
 Folix/game-theme/
 ├── web/css/source/
 │   ├── _theme.less          # 覆盖 Luma 变量
-│   ├── _variables.less       # 新变量定义
-│   └── _components.less      # 自定义组件
+│   ├── _variables.less       # 自定义变量
+│   └── _extends.less         # 全局样式、轻量覆盖
 ├── Magento_Theme/
 │   ├── web/css/source/
-│   │   └── _module.less      # 主题模块样式
+│   │   └── _module.less      # 主题模块样式（大改动）
 │   └── layout/
 │       └── default.xml       # 布局扩展
 ├── Magento_Catalog/
 │   └── web/css/source/
-│       └── _module.less      # Catalog 模块样式
+│       └── _module.less      # Catalog 模块样式（大改动）
 ├── etc/view.xml
 ├── theme.xml
 └── registration.php
 ```
-
----
-
-## 7️⃣ 开发流程
-
-1. **分析需求** → 确定是变量覆盖、样式扩展还是新增
-2. **查找原生选择器** → 在 Luma 和 Blank 主题中查找
-3. **使用 Magento UI Library** → 使用 `.lib-*` 函数
-4. **遵循响应式规则** → 使用 `.media-width()` mixin
-5. **测试验证** → 确保样式正确继承和覆盖
-
----
-
-## 8️⃣ 常见错误
-
-### ❌ 错误 1：在 _theme.less 中定义新变量
-```less
-// 这会导致主题无法被其他主题继承
-@my-color: #FF0000;
-```
-
-### ❌ 错误 2：不使用 & when 包裹样式
-```less
-// 样式会重复输出，导致冲突
-.page-header {
-    background: red;
-}
-```
-
-### ❌ 错误 3：使用自定义选择器
-```less
-// 破坏了 Magento 的选择器继承机制
-.my-header {
-    // ...
-}
-```
-
----
-
-## 9️⃣ 调试技巧
-
-### 查看 Less 编译错误
-```bash
-tail -f var/log/system.log
-tail -f var/log/debug.log
-```
-
-### 清除缓存
-```bash
-php bin/magento cache:flush
-php bin/magento setup:static-content:deploy -f
-```
-
-### 检查样式优先级
-使用浏览器开发者工具查看 CSS 规则的应用顺序。
-
----
-
-## 📚 参考资源
-
-- [Magento 2 主题开发文档](https://devdocs.magento.com/guides/v2.4/frontend-dev-guide/themes/theme-overview.html)
-- [Magento UI Library](https://devdocs.magento.com/guides/v2.4/frontend-dev-guide/css-topics/css-overview.html)
-- [Less 官方文档](https://lesscss.org/)
 
 ---
 
