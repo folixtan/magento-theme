@@ -38,55 +38,58 @@ php bin/magento cache:flush
 ```
 Folix/game-theme/
 ├── web/css/source/
-│   ├── _theme.less          # Override Luma variables
-│   └── _variables.less       # Custom variables
+│   ├── _theme.less          # 覆盖 Luma 变量
+│   ├── _variables.less       # 自定义变量
+│   ├── _extends.less         # 引入模块化样式文件
+│   └── extends/
+│       ├── _global.less      # 全局样式：body、html
+│       ├── _header.less      # 头部样式
+│       ├── _footer.less      # 底部样式
+│       ├── _navigation.less  # 导航样式
+│       ├── _buttons.less     # 按钮样式
+│       ├── _products.less    # 产品样式
+│       └── _abstracts.less   # 抽象类（需要 &:extend）
 ├── Magento_Theme/
-│   ├── web/css/source/
-│   │   └── _module.less      # Theme module styles (overrides parent)
-│   └── layout/
-│       └── default.xml       # Layout extensions
+│   ├── web/css/source/_module.less
+│   └── layout/default.xml
 ├── Magento_Catalog/
-│   └── web/css/source/
-│       └── _module.less      # Catalog module styles (overrides parent)
-├── etc/view.xml              # Image sizes configuration
-├── theme.xml                 # Theme configuration
-└── registration.php          # Theme registration
+│   └── web/css/source/_module.less
+├── etc/view.xml
+├── theme.xml
+└── registration.php
 ```
 
 ## 🔑 Key Concepts
 
-### CSS Loading Order (from Blank theme)
+### `_extends.less` 机制
 
-```
-styles-m.less:
-  _reset.less → _styles.less → @magento_import(_module.less) → _theme.less
-                                      ↓
-                  Automatically scans all module _module.less files
-```
+1. **通过 `@import (reference)` 引入**
+   - 直接选择器（如 `.page-header`）会正常输出
+   - 抽象类（如 `.abs-*`）需要 `&:extend()` 才会输出
 
-### Two Approaches for `_module.less`
+2. **父子主题合并**
+   - 子主题的 `_extends.less` 会与父主题合并
+   - 同选择器会覆盖父主题样式
 
-| Approach | Description | When to Use |
-|----------|-------------|-------------|
-| **Copy & Extend** | Copy all parent variables, then add custom styles | Major style changes |
-| **Override Only** | Only override specific CSS rules (requires CSS specificity) | Minor adjustments |
+3. **模块化组织**
+   - 可以创建任意 Less 文件
+   - 在 `_extends.less` 中 `@import` 引入即可
 
-### Important Rules
+### 两种 CSS 编写方案
 
-1. **`_module.less` completely overrides parent theme's `_module.less`**
-   - Must copy ALL parent variables before extending
-   - Otherwise, parent variables will be undefined
+| 方案 | 文件位置 | 适用场景 |
+|------|----------|----------|
+| **方案一** | `_extends.less` + 模块文件 | 全局样式、轻量覆盖 |
+| **方案二** | `Magento_*/_module.less` | 模块大改动（需复制父主题变量） |
 
-2. **`_theme.less` only overrides variables**
-   - Used to change existing variable values
-   - Do NOT define new variables here
+### `_extends.less` vs `_module.less`
 
-3. **`_variables.less` defines new variables**
-   - All custom theme variables go here
-   - Imported in `_module.less`
-
-4. **Do NOT create `styles-m.less` / `styles-l.less`**
-   - Inherited from Blank theme automatically
+| 特性 | `_extends.less` | `_module.less` |
+|------|-----------------|----------------|
+| 继承方式 | 合并父主题 | 完全覆盖父主题 |
+| 变量要求 | 无需复制 | 必须复制父主题变量 |
+| 适用场景 | 全局样式、小改动 | 模块重构、大改动 |
+| 文件位置 | `web/css/source/` | `Magento_*/web/css/source/` |
 
 ## 🎨 Color Palette
 
@@ -99,39 +102,34 @@ styles-m.less:
 
 ## 🔧 Customization
 
-### Override Colors
-Edit `web/css/source/_theme.less`:
+### 添加新的样式模块
+
+1. 创建文件 `web/css/source/extends/_custom.less`
+2. 在 `_extends.less` 中引入：
+```less
+@import 'extends/_custom.less';
+```
+
+### 使用抽象类
+
+```less
+// 在任何 Less 文件中
+.my-custom-button {
+    &:extend(.abs-folix-button all);
+}
+```
+
+### 覆盖变量
+
+在 `_theme.less` 中覆盖父主题变量：
 ```less
 @theme__color__primary: #YourColor;
-```
-
-### Add Custom Variables
-Edit `web/css/source/_variables.less`:
-```less
-@folix-color-secondary: #YourColor;
-```
-
-### Extend Module Styles
-Edit `Magento_*/web/css/source/_module.less`:
-```less
-& when (@media-common = true) {
-    .page-header {
-        // Your custom styles
-    }
-}
 ```
 
 ## 📱 Responsive Breakpoints
 
 - **Desktop**: ≥ 768px (`@screen__m`)
 - **Mobile**: < 768px
-
-Use `.media-width()` mixin for responsive styles:
-```less
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    // Desktop styles
-}
-```
 
 ## 📚 Requirements
 
@@ -142,10 +140,6 @@ Use `.media-width()` mixin for responsive styles:
 ## 📄 License
 
 OSL-3.0, AFL-3.0
-
-## 🤝 Support
-
-For issues and feature requests, please create an issue on GitHub.
 
 ---
 

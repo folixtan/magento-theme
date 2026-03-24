@@ -1,0 +1,119 @@
+// /**
+//  * Folix Game Theme - Navigation Styles
+//  * 导航样式
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Navigation - 主导航
+    //  _____________________________________________
+    
+    .navigation {
+        background: #FFFFFF;
+        
+        .level0 {
+            > .level-top {
+                font-weight: @font-weight__semibold;
+                border-radius: 4px;
+                transition: @folix-transition-smooth;
+                
+                &:hover {
+                    background: rgba(255, 107, 53, 0.05);
+                    color: @folix-color-secondary;
+                }
+            }
+            
+            &.active > .level-top {
+                color: @folix-color-secondary;
+                border-bottom: 2px solid @folix-color-secondary;
+            }
+            
+            // Submenu
+            .submenu {
+                border: 1px solid #E5E7EB;
+                box-shadow: @folix-shadow-lg;
+                border-radius: 8px;
+                
+                a {
+                    &:hover {
+                        color: @folix-color-secondary;
+                        background: rgba(255, 107, 53, 0.05);
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    //  Nav Toggle - 移动端导航按钮
+    //  _____________________________________________
+    
+    .nav-toggle {
+        &:before {
+            color: @folix-color-primary;
+            font-size: 28px;
+        }
+        
+        &:hover:before {
+            color: @folix-color-secondary;
+        }
+    }
+    
+    //
+    //  Breadcrumbs - 面包屑
+    //  _____________________________________________
+    
+    .breadcrumbs {
+        a {
+            color: @folix-color-primary;
+            
+            &:hover {
+                color: @folix-color-secondary;
+            }
+        }
+        
+        strong {
+            color: #64748B;
+        }
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .navigation {
+        .level0 {
+            > .level-top {
+                padding: 10px 16px;
+            }
+        }
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .navigation {
+        background: @folix-color-primary;
+        
+        .level0 {
+            > .level-top {
+                color: @color-white;
+                
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    color: @color-white;
+                }
+            }
+        }
+    }
+}

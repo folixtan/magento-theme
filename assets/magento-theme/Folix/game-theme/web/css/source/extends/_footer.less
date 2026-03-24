@@ -1,0 +1,112 @@
+// /**
+//  * Folix Game Theme - Footer Styles
+//  * 页面底部样式
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Page Footer - 页面底部
+    //  _____________________________________________
+    
+    .page-footer {
+        background: @folix-footer-bg;
+        margin-top: @indent__xl;
+    }
+    
+    //
+    //  Footer Content - 底部内容
+    //  _____________________________________________
+    
+    .footer.content {
+        border-top-color: @folix-color-primary;
+        padding-top: @indent__xl;
+        
+        .links {
+            a {
+                &:hover {
+                    color: @folix-color-secondary;
+                }
+            }
+        }
+    }
+    
+    //
+    //  Footer Links - 底部链接
+    //  _____________________________________________
+    
+    .footer {
+        &.links {
+            li {
+                margin-bottom: @indent__s;
+                
+                a {
+                    color: #94A3B8;
+                    
+                    &:hover {
+                        color: @folix-color-secondary;
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    //  Copyright - 版权信息
+    //  _____________________________________________
+    
+    .copyright {
+        background: @folix-copyright-bg;
+        color: #94A3B8;
+        padding: @indent__base;
+    }
+    
+    //
+    //  Newsletter - 订阅
+    //  _____________________________________________
+    
+    .footer .block.newsletter {
+        .title {
+            color: @color-white;
+            font-weight: @font-weight__semibold;
+            margin-bottom: @indent__base;
+        }
+        
+        input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: @color-white;
+            
+            &::placeholder {
+                color: #94A3B8;
+            }
+        }
+        
+        .action.subscribe {
+            background: @folix-gradient-primary;
+            border: none;
+            
+            &:hover {
+                background: @folix-gradient-primary-hover;
+            }
+        }
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .footer.content {
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: @indent__xl;
+        }
+    }
+}

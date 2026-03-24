@@ -1,0 +1,100 @@
+// /**
+//  * Folix Game Theme - Button Styles
+//  * 按钮样式
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Primary Button - 主要按钮
+    //  _____________________________________________
+    
+    .action.primary,
+    button.action.primary {
+        background: @folix-gradient-primary;
+        border: none;
+        color: @color-white;
+        font-weight: @font-weight__semibold;
+        border-radius: @button__border-radius;
+        transition: @folix-transition-smooth;
+        
+        &:hover,
+        &:focus {
+            background: @folix-gradient-primary-hover;
+            color: @color-white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+        }
+        
+        &:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(74, 144, 226, 0.3);
+        }
+    }
+    
+    //
+    //  Secondary Button - 次要按钮
+    //  _____________________________________________
+    
+    .action.secondary,
+    button.action.secondary {
+        background: @color-white;
+        border: 2px solid @folix-color-primary;
+        color: @folix-color-primary;
+        font-weight: @font-weight__semibold;
+        border-radius: @button__border-radius;
+        transition: @folix-transition-smooth;
+        
+        &:hover,
+        &:focus {
+            background: @folix-color-primary;
+            color: @color-white;
+        }
+    }
+    
+    //
+    //  Action Link Button - 链接按钮
+    //  _____________________________________________
+    
+    .abs-action-link-button {
+        background: @folix-gradient-primary;
+        border: none;
+        color: @color-white;
+        
+        &:hover {
+            background: @folix-gradient-primary-hover;
+            color: @color-white;
+        }
+    }
+    
+    //
+    //  Add to Cart Button - 加入购物车按钮
+    //  _____________________________________________
+    
+    .action.tocart {
+        background: @folix-gradient-secondary;
+        border: none;
+        color: @color-white;
+        font-weight: @font-weight__semibold;
+        
+        &:hover {
+            background: linear-gradient(135deg, darken(#FF6B35, 10%), darken(#FF8C5A, 10%));
+            color: @color-white;
+        }
+    }
+    
+    //
+    //  Small Buttons - 小按钮
+    //  _____________________________________________
+    
+    .action {
+        &.small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+    }
+}

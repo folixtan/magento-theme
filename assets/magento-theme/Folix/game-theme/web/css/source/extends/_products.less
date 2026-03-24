@@ -1,0 +1,163 @@
+// /**
+//  * Folix Game Theme - Product Styles
+//  * 产品样式
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Product Items - 产品列表项
+    //  _____________________________________________
+    
+    .product-items {
+        .product-item {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: @folix-product-card-border-radius;
+            box-shadow: @folix-product-card-shadow;
+            overflow: hidden;
+            transition: @folix-transition-smooth;
+            position: relative;
+            
+            &:hover {
+                transform: translateY(-6px);
+                border-color: @folix-color-primary;
+                box-shadow: @folix-product-card-hover-shadow;
+            }
+            
+            // Product photo
+            .product-item-photo {
+                display: block;
+                overflow: hidden;
+                
+                img {
+                    transition: @folix-transition-smooth;
+                }
+            }
+            
+            &:hover {
+                .product-item-photo img {
+                    transform: scale(1.1);
+                }
+            }
+            
+            // Product details
+            .product-item-details {
+                padding: @indent__base;
+            }
+            
+            // Product name
+            .product-item-name {
+                font-size: 16px;
+                font-weight: @font-weight__semibold;
+                margin: 0 0 @indent__s;
+                
+                a {
+                    color: #1E293B;
+                    
+                    &:hover {
+                        color: @folix-color-primary;
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    //  Price Box - 价格
+    //  _____________________________________________
+    
+    .price-box {
+        margin-bottom: @indent__s;
+        
+        .price {
+            color: @folix-color-secondary;
+            font-weight: @font-weight__bold;
+        }
+        
+        .old-price .price {
+            color: #9CA3AF;
+            text-decoration: line-through;
+            font-size: 14px;
+        }
+        
+        .special-price .price {
+            color: @folix-color-secondary;
+        }
+    }
+    
+    //
+    //  Product Labels - 产品标签
+    //  _____________________________________________
+    
+    .product-item {
+        .product-item-info {
+            position: relative;
+        }
+    }
+    
+    //
+    //  Product View - 产品详情页
+    //  _____________________________________________
+    
+    .product-info-main {
+        .page-title {
+            color: #1E293B;
+        }
+        
+        .product-info-price {
+            .price-wrapper {
+                .price {
+                    font-size: 28px;
+                    color: @folix-color-secondary;
+                }
+            }
+        }
+    }
+    
+    //
+    //  Product Image Container
+    //  _____________________________________________
+    
+    .product-image-container {
+        .product-image-wrapper {
+            border-radius: @folix-product-card-border-radius @folix-product-card-border-radius 0 0;
+        }
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .product-items {
+        .product-item {
+            .product-item-name {
+                font-size: 18px;
+            }
+        }
+    }
+    
+    .price-box {
+        .price {
+            font-size: @price-size-desktop;
+        }
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .product-items {
+        .product-item {
+            margin-bottom: @indent__base;
+        }
+    }
+}

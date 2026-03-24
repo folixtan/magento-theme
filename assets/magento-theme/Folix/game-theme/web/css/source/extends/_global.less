@@ -1,0 +1,81 @@
+// /**
+//  * Folix Game Theme - Global Styles
+//  * 全局基础样式：body、html、通用元素
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Body - 页面主体
+    //  _____________________________________________
+    
+    body {
+        background-color: #F8FAFC;
+        font-family: @font-family__base;
+        color: #1E293B;
+        line-height: 1.6;
+    }
+    
+    //
+    //  Links - 链接
+    //  _____________________________________________
+    
+    a {
+        transition: @folix-transition-smooth;
+        color: @folix-color-primary;
+        
+        &:hover {
+            color: @folix-color-secondary;
+        }
+    }
+    
+    //
+    //  Headings - 标题
+    //  _____________________________________________
+    
+    h1, h2, h3, h4, h5, h6 {
+        color: #1E293B;
+        font-weight: @font-weight__semibold;
+    }
+    
+    //
+    //  Page Wrapper - 页面容器
+    //  _____________________________________________
+    
+    .page-wrapper {
+        background-color: #F8FAFC;
+    }
+    
+    .page-main {
+        padding-top: @indent__base;
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    body {
+        font-size: 16px;
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    body {
+        font-size: 14px;
+    }
+    
+    .page-main {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
