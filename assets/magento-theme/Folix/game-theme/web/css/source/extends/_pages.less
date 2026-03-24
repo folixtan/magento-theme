@@ -2,7 +2,7 @@
 //  * Folix Game Theme - Header & Footer Styles
 //  * 
 //  * 严格按照原型设计颜色
-//  * 选择器原生优先
+//  * 使用变量替代硬编码，确保一致性
 //  */
 
 //
@@ -21,12 +21,12 @@
     //  _____________________________________________
     
     .page-header {
-        background: #FFFFFF;
-        border-bottom: 3px solid #FF6B35;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        background: @folix-bg-card;
+        border-bottom: 3px solid @theme__color__secondary;
+        box-shadow: @folix-shadow;
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: @folix-z-sticky;
     }
     
     //
@@ -35,7 +35,7 @@
     //  _____________________________________________
     
     .panel.wrapper {
-        background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+        background: @folix-gradient-dark;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
@@ -60,14 +60,14 @@
             
             > li {
                 > a {
-                    color: #E2E8F0;
+                    color: @folix-text-light;
                     font-size: 14px;
-                    font-weight: 500;
+                    font-weight: @font-weight__heavier;
                     text-decoration: none;
-                    transition: all 0.3s ease;
+                    transition: @folix-transition;
                     
                     &:hover {
-                        color: #FF6B35;
+                        color: @theme__color__secondary;
                         text-decoration: none;
                     }
                 }
@@ -83,12 +83,12 @@
             
             > li {
                 > a {
-                    color: #E2E8F0;
+                    color: @folix-text-light;
                     font-size: 14px;
-                    font-weight: 500;
+                    font-weight: @font-weight__heavier;
                     
                     &:hover {
-                        color: #FF6B35;
+                        color: @theme__color__secondary;
                     }
                 }
             }
@@ -117,7 +117,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #E2E8F0;
+            color: @folix-text-light;
             font-size: 13px;
         }
         
@@ -135,14 +135,14 @@
         display: flex;
         align-items: center;
         gap: 6px;
-        color: #E2E8F0;
+        color: @folix-text-light;
         font-size: 14px;
-        font-weight: 500;
+        font-weight: @font-weight__heavier;
         text-decoration: none;
-        transition: all 0.3s ease;
+        transition: @folix-transition;
         
         &:hover {
-            color: #FF6B35;
+            color: @theme__color__secondary;
         }
     }
     
@@ -189,12 +189,12 @@
             > .level-top {
                 display: block;
                 padding: 10px 16px;
-                color: #1E293B;
-                font-weight: 600;
+                color: @folix-text-primary;
+                font-weight: @font-weight__semibold;
                 font-size: 16px;
                 text-decoration: none;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                border-radius: 4px;
+                transition: @folix-transition-smooth;
+                border-radius: @folix-radius-sm;
                 position: relative;
                 
                 // 悬停时显示渐变下划线
@@ -205,14 +205,14 @@
                     left: 50%;
                     width: 0;
                     height: 3px;
-                    background: linear-gradient(90deg, #4A90E2, #FF6B35);
-                    transition: all 0.3s ease;
+                    background: @folix-gradient-primary;
+                    transition: @folix-transition;
                     transform: translateX(-50%);
                     border-radius: 2px 2px 0 0;
                 }
                 
                 &:hover {
-                    color: #FF6B35;
+                    color: @theme__color__secondary;
                     background: rgba(255, 107, 53, 0.05);
                     text-decoration: none;
                     
@@ -223,7 +223,7 @@
             }
             
             &.active > .level-top {
-                color: #FF6B35;
+                color: @theme__color__secondary;
             }
             
             // 下拉箭头
@@ -234,20 +234,20 @@
                 right: 8px;
                 top: 50%;
                 transform: translateY(-50%);
-                color: #6B7280;
+                color: @folix-text-muted;
             }
         }
         
         // 子菜单
         .submenu {
-            background: #FFFFFF;
+            background: @folix-bg-card;
             min-width: 200px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-radius: 4px;
-            border: 1px solid #E5E7EB;
+            box-shadow: @folix-shadow-lg;
+            border-radius: @folix-radius-sm;
+            border: 1px solid @folix-border;
             
             .item {
-                border-bottom: 1px solid #F3F4F6;
+                border-bottom: 1px solid @folix-border-light;
                 
                 &:last-child {
                     border-bottom: none;
@@ -256,13 +256,13 @@
                 > a {
                     display: block;
                     padding: 12px 20px;
-                    color: #2D3436;
+                    color: @folix-text-primary;
                     text-decoration: none;
-                    transition: all 0.3s ease;
+                    transition: @folix-transition;
                     
                     &:hover {
                         background: rgba(74, 144, 226, 0.05);
-                        color: #4A90E2;
+                        color: @theme__color__primary;
                         padding-left: 25px;
                     }
                 }
@@ -291,60 +291,60 @@
             width: 100%;
             padding: 12px 20px;
             font-size: 15px;
-            border: 2px solid #E5E7EB;
+            border: 2px solid @folix-border;
             border-right: none;
-            border-radius: 8px 0 0 8px;
-            background: #F9FAFB;
+            border-radius: @folix-radius-md 0 0 @folix-radius-md;
+            background: @folix-bg-panel;
             outline: none;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             
             &::placeholder {
-                color: #9CA3AF;
+                color: @folix-text-light;
             }
             
             &:focus {
-                background: #FFFFFF;
-                border-color: #4A90E2;
+                background: @folix-bg-card;
+                border-color: @theme__color__primary;
             }
         }
         
         .action.search {
             padding: 12px 24px;
-            background: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
-            color: #FFFFFF;
+            background: @folix-gradient-secondary;
+            color: @folix-bg-card;
             font-size: 15px;
-            font-weight: 600;
+            font-weight: @font-weight__semibold;
             border: none;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0 @folix-radius-md @folix-radius-md 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             
             &:hover {
-                box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+                box-shadow: @folix-shadow-secondary;
             }
         }
     }
     
     //
     //  Header Login Button - 登录按钮
-    //  渐变背景：#4A90E2 → #6C5CE7
+    //  渐变背景：@folix-primary → @folix-accent
     //  _____________________________________________
     
     .header-login-button {
         .action.login-primary {
             padding: 12px 32px;
-            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-            color: #FFFFFF;
+            background: @folix-gradient-primary;
+            color: @folix-bg-card;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: @font-weight__semibold;
             border: none;
-            border-radius: 8px;
+            border-radius: @folix-radius-md;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+            transition: @folix-transition;
+            box-shadow: @folix-shadow-primary;
             
             &:hover {
-                background: linear-gradient(135deg, #357ABD 0%, #5A4FCF 100%);
+                background: linear-gradient(135deg, @folix-primary-dark 0%, @folix-accent-dark 100%);
                 box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3);
                 transform: translateY(-2px);
             }
@@ -361,9 +361,9 @@
     //  _____________________________________________
     
     .page-footer {
-        background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
-        color: #E2E8F0;
-        border-top: 4px solid #FF6B35;
+        background: @folix-gradient-dark;
+        color: @folix-text-light;
+        border-top: 4px solid @theme__color__secondary;
         padding: 40px 20px;
         margin-top: auto;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
@@ -389,12 +389,12 @@
         margin-bottom: 20px;
         
         a {
-            color: #94A3B8;
+            color: @folix-text-muted;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             
             &:hover {
-                color: #FF6B35;
+                color: @theme__color__secondary;
                 text-shadow: 0 0 8px rgba(255, 107, 53, 0.5);
             }
         }
@@ -402,23 +402,23 @@
     
     //
     //  Footer Copyright - 版权信息
-    //  紫色渐变背景：#2563EB → #7C3AED
+    //  紫色渐变背景：@folix-copyright-blue → @folix-accent
     //  _____________________________________________
     
     .footer-copyright {
-        background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-        color: #E2E8F0;
+        background: linear-gradient(135deg, @folix-copyright-blue 0%, @folix-accent 100%);
+        color: @folix-text-light;
         padding: 20px;
-        border-radius: 8px;
+        border-radius: @folix-radius-md;
         text-align: center;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         
         a {
-            color: #FF6B35;
+            color: @theme__color__secondary;
             text-decoration: none;
             
             &:hover {
-                color: #FB923C;
+                color: @folix-secondary-light;
             }
         }
     }
@@ -430,9 +430,9 @@
     .hero-slider {
         position: relative;
         margin-bottom: 40px;
-        border-radius: 12px;
+        border-radius: @folix-radius-lg;
         overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        box-shadow: @folix-shadow-lg;
         
         .slide {
             position: relative;
@@ -459,7 +459,7 @@
             position: relative;
             z-index: 1;
             text-align: center;
-            color: #FFFFFF;
+            color: @folix-text-on-dark;
             max-width: 600px;
             padding: 40px;
         }
@@ -467,20 +467,20 @@
         .slide-badge {
             display: inline-block;
             padding: 8px 20px;
-            background: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
-            color: #FFFFFF;
-            border-radius: 9999px;
+            background: @folix-gradient-secondary;
+            color: @folix-bg-card;
+            border-radius: @folix-radius-full;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: @font-weight__bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+            box-shadow: @folix-shadow-secondary;
         }
         
         .slide-title {
             font-size: 48px;
-            font-weight: 800;
+            font-weight: @font-weight__bold;
             margin-bottom: 16px;
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
@@ -493,8 +493,8 @@
         
         .slide-price {
             font-size: 36px;
-            font-weight: 800;
-            color: #FFD700;
+            font-weight: @font-weight__bold;
+            color: @folix-gold;
             text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
             margin-bottom: 24px;
         }
@@ -502,18 +502,18 @@
         .action.slider-cta {
             display: inline-block;
             padding: 16px 40px;
-            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-            color: #FFFFFF;
+            background: @folix-gradient-primary;
+            color: @folix-bg-card;
             font-size: 18px;
-            font-weight: 600;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
-            transition: all 0.3s ease;
+            font-weight: @font-weight__semibold;
+            border-radius: @folix-radius-md;
+            box-shadow: @folix-shadow-primary;
+            transition: @folix-transition;
             
             &:hover {
                 transform: translateY(-3px);
                 box-shadow: 0 10px 30px rgba(74, 144, 226, 0.5);
-                color: #FFFFFF;
+                color: @folix-bg-card;
                 text-decoration: none;
             }
         }
@@ -535,10 +535,10 @@
             background: rgba(255, 255, 255, 0.5);
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             
             &.active {
-                background: #FFFFFF;
+                background: @folix-bg-card;
                 width: 32px;
                 border-radius: 6px;
             }
@@ -551,13 +551,13 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: none;
-            color: #FFFFFF;
+            color: @folix-bg-card;
             font-size: 24px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             z-index: 2;
             
             &:hover {
@@ -579,18 +579,18 @@
     // ========================================================================
     
     .product-item {
-        background: #FFFFFF;
-        border: 1px solid #E5E7EB;
-        border-radius: 8px;
+        background: @folix-bg-card;
+        border: 1px solid @folix-border;
+        border-radius: @folix-radius-md;
         overflow: hidden;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        transition: @folix-transition-smooth;
+        box-shadow: @folix-shadow;
         position: relative;
         
         &:hover {
             transform: translateY(-6px);
-            border-color: #4A90E2;
-            box-shadow: 0 12px 32px rgba(74, 144, 226, 0.2);
+            border-color: @theme__color__primary;
+            box-shadow: @folix-shadow-md;
             
             .product-image-photo {
                 transform: scale(1.1);
@@ -602,7 +602,7 @@
             width: 100%;
             height: 200px;
             overflow: hidden;
-            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            background: @folix-gradient-primary;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -621,21 +621,21 @@
         
         .product-item-name {
             font-size: 18px;
-            font-weight: 600;
-            color: #1E293B;
+            font-weight: @font-weight__semibold;
+            color: @folix-text-primary;
             margin: 0 0 8px;
             
             a {
-                color: #1E293B;
+                color: @folix-text-primary;
                 
                 &:hover {
-                    color: #4A90E2;
+                    color: @theme__color__primary;
                 }
             }
         }
         
         .product-item-description {
-            color: #6B7280;
+            color: @folix-text-muted;
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 16px;
@@ -648,14 +648,14 @@
         
         .price {
             font-size: 24px;
-            font-weight: 800;
-            color: #FF6B35;
+            font-weight: @font-weight__bold;
+            color: @theme__color__secondary;
             text-shadow: 0 2px 4px rgba(255, 107, 53, 0.2);
         }
         
         .old-price {
             text-decoration: line-through;
-            color: #9CA3AF;
+            color: @folix-text-light;
             font-size: 16px;
             margin-left: 8px;
         }
@@ -664,16 +664,16 @@
         .game-stock-status {
             display: inline-block;
             padding: 6px 14px;
-            border-radius: 9999px;
+            border-radius: @folix-radius-full;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: @font-weight__bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 12px;
             
             &--available {
-                background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-                color: #FFFFFF;
+                background: linear-gradient(135deg, @folix-success 0%, @folix-success-dark 100%);
+                color: @folix-bg-card;
             }
         }
         
@@ -683,16 +683,16 @@
             top: 12px;
             right: 12px;
             padding: 6px 14px;
-            border-radius: 9999px;
+            border-radius: @folix-radius-full;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: @font-weight__bold;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: @folix-shadow;
             
             &--direct {
-                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-                color: #FFFFFF;
+                background: @folix-gradient-primary;
+                color: @folix-bg-card;
             }
         }
         
@@ -702,19 +702,19 @@
             width: 100%;
             padding: 12px 24px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: @font-weight__semibold;
             text-align: center;
-            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-            color: #FFFFFF;
+            background: @folix-gradient-primary;
+            color: @folix-bg-card;
             border: none;
-            border-radius: 8px;
+            border-radius: @folix-radius-md;
             cursor: pointer;
-            box-shadow: 0 4px 14px rgba(74, 144, 226, 0.3);
+            box-shadow: @folix-shadow-primary;
             
             &:hover {
                 transform: translateY(-2px);
                 box-shadow: 0 8px 24px rgba(74, 144, 226, 0.4);
-                color: #FFFFFF;
+                color: @folix-bg-card;
                 text-decoration: none;
             }
         }
@@ -725,11 +725,11 @@
     // ========================================================================
     
     .promo-banner {
-        background: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
-        border-radius: 12px;
+        background: @folix-gradient-secondary;
+        border-radius: @folix-radius-lg;
         padding: 40px;
         margin-bottom: 40px;
-        box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+        box-shadow: @folix-shadow-secondary;
         position: relative;
         overflow: hidden;
         
@@ -747,13 +747,13 @@
         .promo-banner__content {
             position: relative;
             z-index: 1;
-            color: #FFFFFF;
+            color: @folix-bg-card;
             max-width: 600px;
         }
         
         .promo-banner__title {
             font-size: 36px;
-            font-weight: 800;
+            font-weight: @font-weight__bold;
             margin-bottom: 16px;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
@@ -775,9 +775,9 @@
             padding: 14px 20px;
             font-size: 16px;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
+            border-radius: @folix-radius-md;
             background: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
+            color: @folix-bg-card;
             
             &::placeholder {
                 color: rgba(255, 255, 255, 0.7);
@@ -786,17 +786,17 @@
         
         .action.subscribe {
             padding: 14px 32px;
-            background: #FFFFFF;
-            color: #FF6B35;
-            font-weight: 700;
+            background: @folix-bg-card;
+            color: @theme__color__secondary;
+            font-weight: @font-weight__bold;
             border: none;
-            border-radius: 8px;
+            border-radius: @folix-radius-md;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: @folix-transition;
             
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+                box-shadow: @folix-shadow-lg;
             }
         }
     }

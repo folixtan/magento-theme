@@ -50,7 +50,7 @@
                 position: relative;
                 z-index: 1;
                 text-align: center;
-                color: #F8FAFC;
+                color: @folix-text-on-dark;
                 max-width: 600px;
                 padding: @indent__xl;
             }
@@ -59,7 +59,7 @@
                 display: inline-block;
                 padding: 8px 20px;
                 background: @folix-gradient-secondary;
-                color: #FFFFFF;
+                color: @folix-bg-card;
                 border-radius: @folix-radius-full;
                 font-size: 14px;
                 font-weight: @font-weight__bold;
@@ -85,7 +85,7 @@
             .slide__price {
                 font-size: 36px;
                 font-weight: @font-weight__bold;
-                color: #FFD700;
+                color: @folix-gold;
                 text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
                 margin-bottom: @indent__base;
             }
@@ -98,7 +98,7 @@
                 font-weight: @font-weight__semibold;
                 border-radius: @button__border-radius;
                 box-shadow: @folix-shadow-primary;
-                color: #FFFFFF;
+                color: @folix-bg-card;
                 
                 &:hover {
                     transform: translateY(-3px);
@@ -126,7 +126,7 @@
                 transition: @folix-transition;
                 
                 &.active {
-                    background: #FFFFFF;
+                    background: @folix-bg-card;
                     width: 32px;
                     border-radius: 6px;
                 }
@@ -140,7 +140,7 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: none;
-            color: #FFFFFF;
+            color: @folix-bg-card;
             font-size: 24px;
             width: 50px;
             height: 50px;
@@ -190,7 +190,7 @@
         .promo-banner__content {
             position: relative;
             z-index: 1;
-            color: #FFFFFF;
+            color: @folix-bg-card;
             max-width: 600px;
         }
         
@@ -219,7 +219,7 @@
                 border: 2px solid rgba(255, 255, 255, 0.3);
                 border-radius: @button__border-radius;
                 background: rgba(255, 255, 255, 0.2);
-                color: #FFFFFF;
+                color: @folix-bg-card;
                 
                 &::placeholder {
                     color: rgba(255, 255, 255, 0.7);
@@ -227,13 +227,13 @@
                 
                 &:focus {
                     background: rgba(255, 255, 255, 0.3);
-                    border-color: #FFFFFF;
+                    border-color: @folix-bg-card;
                 }
             }
             
             button {
                 padding: 14px 32px;
-                background: #FFFFFF;
+                background: @folix-bg-card;
                 color: @theme__color__secondary;
                 font-size: 16px;
                 font-weight: @font-weight__bold;
@@ -270,17 +270,17 @@
         
         &--direct {
             background: @folix-gradient-primary;
-            color: #FFFFFF;
+            color: @folix-bg-card;
         }
         
         &--hot {
             background: @folix-gradient-secondary;
-            color: #FFFFFF;
+            color: @folix-bg-card;
         }
         
         &--new {
-            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
-            color: #FFFFFF;
+            background: linear-gradient(135deg, @folix-accent-light 0%, @folix-accent 100%);
+            color: @folix-bg-card;
         }
     }
 }

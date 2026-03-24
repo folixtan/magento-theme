@@ -18,14 +18,14 @@
     .abs-folix-button {
         background: @folix-gradient-primary;
         border: none;
-        color: #FFFFFF;
+        color: @folix-bg-card;
         font-weight: @font-weight__semibold;
         border-radius: @button__border-radius;
         transition: @folix-transition;
         
         &:hover {
             background: @folix-gradient-secondary;
-            color: #FFFFFF;
+            color: @folix-bg-card;
         }
     }
     
@@ -34,7 +34,7 @@
     //  _____________________________________________
     
     .abs-folix-card {
-        background: #FFFFFF;
+        background: @folix-bg-card;
         border: 1px solid @border-color__base;
         border-radius: @folix-radius-md;
         box-shadow: @folix-shadow-sm;
@@ -70,7 +70,7 @@
     .abs-folix-badge-sale {
         &:extend(.abs-folix-badge all);
         background: @theme__color__secondary;
-        color: #FFFFFF;
+        color: @folix-bg-card;
     }
     
     //
@@ -80,7 +80,7 @@
     .abs-folix-badge-new {
         &:extend(.abs-folix-badge all);
         background: @theme__color__primary;
-        color: #FFFFFF;
+        color: @folix-bg-card;
     }
     
     //
@@ -90,7 +90,7 @@
     .abs-folix-badge-hot {
         &:extend(.abs-folix-badge all);
         background: @folix-gradient-secondary;
-        color: #FFFFFF;
+        color: @folix-bg-card;
     }
     
     //
