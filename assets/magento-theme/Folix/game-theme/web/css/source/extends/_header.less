@@ -747,11 +747,28 @@
         }
         
         // ====================================================================
-        //  导航区域 - 移动端隐藏
+        //  导航区域 - 移动端侧边栏导航
         //  ====================================================================
         
         .nav-sections {
-            display: none !important;  // 移动端隐藏桌面导航
+            // 移动端使用固定定位，默认在左侧隐藏
+            position: fixed;
+            top: 0;
+            left: calc(-1 * (100% - 54px));  // 默认隐藏在左侧
+            height: 100%;
+            width: calc(100% - 54px);
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: left 0.3s;
+            z-index: 99;
+            background: #FFFFFF;
+            box-shadow: none;
+            
+            // 当导航打开时显示
+            .nav-open & {
+                left: 0;
+                box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.75);
+            }
         }
         
         // ====================================================================
