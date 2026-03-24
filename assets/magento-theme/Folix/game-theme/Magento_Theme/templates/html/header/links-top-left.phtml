@@ -1,29 +1,29 @@
 <?php
 /**
- * Folix Game Theme - Header Top Left Links
+ * Folix Game Theme - Top Left Links
  * 
- * 位置：folix.top.left 容器内
- * 选择器：.header-wrapper-links-top
- * 内容：辅助链接（新闻、奖励、支持）
+ * 按照原型设计：Folix 新闻 | STAR 奖励 | 支持
+ * 
+ * @var $block \Magento\Framework\View\Element\Template
  */
 ?>
 <ul class="header-links-top">
     <li>
-        <a href="<?= $block->escapeUrl($block->getUrl('news')) ?>" class="link-item">
+        <a href="<?php echo $block->getUrl('news') ?>" title="Folix 新闻">
             <span class="link-icon">📰</span>
-            <span class="link-text"><?= $block->escapeHtml(__('Folix News')) ?></span>
+            <span>Folix 新闻</span>
         </a>
     </li>
     <li>
-        <a href="<?= $block->escapeUrl($block->getUrl('rewards')) ?>" class="link-item">
+        <a href="<?php echo $block->getUrl('rewards') ?>" title="STAR 奖励">
             <span class="link-icon">⭐</span>
-            <span class="link-text"><?= $block->escapeHtml(__('STAR Rewards')) ?></span>
+            <span>STAR 奖励</span>
         </a>
     </li>
     <li>
-        <a href="<?= $block->escapeUrl($block->getUrl('support')) ?>" class="link-item">
+        <a href="<?php echo $block->getUrl('support') ?>" title="支持">
             <span class="link-icon">💬</span>
-            <span class="link-text"><?= $block->escapeHtml(__('Support')) ?></span>
+            <span>支持</span>
         </a>
     </li>
 </ul>

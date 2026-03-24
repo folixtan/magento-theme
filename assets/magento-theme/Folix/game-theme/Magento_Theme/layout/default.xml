@@ -3,107 +3,88 @@
 /**
  * Folix Game Theme - Default Layout
  * 
- * 继承机制说明：
- * 1. 新增容器：<container name="xxx" ...> 在 referenceContainer 内
- * 2. 移动元素：<move element="xxx" destination="yyy" />
- * 3. 删除元素：<referenceBlock name="xxx" remove="true" />
- * 4. 新增block：<block ...> 在容器内
+ * 头部结构（严格按原型）：
  * 
- * 头部结构设计：
+ * Top Bar (header.panel) - 深蓝渐变背景，高度40px
+ * ├── 左侧：新闻、奖励、支持链接
+ * └── 右侧：APP下载、语言切换
  * 
- * header.panel (Top Bar)
- * ├── folix.top.left (左侧：辅助链接)
- * ├── header-marquee (中间：跑马灯)
- * └── header-wrapper-right (右侧：APP下载、语言切换)
+ * Main Bar (header.content) - 白色背景，高度70px，底部橙色边框3px
+ * ├── Logo
+ * ├── 导航菜单
+ * ├── 搜索框
+ * └── 登录按钮
  * 
- * header-wrapper (Main Bar)
- * ├── logo [原生]
- * ├── navigation.sections [移动到此处]
- * ├── top.search [移动到此处]
- * ├── folix.login.button (登录按钮)
- * └── minicart [移动到此处]
+ * 注意：跑马灯不在header内，可能在page.top区域
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <!-- =================================================================
-             TOP BAR 结构重构
-             在 header.panel 内新增三个容器：左 | 中 | 右
+             TOP BAR - 顶部栏
+             深蓝渐变背景，高度40px
+             左侧：链接 | 右侧：APP + 语言切换
              ================================================================= -->
         
         <referenceContainer name="header.panel">
-            <!-- 左侧容器：辅助链接 -->
-            <container name="folix.top.left" label="Folix Top Left Links" htmlTag="div" htmlClass="header-wrapper-links-top" before="-" />
+            <!-- 左侧链接容器 -->
+            <container name="folix.top.left" label="Folix Top Left Links" htmlTag="div" htmlClass="header-links-left" before="-" />
             
-            <!-- 中间容器：跑马灯公告 -->
-            <container name="header-marquee" label="Header Marquee" htmlTag="div" htmlClass="header-marquee" after="folix.top.left" />
-            
-            <!-- 右侧容器：APP下载、语言切换 -->
-            <container name="header-wrapper-right" label="Folix Top Right" htmlTag="div" htmlClass="header-wrapper-right" after="header-marquee" />
+            <!-- 右侧容器 -->
+            <container name="folix.top.right" label="Folix Top Right" htmlTag="div" htmlClass="header-links-right" after="folix.top.left" />
         </referenceContainer>
         
-        <!-- =================================================================
-             移除不需要的原生元素
-             ================================================================= -->
-        
+        <!-- 移除不需要的原生元素 -->
         <referenceBlock name="header.links" remove="true" />
         <referenceBlock name="skip_to_content" remove="true" />
         <referenceBlock name="catalog.compare.link" remove="true" />
         <referenceBlock name="currency" remove="true" />
         
-        <!-- =================================================================
-             移动原生元素到新位置
-             ================================================================= -->
-        
         <!-- 移动语言切换到右侧容器 -->
-        <move element="store_language" destination="header-wrapper-right" />
+        <move element="store_language" destination="folix.top.right" />
         
-        <!-- 移动导航到 header-wrapper -->
-        <move element="navigation.sections" destination="header-wrapper" after="logo" />
-        
-        <!-- 移动搜索框到 header-wrapper -->
-        <move element="top.search" destination="header-wrapper" after="navigation.sections" />
-        
-        <!-- 移动购物车到 header-wrapper -->
-        <move element="minicart" destination="header-wrapper" after="top.search" />
-        
-        <!-- =================================================================
-             为新增容器添加内容
-             ================================================================= -->
-        
-        <!-- 左侧容器：辅助链接 -->
+        <!-- 左侧链接内容 -->
         <referenceContainer name="folix.top.left">
-            <block class="Magento\Framework\View\Element\Template" name="folix.game.top.links" template="Magento_Theme::html/header/links-top-left.phtml" before="-" />
+            <block class="Magento\Framework\View\Element\Template" name="folix.top.links" template="Magento_Theme::html/header/links-top-left.phtml" before="-" />
         </referenceContainer>
         
-        <!-- 中间容器：跑马灯 -->
-        <referenceContainer name="header-marquee">
-            <block class="Magento\Framework\View\Element\Template" name="folix.marquee" template="Magento_Theme::html/header/marquee.phtml" before="-" />
-        </referenceContainer>
-        
-        <!-- 右侧容器：APP下载链接 -->
-        <referenceContainer name="header-wrapper-right">
+        <!-- 右侧APP链接 -->
+        <referenceContainer name="folix.top.right">
             <block class="Magento\Framework\View\Element\Template" name="folix.app.link" template="Magento_Theme::html/header/app-link.phtml" before="store_language" />
         </referenceContainer>
         
         <!-- =================================================================
-             MAIN BAR - 登录按钮
+             MAIN BAR - 主导航栏
+             白色背景，底部橙色边框3px
+             Logo | 导航 | 搜索 | 登录按钮
              ================================================================= -->
         
-        <referenceContainer name="header.content">
-            <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="logo" />
+        <!-- 移动原生元素到正确位置 -->
+        <move element="navigation.sections" destination="header-wrapper" after="logo" />
+        <move element="top.search" destination="header-wrapper" after="navigation.sections" />
+        <move element="minicart" destination="header-wrapper" after="top.search" />
+        
+        <!-- 添加登录按钮 -->
+        <referenceContainer name="header-wrapper">
+            <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="minicart" />
         </referenceContainer>
         
         <!-- =================================================================
-             FOOTER 结构重构
+             PAGE TOP - Hero Slider（跑马灯可能在这里或其他位置）
+             ================================================================= -->
+        
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml" />
+        </referenceContainer>
+        
+        <!-- =================================================================
+             FOOTER
              ================================================================= -->
         
         <referenceContainer name="footer">
-            <!-- 移除默认 store_switcher -->
             <referenceBlock name="store_switcher" remove="true" />
         </referenceContainer>
         
-        <!-- 添加自定义链接到 footer_links -->
         <referenceBlock name="footer_links">
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-about">
                 <arguments>
@@ -137,20 +118,10 @@
             </block>
         </referenceBlock>
         
-        <!-- 移动 copyright 到 before.body.end -->
         <move element="copyright" destination="before.body.end" />
         
-        <!-- 添加自定义版权区块 -->
         <referenceContainer name="footer">
             <block class="Magento\Framework\View\Element\Template" name="folix.footer.copyright" template="Magento_Theme::html/footer/copyright.phtml" after="-" />
-        </referenceContainer>
-        
-        <!-- =================================================================
-             PAGE TOP - Hero Slider
-             ================================================================= -->
-        
-        <referenceContainer name="page.top">
-            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml" />
         </referenceContainer>
         
         <!-- =================================================================
@@ -161,10 +132,7 @@
             <block class="Magento\Framework\View\Element\Template" name="login.modal" template="Magento_Theme::html/modal/login.phtml" />
         </referenceContainer>
         
-        <!-- =================================================================
-             BODY ATTRIBUTES
-             ================================================================= -->
-        
+        <!-- Body Class -->
         <attribute name="body" value="folix-theme" />
         
     </body>

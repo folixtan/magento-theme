@@ -17,27 +17,43 @@
     
     .hero-slider {
         position: relative;
-        margin-bottom: @indent__xl;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto @indent__xl;
         border-radius: @folix-radius-lg;
         overflow: hidden;
         box-shadow: @folix-shadow-lg;
         
-        .slider-container {
-            display: flex;
-            transition: @folix-transition-slow;
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
         }
         
         .slide {
-            min-width: 100%;
-            height: 400px;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
+            height: 400px;
+            display: none;
             background-size: cover;
             background-position: center;
             
-            .slide__overlay {
+            &.active {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .slide-background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-size: cover;
+                background-position: center;
+            }
+            
+            .slide-overlay {
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -46,93 +62,69 @@
                 background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.6) 100%);
             }
             
-            .slide__content {
+            .slide-content {
                 position: relative;
                 z-index: 1;
                 text-align: center;
-                color: @folix-text-on-dark;
+                color: #FFFFFF;
                 max-width: 600px;
-                padding: @indent__xl;
+                padding: 40px;
             }
             
-            .slide__badge {
+            .slide-badge {
                 display: inline-block;
                 padding: 8px 20px;
-                background: @folix-gradient-secondary;
-                color: @folix-bg-card;
-                border-radius: @folix-radius-full;
-                font-size: 14px;
-                font-weight: @font-weight__bold;
+                background: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
+                color: #FFFFFF;
+                border-radius: 50px;
+                font-size: 13px;
+                font-weight: 700;
                 text-transform: uppercase;
                 letter-spacing: 1px;
-                margin-bottom: @indent__base;
-                box-shadow: @folix-shadow-secondary;
+                margin-bottom: 16px;
             }
             
-            .slide__title {
-                font-size: 48px;
-                font-weight: @font-weight__bold;
-                margin-bottom: @indent__base;
+            .slide-title {
+                font-size: 42px;
+                font-weight: 700;
+                margin-bottom: 12px;
                 text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                color: #FFFFFF;
             }
             
-            .slide__description {
-                font-size: 18px;
-                margin-bottom: @indent__base;
+            .slide-description {
+                font-size: 16px;
+                margin-bottom: 16px;
                 opacity: 0.95;
+                color: #E2E8F0;
             }
             
-            .slide__price {
-                font-size: 36px;
-                font-weight: @font-weight__bold;
-                color: @folix-gold;
+            .slide-price {
+                font-size: 32px;
+                font-weight: 700;
+                color: #FFD700;
                 text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
-                margin-bottom: @indent__base;
+                margin-bottom: 24px;
             }
             
             .action.slider-cta {
-                background: @folix-gradient-primary;
+                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
                 display: inline-block;
-                padding: 16px 40px;
-                font-size: 18px;
-                font-weight: @font-weight__semibold;
-                border-radius: @button__border-radius;
-                box-shadow: @folix-shadow-primary;
-                color: @folix-bg-card;
+                padding: 14px 36px;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 8px;
+                color: #FFFFFF;
+                text-decoration: none;
                 
                 &:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 10px 30px rgba(74, 144, 226, 0.5);
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
                 }
             }
         }
         
-        // Slider navigation
-        .slider-dots {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 2;
-            
-            .slider-dot {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.5);
-                cursor: pointer;
-                transition: @folix-transition;
-                
-                &.active {
-                    background: @folix-bg-card;
-                    width: 32px;
-                    border-radius: 6px;
-                }
-            }
-        }
-        
+        // Slider navigation - arrows
         .slider-arrow {
             position: absolute;
             top: 50%;
@@ -140,25 +132,55 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: none;
-            color: @folix-bg-card;
-            font-size: 24px;
+            color: #FFFFFF;
+            font-size: 28px;
             width: 50px;
             height: 50px;
             border-radius: 50%;
             cursor: pointer;
-            transition: @folix-transition;
+            transition: all 0.3s ease;
             z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             
             &:hover {
                 background: rgba(255, 255, 255, 0.3);
             }
             
-            &--prev {
+            &.slider-arrow-prev {
                 left: 20px;
             }
             
-            &--next {
+            &.slider-arrow-next {
                 right: 20px;
+            }
+        }
+        
+        // Slider navigation - dots
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2;
+            
+            .slider-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.5);
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                
+                &.active {
+                    background: #FFFFFF;
+                    width: 32px;
+                    border-radius: 6px;
+                }
             }
         }
     }
@@ -299,30 +321,69 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .hero-slider {
+        margin-left: 15px;
+        margin-right: 15px;
+        
         .slide {
-            height: 300px;
+            height: 280px;
             
-            .slide__title {
-                font-size: 32px;
+            .slide-content {
+                padding: 20px;
             }
             
-            .slide__price {
+            .slide-title {
+                font-size: 28px;
+            }
+            
+            .slide-description {
+                font-size: 14px;
+            }
+            
+            .slide-price {
                 font-size: 24px;
+            }
+            
+            .action.slider-cta {
+                padding: 12px 28px;
+                font-size: 14px;
             }
         }
         
         .slider-arrow {
-            width: 40px;
-            height: 40px;
-            font-size: 18px;
+            width: 36px;
+            height: 36px;
+            font-size: 20px;
+            
+            &.slider-arrow-prev {
+                left: 10px;
+            }
+            
+            &.slider-arrow-next {
+                right: 10px;
+            }
+        }
+        
+        .slider-dots {
+            bottom: 12px;
+            
+            .slider-dot {
+                width: 10px;
+                height: 10px;
+                
+                &.active {
+                    width: 24px;
+                }
+            }
         }
     }
     
     .promo-banner {
         padding: @indent__base;
+        margin-left: 15px;
+        margin-right: 15px;
         
         .promo-banner__title {
-            font-size: 28px;
+            font-size: 24px;
         }
         
         .promo-banner__form {
