@@ -1,15 +1,13 @@
 // /**
-//  * Folix Game Theme - Style Extends
+//  * Folix Game Theme - Style Extend
 //  * 
-//  * 核心文件：
-//  * - 通过 @import (reference) 引入，直接选择器会正常输出
-//  * - abs-* 抽象类需要 &:extend() 才会输出
-//  * - 与父主题的 _extends.less 合并，同选择器覆盖
+//  * 核心文件：扩展父主题样式
 //  * 
-//  * 可以引入任意 Less 文件，组织模块化样式
+//  * 注意：
+//  * - _variables.less 和 _theme.less 由Magento自动加载，无需手动引入
+//  * - 此文件中的样式会覆盖父主题的同名选择器
+//  * - 使用 @import 引入自定义模块化样式文件
 //  */
-
-@import '_variables.less';
 
 //
 //  引入模块化样式文件
@@ -21,5 +19,5 @@
 @import 'extends/_navigation.less';   // 导航样式
 @import 'extends/_buttons.less';      // 按钮样式
 @import 'extends/_products.less';     // 产品样式
-@import 'extends/_components.less'; // 自定义组件（Hero Slider, Promo Banner）
+@import 'extends/_components.less';   // 自定义组件（Hero Slider, Promo Banner）
 @import 'extends/_abstracts.less';    // 抽象类（需要 &:extend 使用）
