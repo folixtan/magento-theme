@@ -15,8 +15,8 @@ var config = {
             'folix/mobile-header': 'Magento_Theme/js/mobile-header'
         }
     },
-    // 暂时禁用自定义JS，使用Luma原生功能
+    // 移动端交互JS
     deps: [
-        // 'folix/mobile-header'  // 暂时注释，测试原生功能
+        'folix/mobile-header'  // 重新启用，修复搜索功能
     ]
 };
