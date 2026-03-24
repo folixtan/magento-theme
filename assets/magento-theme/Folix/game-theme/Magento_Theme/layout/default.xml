@@ -70,11 +70,12 @@
         </referenceContainer>
         
         <!-- =================================================================
-             PAGE TOP - Hero Slider（跑马灯可能在这里或其他位置）
+             PAGE TOP - Hero Slider
+             首页专用，在main.content之前
              ================================================================= -->
         
         <referenceContainer name="page.top">
-            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml" />
+            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="-" template="Magento_Theme::html/slider/hero.phtml" />
         </referenceContainer>
         
         <!-- =================================================================
