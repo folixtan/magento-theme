@@ -60,12 +60,16 @@
              MAIN BAR - 主导航栏
              白色背景，底部橙色边框3px
              Logo | 导航 | 搜索 | 登录按钮
+             
+             注意：navigation.sections 保持原位置，不要移动！
+             移动端通过 .nav-toggle 触发侧边栏显示
              ================================================================= -->
         
         <!-- 移动原生元素到正确位置 -->
-        <move element="navigation.sections" destination="header-wrapper" after="logo" />
-        <move element="top.search" destination="header-wrapper" after="navigation.sections" />
-        <move element="minicart" destination="header-wrapper" after="top.search" />
+        <!-- ❌ 不要移动 navigation.sections，否则会破坏移动端侧边栏导航 -->
+        <!-- navigation.sections 默认在 header.container 之后，移动端和桌面端都能正常工作 -->
+        
+        <move element="top.search" destination="header-wrapper" before="minicart" />
         
         <!-- 添加登录按钮 -->
         <referenceContainer name="header-wrapper">
