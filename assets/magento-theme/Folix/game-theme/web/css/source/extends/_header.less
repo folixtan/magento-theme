@@ -42,11 +42,11 @@
     
     // ========================================================================
     //  PANEL HEADER - Top Bar 内容
-    //  Flex布局：左 | 右
+    //  Flex布局：左 | 中 | 右
     //  ========================================================================
     
     .panel.header {
-        display: flex;
+        display: flex !important;
         justify-content: space-between;
         align-items: center;
         max-width: 1200px;
@@ -54,6 +54,12 @@
         padding: 0 20px;
         height: 40px;
         min-height: 40px;
+        
+        // 清除浮动
+        &:before,
+        &:after {
+            display: none !important;
+        }
     }
     
     // ========================================================================
@@ -63,6 +69,7 @@
     .header-links-left {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
         
         .header-links-top {
             display: flex;
@@ -96,6 +103,26 @@
     }
     
     // ========================================================================
+    //  中间容器（跑马灯或留空）
+    //  ========================================================================
+    
+    .header-links-center {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        overflow: hidden;
+        
+        // 如果放跑马灯
+        .header-marquee {
+            width: 100%;
+            color: #E2E8F0;
+            font-size: 13px;
+        }
+    }
+    
+    // ========================================================================
     //  右侧容器 - APP + 语言切换
     //  ========================================================================
     
@@ -103,6 +130,7 @@
         display: flex;
         align-items: center;
         gap: 16px;
+        flex-shrink: 0;
         
         // APP下载链接
         .app-download-link {
