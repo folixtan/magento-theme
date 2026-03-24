@@ -28,6 +28,7 @@
         background: #FFFFFF;
         margin-bottom: 0;
         border: none;
+        border-bottom: 3px solid #FF6B35;  // 橙色底边框移到这里
     }
     
     // ========================================================================
@@ -220,7 +221,7 @@
     
     // ========================================================================
     //  HEADER CONTENT - Main Bar
-    //  白色背景，高度70px，底部橙色边框3px
+    //  白色背景，高度70px
     //  ========================================================================
     
     .header.content {
@@ -231,7 +232,6 @@
         padding: 15px 20px;
         height: 70px;
         gap: 20px;
-        border-bottom: 3px solid #FF6B35;
         
         // 清除浮动
         &:before,
@@ -464,7 +464,7 @@
                     
                     input {
                         width: 100%;
-                        height: 36px;
+                        height: 40px;  // 调整到 40px
                         padding: 0 16px;
                         font-size: 14px;
                         border: none;
@@ -514,7 +514,7 @@
                     align-items: center;
                     justify-content: center;
                     
-                    height: 36px;
+                    height: 40px;  // 调整到 40px
                     padding: 0 20px !important;
                     background: linear-gradient(90deg, #FF6B35 0%, #EA580C 100%) !important;
                     border: none !important;
@@ -573,7 +573,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                padding: 8px 16px;
+                padding: 8px 16px;  // 左右内边距保持 16px
                 background: transparent;
                 border: 1px solid #E5E7EB;
                 border-radius: 6px;
@@ -626,7 +626,7 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                height: 40px;
+                height: 44px;  // 调整到 44px
                 padding: 0 24px;
                 background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
                 color: #FFFFFF;
