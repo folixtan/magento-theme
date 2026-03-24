@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <!-- 渐变定义 -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2"/>
+      <stop offset="100%" style="stop-color:#6C5CE7"/>
+    </linearGradient>
+    <linearGradient id="secondaryGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:#EA580C"/>
+    </linearGradient>
+    <linearGradient id="darkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E293B"/>
+      <stop offset="100%" style="stop-color:#0F172A"/>
+    </linearGradient>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#F8FAFC"/>
+      <stop offset="100%" style="stop-color:#E2E8F0"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- 头部区域 -->
+  <rect y="0" width="800" height="120" fill="#FFFFFF"/>
+  <rect y="0" width="800" height="3" fill="url(#secondaryGradient)"/>
+  
+  <!-- Top Bar -->
+  <rect y="0" width="800" height="35" fill="url(#darkGradient)"/>
+  
+  <!-- Logo区域 -->
+  <rect x="30" y="50" width="100" height="30" rx="4" fill="url(#primaryGradient)"/>
+  <text x="50" y="72" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF">FOLIX</text>
+  
+  <!-- 搜索框 -->
+  <rect x="200" y="55" width="300" height="24" rx="4" fill="#F1F5F9" stroke="#E2E8F0"/>
+  <circle cx="480" cy="67" r="8" fill="url(#secondaryGradient)"/>
+  
+  <!-- 登录按钮 -->
+  <rect x="520" y="52" width="80" height="28" rx="6" fill="url(#primaryGradient)"/>
+  <text x="540" y="71" font-family="Arial, sans-serif" font-size="12" fill="#FFFFFF">登录</text>
+  
+  <!-- 购物车图标 -->
+  <rect x="620" y="55" width="30" height="24" rx="4" fill="#F1F5F9"/>
+  
+  <!-- Hero Slider区域 -->
+  <rect x="20" y="130" width="760" height="180" rx="12" fill="url(#primaryGradient)"/>
+  <rect x="20" y="130" width="760" height="180" rx="12" fill="rgba(0,0,0,0.3)"/>
+  
+  <!-- Slider内容 -->
+  <rect x="280" y="160" width="80" height="20" rx="10" fill="url(#secondaryGradient)"/>
+  <text x="295" y="175" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">限时特惠</text>
+  
+  <text x="180" y="210" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">Mobile Legends 钻石充值</text>
+  <text x="250" y="240" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.9)">直充模式，5分钟快速到账</text>
+  <text x="330" y="275" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#FFD700">¥98.00 起</text>
+  
+  <!-- Slider Dots -->
+  <circle cx="370" cy="290" r="5" fill="#FFFFFF"/>
+  <circle cx="385" cy="290" r="5" fill="rgba(255,255,255,0.5)"/>
+  <circle cx="400" cy="290" r="5" fill="rgba(255,255,255,0.5)"/>
+  
+  <!-- 产品卡片区域 -->
+  <text x="30" y="340" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1E293B">🔥 热销产品</text>
+  
+  <!-- 产品卡片1 -->
+  <rect x="30" y="360" width="175" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="30" y="360" width="175" height="100" rx="8" fill="url(#primaryGradient)"/>
+  <rect x="165" y="370" width="35" height="16" rx="8" fill="url(#secondaryGradient)"/>
+  <text x="173" y="382" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF">直充</text>
+  <text x="45" y="485" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1E293B">ML 钻石</text>
+  <text x="45" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF6B35">¥98.00</text>
+  <rect x="45" y="520" width="145" height="28" rx="6" fill="url(#primaryGradient)"/>
+  <text x="85" y="538" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">立即购买</text>
+  
+  <!-- 产品卡片2 -->
+  <rect x="220" y="360" width="175" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="220" y="360" width="175" height="100" rx="8" fill="url(#secondaryGradient)"/>
+  <rect x="355" y="370" width="35" height="16" rx="8" fill="#10B981"/>
+  <text x="365" y="382" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF">卡密</text>
+  <text x="235" y="485" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1E293B">PUBG UC</text>
+  <text x="235" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF6B35">¥198.00</text>
+  <rect x="235" y="520" width="145" height="28" rx="6" fill="url(#primaryGradient)"/>
+  <text x="275" y="538" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">立即购买</text>
+  
+  <!-- 产品卡片3 -->
+  <rect x="410" y="360" width="175" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="410" y="360" width="175" height="100" rx="8" fill="#10B981"/>
+  <rect x="545" y="370" width="35" height="16" rx="8" fill="url(#primaryGradient)"/>
+  <text x="555" y="382" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF">直充</text>
+  <text x="425" y="485" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1E293B">VIP 月卡</text>
+  <text x="425" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF6B35">¥298.00</text>
+  <rect x="425" y="520" width="145" height="28" rx="6" fill="url(#primaryGradient)"/>
+  <text x="465" y="538" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF">立即购买</text>
+  
+  <!-- 产品卡片4 -->
+  <rect x="600" y="360" width="175" height="200" rx="8" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <rect x="600" y="360" width="175" height="100" rx="8" fill="#8B5CF6"/>
+  <rect x="735" y="370" width="35" height="16" rx="8" fill="#8B5CF6"/>
+  <text x="745" y="382" font-family="Arial, sans-serif" font-size="8" fill="#FFFFFF">新品</text>
+  <text x="615" y="485" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1E293B">游戏点卡</text>
+  <text x="615" y="510" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FF6B35">¥100.00</text>
+  <rect x="615" y="520" width="145" height="28" rx="6" fill="#E2E8F0"/>
+  <text x="660" y="538" font-family="Arial, sans-serif" font-size="10" fill="#64748B">暂时缺货</text>
+  
+  <!-- 尾部区域 -->
+  <rect y="570" width="800" height="30" fill="url(#darkGradient)"/>
+  <text x="400" y="588" font-family="Arial, sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">© 2026 Folix Game. Powered by Magento</text>
+</svg>
