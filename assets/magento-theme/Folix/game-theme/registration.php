@@ -1,6 +1,6 @@
 <?php
 /**
- * Folix Game Theme Registration
+ * Folix Game Theme - Registration
  * 
  * @category  Design
  * @package   Folix_GameTheme

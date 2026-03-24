@@ -1,41 +1,114 @@
+// /**
+//  * Folix Game Theme - Variable Overrides
+//  * 
+//  * This file ONLY overrides existing Luma theme variables
+//  * New variables should be defined in _variables.less
+//  */
+
 //
-//  Folix Game Theme - Main Theme File
+//  Colors - Override Luma defaults
 //  _____________________________________________
 
-//
-//  Imports
-//  ---------------------------------------------
+//  Primary colors
+@theme__color__primary: #4A90E2;
+@theme__color__primary-alt: #6C5CE7;
 
-@import '_variables.less';
-@import '_extend.less';
-@import '_buttons.less';
-@import '_forms.less';
-@import '_header.less';
-@import '_footer.less';
-@import '_products.less';
-@import '_components.less';
+//  Link colors
+@link__color: @theme__color__primary;
+@link__hover__color: #FF6B35;
+@link__active__color: #EA580C;
+
+//  Header colors
+@header-panel__background-color: #1E293B;
+@header-panel__text-color: #E2E8F0;
+@header-icons-color: #1E293B;
+@header-icons-color-hover: #FF6B35;
+
+//  Footer colors
+@footer__background-color: #F8F9FA;
+@footer-links-separator-border-color: #334155;
+@footer-links-color: #94A3B8;
+@footer-links-color-hover: #FF6B35;
+@copyright__background-color: linear-gradient(135deg, #2563EB, #7C3AED);
+
+//  Button colors
+@button__background: #6B7280;
+@button__border: 1px solid #6B7280;
+@button__color: #FFFFFF;
+@button__hover__background: #4B5563;
+@button__hover__color: #FFFFFF;
+
+//  Primary button
+@button-primary__background: linear-gradient(135deg, #4A90E2, #6C5CE7);
+@button-primary__border: 1px solid #4A90E2;
+@button-primary__color: #FFFFFF;
+@button-primary__hover__background: linear-gradient(135deg, #357ABD, #5A4FCF);
+@button-primary__hover__border: 1px solid #357ABD;
+@button-primary__hover__color: #FFFFFF;
 
 //
-//  Theme Documentation
+//  Typography
 //  _____________________________________________
 
-// Folix Game Theme - A Modern Gaming E-commerce Theme for Magento 2
-// Based on Magento Luma theme
-// 
-// Features:
-// - Gradient color scheme (Blue + Orange)
-// - Two-row header design
-// - Game-style product cards
-// - Hero slider component
-// - Promo banner component
-// - Responsive design
-// - Modern animations and transitions
-// 
-// Color Palette:
-// - Primary: #4A90E2 (Blue)
-// - Secondary: #FF6B35 (Orange)
-// - Accent: #6C5CE7 (Purple)
-// - Dark: #1E293B, #0F172A
-// - Success: #10B981
-// - Warning: #F59E0B
-// - Danger: #EF4444
+@font-family-name__base: 'Open Sans';
+@font-family__base: @font-family-name__base, @font-family__sans-serif;
+
+@font-size__base: 16px;
+@font-size__l: 18px;
+@font-size__xl: 24px;
+
+@font-weight__regular: 400;
+@font-weight__semibold: 600;
+@font-weight__bold: 700;
+
+@h1__font-weight: @font-weight__bold;
+@h2__font-weight: @font-weight__bold;
+@h3__font-weight: @font-weight__semibold;
+
+//
+//  Layout
+//  _____________________________________________
+
+@layout__max-width: 1200px;
+@layout-indent__width: 20px;
+
+//
+//  Buttons
+//  _____________________________________________
+
+@button__border-radius: 8px;
+@button__font-weight: @font-weight__semibold;
+
+//
+//  Forms
+//  _____________________________________________
+
+@form-element-input__border-radius: 8px;
+@form-element-input__border-color: #E5E7EB;
+@form-element-input__background: #F9FAFB;
+@form-element-input__focus__border-color: @theme__color__primary;
+
+//
+//  Navigation
+//  _____________________________________________
+
+@navigation__background: #FFFFFF;
+@navigation-level0-item__color: #1E293B;
+@navigation-level0-item__hover__color: #FF6B35;
+@navigation-level0-item__active__color: #FF6B35;
+@navigation-level0-item__font-weight: @font-weight__semibold;
+
+//
+//  Messages
+//  _____________________________________________
+
+@message-global-note__background: #FEF3C7;
+@message-global-note__border-color: #F59E0B;
+
+//
+//  Price
+//  _____________________________________________
+
+@price-color: #FF6B35;
+@price-size: 22px;
+@price-size-desktop: 28px;

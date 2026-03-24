@@ -1,10 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Folix Game Theme View Configuration
- * 
- * @category  Design
- * @package   Folix_GameTheme
+ * Folix Game Theme - View Configuration
  */
 -->
 <view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
@@ -28,33 +25,9 @@
                 <width>1200</width>
                 <height>1200</height>
             </image>
-            <!-- Thumbnail images -->
-            <image id="product_page_image_small" type="thumbnail">
-                <width>88</width>
-                <height>110</height>
-            </image>
-            <!-- Cart images -->
-            <image id="cart_page_product_thumbnail" type="small_image">
-                <width>165</width>
-                <height>165</height>
-            </image>
-            <!-- Related/Up-sell/Cross-sell products -->
-            <image id="related_products_list" type="small_image">
-                <width>200</width>
-                <height>258</height>
-            </image>
         </images>
     </media>
-    
     <vars module="Magento_Catalog">
         <var name="gallery_switch_strategy">replace</var>
-    </vars>
-    
-    <vars module="Magento_PageBuilder">
-        <var name="breakpoints_mapping">
-            <var name="desktop">1024px</var>
-            <var name="tablet">768px</var>
-            <var name="mobile">640px</var>
-        </var>
     </vars>
 </view>
