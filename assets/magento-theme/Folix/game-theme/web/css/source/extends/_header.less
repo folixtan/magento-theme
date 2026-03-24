@@ -4,7 +4,7 @@
 //  * 严格按照原型设计
 //  * 
 //  * Top Bar (header.panel): 
-//  *   - 深蓝渐变背景 #1E293B → #0F172A
+//  *   - 深蓝渐变背景 @folix-text-primary → @folix-bg-dark-alt
 //  *   - 高度 40px
 //  *   - 左侧：链接 | 右侧：APP + 语言切换
 //  * 
@@ -25,10 +25,10 @@
     //  ========================================================================
     
     .page-header {
-        background: #FFFFFF;
+        background: @folix-bg-card;
         margin-bottom: 0;
         border: none;
-        border-bottom: 3px solid #FF6B35;  // 橙色底边框移到这里
+        border-bottom: 3px solid @folix-secondary;  // 橙色底边框移到这里
     }
     
     // ========================================================================
@@ -37,7 +37,7 @@
     //  ========================================================================
     
     .panel.wrapper {
-        background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+        background: @folix-gradient-dark;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     
@@ -84,7 +84,7 @@
                     display: inline-flex;
                     align-items: center;
                     gap: 6px;
-                    color: #E2E8F0;
+                    color: @folix-border;
                     font-size: 13px;
                     font-weight: 500;
                     text-decoration: none;
@@ -92,7 +92,7 @@
                     white-space: nowrap;
                     
                     &:hover {
-                        color: #FF6B35;
+                        color: @folix-secondary;
                     }
                     
                     .link-icon {
@@ -118,7 +118,7 @@
         // 如果放跑马灯
         .header-marquee {
             width: 100%;
-            color: #E2E8F0;
+            color: @folix-border;
             font-size: 13px;
         }
     }
@@ -138,7 +138,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #E2E8F0;
+            color: @folix-border;
             font-size: 13px;
             font-weight: 500;
             text-decoration: none;
@@ -146,7 +146,7 @@
             white-space: nowrap;
             
             &:hover {
-                color: #FF6B35;
+                color: @folix-secondary;
             }
         }
         
@@ -176,7 +176,7 @@
                     font-weight: 500;
                     
                     span {
-                        color: #E2E8F0;
+                        color: @folix-border;
                         font-size: 12px;
                     }
                 }
@@ -186,7 +186,7 @@
                 position: absolute;
                 top: 100%;
                 right: 0;
-                background: #1E293B;
+                background: @folix-text-primary;
                 border: 1px solid rgba(255, 255, 255, 0.1);
                 border-radius: 4px;
                 min-width: 140px;
@@ -200,13 +200,13 @@
                     a {
                         display: block;
                         padding: 8px 16px;
-                        color: #E2E8F0;
+                        color: @folix-border;
                         font-size: 13px;
                         text-decoration: none;
                         
                         &:hover {
                             background: rgba(255, 255, 255, 0.1);
-                            color: #FF6B35;
+                            color: @folix-secondary;
                         }
                     }
                 }
@@ -248,12 +248,12 @@
             order: 0;
             
             &:before {
-                color: #1E293B;
+                color: @folix-text-primary;
                 font-size: 24px;
             }
             
             &:hover:before {
-                color: #FF6B35;
+                color: @folix-secondary;
             }
         }
         
@@ -320,7 +320,7 @@
                         align-items: center;
                         gap: 4px;
                         padding: 10px 16px;
-                        color: #1E293B;
+                        color: @folix-text-primary;
                         font-weight: 600;
                         font-size: 15px;
                         text-decoration: none;
@@ -334,13 +334,13 @@
                         }
                         
                         &:hover {
-                            color: #FFFFFF;
-                            background: linear-gradient(135deg, #EA580C, #C2410C);
+                            color: @folix-bg-card;
+                            background: linear-gradient(135deg, @folix-secondary-dark, @folix-secondary-dark);
                         }
                     }
                     
                     &.active > .level-top {
-                        color: #FF6B35;
+                        color: @folix-secondary;
                     }
                 }
                 
@@ -349,8 +349,8 @@
                     position: absolute;
                     top: calc(100% + 5px);  // 增加间距，避免重叠
                     left: 0;
-                    background: #FFFFFF;
-                    border: 1px solid #E5E7EB;
+                    background: @folix-bg-card;
+                    border: 1px solid @folix-border;
                     border-radius: 6px;
                     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
                     min-width: 180px;
@@ -365,14 +365,14 @@
                             align-items: center;
                             justify-content: space-between;
                             padding: 10px 16px;
-                            color: #1E293B;
+                            color: @folix-text-primary;
                             font-size: 14px;
                             text-decoration: none;
                             transition: all 0.2s ease;
                             
                             &:hover {
-                                background: #DBEAFE;  // 浅蓝高亮
-                                color: #4A90E2;
+                                background: @folix-info-bg;  // 浅蓝高亮
+                                color: @folix-primary;
                             }
                         }
                         
@@ -381,8 +381,8 @@
                             position: absolute;
                             top: 0;
                             left: 100%;  // 在右侧展开
-                            background: #FFFFFF;
-                            border: 1px solid #E5E7EB;
+                            background: @folix-bg-card;
+                            border: 1px solid @folix-border;
                             border-radius: 6px;
                             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
                             min-width: 150px;
@@ -393,12 +393,12 @@
                             .level2 {
                                 a {
                                     padding: 10px 16px;
-                                    color: #1E293B;
+                                    color: @folix-text-primary;
                                     font-size: 14px;
                                     
                                     &:hover {
-                                        background: #DBEAFE;
-                                        color: #4A90E2;
+                                        background: @folix-info-bg;
+                                        color: @folix-primary;
                                     }
                                 }
                             }
@@ -452,13 +452,13 @@
                 
                 .control {
                     flex: 1;
-                    border: 2px solid #E5E7EB;
+                    border: 2px solid @folix-border;
                     border-right: none;
                     border-radius: 6px 0 0 6px;
                     overflow: hidden;
                     margin: 0;
                     padding: 0;
-                    background: #F9FAFB;
+                    background: @folix-bg-page;
                     transition: all 0.3s ease;
                     position: relative;  // 确保相对定位
                     
@@ -471,7 +471,7 @@
                         background: transparent;
                         
                         &::placeholder {
-                            color: #9CA3AF;
+                            color: @folix-text-light;
                         }
                         
                         &:focus {
@@ -481,10 +481,10 @@
                     
                     // 聚焦时整个控制框外发光
                     &:focus-within {
-                        border-color: #4A90E2;
+                        border-color: @folix-primary;
                         box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2),
                                     0 0 0 1px rgba(74, 144, 226, 0.1);
-                        background: #FFFFFF;
+                        background: @folix-bg-card;
                     }
                     
                     // 隐藏 Luma 原生的下拉和嵌套元素
@@ -516,10 +516,10 @@
                     
                     height: 44px;  // 调整到 44px，与登录按钮一致
                     padding: 0 20px !important;
-                    background: linear-gradient(90deg, #FF6B35 0%, #EA580C 100%) !important;
+                    background: linear-gradient(90deg, @folix-secondary 0%, @folix-secondary-dark 100%) !important;
                     border: none !important;
                     border-radius: 0 6px 6px 0;
-                    color: #FFFFFF;
+                    color: @folix-bg-card;
                     font-size: 14px;
                     cursor: pointer;
                     z-index: 10;
@@ -535,7 +535,7 @@
                         clip: auto !important;
                         height: auto !important;
                         width: auto !important;
-                        color: #FFFFFF;
+                        color: @folix-bg-card;
                         font-size: 14px;
                     }
                     
@@ -545,7 +545,7 @@
                     }
                     
                     &:hover {
-                        background: linear-gradient(135deg, #EA580C, #C2410C) !important;
+                        background: linear-gradient(135deg, @folix-secondary-dark, @folix-secondary-dark) !important;
                         transform: translateY(-1px);
                         box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3) !important;
                     }
@@ -575,7 +575,7 @@
                 gap: 8px;
                 padding: 8px 16px;  // 左右内边距保持 16px
                 background: transparent;
-                border: 1px solid #E5E7EB;
+                border: 1px solid @folix-border;
                 border-radius: 6px;
                 text-decoration: none;
                 transition: all 0.2s ease;
@@ -583,19 +583,19 @@
                 &:before {
                     content: '🛒';
                     font-size: 16px;
-                    color: #1E293B;
+                    color: @folix-text-primary;
                     font-family: inherit;
                 }
                 
                 .text {
-                    color: #3B82F6;
+                    color: @folix-info;
                     font-size: 14px;
                     font-weight: 600;
                 }
                 
                 .counter {
-                    background: #FF6B35;
-                    color: #FFFFFF;
+                    background: @folix-secondary;
+                    color: @folix-bg-card;
                     border-radius: 10px;
                     padding: 2px 8px;
                     font-size: 12px;
@@ -603,12 +603,12 @@
                     
                     .counter-number,
                     .counter-label {
-                        color: #FFFFFF;
+                        color: @folix-bg-card;
                     }
                 }
                 
                 &:hover {
-                    border-color: #FF6B35;
+                    border-color: @folix-secondary;
                     background: rgba(255, 107, 53, 0.05);
                 }
             }
@@ -628,8 +628,8 @@
                 justify-content: center;
                 height: 44px;  // 调整到 44px
                 padding: 0 24px;
-                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-                color: #FFFFFF;
+                background: @folix-gradient-primary;
+                color: @folix-bg-card;
                 font-size: 15px;
                 font-weight: 600;
                 border: none;
@@ -690,7 +690,7 @@
     //  ========================================================================
     
     .page-header {
-        border-bottom: 3px solid #FF6B35;  // 确保边框显示
+        border-bottom: 3px solid @folix-secondary;  // 确保边框显示
     }
     
     // ========================================================================
@@ -728,13 +728,13 @@
             flex-shrink: 0 !important;
             
             &:before {
-                color: #1E293B !important;
+                color: @folix-text-primary !important;
                 font-size: 28px !important;
                 line-height: 1 !important;
             }
             
             &:hover:before {
-                color: #FF6B35 !important;
+                color: @folix-secondary !important;
             }
         }
         
@@ -802,24 +802,24 @@
                     content: '\e615' !important;  // Luma 搜索图标
                     font-family: 'luma-icons' !important;
                     font-size: 22px !important;
-                    color: #1E293B !important;
+                    color: @folix-text-primary !important;
                     display: inline-block !important;
                     -webkit-font-smoothing: antialiased !important;
                     -moz-osx-font-smoothing: grayscale !important;
                 }
                 
                 &:hover:before {
-                    color: #FF6B35 !important;
+                    color: @folix-secondary !important;
                 }
             }
             
             // 搜索输入框 - 点击图标后在下方展开
             .control {
-                border-top: 1px solid #E2E8F0 !important;
+                border-top: 1px solid @folix-border !important;
                 clear: both !important;
                 margin: 0 -15px !important;  // 通栏
                 padding: 0 15px !important;
-                background: #FFFFFF !important;
+                background: @folix-bg-card !important;
                 display: none !important;  // 默认隐藏
                 position: relative !important;
                 
@@ -828,15 +828,15 @@
                     height: 44px !important;
                     padding: 0 16px !important;
                     font-size: 16px !important;
-                    border: 2px solid #E5E7EB !important;
+                    border: 2px solid @folix-border !important;
                     border-radius: 6px !important;
                     margin: 15px 0 !important;
-                    background: #F9FAFB !important;
+                    background: @folix-bg-page !important;
                     box-sizing: border-box !important;
                     
                     &:focus {
-                        border-color: #4A90E2 !important;
-                        background: #FFFFFF !important;
+                        border-color: @folix-primary !important;
+                        background: @folix-bg-card !important;
                         outline: none !important;
                     }
                 }
@@ -879,7 +879,7 @@
                     content: '\e611' !important;  // Luma 购物车图标
                     font-family: 'luma-icons' !important;
                     font-size: 22px !important;
-                    color: #1E293B !important;
+                    color: @folix-text-primary !important;
                     margin: 0 !important;
                     -webkit-font-smoothing: antialiased !important;
                     -moz-osx-font-smoothing: grayscale !important;
@@ -893,8 +893,8 @@
                     position: absolute !important;
                     top: 0 !important;
                     right: 0 !important;
-                    background: #FF6B35 !important;
-                    color: #FFFFFF !important;
+                    background: @folix-secondary !important;
+                    color: @folix-bg-card !important;
                     border-radius: 10px !important;
                     padding: 2px 6px !important;
                     font-size: 11px !important;
@@ -904,7 +904,7 @@
                     
                     .counter-number,
                     .counter-label {
-                        color: #FFFFFF !important;
+                        color: @folix-bg-card !important;
                     }
                 }
                 
@@ -930,8 +930,8 @@
                 width: 44px !important;  // 固定宽度
                 height: 44px !important;  // 固定高度
                 padding: 0 !important;
-                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%) !important;
-                color: #FFFFFF !important;
+                background: @folix-gradient-primary !important;
+                color: @folix-bg-card !important;
                 border: none !important;
                 border-radius: 50% !important;  // 圆形
                 text-decoration: none !important;
@@ -968,7 +968,7 @@
         -webkit-overflow-scrolling: touch !important;
         transition: left 0.3s ease-in-out !important;
         z-index: 99 !important;
-        background: #FFFFFF !important;
+        background: @folix-bg-card !important;
         box-shadow: none !important;
         display: block !important;
         margin: 0 !important;
@@ -987,27 +987,27 @@
             // 标签页标题（Menu、Account、Settings）
             .nav-sections-item-title {
                 display: block !important;
-                border-bottom: 1px solid #E2E8F0 !important;
+                border-bottom: 1px solid @folix-border !important;
                 margin: 0 !important;
                 
                 // 标签页切换链接
                 .nav-sections-item-switch {
                     display: block !important;
                     padding: 15px 20px !important;
-                    color: #64748B !important;
+                    color: @folix-text-muted !important;
                     font-size: 13px !important;
                     font-weight: 600 !important;
                     text-transform: uppercase !important;
                     text-decoration: none !important;
-                    background: #F8FAFC !important;
+                    background: @folix-bg-page !important;
                     letter-spacing: 0.5px !important;
                 }
                 
                 // 激活状态的标签页
                 &.active .nav-sections-item-switch {
-                    background: #FFFFFF !important;
-                    color: #FF6B35 !important;
-                    border-bottom: 3px solid #FF6B35 !important;
+                    background: @folix-bg-card !important;
+                    color: @folix-secondary !important;
+                    border-bottom: 3px solid @folix-secondary !important;
                 }
             }
             
@@ -1037,27 +1037,27 @@
             li {
                 margin: 0 !important;
                 padding: 0 !important;
-                border-bottom: 1px solid #E2E8F0 !important;
+                border-bottom: 1px solid @folix-border !important;
                 
                 a {
                     display: flex !important;
                     align-items: center !important;
                     justify-content: space-between !important;
                     padding: 14px 20px !important;
-                    color: #1E293B !important;
+                    color: @folix-text-primary !important;
                     font-size: 15px !important;
                     font-weight: 500 !important;
                     text-decoration: none !important;
-                    background: #FFFFFF !important;
+                    background: @folix-bg-card !important;
                     
                     // 移动端使用 :active 代替 :hover
                     &:active {
-                        background: #F8FAFC !important;
+                        background: @folix-bg-page !important;
                     }
                     
                     // 展开图标
                     .ui-menu-icon {
-                        color: #94A3B8 !important;
+                        color: @folix-text-light !important;
                         font-size: 12px !important;
                     }
                 }
@@ -1065,19 +1065,19 @@
                 // 子菜单
                 .submenu {
                     display: none !important;
-                    background: #F8FAFC !important;
+                    background: @folix-bg-page !important;
                     
                     li {
-                        border-bottom: 1px solid #E2E8F0 !important;
+                        border-bottom: 1px solid @folix-border !important;
                         
                         a {
                             padding-left: 30px !important;
                             font-size: 14px !important;
-                            color: #64748B !important;
+                            color: @folix-text-muted !important;
                             font-weight: 400 !important;
                             
                             &:active {
-                                color: #FF6B35 !important;
+                                color: @folix-secondary !important;
                             }
                         }
                     }
@@ -1101,12 +1101,12 @@
             
             .switcher-trigger {
                 padding: 12px 15px !important;
-                background: #F8FAFC !important;
-                border: 1px solid #E2E8F0 !important;
+                background: @folix-bg-page !important;
+                border: 1px solid @folix-border !important;
                 border-radius: 8px !important;
                 
                 strong span {
-                    color: #1E293B !important;
+                    color: @folix-text-primary !important;
                     font-size: 14px !important;
                     font-weight: 500 !important;
                 }
@@ -1114,7 +1114,7 @@
             
             .switcher-dropdown {
                 margin-top: 8px !important;
-                border: 1px solid #E2E8F0 !important;
+                border: 1px solid @folix-border !important;
                 border-radius: 8px !important;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
                 
@@ -1123,12 +1123,12 @@
                     
                     a {
                         padding: 10px 15px !important;
-                        color: #1E293B !important;
+                        color: @folix-text-primary !important;
                         font-size: 14px !important;
                         
                         &:active {
-                            background: #F8FAFC !important;
-                            color: #FF6B35 !important;
+                            background: @folix-bg-page !important;
+                            color: @folix-secondary !important;
                         }
                     }
                 }
