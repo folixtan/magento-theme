@@ -282,6 +282,7 @@
             order: 2;
             clear: none;
             float: none;
+            margin-bottom: 0 !important;  // 覆盖 Luma 的 margin-bottom: 25px，防止撑开导航
             
             .nav-sections-items {
                 display: flex;
@@ -414,7 +415,7 @@
         
         // ====================================================================
         //  搜索框
-        //  ====================================================================
+        //  ========================================================================
         
         .block-search {
             flex-shrink: 0;
@@ -423,8 +424,8 @@
             clear: none;
             float: none;
             margin: 0;
-            position: relative;  // 确保相对定位
-            z-index: 10;  // 提高层级，确保按钮可点击
+            position: relative;
+            z-index: 10;
             
             .block-title {
                 display: none;
@@ -436,7 +437,8 @@
             
             .form.minisearch {
                 display: flex;
-                position: relative;  // 确保相对定位
+                position: relative;
+                align-items: center;  // 确保垂直居中对齐
             }
             
             .field.search {
@@ -457,7 +459,8 @@
                     margin: 0;
                     padding: 0;
                     background: #F9FAFB;
-                    transition: all 0.3s ease;  // 添加过渡效果
+                    transition: all 0.3s ease;
+                    position: relative;  // 确保相对定位
                     
                     input {
                         width: 100%;
@@ -479,49 +482,72 @@
                     // 聚焦时整个控制框外发光
                     &:focus-within {
                         border-color: #4A90E2;
-                        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2),  // 蓝色外发光
-                                    0 0 0 1px rgba(74, 144, 226, 0.1);  // 内发光
+                        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2),
+                                    0 0 0 1px rgba(74, 144, 226, 0.1);
                         background: #FFFFFF;
                     }
                     
+                    // 隐藏 Luma 原生的下拉和嵌套元素
                     .nested,
                     .search-autocomplete {
-                        display: none;
+                        display: none !important;
                     }
                 }
             }
             
             .actions {
                 display: flex;
-                position: relative;  // 确保相对定位
-                z-index: 10;  // 提高层级，确保按钮可点击
+                align-items: center;  // 确保垂直居中对齐
+                position: relative;
+                z-index: 10;
+                margin: 0;  // 清除可能的 margin
+                padding: 0;  // 清除可能的 padding
                 
                 .action.search {
+                    // 覆盖 Luma 的绝对定位样式
+                    position: relative !important;
+                    right: auto !important;
+                    top: auto !important;
+                    
+                    // 使用 flex 布局
+                    display: inline-flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    
                     height: 36px;
-                    padding: 0 20px;
-                    background: linear-gradient(90deg, #FF6B35 0%, #EA580C 100%);
-                    border: none;
+                    padding: 0 20px !important;
+                    background: linear-gradient(90deg, #FF6B35 0%, #EA580C 100%) !important;
+                    border: none !important;
                     border-radius: 0 6px 6px 0;
                     color: #FFFFFF;
                     font-size: 14px;
                     cursor: pointer;
-                    position: relative;  // 确保相对定位
-                    z-index: 10;  // 提高层级，确保可点击
+                    z-index: 10;
                     transition: all 0.3s ease;
+                    box-shadow: none !important;
+                    line-height: 1 !important;
+                    margin: 0 !important;
                     
                     span {
-                        display: none;
-                    }
-                    
-                    &:before {
-                        content: '🔍';
+                        // 显示文字，隐藏图标
+                        display: inline !important;
+                        position: static !important;
+                        clip: auto !important;
+                        height: auto !important;
+                        width: auto !important;
+                        color: #FFFFFF;
                         font-size: 14px;
                     }
                     
+                    &:before {
+                        // 隐藏 Luma 的图标
+                        display: none !important;
+                    }
+                    
                     &:hover {
-                        background: linear-gradient(135deg, #EA580C, #C2410C);
+                        background: linear-gradient(135deg, #EA580C, #C2410C) !important;
                         transform: translateY(-1px);
-                        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+                        box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3) !important;
                     }
                     
                     &:disabled {
