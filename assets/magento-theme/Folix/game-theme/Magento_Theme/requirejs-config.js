@@ -4,20 +4,19 @@
  * 文件位置：Magento_Theme/requirejs-config.js
  * 
  * 说明：
+ * - 暂时禁用自定义JS，使用Luma原生功能
  * - marquee.js, slider.js, modal.js 通过模板中的 data-mage-init 初始化
- * - mobile-header.js 需要全局加载（在 deps 中）
  */
 
 var config = {
     map: {
         '*': {
             // 路径映射（用于模板中的 data-mage-init）
-            // 这些模块在需要时才会加载
             'folix/mobile-header': 'Magento_Theme/js/mobile-header'
         }
     },
-    // 全局依赖（页面加载时立即执行）
+    // 暂时禁用自定义JS，使用Luma原生功能
     deps: [
-        'folix/mobile-header'
+        // 'folix/mobile-header'  // 暂时注释，测试原生功能
     ]
 };

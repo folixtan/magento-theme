@@ -39,12 +39,12 @@
         
         <!-- 移除不需要的原生元素 -->
         <!-- 注意：不要移除 header.links，它在移动端会显示在 Account 标签页中 -->
+        <!-- 注意：不要移除 store_language 和 currency，它们在移动端会显示在 Settings 标签页中 -->
         <referenceBlock name="skip_to_content" remove="true" />
         <referenceBlock name="catalog.compare.link" remove="true" />
-        <referenceBlock name="currency" remove="true" />
         
-        <!-- 移动语言切换到右侧容器 -->
-        <move element="store_language" destination="folix.top.right" />
+        <!-- 桌面端：语言切换保持在Top Bar右侧 -->
+        <!-- 移动端：Luma自动将语言切换显示在Settings标签页中 -->
         
         <!-- 左侧链接内容 -->
         <referenceContainer name="folix.top.left">
