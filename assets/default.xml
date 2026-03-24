@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- 重构header.panel内部容器结构 -->
+        <referenceContainer name="header.panel">
+            <container name="folix.top.left" label="Header Top" htmlTag="div" htmlClass="header-wrapper-links-top" before="-" />
+            <!-- 2. 跑马灯容器：紧跟左侧容器 -->
+            <container name="header-marquee" label="Header Marquee" htmlTag="div" htmlId="header-marquee" htmlClass="header-marquee" after="folix.top.left" />
+            <!-- 3. 右侧容器：紧跟跑马灯容器 -->
+            <container name="header-wrapper-right" label="Header Top Right" htmlTag="div" htmlId="header-wrapper-right" htmlClass="header-wrapper-right" after="header-marquee" />
+        </referenceContainer>
+
+ <!-- 移除原生header.links（先移除，再重建） -->
+        <referenceBlock name="header.links" remove="true" />
+        <referenceBlock name="skip_to_content" remove="true" />
+           <referenceBlock name="catalog.compare.link" remove="true" />
+
+           
+        <move element="store_language" destination="header-wrapper-right"/>
+        <move element="navigation.sections" destination="header-wrapper" after="logo" />
+        <move element="top.search" destination="header-wrapper" after="navigation.sections" />
+        <move element="minicart" destination="header-wrapper" after="top.search" />
+      
+      
+
+        <!-- 给左侧容器添加内容（确保容器有内容才会渲染） -->
+        <referenceContainer name="folix.top.left">
+            <block class="Magento\Framework\View\Element\Template" name="folix.game.top.links" template="Magento_Theme::html/header/links-top-left.phtml" before="-" />
+        </referenceContainer>
+
+        <!-- 给右侧容器添加APP链接 -->
+        <referenceContainer name="header-wrapper-right">
+            <block class="Magento\Framework\View\Element\Template" name="folix.app.link" template="Magento_Theme::html/header/app-link.phtml" before="store_language" />
+        </referenceContainer>
+
+        <!-- 跑马灯模块保持不变 -->
+        <referenceContainer name="header-marquee">
+            <block class="Magento\Framework\View\Element\Template" name="folix.marquee" template="Magento_Theme::html/header/marquee.phtml" before="-" />
+        </referenceContainer>
+
+        <!-- 在主头部添加登录按钮 -->
+        <referenceContainer name="header.content">
+            <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="logo" />
+        </referenceContainer>
+    </body>
+</page>

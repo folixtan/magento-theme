@@ -1,0 +1,29 @@
+<?php
+/**
+ * Folix Game Theme - Header Top Left Links
+ * 
+ * 位置：folix.top.left 容器内
+ * 选择器：.header-wrapper-links-top
+ * 内容：辅助链接（新闻、奖励、支持）
+ */
+?>
+<ul class="header-links-top">
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('news')) ?>" class="link-item">
+            <span class="link-icon">📰</span>
+            <span class="link-text"><?= $block->escapeHtml(__('Folix News')) ?></span>
+        </a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('rewards')) ?>" class="link-item">
+            <span class="link-icon">⭐</span>
+            <span class="link-text"><?= $block->escapeHtml(__('STAR Rewards')) ?></span>
+        </a>
+    </li>
+    <li>
+        <a href="<?= $block->escapeUrl($block->getUrl('support')) ?>" class="link-item">
+            <span class="link-icon">💬</span>
+            <span class="link-text"><?= $block->escapeHtml(__('Support')) ?></span>
+        </a>
+    </li>
+</ul>

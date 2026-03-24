@@ -175,38 +175,66 @@ php bin/magento dev:source-theme:deploy
 
 ## 头部布局详细说明
 
-### 原生结构（Magento Luma）
+### Magento布局继承机制（重要！）
 
+Magento主题的布局文件是通过**继承机制**工作的，子主题的`default.xml`会与父主题的`default.xml`**合并**，而非覆盖。
+
+#### 四种操作方式
+
+| 操作 | 语法 | 说明 |
+|------|------|------|
+| **新增容器** | `<container name="xxx" ...>` | 在 `referenceContainer` 内新建容器 |
+| **新增Block** | `<block class="..." name="xxx" ...>` | 在容器内添加新Block |
+| **移动元素** | `<move element="xxx" destination="yyy" />` | 将原生Block移到新位置 |
+| **删除元素** | `<referenceBlock name="xxx" remove="true" />` | 移除不需要的Block |
+
+#### 示例：Folix头部布局
+
+```xml
+<!-- 1. 新增容器 -->
+<referenceContainer name="header.panel">
+    <container name="folix.top.left" htmlTag="div" htmlClass="header-wrapper-links-top" before="-" />
+    <container name="header-marquee" htmlTag="div" htmlClass="header-marquee" after="folix.top.left" />
+    <container name="header-wrapper-right" htmlTag="div" htmlClass="header-wrapper-right" after="header-marquee" />
+</referenceContainer>
+
+<!-- 2. 删除不需要的元素 -->
+<referenceBlock name="header.links" remove="true" />
+<referenceBlock name="skip_to_content" remove="true" />
+
+<!-- 3. 移动原生元素 -->
+<move element="store_language" destination="header-wrapper-right" />
+<move element="navigation.sections" destination="header-wrapper" after="logo" />
+<move element="top.search" destination="header-wrapper" after="navigation.sections" />
+<move element="minicart" destination="header-wrapper" after="top.search" />
+
+<!-- 4. 新增Block -->
+<referenceContainer name="folix.top.left">
+    <block class="..." name="folix.game.top.links" template="..." />
+</referenceContainer>
 ```
-header.container (header.page-header)
-├── header.panel.wrapper (div.panel.wrapper)
-│   └── header.panel (div.panel.header) - Top Bar
-│       ├── skip_to_content (无障碍跳转链接)
-│       ├── currency (货币选择器)
-│       ├── store_language (语言选择器)
-│       ├── header.links (用户链接)
-│       │   ├── customer (客户菜单)
-│       │   └── authorization-link-login (登录链接)
-│       └── top.links (原始链接，被移到customer中)
-└── header-wrapper (div.header.content) - Main Bar
-    ├── logo
-    ├── minicart (购物车图标)
-    ├── top.search (搜索框)
-    └── compare-link-wrapper (比较链接)
+
+### Folix头部结构
+
+**Top Bar (`header.panel`)**：
+```
+folix.top.left (.header-wrapper-links-top)
+    └── 辅助链接（新闻、奖励、支持）
+header-marquee (.header-marquee)
+    └── 跑马灯公告
+header-wrapper-right (.header-wrapper-right)
+    ├── APP下载链接
+    └── 语言切换 (移动自 store_language)
 ```
 
-### Folix扩展结构
-
-**Top Bar (`.panel.header`)**：
-- 背景：深蓝渐变 (`#1E293B` → `#0F172A`)
-- 左侧：辅助链接（新闻、奖励、支持）
-- 中间：跑马灯公告
-- 右侧：APP下载链接
-
-**Main Bar (`.header.content`)**：
-- 背景：白色 (`#FFFFFF`)
-- 底部边框：橙色 3px (`#FF6B35`)
-- 内容：Logo | 导航菜单 | 搜索框 | 登录按钮 | 购物车
+**Main Bar (`header-wrapper`)**：
+```
+logo [原生]
+navigation.sections [移动到此处]
+top.search [移动到此处]
+folix.login.button [新增]
+minicart [移动到此处]
+```
 
 ### 响应式设计
 
@@ -218,34 +246,32 @@ header.container (header.page-header)
 **移动端 (< 768px)**：
 - Top Bar：仅显示跑马灯
 - Main Bar：导航按钮 | Logo | 登录/购物车 | 搜索框(全宽)
-- 隐藏桌面导航
 
 ### 关键选择器
 
-| 原生选择器 | 用途 |
-|-----------|------|
+| 选择器 | 用途 |
+|--------|------|
 | `.page-header` | 整个头部容器 |
-| `.panel.wrapper` | Top Bar外层容器 |
+| `.panel.wrapper` | Top Bar外层 |
 | `.panel.header` | Top Bar内容区 |
 | `.header.content` | Main Bar内容区 |
-| `.logo` | Logo容器 |
-| `.minicart-wrapper` | 购物车容器 |
-| `.block-search` | 搜索框容器 |
-| `.nav-toggle` | 移动端导航按钮 |
+| `.header-wrapper-links-top` | 左侧辅助链接容器 |
+| `.header-marquee` | 跑马灯容器 |
+| `.header-wrapper-right` | 右侧容器 |
 
 ### 验证方法
 
-在Magento环境中：
-1. 部署主题：`php bin/magento setup:static-content:deploy --theme=Folix/game-theme`
-2. 清除缓存：`php bin/magento cache:clean`
-3. 前台验证：打开浏览器查看首页头部布局
+```bash
+# 部署主题
+php bin/magento setup:static-content:deploy --theme=Folix/game-theme
+php bin/magento cache:clean
+```
 
 检查项：
-- [ ] Top Bar背景是否为深蓝渐变
-- [ ] Main Bar底部是否有橙色边框
-- [ ] Logo、搜索框、登录按钮、购物车是否正确显示
-- [ ] 移动端响应式布局是否正确
-- [ ] 导航菜单悬停效果（渐变下划线）
+- [ ] Top Bar背景为深蓝渐变
+- [ ] Main Bar底部有橙色边框
+- [ ] 所有元素正确显示
+- [ ] 移动端响应式布局正常
 
 ---
 

@@ -1,0 +1,13 @@
+<?php
+/**
+ * Folix Game Theme - Header App Link
+ * 
+ * 位置：header-wrapper-right 容器内
+ * 选择器：.app-download-link
+ * 内容：APP下载链接
+ */
+?>
+<a href="<?= $block->escapeUrl($block->getUrl('app')) ?>" class="app-download-link">
+    <span class="app-icon">📱</span>
+    <span class="app-text"><?= $block->escapeHtml(__('Folix APP')) ?></span>
+</a>

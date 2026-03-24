@@ -3,196 +3,169 @@
 /**
  * Folix Game Theme - Default Layout
  * 
- * 布局设计原则：
- * 1. 遵循 Magento Luma 原生结构
- * 2. 使用 referenceContainer 扩展而非覆盖
- * 3. 移动优先，响应式布局
- * 4. 选择器原生优先：.page-header, .panel.header, .header.content
+ * 继承机制说明：
+ * 1. 新增容器：<container name="xxx" ...> 在 referenceContainer 内
+ * 2. 移动元素：<move element="xxx" destination="yyy" />
+ * 3. 删除元素：<referenceBlock name="xxx" remove="true" />
+ * 4. 新增block：<block ...> 在容器内
  * 
- * 头部结构（遵循Magento原生）：
+ * 头部结构设计：
  * 
- * header.container (header.page-header)
- * ├── header.panel.wrapper (div.panel.wrapper)
- * │   └── header.panel (div.panel.header) - Top Bar
- * │       ├── [原生] currency, store_language
- * │       ├── [原生] header.links (登录/注册)
- * │       └── [Folix] 自定义链接、跑马灯
- * └── header-wrapper (div.header.content) - Main Bar
- *     ├── logo [原生]
- *     ├── minicart [原生]
- *     ├── top.search [原生]
- *     └── [Folix] 自定义元素
+ * header.panel (Top Bar)
+ * ├── folix.top.left (左侧：辅助链接)
+ * ├── header-marquee (中间：跑马灯)
+ * └── header-wrapper-right (右侧：APP下载、语言切换)
  * 
- * 颜色方案（严格匹配原型）：
- * - Top Bar: 深蓝渐变 #1E293B → #0F172A
- * - Main Bar: 白色背景 + 橙色底部边框 3px (#FF6B35)
+ * header-wrapper (Main Bar)
+ * ├── logo [原生]
+ * ├── navigation.sections [移动到此处]
+ * ├── top.search [移动到此处]
+ * ├── folix.login.button (登录按钮)
+ * └── minicart [移动到此处]
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <!-- =================================================================
-             HEADER PANEL (Top Bar) - 顶部栏
-             原生容器: header.panel
-             样式: 深蓝渐变背景 #1E293B → #0F172A
-             布局: 左侧辅助链接 | 中间跑马灯 | 右侧APP下载
+             TOP BAR 结构重构
+             在 header.panel 内新增三个容器：左 | 中 | 右
              ================================================================= -->
         
         <referenceContainer name="header.panel">
-            <!-- 
-                左侧辅助链接
-                注意：使用 before="-" 确保在最前面
-                原生元素顺序：skip_to_content, currency, store_language, header.links
-            -->
-            <block class="Magento\Framework\View\Element\Html\Links" name="header.links.top" before="-">
-                <arguments>
-                    <argument name="css_class" xsi:type="string">header links top-links</argument>
-                </arguments>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-news">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">Folix News</argument>
-                        <argument name="path" xsi:type="string">news</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-rewards">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">STAR Rewards</argument>
-                        <argument name="path" xsi:type="string">rewards</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="header-link-support">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">Support</argument>
-                        <argument name="path" xsi:type="string">support</argument>
-                    </arguments>
-                </block>
-            </block>
+            <!-- 左侧容器：辅助链接 -->
+            <container name="folix.top.left" label="Folix Top Left Links" htmlTag="div" htmlClass="header-wrapper-links-top" before="-" />
             
-            <!-- 中间跑马灯公告 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.marquee" after="header.links.top" template="Magento_Theme::html/header/marquee.phtml"/>
+            <!-- 中间容器：跑马灯公告 -->
+            <container name="header-marquee" label="Header Marquee" htmlTag="div" htmlClass="header-marquee" after="folix.top.left" />
             
-            <!-- 右侧APP下载链接 -->
-            <block class="Magento\Framework\View\Element\Html\Link" name="header.app.link" after="header.marquee">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Folix APP</argument>
-                    <argument name="path" xsi:type="string">app</argument>
-                    <argument name="class" xsi:type="string">app-link</argument>
-                </arguments>
-            </block>
+            <!-- 右侧容器：APP下载、语言切换 -->
+            <container name="header-wrapper-right" label="Folix Top Right" htmlTag="div" htmlClass="header-wrapper-right" after="header-marquee" />
         </referenceContainer>
         
         <!-- =================================================================
-             HEADER WRAPPER (Main Bar) - 主头部
-             原生容器: header-wrapper
-             样式: 白色背景 + 橙色底部边框 3px
-             原生元素: logo, minicart (after="logo"), top.search
-             布局: Logo | 导航菜单 | 搜索框 | 登录按钮 | 购物车
+             移除不需要的原生元素
              ================================================================= -->
         
-        <referenceContainer name="header-wrapper">
-            <!-- 
-                注意：原生元素顺序
-                - logo (before="-")
-                - minicart (after="logo")
-                - top.search (无after/before，默认位置)
-                
-                Folix添加的元素使用 after/before 控制位置
-            -->
-            
-            <!-- 搜索框 - 在minicart之前 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.search.form" before="minicart" template="Magento_Theme::html/header/search.phtml"/>
-            
-            <!-- 登录按钮 - 在minicart之前 -->
-            <block class="Magento\Framework\View\Element\Template" name="header.login.button" before="minicart" template="Magento_Theme::html/header/login-button.phtml"/>
+        <referenceBlock name="header.links" remove="true" />
+        <referenceBlock name="skip_to_content" remove="true" />
+        <referenceBlock name="catalog.compare.link" remove="true" />
+        <referenceBlock name="currency" remove="true" />
+        
+        <!-- =================================================================
+             移动原生元素到新位置
+             ================================================================= -->
+        
+        <!-- 移动语言切换到右侧容器 -->
+        <move element="store_language" destination="header-wrapper-right" />
+        
+        <!-- 移动导航到 header-wrapper -->
+        <move element="navigation.sections" destination="header-wrapper" after="logo" />
+        
+        <!-- 移动搜索框到 header-wrapper -->
+        <move element="top.search" destination="header-wrapper" after="navigation.sections" />
+        
+        <!-- 移动购物车到 header-wrapper -->
+        <move element="minicart" destination="header-wrapper" after="top.search" />
+        
+        <!-- =================================================================
+             为新增容器添加内容
+             ================================================================= -->
+        
+        <!-- 左侧容器：辅助链接 -->
+        <referenceContainer name="folix.top.left">
+            <block class="Magento\Framework\View\Element\Template" name="folix.game.top.links" template="Magento_Theme::html/header/links-top-left.phtml" before="-" />
+        </referenceContainer>
+        
+        <!-- 中间容器：跑马灯 -->
+        <referenceContainer name="header-marquee">
+            <block class="Magento\Framework\View\Element\Template" name="folix.marquee" template="Magento_Theme::html/header/marquee.phtml" before="-" />
+        </referenceContainer>
+        
+        <!-- 右侧容器：APP下载链接 -->
+        <referenceContainer name="header-wrapper-right">
+            <block class="Magento\Framework\View\Element\Template" name="folix.app.link" template="Magento_Theme::html/header/app-link.phtml" before="store_language" />
         </referenceContainer>
         
         <!-- =================================================================
-             NAVIGATION - 导航菜单
-             原生Block: catalog.topnav
-             样式: 悬停显示渐变下划线
+             MAIN BAR - 登录按钮
              ================================================================= -->
         
-        <referenceBlock name="catalog.topnav">
-            <arguments>
-                <argument name="css_class" xsi:type="string">nav menu</argument>
-            </arguments>
-        </referenceBlock>
-        
-        <!-- =================================================================
-             PAGE TOP - 页面顶部
-             在导航之前添加 Hero Slider
-             ================================================================= -->
-        
-        <referenceContainer name="page.top">
-            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml"/>
+        <referenceContainer name="header.content">
+            <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="logo" />
         </referenceContainer>
         
         <!-- =================================================================
-             FOOTER - 尾部
-             原生容器: footer
-             样式: 深蓝渐变背景 + 橙色顶部边框 4px
-             原生元素: store_switcher, footer_links, copyright
+             FOOTER 结构重构
              ================================================================= -->
         
         <referenceContainer name="footer">
             <!-- 移除默认 store_switcher -->
-            <referenceBlock name="store_switcher" remove="true"/>
-            
-            <!-- 自定义链接 - 使用原生 footer_links -->
-            <referenceBlock name="footer_links">
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-about">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">About Us</argument>
-                        <argument name="path" xsi:type="string">about-us</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-terms">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">Terms of Service</argument>
-                        <argument name="path" xsi:type="string">terms</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-privacy">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">Privacy Policy</argument>
-                        <argument name="path" xsi:type="string">privacy-policy</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-contact">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
-                        <argument name="path" xsi:type="string">contact</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-faq">
-                    <arguments>
-                        <argument name="label" xsi:type="string" translate="true">FAQ</argument>
-                        <argument name="path" xsi:type="string">faq</argument>
-                    </arguments>
-                </block>
-            </referenceBlock>
-            
-            <!-- 自定义版权区块 - 替代原生copyright -->
-            <block class="Magento\Framework\View\Element\Template" name="footer.copyright" after="-" template="Magento_Theme::html/footer/copyright.phtml"/>
+            <referenceBlock name="store_switcher" remove="true" />
         </referenceContainer>
         
-        <!-- 移除默认版权区块 -->
-        <referenceBlock name="copyright" remove="true"/>
+        <!-- 添加自定义链接到 footer_links -->
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-about">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">About Us</argument>
+                    <argument name="path" xsi:type="string">about-us</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-terms">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Terms of Service</argument>
+                    <argument name="path" xsi:type="string">terms</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-privacy">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Privacy Policy</argument>
+                    <argument name="path" xsi:type="string">privacy-policy</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-contact">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
+                    <argument name="path" xsi:type="string">contact</argument>
+                </arguments>
+            </block>
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-faq">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true">FAQ</argument>
+                    <argument name="path" xsi:type="string">faq</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        
+        <!-- 移动 copyright 到 before.body.end -->
+        <move element="copyright" destination="before.body.end" />
+        
+        <!-- 添加自定义版权区块 -->
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template" name="folix.footer.copyright" template="Magento_Theme::html/footer/copyright.phtml" after="-" />
+        </referenceContainer>
         
         <!-- =================================================================
-             LOGIN MODAL - 登录注册弹窗
-             添加到页面底部
+             PAGE TOP - Hero Slider
+             ================================================================= -->
+        
+        <referenceContainer name="page.top">
+            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="navigation.sections" template="Magento_Theme::html/slider/hero.phtml" />
+        </referenceContainer>
+        
+        <!-- =================================================================
+             LOGIN MODAL
              ================================================================= -->
         
         <referenceContainer name="before.body.end">
-            <block class="Magento\Framework\View\Element\Template" name="login.modal" template="Magento_Theme::html/modal/login.phtml"/>
+            <block class="Magento\Framework\View\Element\Template" name="login.modal" template="Magento_Theme::html/modal/login.phtml" />
         </referenceContainer>
         
         <!-- =================================================================
              BODY ATTRIBUTES
-             添加主题标识类
              ================================================================= -->
         
-        <attribute name="body" value="folix-theme"/>
+        <attribute name="body" value="folix-theme" />
         
     </body>
 </page>
