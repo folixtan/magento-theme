@@ -2,9 +2,9 @@
 //  * Folix Game Theme - Theme Variables Override
 //  * 
 //  * 规则：
-//  * - 此文件只覆盖真正需要修改的变量（硬编码值）
-//  * - 引用其他变量的不需要覆盖（会自动继承）
+//  * - 此文件覆盖父主题变量
 //  * - 新变量在 _variables.less 中定义
+//  * - 所有变量必须有值（不能引用未定义的变量）
 //  */
 
 // ============================================================================
@@ -35,6 +35,9 @@
 //  Border
 @border-color__base: #E2E8F0;               // 基础边框色
 
+//  Sidebar Background (Required for collapsible navigation)
+@sidebar__background-color: #F1F5F9;        // 侧边栏背景色
+
 // ============================================================================
 //  TYPOGRAPHY - 排版
 //  ============================================================================
@@ -61,6 +64,7 @@
 @h2__font-weight: @font-weight__semibold;
 @h3__font-weight: @font-weight__semibold;
 @h1__margin-top: 0;
+@h3__margin-top: @indent__base;
 
 // ============================================================================
 //  BUTTONS - 按钮
@@ -87,6 +91,10 @@
 @button-primary__active__border: 1px solid @theme__color__secondary;
 @button-primary__active__color: #FFFFFF;
 
+//  Button Shadow
+@button__shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+@button__shadow-active: 0 1px 2px rgba(0, 0, 0, 0.15);
+
 // ============================================================================
 //  NAVIGATION - 导航
 //  ============================================================================
@@ -97,11 +105,14 @@
 @navigation-level0-item__hover__color: @theme__color__primary;
 @navigation-level0-item__active__border-color: @theme__color__secondary;
 @navigation-level0-item__active__color: @theme__color__secondary;
+@navigation-desktop-level0-item__line-height: 47px;
 
-//  Submenu Mobile
+//  Submenu
 @submenu-item__color: #575757;
 @submenu-item__active__border-color: @theme__color__secondary;
 @submenu-item__active__color: @theme__color__secondary;
+@submenu-desktop__font-weight: @font-weight__regular;
+@submenu-desktop-item__active__color: @navigation-level0-item__active__color;
 
 //  Desktop Navigation
 @navigation-desktop__background: #FFFFFF;
@@ -132,6 +143,9 @@
 //  Focus
 @form-element-input__focus__border: 1px solid @theme__color__primary;
 
+//  Select
+@select__background: @form-element-input__background url('../images/select-bg.svg') no-repeat 100% 45%;
+
 // ============================================================================
 //  MESSAGES - 消息提示
 //  ============================================================================
@@ -156,6 +170,30 @@
 @message-success-icon__background: #059669;
 @message-success-icon__color-inner: #D1FAE5;
 
+//  Message Global
+@message__padding: 12px @indent__base 12px @indent__m;
+@message__line-height: false;
+@message-icon__font-size: 24px;
+@message-icon__inner-padding-left: 45px;
+@message-icon__top: 22px;
+@message-error-icon: @icon-error;
+@message-success-icon: @icon-success;
+
+//  Global Messages
+@message-global-note__background: @message-info__background;
+@message-global-note__border-color: @message-info-icon__background;
+@message-global-note__color: @message-info__color;
+@message-global-note-link__color: @link__color;
+@message-global-note-link__color-hover: @link__hover__color;
+@message-global-note-link__color-active: @link__active__color;
+
+@message-global-caution__background: @message-error__background;
+@message-global-caution__border-color: @message-error-icon__background;
+@message-global-caution__color: @message-error__color;
+@message-global-caution-link__color: @link__color;
+@message-global-caution-link__color-hover: @link__hover__color;
+@message-global-caution-link__color-active: @link__active__color;
+
 // ============================================================================
 //  TABLES - 表格
 //  ============================================================================
@@ -164,6 +202,9 @@
 @table-cell__hover__background-color: @panel__background-color;
 @table-td__color: @primary__color;
 @table-th__color: @primary__color;
+@table-cell-stripped__background-color: @table-cell__hover__background-color;
+@table-responsive-th__background-color: @table-cell-stripped__background-color;
+@table-responsive-cell__padding: @indent__xs @indent__s;
 
 // ============================================================================
 //  POPUPS - 弹窗
@@ -203,6 +244,12 @@
 @tab-control__active__background-color: #FFFFFF;
 @tab-control__active__color: @primary__color;
 @tab-content__background-color: #FFFFFF;
+@tab-control__height: @indent__base*2;
+@tab-control__margin-right: -1px;
+@tab-control__padding-top: 1px;
+@tab-control__padding-right: 35px;
+@tab-content__padding-top: 35px;
+@tab-content__padding-right: @tab-control__padding-right;
 
 // ============================================================================
 //  ACCORDION - 手风琴
@@ -214,6 +261,19 @@
 @accordion-control__hover__background-color: #F8FAFC;
 @accordion-control__active__background-color: #FFFFFF;
 @accordion-control__active__color: @primary__color;
+@accordion-control__font-family: false;
+@accordion-control__font-size: @font-size__base;
+@accordion-control__font-style: false;
+@accordion-control__border-right: false;
+@accordion-control__border-bottom: false;
+@accordion-control__border-left: false;
+@accordion-control__hover__color: @accordion-control__color;
+@accordion-control__margin-bottom: 0;
+@accordion-control__padding-right: @indent__s;
+@accordion-control__padding-left: @indent__s;
+@accordion-content__border: false;
+@accordion-content__margin: 0;
+@accordion-content__padding: @indent__s @indent__s @indent__l;
 
 // ============================================================================
 //  BREADCRUMBS - 面包屑
@@ -244,3 +304,75 @@
 //  ============================================================================
 
 @content__background: #FFFFFF;
+
+// ============================================================================
+//  LAYOUT - 布局
+//  ============================================================================
+
+@total-columns: 24;
+@layout-column__sidebar-width: 5;
+@layout-column-checkout__width-left: 6;
+
+// ============================================================================
+//  HEADER & FOOTER - 头部和尾部
+//  ============================================================================
+
+//  Header
+@header__background-color: #FFFFFF;
+@header-icons-color: @primary__color;
+@header-icons-color-hover: @theme__color__secondary;
+@header-panel__background-color: #1E293B;
+@header-panel__text-color: #E2E8F0;
+
+//  Footer
+@footer__background-color: #1E293B;
+@footer-links-color: #E2E8F0;
+@footer-links-color-hover: @theme__color__secondary;
+@footer-links-color-current: @primary__color__light;
+@footer-links-separator-border-color: rgba(255, 255, 255, 0.2);
+
+// ============================================================================
+//  PRODUCT LISTING - 产品列表
+//  ============================================================================
+
+//  Filter
+@filter-link: @primary__color;
+@filter-link-hover: @theme__color__secondary;
+@filter-quantity: @primary__color__light;
+@filter-title-background-color: @panel__background-color;
+
+//  Add to
+@addto-color: @primary__color__lighter;
+@addto-hover-color: @theme__color__secondary;
+
+// ============================================================================
+//  CUSTOMER - 用户相关
+//  ============================================================================
+
+@customer-welcome__z-index: 200;
+
+// ============================================================================
+//  LOADER - 加载器
+//  ============================================================================
+
+@loader-overlay__background-color: rgba(255, 255, 255, .7);
+
+// ============================================================================
+//  ICONS - 图标（继承自父主题）
+//  ============================================================================
+
+@icons__font-path: '@{baseDir}fonts/Luma-Icons';
+@icons__font-name: 'luma-icons';
+@icon-wishlist-empty: false;
+@icon-comment-reflected: false;
+@icon-compare-empty: false;
+@icon-arrow-up-thin: false;
+@icon-arrow-right-thin: false;
+@icon-arrow-left-thin: false;
+@icon-arrow-down-thin: false;
+
+// ============================================================================
+//  BLOCK ITEMS - 区块项目
+//  ============================================================================
+
+@block-items__counter__color: @primary__color__lighter;
