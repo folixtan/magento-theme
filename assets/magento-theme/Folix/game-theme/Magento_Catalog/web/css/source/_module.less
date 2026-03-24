@@ -3,6 +3,10 @@
 //  * 
 //  * IMPORTANT: _module.less completely overrides parent theme's _module.less
 //  * All parent theme variables MUST be copied before extending styles!
+//  * 
+//  * 变量使用规范：
+//  * - 颜色使用原生变量（通过 _theme.less 覆盖）
+//  * - 渐变、阴影、过渡使用自定义变量（_variables.less）
 //  */
 
 @import 'module/_listings.less';
@@ -354,14 +358,15 @@
 
     //
     //  Product Items - Folix Gaming Style
+    //  使用原生变量 + 扩展变量（渐变、阴影）
     //  _____________________________________________
 
     .product-items {
         .product-item {
-            background: @folix-card-bg;
-            border: 1px solid @folix-card-border;
+            background: #FFFFFF;
+            border: 1px solid @border-color__base;
             border-radius: @folix-radius-md;
-            box-shadow: @folix-card-shadow;
+            box-shadow: @folix-shadow-sm;
             overflow: hidden;
             transition: @folix-transition;
             position: relative;
@@ -369,8 +374,8 @@
             
             &:hover {
                 transform: translateY(-6px);
-                border-color: @folix-primary;
-                box-shadow: @folix-card-hover-shadow;
+                border-color: @theme__color__primary;
+                box-shadow: @folix-shadow-md;
             }
             
             .product-item-photo {
@@ -412,9 +417,9 @@
                 
                 a {
                     .lib-link(
-                        @_link-color: @folix-text-primary,
+                        @_link-color: @primary__color,
                         @_link-text-decoration: none,
-                        @_link-color-hover: @folix-primary
+                        @_link-color-hover: @theme__color__primary
                     );
                 }
             }
@@ -425,12 +430,12 @@
                 .price {
                     font-size: @price-size;
                     font-weight: @font-weight__bold;
-                    color: @folix-price;
+                    color: @theme__color__secondary;
                 }
                 
                 .old-price .price {
                     font-size: 16px;
-                    color: @folix-price-old;
+                    color: @primary__color__lighter;
                     text-decoration: line-through;
                 }
             }

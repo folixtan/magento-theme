@@ -2,9 +2,8 @@
 //  * Folix Game Theme - Custom Components
 //  * 
 //  * Hero Slider, Promo Banner, and other custom components
+//  * 使用原生变量 + 扩展变量（渐变、阴影）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -51,7 +50,7 @@
                 position: relative;
                 z-index: 1;
                 text-align: center;
-                color: @folix-text-on-dark;
+                color: #F8FAFC;
                 max-width: 600px;
                 padding: @indent__xl;
             }
@@ -60,7 +59,7 @@
                 display: inline-block;
                 padding: 8px 20px;
                 background: @folix-gradient-secondary;
-                color: @folix-text-on-dark;
+                color: #FFFFFF;
                 border-radius: @folix-radius-full;
                 font-size: 14px;
                 font-weight: @font-weight__bold;
@@ -97,9 +96,9 @@
                 padding: 16px 40px;
                 font-size: 18px;
                 font-weight: @font-weight__semibold;
-                border-radius: @folix-radius;
+                border-radius: @button__border-radius;
                 box-shadow: @folix-shadow-primary;
-                color: @folix-text-on-dark;
+                color: #FFFFFF;
                 
                 &:hover {
                     transform: translateY(-3px);
@@ -127,7 +126,7 @@
                 transition: @folix-transition;
                 
                 &.active {
-                    background: @folix-text-on-dark;
+                    background: #FFFFFF;
                     width: 32px;
                     border-radius: 6px;
                 }
@@ -141,7 +140,7 @@
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border: none;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
             font-size: 24px;
             width: 50px;
             height: 50px;
@@ -191,7 +190,7 @@
         .promo-banner__content {
             position: relative;
             z-index: 1;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
             max-width: 600px;
         }
         
@@ -218,9 +217,9 @@
                 padding: 14px 20px;
                 font-size: 16px;
                 border: 2px solid rgba(255, 255, 255, 0.3);
-                border-radius: @folix-radius;
+                border-radius: @button__border-radius;
                 background: rgba(255, 255, 255, 0.2);
-                color: @folix-text-on-dark;
+                color: #FFFFFF;
                 
                 &::placeholder {
                     color: rgba(255, 255, 255, 0.7);
@@ -228,18 +227,18 @@
                 
                 &:focus {
                     background: rgba(255, 255, 255, 0.3);
-                    border-color: @folix-text-on-dark;
+                    border-color: #FFFFFF;
                 }
             }
             
             button {
                 padding: 14px 32px;
-                background: @folix-text-on-dark;
-                color: @folix-secondary;
+                background: #FFFFFF;
+                color: @theme__color__secondary;
                 font-size: 16px;
                 font-weight: @font-weight__bold;
                 border: none;
-                border-radius: @folix-radius;
+                border-radius: @button__border-radius;
                 cursor: pointer;
                 transition: @folix-transition;
                 white-space: nowrap;
@@ -271,17 +270,17 @@
         
         &--direct {
             background: @folix-gradient-primary;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
         }
         
         &--hot {
             background: @folix-gradient-secondary;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
         }
         
         &--new {
-            background: @folix-badge-new-bg;
-            color: @folix-text-on-dark;
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: #FFFFFF;
         }
     }
 }

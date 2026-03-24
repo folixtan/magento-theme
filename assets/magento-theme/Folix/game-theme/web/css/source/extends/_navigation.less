@@ -1,14 +1,9 @@
 // /**
 //  * Folix Game Theme - Navigation Styles
 //  * 
-//  * 原生选择器来源：
-//  * - navigation: Magento_Theme/templates/html/topmenu.phtml
-//  * - level0, level-top: Magento_Theme/templates/html/topmenu.phtml
-//  * - submenu: Magento_Theme/templates/html/topmenu.phtml
-//  * - nav-toggle: Magento_Theme/templates/html/header/logo.phtml
+//  * 使用原生变量（通过 _theme.less 覆盖）
+//  * 自定义变量仅用于扩展功能（渐变、阴影等）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -21,32 +16,32 @@
     //  _____________________________________________
     
     .navigation {
-        background: @folix-nav-bg;
+        background: #FFFFFF;
         
         .level0 {
             > .level-top {
                 font-weight: @font-weight__semibold;
-                color: @folix-nav-text;
+                color: @primary__color;
                 border-radius: @folix-radius-sm;
                 transition: @folix-transition;
                 
                 &:hover {
-                    color: @folix-nav-hover-text;
+                    color: @theme__color__secondary;
                 }
             }
             
             &.active > .level-top {
-                color: @folix-nav-active-text;
+                color: @theme__color__secondary;
             }
             
             .submenu {
-                border: 1px solid @folix-border;
+                border: 1px solid @border-color__base;
                 box-shadow: @folix-shadow-md;
                 border-radius: @folix-radius-md;
                 
                 a {
                     &:hover {
-                        color: @folix-secondary;
+                        color: @theme__color__secondary;
                     }
                 }
             }
@@ -70,12 +65,12 @@
     .breadcrumbs {
         a {
             &:hover {
-                color: @folix-secondary;
+                color: @theme__color__secondary;
             }
         }
         
         strong {
-            color: @folix-text-muted;
+            color: @primary__color__lighter;
         }
     }
 }
@@ -100,14 +95,14 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .navigation {
-        background: @folix-nav-mobile-bg;
+        background: @theme__color__primary;
         
         .level0 {
             > .level-top {
-                color: @folix-nav-mobile-text;
+                color: #FFFFFF;
                 
                 &:hover {
-                    color: @folix-nav-mobile-text;
+                    color: #FFFFFF;
                 }
             }
         }

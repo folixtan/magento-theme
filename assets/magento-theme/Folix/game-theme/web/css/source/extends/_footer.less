@@ -1,15 +1,9 @@
 // /**
 //  * Folix Game Theme - Footer Styles
 //  * 
-//  * 原生选择器来源：
-//  * - page-footer: XML layout default.xml
-//  * - footer.content: Magento_Theme/templates/html/footer.phtml
-//  * - footer-container: Magento_Theme/templates/html/footer.phtml
-//  * - footer.links: Magento_Theme/templates/html/footer.phtml
-//  * - copyright: Magento_Theme/templates/html/copyright.phtml
+//  * 使用原生变量（通过 _theme.less 覆盖）
+//  * 自定义变量仅用于扩展功能（渐变、阴影等）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -39,13 +33,13 @@
     //  _____________________________________________
     
     .footer.content {
-        border-top-color: @folix-primary;
+        border-top-color: @theme__color__primary;
         padding-top: @indent__xl;
         
         .links {
             a {
                 &:hover {
-                    color: @folix-footer-link-hover;
+                    color: @theme__color__secondary;
                 }
             }
         }
@@ -60,10 +54,10 @@
             margin-bottom: @indent__s;
             
             a {
-                color: @folix-footer-link;
+                color: #F8FAFC;
                 
                 &:hover {
-                    color: @folix-footer-link-hover;
+                    color: @theme__color__secondary;
                 }
             }
         }
@@ -75,7 +69,7 @@
     
     .copyright {
         background: rgba(0, 0, 0, 0.2);
-        color: @folix-footer-text;
+        color: @primary__color__light;
         padding: @indent__base;
         display: block;
         text-align: center;
@@ -86,13 +80,13 @@
     //  _____________________________________________
     
     .bugs {
-        color: @folix-footer-text;
+        color: @primary__color__light;
         
         a {
-            color: @folix-primary;
+            color: @theme__color__primary;
             
             &:hover {
-                color: @folix-secondary;
+                color: @theme__color__secondary;
             }
         }
     }
@@ -103,7 +97,7 @@
     
     .footer .block.newsletter {
         .title {
-            color: @folix-text-on-dark;
+            color: #F8FAFC;
             font-weight: @font-weight__semibold;
             margin-bottom: @indent__base;
         }
@@ -111,20 +105,20 @@
         input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            color: @folix-text-on-dark;
+            color: #F8FAFC;
             
             &::placeholder {
-                color: @folix-text-on-dark-muted;
+                color: @primary__color__light;
             }
         }
         
         .action.subscribe {
-            background: @folix-primary;
+            background: @theme__color__primary;
             border: none;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
             
             &:hover {
-                background: @folix-secondary;
+                background: @theme__color__secondary;
             }
         }
     }

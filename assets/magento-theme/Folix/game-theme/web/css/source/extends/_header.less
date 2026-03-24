@@ -1,15 +1,9 @@
 // /**
 //  * Folix Game Theme - Header Styles
 //  * 
-//  * 原生选择器来源：
-//  * - page-header: XML layout default.xml
-//  * - header.content: Magento_Theme/templates/html/header.phtml
-//  * - logo: Magento_Theme/templates/html/header/logo.phtml
-//  * - panel.wrapper: XML layout default.xml
-//  * - header.links: Magento_Customer/templates/account/link.phtml
+//  * 使用原生变量（通过 _theme.less 覆盖）
+//  * 自定义变量仅用于扩展功能（渐变、阴影等）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -19,17 +13,16 @@
     
     //
     //  Page Header - 页面头部
-    //  选择器来源: XML layout
     //  _____________________________________________
     
     .page-header {
-        background: @folix-header-bg;
-        border-bottom: 3px solid @folix-header-accent-border;
+        background: #FFFFFF;
+        border-bottom: 3px solid @theme__color__secondary;
         box-shadow: @folix-shadow;
         
         //  Header Panel Wrapper (top bar)
         .panel.wrapper {
-            background: @folix-header-top-bg;
+            background: @folix-gradient-dark;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     }
@@ -39,15 +32,15 @@
     //  _____________________________________________
     
     .header.panel {
-        color: @folix-header-top-text;
+        color: @primary__color__light;
         
         > .header.links {
             > li {
                 > a {
-                    color: @folix-header-top-text;
+                    color: @primary__color__light;
                     
                     &:hover {
-                        color: @folix-secondary;
+                        color: @theme__color__secondary;
                     }
                 }
             }
@@ -78,11 +71,11 @@
     
     .nav-toggle {
         &:before {
-            color: @folix-primary;
+            color: @theme__color__primary;
         }
         
         &:hover:before {
-            color: @folix-secondary;
+            color: @theme__color__secondary;
         }
     }
 }

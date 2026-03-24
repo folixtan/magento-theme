@@ -2,11 +2,8 @@
 //  * Folix Game Theme - Abstract Classes
 //  * 
 //  * 抽象类：需要通过 &:extend() 使用
-//  * 注意：这些类不会直接输出，必须被继承才生效
-//  * 使用方式：.my-class { &:extend(.abs-folix-* all); }
+//  * 使用原生变量 + 扩展变量（渐变、阴影）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -21,14 +18,14 @@
     .abs-folix-button {
         background: @folix-gradient-primary;
         border: none;
-        color: @folix-text-on-dark;
+        color: #FFFFFF;
         font-weight: @font-weight__semibold;
-        border-radius: @folix-radius;
+        border-radius: @button__border-radius;
         transition: @folix-transition;
         
         &:hover {
             background: @folix-gradient-secondary;
-            color: @folix-text-on-dark;
+            color: #FFFFFF;
         }
     }
     
@@ -37,16 +34,16 @@
     //  _____________________________________________
     
     .abs-folix-card {
-        background: @folix-card-bg;
-        border: 1px solid @folix-card-border;
+        background: #FFFFFF;
+        border: 1px solid @border-color__base;
         border-radius: @folix-radius-md;
         box-shadow: @folix-shadow-sm;
         transition: @folix-transition;
         overflow: hidden;
         
         &:hover {
-            border-color: @folix-card-hover-border;
-            box-shadow: @folix-card-hover-shadow;
+            border-color: @theme__color__primary;
+            box-shadow: @folix-shadow-md;
         }
     }
     
@@ -72,8 +69,8 @@
     
     .abs-folix-badge-sale {
         &:extend(.abs-folix-badge all);
-        background: @folix-secondary;
-        color: @folix-text-on-dark;
+        background: @theme__color__secondary;
+        color: #FFFFFF;
     }
     
     //
@@ -82,8 +79,8 @@
     
     .abs-folix-badge-new {
         &:extend(.abs-folix-badge all);
-        background: @folix-primary;
-        color: @folix-text-on-dark;
+        background: @theme__color__primary;
+        color: #FFFFFF;
     }
     
     //
@@ -93,7 +90,7 @@
     .abs-folix-badge-hot {
         &:extend(.abs-folix-badge all);
         background: @folix-gradient-secondary;
-        color: @folix-text-on-dark;
+        color: #FFFFFF;
     }
     
     //
@@ -101,7 +98,7 @@
     //  _____________________________________________
     
     .abs-folix-price {
-        color: @folix-price;
+        color: @theme__color__secondary;
         font-weight: @font-weight__bold;
     }
     

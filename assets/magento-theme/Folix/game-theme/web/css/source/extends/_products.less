@@ -1,18 +1,9 @@
 // /**
 //  * Folix Game Theme - Product Styles
 //  * 
-//  * 原生选择器来源：
-//  * - products wrapper: Magento_Catalog/templates/product/list.phtml
-//  * - product-items: Magento_Catalog/templates/product/list.phtml
-//  * - product-item: Magento_Catalog/templates/product/list.phtml
-//  * - product-item-info: Magento_Catalog/templates/product/list.phtml
-//  * - product-item-photo: Magento_Catalog/templates/product/list.phtml
-//  * - product-item-details: Magento_Catalog/templates/product/list.phtml
-//  * - product-item-name: Magento_Catalog/templates/product/list.phtml
-//  * - price-box: Magento_Catalog/templates/product/price/price.phtml
+//  * 使用原生变量（通过 _theme.less 覆盖）
+//  * 自定义变量仅用于扩展功能（渐变、阴影等）
 //  */
-
-@import '../_variables.less';
 
 //
 //  Common (All devices)
@@ -46,15 +37,15 @@
         margin-bottom: @indent__base;
         
         .product-item-info {
-            background: @folix-card-bg;
-            border: 1px solid @folix-card-border;
+            background: #FFFFFF;
+            border: 1px solid @border-color__base;
             border-radius: @folix-radius-md;
             overflow: hidden;
             transition: @folix-transition;
             
             &:hover {
-                border-color: @folix-card-hover-border;
-                box-shadow: @folix-card-hover-shadow;
+                border-color: @theme__color__primary;
+                box-shadow: @folix-shadow-md;
             }
         }
         
@@ -83,19 +74,19 @@
             margin: 0 0 @indent__s;
             
             a {
-                color: @folix-text-primary;
+                color: @primary__color;
                 
                 &:hover {
-                    color: @folix-primary;
+                    color: @theme__color__primary;
                 }
             }
         }
         
         .product-item-link {
-            color: @folix-text-primary;
+            color: @primary__color;
             
             &:hover {
-                color: @folix-primary;
+                color: @theme__color__primary;
             }
         }
         
@@ -116,18 +107,18 @@
         margin-bottom: @indent__s;
         
         .price {
-            color: @folix-price;
+            color: @theme__color__secondary;
             font-weight: @font-weight__bold;
         }
         
         .old-price .price {
-            color: @folix-price-old;
+            color: @primary__color__lighter;
             text-decoration: line-through;
             font-size: 14px;
         }
         
         .special-price .price {
-            color: @folix-price-special;
+            color: @theme__color__secondary;
         }
     }
     

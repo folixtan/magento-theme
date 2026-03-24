@@ -12,27 +12,28 @@
 //  ============================================================================
 
 //  Primary Theme Colors
-@theme__color__primary: #4A90E2;           // 蓝色 - 游戏主题主色
-@theme__color__primary-alt: #6C5CE7;       // 紫色 - 渐变搭配
-@theme__color__secondary: #FF6B35;         // 橙色 - 强调色
+@theme__color__primary: #4A90E2;
+@theme__color__primary-alt: #6C5CE7;
+@theme__color__secondary: #FF6B35;
 
 //  Text Colors
-@primary__color: #1E293B;                   // 深灰蓝 - 主文字
-@primary__color__lighter: #64748B;          // 中灰 - 次要文字
-@primary__color__light: #94A3B8;            // 浅灰 - 辅助文字
+@primary__color: #1E293B;
+@primary__color__darker: #000000;
+@primary__color__lighter: #64748B;
+@primary__color__light: #94A3B8;
 
 //  Background Colors
-@page__background-color: #F8FAFC;           // 页面背景
-@panel__background-color: #F1F5F9;          // 面板背景
-@secondary__color: #E2E8F0;                 // 次要背景
-@secondary__color__light: #F1F5F9;          // 次要背景浅色
+@page__background-color: #F8FAFC;
+@panel__background-color: #F1F5F9;
+@secondary__color: #E2E8F0;
+@secondary__color__light: #F1F5F9;
 
 //  Active & Error Colors
-@active__color: @theme__color__secondary;   // 激活色 - 引用主题色
-@error__color: #EF4444;                     // 错误红
+@active__color: @theme__color__secondary;
+@error__color: #EF4444;
 
 //  Border
-@border-color__base: #E2E8F0;               // 边框颜色
+@border-color__base: #E2E8F0;
 
 // ============================================================================
 //  TYPOGRAPHY - 排版
@@ -45,6 +46,11 @@
 //  Font Weights
 @font-weight__heavier: 500;
 @font-weight__semibold: 600;
+
+//  Links
+@link__color: @theme__color__primary;
+@link__hover__color: @theme__color__secondary;
+@link__active__color: @theme__color__secondary;
 
 //  Focus
 @focus__color: @theme__color__primary;
@@ -61,7 +67,7 @@
 //  ============================================================================
 
 //  Base Button
-@button__border-radius: 6px;                // 圆角
+@button__border-radius: 6px;
 @button__font-weight: @font-weight__semibold;
 
 //  Default Button (Secondary)
@@ -70,31 +76,57 @@
 @button__hover__background: #E2E2E2;
 @button__hover__color: #555555;
 
-//  Primary Button - 核心颜色
+//  Primary Button
 @button-primary__background: @theme__color__primary;
 @button-primary__border: 1px solid @theme__color__primary;
+@button-primary__color: #FFFFFF;
 @button-primary__hover__background: @theme__color__secondary;
 @button-primary__hover__border: 1px solid @theme__color__secondary;
+@button-primary__hover__color: #FFFFFF;
+@button-primary__active__background: @theme__color__secondary;
+@button-primary__active__border: 1px solid @theme__color__secondary;
+@button-primary__active__color: #FFFFFF;
 
 // ============================================================================
 //  NAVIGATION - 导航
 //  ============================================================================
 
+//  Mobile Navigation
+@navigation__background: #FFFFFF;
+@navigation-level0-item__color: #575757;
+@navigation-level0-item__hover__color: @theme__color__primary;
+@navigation-level0-item__active__border-color: @theme__color__secondary;
+@navigation-level0-item__active__color: @theme__color__secondary;
+
+//  Submenu Mobile
+@submenu-item__color: #575757;
+@submenu-item__active__border-color: @theme__color__secondary;
+@submenu-item__active__color: @theme__color__secondary;
+
 //  Desktop Navigation
+@navigation-desktop__background: #FFFFFF;
+@navigation-desktop-level0-item__color: #575757;
 @navigation-desktop-level0-item__hover__color: @theme__color__secondary;
 @navigation-desktop-level0-item__active__border-color: @theme__color__secondary;
+@navigation-desktop-level0-item__active__color: @theme__color__secondary;
 
-//  Submenu
+//  Submenu Desktop
+@submenu-desktop__background: #FFFFFF;
+@submenu-desktop__border-color: @border-color__base;
+@submenu-desktop-item__color: #575757;
+@submenu-desktop-item__hover__background: @secondary__color;
 @submenu-desktop-item__hover__color: @theme__color__secondary;
+@submenu-desktop-item__active__border-color: @theme__color__secondary;
 
 // ============================================================================
 //  FORMS - 表单
 //  ============================================================================
 
 //  Input
+@form-element-input__background: #FFFFFF;
+@form-element-input__border-color: @border-color__base;
 @form-element-input__border-radius: 6px;
 @form-element-input__height: 38px;
-@form-element-input__border-color: @border-color__base;
 @form-element-input-placeholder__color: #94A3B8;
 
 //  Focus
@@ -104,17 +136,25 @@
 //  MESSAGES - 消息提示
 //  ============================================================================
 
+//  Info
+@message-info__color: #92400E;
+@message-info__background: #FEF3C7;
+@message-info-icon__background: #D97706;
+@message-info-icon__color-inner: #FEF3C7;
+
+//  Warning (继承 Info)
+
+//  Error
+@message-error__color: #DC2626;
+@message-error__background: #FEE2E2;
+@message-error-icon__background: #DC2626;
+@message-error-icon__color-inner: #FEE2E2;
+
 //  Success
 @message-success__color: #059669;
 @message-success__background: #D1FAE5;
 @message-success-icon__background: #059669;
-@message-success-icon__color-inner: #059669;
-
-//  Error
-@message-error__background: #FEE2E2;
-
-//  Info
-@message-info__background: #FEF3C7;
+@message-success-icon__color-inner: #D1FAE5;
 
 // ============================================================================
 //  TABLES - 表格
@@ -122,52 +162,85 @@
 
 @table-cell__padding-vertical: 12px;
 @table-cell__hover__background-color: @panel__background-color;
+@table-td__color: @primary__color;
+@table-th__color: @primary__color;
 
 // ============================================================================
 //  POPUPS - 弹窗
 //  ============================================================================
 
-@popup__border-color: #E2E8F0;
+@popup__background: #FFFFFF;
+@popup__border-color: @border-color__base;
 @popup__shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+//  Overlay
+@overlay__background: rgba(0, 0, 0, 0.5);
 
 // ============================================================================
 //  RATING - 评分
 //  ============================================================================
 
+@rating-icon__color: #E2E8F0;
 @rating-icon__active__color: @theme__color__secondary;
 
 // ============================================================================
 //  TOOLTIPS - 工具提示
 //  ============================================================================
 
+@tooltip__background: #FFFFFF;
 @tooltip__border-color: @border-color__base;
+@tooltip__color: @primary__color;
 
 // ============================================================================
 //  TABS - 标签页
 //  ============================================================================
 
 @tab-control__font-weight: @font-weight__semibold;
+@tab-control__background-color: @panel__background-color;
+@tab-control__color: @primary__color__lighter;
+@tab-control__hover__background-color: #F8FAFC;
+@tab-control__hover__color: @primary__color__lighter;
+@tab-control__active__background-color: #FFFFFF;
+@tab-control__active__color: @primary__color;
+@tab-content__background-color: #FFFFFF;
 
 // ============================================================================
 //  ACCORDION - 手风琴
 //  ============================================================================
 
 @accordion-control__font-weight: @font-weight__semibold;
+@accordion-control__background-color: @panel__background-color;
+@accordion-control__color: @primary__color__lighter;
+@accordion-control__hover__background-color: #F8FAFC;
+@accordion-control__active__background-color: #FFFFFF;
+@accordion-control__active__color: @primary__color;
 
 // ============================================================================
 //  BREADCRUMBS - 面包屑
 //  ============================================================================
 
-@breadcrumbs-current__color: #A3A3A3;
+@breadcrumbs-current__color: @primary__color__light;
 
 // ============================================================================
 //  DROPDOWNS - 下拉菜单
 //  ============================================================================
 
+@dropdown-list__background: #FFFFFF;
+@dropdown-list__border: 1px solid @border-color__base;
 @dropdown-list-item__hover: @secondary__color;
 
 // ============================================================================
 //  PAGER - 分页
 //  ============================================================================
 
+@pager-current__color: @primary__color;
+@pager__color: @link__color;
+@pager__hover__color: @link__hover__color;
 @pager-action__border: @border-width__base solid @border-color__base;
+@pager-action__color: @primary__color__lighter;
+
+// ============================================================================
+//  SECTIONS - 内容区
+//  ============================================================================
+
+@content__background: #FFFFFF;
