@@ -686,46 +686,55 @@
     }
     
     // ========================================================================
+    //  PAGE HEADER - 移动端
+    //  ========================================================================
+    
+    .page-header {
+        border-bottom: 3px solid #FF6B35;  // 确保边框显示
+    }
+    
+    // ========================================================================
     //  Main Bar - 移动端布局
     //  ========================================================================
     
     .header.content {
-        height: auto;  // 自适应高度
-        min-height: 50px;
-        padding: 10px 15px;
-        display: flex;
-        align-items: center;
-        position: relative;
+        height: auto !important;  // 强制自适应高度
+        min-height: 50px !important;
+        padding: 10px 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        position: relative !important;
         
         // 清除浮动
         &:before,
         &:after {
-            display: none;
+            display: none !important;
         }
         
         // ====================================================================
-        //  导航切换按钮 - 左上角
+        //  导航切换按钮 - 左侧
         //  ====================================================================
         
         .nav-toggle {
-            display: block;
-            position: relative;  // 使用相对定位
-            left: auto;
-            top: auto;
-            transform: none;
-            z-index: 14;
-            margin: 0;
-            padding: 0;
-            order: 0;  // 放在最左边
+            display: block !important;
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            z-index: 14 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            order: 0 !important;  // 放在最左边
+            flex-shrink: 0 !important;
             
             &:before {
-                color: #1E293B;
-                font-size: 28px;
-                line-height: 1;
+                color: #1E293B !important;
+                font-size: 28px !important;
+                line-height: 1 !important;
             }
             
             &:hover:before {
-                color: #FF6B35;
+                color: #FF6B35 !important;
             }
         }
         
@@ -734,15 +743,16 @@
         //  ====================================================================
         
         .logo {
-            flex: 1;  // 占据剩余空间
-            margin: 0;
-            float: none;
-            text-align: center;
-            order: 1;  // 放在中间
+            flex: 1 !important;  // 占据剩余空间
+            margin: 0 !important;
+            float: none !important;
+            text-align: center !important;
+            order: 1 !important;  // 放在中间
             
             img {
-                height: 35px;
-                width: auto;
+                height: 35px !important;
+                width: auto !important;
+                display: block !important;
             }
         }
         
@@ -752,22 +762,23 @@
         
         .nav-sections {
             // 移动端使用固定定位，默认在左侧隐藏
-            position: fixed;
-            top: 0;
-            left: calc(-1 * (100% - 54px));  // 默认隐藏在左侧
-            height: 100%;
-            width: calc(100% - 54px);
-            overflow: auto;
-            -webkit-overflow-scrolling: touch;
-            transition: left 0.3s;
-            z-index: 99;
-            background: #FFFFFF;
-            box-shadow: none;
+            position: fixed !important;
+            top: 0 !important;
+            left: calc(-1 * (100% - 54px)) !important;  // 默认隐藏在左侧
+            height: 100% !important;
+            width: calc(100% - 54px) !important;
+            overflow: auto !important;
+            -webkit-overflow-scrolling: touch !important;
+            transition: left 0.3s !important;
+            z-index: 99 !important;
+            background: #FFFFFF !important;
+            box-shadow: none !important;
+            display: block !important;  // 确保显示
             
             // 当导航打开时显示
             .nav-open & {
-                left: 0;
-                box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.75);
+                left: 0 !important;
+                box-shadow: 0 0 5px 0 rgba(50, 50, 50, 0.75) !important;
             }
         }
         
@@ -776,88 +787,95 @@
         //  ====================================================================
         
         .block-search {
-            order: 2;  // 放在右侧
-            width: auto;
-            margin: 0;
-            position: relative;
-            z-index: 10;
+            order: 2 !important;  // 放在右侧
+            width: auto !important;
+            margin: 0 !important;
+            position: relative !important;
+            z-index: 10 !important;
+            flex-shrink: 0 !important;
             
             .block-title {
-                display: none;
+                display: none !important;
             }
             
             .block-content {
-                margin: 0;
+                margin: 0 !important;
             }
             
             .form.minisearch {
-                display: block;
+                display: block !important;
             }
             
-            // 搜索图标按钮
+            // 搜索图标按钮 - 强制显示
             .label {
-                display: inline-block;
-                cursor: pointer;
-                padding: 10px;
+                display: inline-block !important;
+                cursor: pointer !important;
+                padding: 10px !important;
+                text-decoration: none !important;
                 
                 > span {
-                    border: 0;
-                    clip: rect(0, 0, 0, 0);
-                    height: 1px;
-                    margin: -1px;
-                    overflow: hidden;
-                    padding: 0;
-                    position: absolute;
-                    width: 1px;
+                    border: 0 !important;
+                    clip: rect(0, 0, 0, 0) !important;
+                    height: 1px !important;
+                    margin: -1px !important;
+                    overflow: hidden !important;
+                    padding: 0 !important;
+                    position: absolute !important;
+                    width: 1px !important;
                 }
                 
                 &:before {
-                    content: '\e615';  // Luma 搜索图标
-                    font-family: 'luma-icons';
-                    font-size: 22px;
-                    color: #1E293B;
-                    display: inline-block;
+                    content: '\e615' !important;  // Luma 搜索图标
+                    font-family: 'luma-icons' !important;
+                    font-size: 22px !important;
+                    color: #1E293B !important;
+                    display: inline-block !important;
+                    -webkit-font-smoothing: antialiased !important;
+                    -moz-osx-font-smoothing: grayscale !important;
                 }
                 
                 &:hover:before {
-                    color: #FF6B35;
+                    color: #FF6B35 !important;
                 }
             }
             
             // 搜索输入框 - 点击图标后在下方展开
             .control {
-                border-top: 1px solid #E2E8F0;
-                clear: both;
-                margin: 0 -15px;  // 通栏
-                padding: 0 15px;
-                background: #FFFFFF;
-                display: none;  // 默认隐藏
+                border-top: 1px solid #E2E8F0 !important;
+                clear: both !important;
+                margin: 0 -15px !important;  // 通栏
+                padding: 0 15px !important;
+                background: #FFFFFF !important;
+                display: none !important;  // 默认隐藏
+                position: relative !important;
                 
                 input {
-                    width: 100%;
-                    height: 44px;
-                    padding: 0 16px;
-                    font-size: 16px;
-                    border: 2px solid #E5E7EB;
-                    border-radius: 6px;
-                    margin: 15px 0;
-                    background: #F9FAFB;
+                    width: 100% !important;
+                    height: 44px !important;
+                    padding: 0 16px !important;
+                    font-size: 16px !important;
+                    border: 2px solid #E5E7EB !important;
+                    border-radius: 6px !important;
+                    margin: 15px 0 !important;
+                    background: #F9FAFB !important;
+                    box-sizing: border-box !important;
                     
                     &:focus {
-                        border-color: #4A90E2;
-                        background: #FFFFFF;
+                        border-color: #4A90E2 !important;
+                        background: #FFFFFF !important;
+                        outline: none !important;
                     }
                 }
             }
             
             // 点击图标后显示搜索框
             .label.active + .control {
-                display: block;
+                display: block !important;
             }
             
             // 搜索按钮 - 移动端隐藏
             .actions {
-                display: none;
+                display: none !important;
             }
         }
         
@@ -866,53 +884,58 @@
         //  ====================================================================
         
         .minicart-wrapper {
-            order: 3;  // 放在最右边
-            margin: 0 0 0 10px;
+            order: 3 !important;  // 放在最右边
+            margin: 0 0 0 10px !important;
+            flex-shrink: 0 !important;
+            position: relative !important;
             
             .action.showcart {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 44px;  // 固定宽度
-                height: 44px;  // 固定高度
-                padding: 0;
-                background: transparent;
-                border: none;
-                border-radius: 50%;  // 圆形
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;  // 固定宽度
+                height: 44px !important;  // 固定高度
+                padding: 0 !important;
+                background: transparent !important;
+                border: none !important;
+                border-radius: 50% !important;  // 圆形
+                text-decoration: none !important;
                 
                 &:before {
-                    content: '\e611';  // Luma 购物车图标
-                    font-family: 'luma-icons';
-                    font-size: 22px;
-                    color: #1E293B;
-                    margin: 0;
+                    content: '\e611' !important;  // Luma 购物车图标
+                    font-family: 'luma-icons' !important;
+                    font-size: 22px !important;
+                    color: #1E293B !important;
+                    margin: 0 !important;
+                    -webkit-font-smoothing: antialiased !important;
+                    -moz-osx-font-smoothing: grayscale !important;
                 }
                 
                 .text {
-                    display: none;  // 隐藏文字
+                    display: none !important;  // 隐藏文字
                 }
                 
                 .counter {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    background: #FF6B35;
-                    color: #FFFFFF;
-                    border-radius: 10px;
-                    padding: 2px 6px;
-                    font-size: 11px;
-                    font-weight: 600;
-                    min-width: 18px;
-                    text-align: center;
+                    position: absolute !important;
+                    top: 0 !important;
+                    right: 0 !important;
+                    background: #FF6B35 !important;
+                    color: #FFFFFF !important;
+                    border-radius: 10px !important;
+                    padding: 2px 6px !important;
+                    font-size: 11px !important;
+                    font-weight: 600 !important;
+                    min-width: 18px !important;
+                    text-align: center !important;
                     
                     .counter-number,
                     .counter-label {
-                        color: #FFFFFF;
+                        color: #FFFFFF !important;
                     }
                 }
                 
                 &:hover {
-                    background: rgba(255, 107, 53, 0.1);
+                    background: rgba(255, 107, 53, 0.1) !important;
                 }
             }
         }
@@ -922,33 +945,35 @@
         //  ====================================================================
         
         .header-login-button {
-            order: 4;  // 放在购物车后面
-            margin: 0 0 0 10px;
+            order: 4 !important;  // 放在购物车后面
+            margin: 0 0 0 10px !important;
+            flex-shrink: 0 !important;
             
             .action.login-primary {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 44px;  // 固定宽度
-                height: 44px;  // 固定高度
-                padding: 0;
-                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-                color: #FFFFFF;
-                border: none;
-                border-radius: 50%;  // 圆形
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 44px !important;  // 固定宽度
+                height: 44px !important;  // 固定高度
+                padding: 0 !important;
+                background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%) !important;
+                color: #FFFFFF !important;
+                border: none !important;
+                border-radius: 50% !important;  // 圆形
+                text-decoration: none !important;
                 
                 span {
-                    font-size: 0;  // 隐藏文字
+                    font-size: 0 !important;  // 隐藏文字
                     
                     &:before {
-                        content: '👤';  // 用户图标
-                        font-size: 20px;
+                        content: '👤' !important;  // 用户图标
+                        font-size: 20px !important;
                     }
                 }
                 
                 &:hover {
-                    transform: none;
-                    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+                    transform: none !important;
+                    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3) !important;
                 }
             }
         }
