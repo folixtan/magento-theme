@@ -934,6 +934,38 @@
             left: 0;
         }
         
+        // Logo 和关闭按钮
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid @folix-border-light;
+            
+            .mobile-nav-logo {
+                a {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: @folix-text-primary;
+                    text-decoration: none;
+                }
+            }
+            
+            .mobile-nav-close {
+                background: transparent;
+                border: none;
+                font-size: 28px;
+                color: @folix-text-primary;
+                cursor: pointer;
+                padding: 0;
+                line-height: 1;
+                
+                &:hover {
+                    color: @folix-secondary;
+                }
+            }
+        }
+        
         // 导航菜单
         .navigation {
             display: block;
