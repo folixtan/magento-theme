@@ -66,7 +66,47 @@ Folix/game-theme/
 - **单一职责**: 每个文件只负责一个功能区域
 - **命名约定**: 使用 Magento 原生选择器 + 自定义前缀 `folix-`
 
-#### 3.1.2 响应式写法
+#### 3.1.2 移动优先原则（重要）
+```
+样式编写顺序：
+1. 公共样式（& when (@media-common = true)）- 基础、全局样式
+2. 移动端样式（@extremum = 'max'）- 移动优先实现
+3. 桌面端样式（@extremum = 'min'）- 渐进增强
+```
+
+**原则说明**：
+- **公共样式优先**: 在 `@media-common` 中编写基础样式，作为所有设备的默认样式
+- **移动端为主**: 移动端样式作为主要实现，桌面端作为渐进增强
+- **渐进增强**: 桌面端样式在移动端基础上扩展，而非覆盖
+
+```less
+// ✅ 正确：移动优先写法
+& when (@media-common = true) {
+    .component {
+        // 1. 公共基础样式（移动端默认）
+        display: flex;
+        flex-direction: column;  // 移动端纵向排列
+        padding: 10px;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .component {
+        // 3. 桌面端增强
+        flex-direction: row;     // 桌面端横向排列
+        padding: 20px;
+    }
+}
+
+// ❌ 错误：桌面优先写法
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .component {
+        flex-direction: column;  // 不应在移动端覆盖桌面样式
+    }
+}
+```
+
+#### 3.1.3 响应式写法
 ```less
 // ✅ 正确：使用 Magento 标准响应式写法
 & when (@media-common = true) {
@@ -74,10 +114,12 @@ Folix/game-theme/
 }
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    // 桌面端样式（≥ 768px）
+    // 桌面端样式（≥ 768px）- 渐进增强
 }
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    // 移动端样式（< 768px）- 仅在需要覆盖原生样式时使用
+}
     // 移动端样式（< 768px）
 }
 ```
