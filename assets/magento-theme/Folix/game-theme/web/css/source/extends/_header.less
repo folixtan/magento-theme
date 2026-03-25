@@ -1004,15 +1004,55 @@
                     border-left: 3px solid @folix-secondary;
                 }
                 
-                // 子菜单
+                // 子菜单（默认隐藏）
                 .submenu {
+                    display: none;  // 默认隐藏
                     background: @folix-bg-page;
                     
                     li {
+                        border-bottom: none;
+                        
                         a {
-                            padding-left: 40px;
+                            padding: 12px 20px 12px 40px;
                             font-size: 14px;
+                            color: @folix-text-secondary;
+                            
+                            &:hover {
+                                color: @folix-secondary;
+                                background: rgba(255, 107, 53, 0.05);
+                            }
                         }
+                    }
+                }
+                
+                // 子菜单展开状态
+                &.open > .submenu {
+                    display: block;
+                }
+                
+                // 父级菜单项 - 添加展开图标
+                &.parent {
+                    > a {
+                        position: relative;
+                        
+                        // 添加右箭头图标
+                        &:after {
+                            content: '+';
+                            position: absolute;
+                            right: 15px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 18px;
+                            font-weight: 300;
+                            color: @folix-text-tertiary;
+                            transition: transform 0.3s ease;
+                        }
+                    }
+                    
+                    // 展开状态 - 图标旋转
+                    &.open > a:after {
+                        content: '−';
+                        color: @folix-secondary;
                     }
                 }
             }

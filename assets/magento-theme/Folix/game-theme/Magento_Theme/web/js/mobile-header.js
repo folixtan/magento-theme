@@ -89,6 +89,21 @@ define([
             console.log('[Folix] Nav sections left:', $navSections.css('left'));  // 调试日志
         });
 
+        // 关闭按钮
+        var $navClose = $('.mobile-nav-close');
+        $navClose.off('click.folixMobile').on('click.folixMobile', function (e) {
+            e.preventDefault();
+            console.log('[Folix] Close button clicked');
+            closeNav();
+        });
+        
+        // 关闭导航的公共函数
+        function closeNav() {
+            $body.removeClass('nav-open');
+            // 折叠所有子菜单
+            $('.mobile-nav-container .navigation li.open').removeClass('open');
+        }
+
         // 处理导航遮罩（确保遮罩存在并正确绑定事件）
         var $navOverlay = $('.nav-overlay');
         
@@ -103,10 +118,46 @@ define([
             e.preventDefault();
             e.stopPropagation();
             console.log('[Folix] Overlay clicked, closing nav');  // 调试日志
-            $body.removeClass('nav-open');
+            closeNav();
         });
         
         console.log('[Folix] Nav overlay initialized, length:', $navOverlay.length);
+        
+        // 子菜单展开/折叠
+        initSubmenuToggle();
+    }
+    
+    /**
+     * 子菜单展开/折叠
+     */
+    function initSubmenuToggle() {
+        console.log('[Folix] Initializing submenu toggle');
+        
+        // 在移动端导航容器中找到有子菜单的项
+        var $mobileNav = $('.mobile-nav-container .navigation');
+        
+        // 为所有父级菜单项绑定点击事件
+        $mobileNav.find('li.parent > a, li.level0.parent > .level-top').off('click.folixSubmenu').on('click.folixSubmenu', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            var $this = $(this);
+            var $parent = $this.parent('li');
+            
+            console.log('[Folix] Parent menu item clicked:', $this.text().trim());
+            
+            // 关闭其他已展开的子菜单（手风琴效果）
+            $parent.siblings('.open').removeClass('open');
+            
+            // 切换展开状态
+            $parent.toggleClass('open');
+        });
+        
+        // 普通菜单项（无子菜单）- 直接跳转
+        $mobileNav.find('li:not(.parent) > a').off('click.folixSubmenu').on('click.folixSubmenu', function (e) {
+            // 允许默认行为（跳转）
+            console.log('[Folix] Regular menu item clicked:', $(this).text().trim());
+        });
     }
 
     /**
