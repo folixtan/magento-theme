@@ -867,7 +867,7 @@
                 clear: both;
                 margin: 0 -15px;  // 通栏
                 padding: 0 15px;
-                background: @color-white;
+                background: #FFFFFF;
                 display: none;  // 默认隐藏
                 position: relative;
                 
@@ -879,12 +879,12 @@
                     border: 2px solid @folix-border-light;
                     border-radius: 6px;
                     margin: 15px 0;
-                    background: @color-gray98;
+                    background: @folix-bg-page;
                     box-sizing: border-box;
                     
                     &:focus {
                         border-color: @theme__color__primary;
-                        background: @color-white;
+                        background: #FFFFFF;
                         outline: none;
                     }
                 }
@@ -949,7 +949,7 @@
                     top: 0;
                     right: 0;
                     background: @folix-secondary;
-                    color: @color-white;
+                    color: #FFFFFF;
                     border-radius: 10px;
                     padding: 2px 6px;
                     font-size: 11px;
@@ -959,7 +959,7 @@
                     
                     .counter-number,
                     .counter-label {
-                        color: @color-white;
+                        color: #FFFFFF;
                     }
                 }
                 
@@ -986,7 +986,7 @@
                 height: 44px;  // 固定高度
                 padding: 0;
                 background: linear-gradient(135deg, @theme__color__primary 0%, @theme__color__secondary 100%);
-                color: @color-white;
+                color: #FFFFFF;
                 border: none;
                 border-radius: 50%;  // 圆形
                 text-decoration: none;
@@ -1024,7 +1024,7 @@
         -webkit-overflow-scrolling: touch;
         transition: left 0.3s ease-in-out;
         z-index: 99;
-        background: @color-white;
+        background: #FFFFFF;
         box-shadow: none;
         display: block;
         margin: 0;
@@ -1055,13 +1055,13 @@
                     font-weight: 600;
                     text-transform: uppercase;
                     text-decoration: none;
-                    background: @color-gray98;
+                    background: @folix-bg-page;
                     letter-spacing: 0.5px;
                 }
                 
                 // 激活状态的标签页
                 &.active .nav-sections-item-switch {
-                    background: @color-white;
+                    background: #FFFFFF;
                     color: @folix-secondary;
                     border-bottom: 3px solid @folix-secondary;
                 }
@@ -1104,16 +1104,16 @@
                     font-size: 15px;
                     font-weight: 500;
                     text-decoration: none;
-                    background: @color-white;
+                    background: #FFFFFF;
                     
                     // 移动端使用 :active 代替 :hover
                     &:active {
-                        background: @color-gray98;
+                        background: @folix-bg-page;
                     }
                     
                     // 展开图标
                     .ui-menu-icon {
-                        color: @folix-text-tertiary;
+                        color: @folix-text-light;
                         font-size: 12px;
                     }
                 }
@@ -1121,7 +1121,7 @@
                 // 子菜单
                 .submenu {
                     display: none;
-                    background: @color-gray98;
+                    background: @folix-bg-page;
                     
                     li {
                         border-bottom: 1px solid @folix-border-light;
@@ -1157,7 +1157,7 @@
             
             .switcher-trigger {
                 padding: 12px 15px;
-                background: @color-gray98;
+                background: @folix-bg-page;
                 border: 1px solid @folix-border-light;
                 border-radius: 8px;
                 
@@ -1183,7 +1183,7 @@
                         font-size: 14px;
                         
                         &:active {
-                            background: @color-gray98;
+                            background: @folix-bg-page;
                             color: @folix-secondary;
                         }
                     }
@@ -1210,3 +1210,4 @@
         }
     }
 }
+
