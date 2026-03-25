@@ -85,7 +85,7 @@
         </referenceContainer>
         
         <!-- 移动端导航菜单（独立容器） -->
-        <referenceContainer name="page.top.container">
+        <referenceContainer name="page.top">
             <container name="mobile.nav.container" label="Mobile Navigation Container" htmlTag="div" htmlClass="mobile-nav-container" after="header.container">
                 <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.mobile" template="Magento_Theme::html/topmenu.phtml" before="-">
                     <arguments>
