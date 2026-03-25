@@ -674,15 +674,64 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     // ========================================================================
-    //  Top Bar - 移动端隐藏
+    //  Top Bar - 移动端显示（参考seagm.com）
+    //  布局：[汉堡菜单] [品牌名] [语言/货币 + 登录]
     //  ========================================================================
     
-    .panel.header {
-        display: none !important;  // 移动端完全隐藏 Top Bar
+    .panel.wrapper {
+        display: block !important;  // 移动端显示Top Bar背景
+        background: @folix-bg-dark !important;  // 深蓝色背景
     }
     
-    .panel.wrapper {
-        display: none !important;  // 移动端完全隐藏 Top Bar 背景
+    .panel.header {
+        display: flex !important;  // 移动端显示Top Bar
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 15px !important;
+        min-height: 50px !important;
+        max-width: none !important;
+        
+        // 隐藏桌面端的容器
+        .header-links-left,
+        .header-links-center {
+            display: none !important;
+        }
+        
+        // 右侧容器 - 显示语言/货币 + 登录按钮
+        .header-links-right {
+            display: flex !important;
+            align-items: center !important;
+            gap: 15px !important;
+            
+            // APP下载链接 - 移动端隐藏
+            .app-link {
+                display: none !important;
+            }
+        }
+        
+        // 语言切换器样式
+        .switcher {
+            margin: 0 !important;
+            
+            .switcher-options {
+                margin: 0 !important;
+                
+                .switcher-trigger {
+                    padding: 5px 10px !important;
+                    
+                    strong {
+                        color: @folix-border !important;
+                        font-size: 12px !important;
+                        font-weight: 500 !important;
+                    }
+                    
+                    &:after {
+                        color: @folix-border !important;
+                        font-size: 10px !important;
+                    }
+                }
+            }
+        }
     }
     
     // ========================================================================
@@ -690,15 +739,17 @@
     //  ========================================================================
     
     .page-header {
-        border-bottom: 3px solid #FF6B35;  // 确保边框显示
+        border-bottom: 3px solid @folix-secondary;  // 橙色底边框
     }
     
     // ========================================================================
     //  Main Bar - 移动端布局
+    //  布局：[汉堡菜单] [搜索] [用户/登录]
+    //  Logo隐藏（在Top Bar显示品牌名）
     //  ========================================================================
     
     .header.content {
-        height: auto !important;  // 强制自适应高度
+        height: auto !important;
         min-height: 50px !important;
         padding: 10px 15px !important;
         display: flex !important;
@@ -712,7 +763,7 @@
         }
         
         // ====================================================================
-        //  导航切换按钮 - 左侧
+        //  导航切换按钮 - 左侧（复用原生机制）
         //  ====================================================================
         
         .nav-toggle {
@@ -724,30 +775,35 @@
             z-index: 14 !important;
             margin: 0 !important;
             padding: 0 !important;
-            order: 0 !important;  // 放在最左边
+            order: 0 !important;
             flex-shrink: 0 !important;
             
             &:before {
-                color: #1E293B !important;
+                color: @folix-text-primary !important;
                 font-size: 28px !important;
                 line-height: 1 !important;
             }
             
             &:hover:before {
-                color: #FF6B35 !important;
+                color: @folix-secondary !important;
             }
         }
         
         // ====================================================================
-        //  Logo - 居中
+        //  Logo - 移动端隐藏（在Top Bar显示品牌名）
         //  ====================================================================
         
         .logo {
-            flex: 1 !important;  // 占据剩余空间
-            margin: 0 !important;
-            float: none !important;
-            text-align: center !important;
-            order: 1 !important;  // 放在中间
+            display: none !important;  // 移动端隐藏Logo
+        }
+        
+        // ====================================================================
+        //  导航菜单 - 复用原生侧边栏机制
+        //  ====================================================================
+        
+        .navigation {
+            // 复用原生样式，不做修改
+        }
             
             img {
                 height: 35px !important;

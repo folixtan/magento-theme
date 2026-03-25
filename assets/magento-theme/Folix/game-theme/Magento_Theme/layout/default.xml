@@ -60,12 +60,24 @@
              MAIN BAR - 主导航栏
              白色背景，底部橙色边框3px
              Logo | 导航 | 搜索 | 登录按钮
-             移动原生元素到正确位置 -->
-         <move element="navigation.sections" destination="header-wrapper" after="logo" />
+             
+             移动端重构：
+             1. 删除navigation.sections（标签页导航）
+             2. 重新添加topmenu到header-wrapper
+             ================================================================= -->
+        
+        <!-- 删除原生标签页导航 -->
+        <referenceBlock name="navigation.sections" remove="true" />
+        
+        <!-- 移动搜索框到正确位置 -->
         <move element="top.search" destination="header-wrapper" before="minicart" />
         
-        <!-- 添加登录按钮 -->
+        <!-- 添加导航菜单和登录按钮 -->
         <referenceContainer name="header-wrapper">
+            <!-- 导航菜单（移动端和桌面端共用） -->
+            <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav" template="Magento_Theme::html/topmenu.phtml" before="-" />
+            
+            <!-- 登录按钮 -->
             <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="minicart" />
         </referenceContainer>
         
