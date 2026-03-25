@@ -24,7 +24,7 @@
     </button>
     
     <!-- 下拉菜单 -->
-    <div class="login-dropdown" id="login-dropdown" data-role="login-dropdown" style="display: none;">
+    <div class="login-dropdown" id="login-dropdown" data-role="login-dropdown">
         <!-- 顶部装饰条 -->
         <div class="dropdown-decoration"></div>
         
@@ -196,3 +196,11 @@
         </div>
     </div>
 </div>
+
+<script type="text/x-magento-init">
+{
+    "[data-role=login-dropdown]": {
+        "Magento_Theme/js/login-dropdown": {}
+    }
+}
+</script>

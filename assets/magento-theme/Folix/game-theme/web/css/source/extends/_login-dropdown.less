@@ -15,7 +15,7 @@
 & when (@media-common = true) {
     
     //
-    //  Login Dropdown Wrapper
+    //  Login Dropdown Wrapper - 相对定位容器
     //  _____________________________________________
     
     .login-dropdown-wrapper {
@@ -33,7 +33,7 @@
         gap: 8px;
         padding: 8px 16px;
         background: @folix-secondary;
-        color: #FFFFFF;
+        color: #FFFFFF !important;
         border: none;
         border-radius: @folix-radius;
         font-size: 14px;
@@ -52,19 +52,29 @@
             }
         }
         
+        .login-text {
+            color: #FFFFFF;
+        }
+        
         &:hover {
             background: @folix-secondary-dark;
+            color: #FFFFFF !important;
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+            
+            .login-text {
+                color: #FFFFFF;
+            }
         }
         
         &.active {
             background: @folix-secondary-dark;
+            color: #FFFFFF !important;
         }
     }
     
     //
-    //  Login Dropdown Panel
+    //  Login Dropdown Panel - 使用CSS控制显示
     //  _____________________________________________
     
     .login-dropdown {
@@ -77,13 +87,18 @@
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         overflow: hidden;
         z-index: 100;
+        pointer-events: none;  // 默认不响应事件
         opacity: 0;
         transform: translateY(-10px);
+        visibility: hidden;  // 使用 visibility 而不是 display
         transition: all 0.3s ease;
         
+        // 展开状态
         &.open {
             opacity: 1;
             transform: translateY(0);
+            visibility: visible;
+            pointer-events: auto;  // 展开时响应事件
         }
         
         //
@@ -373,4 +388,19 @@
             transform: translateY(0);
         }
     }
+}
+
+//
+//  Login Overlay (Mobile)
+//  _____________________________________________
+
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    animation: fadeIn 0.3s ease;
 }
