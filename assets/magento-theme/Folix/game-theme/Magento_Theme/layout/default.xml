@@ -80,8 +80,8 @@
                 </arguments>
             </block>
             
-            <!-- 登录按钮 -->
-            <block class="Magento\Framework\View\Element\Template" name="folix.login.button" template="Magento_Theme::html/header/login-button.phtml" after="minicart" />
+            <!-- 登录下拉菜单（替换原来的登录按钮） -->
+            <block class="Magento\Framework\View\Element\Template" name="folix.login.dropdown" template="Magento_Theme::html/header/login-dropdown.phtml" after="minicart" />
         </referenceContainer>
         
         <!-- 移动端导航菜单（独立容器） -->

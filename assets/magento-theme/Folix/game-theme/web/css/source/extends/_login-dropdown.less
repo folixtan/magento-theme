@@ -1,0 +1,376 @@
+// /**
+//  * Folix Game Theme - Login Dropdown Styles
+//  * 
+//  * 设计理念：
+//  * - 扁平化设计，卡片风格
+//  * - 游戏时尚感：渐变色装饰、圆角、微阴影
+//  * - 登录/注册切换动画
+//  * - 第三方登录（Google、Facebook）
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+    
+    //
+    //  Login Dropdown Wrapper
+    //  _____________________________________________
+    
+    .login-dropdown-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    
+    //
+    //  Login Trigger Button
+    //  _____________________________________________
+    
+    .login-trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: @folix-secondary;
+        color: #FFFFFF;
+        border: none;
+        border-radius: @folix-radius;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        .login-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+        
+        &:hover {
+            background: @folix-secondary-dark;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+        
+        &.active {
+            background: @folix-secondary-dark;
+        }
+    }
+    
+    //
+    //  Login Dropdown Panel
+    //  _____________________________________________
+    
+    .login-dropdown {
+        position: absolute;
+        top: calc(100% + 12px);
+        right: 0;
+        width: 380px;
+        background: #FFFFFF;
+        border-radius: @folix-radius-lg;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        
+        &.open {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        //
+        //  顶部装饰条（渐变色）
+        //  _____________________________________________
+        
+        .dropdown-decoration {
+            height: 4px;
+            background: linear-gradient(90deg, @folix-primary 0%, @folix-secondary 100%);
+        }
+        
+        //
+        //  标签切换
+        //  _____________________________________________
+        
+        .dropdown-tabs {
+            display: flex;
+            border-bottom: 1px solid @folix-border-light;
+            
+            .dropdown-tab {
+                flex: 1;
+                padding: 16px;
+                background: transparent;
+                border: none;
+                font-size: 14px;
+                font-weight: 600;
+                color: @folix-text-tertiary;
+                cursor: pointer;
+                position: relative;
+                transition: all 0.3s ease;
+                
+                &:hover {
+                    color: @folix-text-primary;
+                    background: @folix-bg-page;
+                }
+                
+                &.active {
+                    color: @folix-secondary;
+                    background: #FFFFFF;
+                    
+                    // 底部指示器
+                    &:after {
+                        content: '';
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 40px;
+                        height: 3px;
+                        background: @folix-secondary;
+                        border-radius: 3px 3px 0 0;
+                    }
+                }
+            }
+        }
+        
+        //
+        //  表单内容
+        //  _____________________________________________
+        
+        .dropdown-content {
+            padding: 24px;
+        }
+        
+        .dropdown-panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+            
+            &.active {
+                display: block;
+            }
+        }
+        
+        //
+        //  表单字段
+        //  _____________________________________________
+        
+        .field-group {
+            position: relative;
+            margin-bottom: 20px;
+            
+            .input-field {
+                width: 100%;
+                padding: 12px 16px;
+                background: @folix-bg-page;
+                border: 2px solid transparent;
+                border-radius: @folix-radius;
+                font-size: 14px;
+                color: @folix-text-primary;
+                transition: all 0.3s ease;
+                
+                &:focus {
+                    outline: none;
+                    border-color: @folix-primary;
+                    background: #FFFFFF;
+                    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+                }
+                
+                &::placeholder {
+                    color: @folix-text-light;
+                }
+            }
+            
+            .field-label {
+                display: none;  // 扁平化设计，使用 placeholder
+            }
+        }
+        
+        .field-row {
+            display: flex;
+            gap: 12px;
+            
+            .field-group {
+                flex: 1;
+            }
+        }
+        
+        .field-options {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            
+            .forgot-link {
+                font-size: 13px;
+                color: @folix-primary;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                
+                &:hover {
+                    color: @folix-secondary;
+                    text-decoration: underline;
+                }
+            }
+        }
+        
+        //
+        //  主按钮
+        //  _____________________________________________
+        
+        .btn-primary {
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, @folix-primary 0%, @folix-primary-dark 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: @folix-radius;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+            }
+            
+            &:active {
+                transform: translateY(0);
+            }
+        }
+        
+        //
+        //  第三方登录
+        //  _____________________________________________
+        
+        .social-login {
+            margin-top: 24px;
+            
+            .social-divider {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+                
+                &:before,
+                &:after {
+                    content: '';
+                    flex: 1;
+                    height: 1px;
+                    background: @folix-border-light;
+                }
+                
+                span {
+                    padding: 0 16px;
+                    font-size: 12px;
+                    color: @folix-text-tertiary;
+                    text-transform: uppercase;
+                }
+            }
+            
+            .social-buttons {
+                display: flex;
+                gap: 12px;
+                
+                .btn-social {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    padding: 10px 16px;
+                    background: @folix-bg-page;
+                    border: 1px solid @folix-border-light;
+                    border-radius: @folix-radius;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: @folix-text-primary;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+                    
+                    &:hover {
+                        background: #FFFFFF;
+                        transform: translateY(-1px);
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                    }
+                    
+                    &.btn-google:hover {
+                        border-color: #4285F4;
+                        color: #4285F4;
+                    }
+                    
+                    &.btn-facebook:hover {
+                        border-color: #1877F2;
+                        color: #1877F2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Animations
+//  _____________________________________________
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .login-dropdown {
+        width: 400px;  // 桌面端稍宽
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .login-trigger {
+        padding: 6px 12px;
+        
+        .login-text {
+            display: none;  // 移动端只显示图标
+        }
+    }
+    
+    .login-dropdown {
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: @folix-radius-lg @folix-radius-lg 0 0;
+        max-height: 90vh;
+        overflow-y: auto;
+        transform: translateY(100%);
+        
+        &.open {
+            transform: translateY(0);
+        }
+    }
+}
