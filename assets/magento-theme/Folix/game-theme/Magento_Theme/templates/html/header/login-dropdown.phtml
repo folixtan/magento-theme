@@ -12,8 +12,8 @@
  */
 ?>
 <div class="login-dropdown-wrapper">
-    <!-- 触发按钮 -->
-    <button type="button" class="login-trigger" data-trigger="login-dropdown">
+    <!-- 触发按钮（使用div避免原生button样式冲突） -->
+    <div class="login-trigger" data-trigger="login-dropdown" tabindex="0" role="button" aria-label="<?= $block->escapeHtmlAttr(__('Login')) ?>">
         <span class="login-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -21,7 +21,7 @@
             </svg>
         </span>
         <span class="login-text"><?= $block->escapeHtml(__('Login')) ?></span>
-    </button>
+    </div>
     
     <!-- 下拉菜单 -->
     <div class="login-dropdown" id="login-dropdown" data-role="login-dropdown">

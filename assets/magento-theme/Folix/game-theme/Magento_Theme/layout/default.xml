@@ -108,53 +108,7 @@
             <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="-" template="Magento_Theme::html/slider/hero.phtml" />
         </referenceContainer>
         
-        <!-- =================================================================
-             FOOTER
-             ================================================================= -->
-        
-        <referenceContainer name="footer">
-            <referenceBlock name="store_switcher" remove="true" />
-        </referenceContainer>
-        
-        <referenceBlock name="footer_links">
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-about">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">About Us</argument>
-                    <argument name="path" xsi:type="string">about-us</argument>
-                </arguments>
-            </block>
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-terms">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Terms of Service</argument>
-                    <argument name="path" xsi:type="string">terms</argument>
-                </arguments>
-            </block>
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-privacy">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Privacy Policy</argument>
-                    <argument name="path" xsi:type="string">privacy-policy</argument>
-                </arguments>
-            </block>
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-contact">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">Contact Us</argument>
-                    <argument name="path" xsi:type="string">contact</argument>
-                </arguments>
-            </block>
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="footer-link-faq">
-                <arguments>
-                    <argument name="label" xsi:type="string" translate="true">FAQ</argument>
-                    <argument name="path" xsi:type="string">faq</argument>
-                </arguments>
-            </block>
-        </referenceBlock>
-        
-        <move element="copyright" destination="before.body.end" />
-        
-        <referenceContainer name="footer">
-            <block class="Magento\Framework\View\Element\Template" name="folix.footer.copyright" template="Magento_Theme::html/footer/copyright.phtml" after="-" />
-        </referenceContainer>
-        
+   
         <!-- =================================================================
              LOGIN MODAL
              ================================================================= -->

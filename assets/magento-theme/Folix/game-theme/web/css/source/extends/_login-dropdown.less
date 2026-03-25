@@ -24,7 +24,7 @@
     }
     
     //
-    //  Login Trigger Button - 提升选择器优先级覆盖原生样式
+    //  Login Trigger Button（使用div，避免原生button样式冲突）
     //  _____________________________________________
     
     .login-dropdown-wrapper .login-trigger {
@@ -40,6 +40,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
+        user-select: none;  // 防止文字选中
         
         .login-icon {
             display: flex;
@@ -54,6 +55,12 @@
         
         .login-text {
             color: #FFFFFF;
+        }
+        
+        // 键盘焦点样式
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
         }
     }
     
