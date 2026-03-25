@@ -24,16 +24,16 @@
     }
     
     //
-    //  Login Trigger Button
+    //  Login Trigger Button - 提升选择器优先级覆盖原生样式
     //  _____________________________________________
     
-    .login-trigger {
+    .login-dropdown-wrapper .login-trigger {
         display: flex;
         align-items: center;
         gap: 8px;
         padding: 8px 16px;
         background: @folix-secondary;
-        color: #FFFFFF !important;
+        color: #FFFFFF;
         border: none;
         border-radius: @folix-radius;
         font-size: 14px;
@@ -55,21 +55,27 @@
         .login-text {
             color: #FFFFFF;
         }
+    }
+    
+    // Hover 状态 - 独立选择器，优先级更高
+    .login-dropdown-wrapper .login-trigger:hover {
+        background: @folix-secondary-dark;
+        color: #FFFFFF;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
         
-        &:hover {
-            background: @folix-secondary-dark;
-            color: #FFFFFF !important;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
-            
-            .login-text {
-                color: #FFFFFF;
-            }
+        .login-text {
+            color: #FFFFFF;
         }
+    }
+    
+    // Active 状态
+    .login-dropdown-wrapper .login-trigger.active {
+        background: @folix-secondary-dark;
+        color: #FFFFFF;
         
-        &.active {
-            background: @folix-secondary-dark;
-            color: #FFFFFF !important;
+        .login-text {
+            color: #FFFFFF;
         }
     }
     

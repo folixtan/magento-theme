@@ -163,16 +163,82 @@ border: @border-width__base solid @border-color__base;
 | `_variables.less` | 主题专属变量 | `@folix-primary`, `@folix-text-tertiary` |
 | `_theme.less` | 覆盖 Magento 原生变量 | `@navigation__background`, `@primary__color` |
 
-#### 3.1.4 覆盖原则
+#### 3.1.5 覆盖原则（优先级提升）
+
+**原则**：优先提升选择器优先级，而非使用 `!important`
+
 ```less
-// ✅ 优先使用选择器优先级
-.navigation .level0 > .level-top {
-    color: @folix-text-primary;
+// ❌ 错误：直接使用 !important
+.login-trigger {
+    color: #FFFFFF !important;
+    
+    &:hover {
+        color: #FFFFFF !important;  // 强制覆盖
+    }
 }
 
-// ❌ 避免滥用 !important
-// ✅ 仅在必要时使用（如覆盖原生 Luma 样式）
-.navigation .level0 > .level-top {
+// ✅ 正确：提升选择器优先级
+.login-dropdown-wrapper .login-trigger {
+    color: #FFFFFF;
+}
+
+.login-dropdown-wrapper .login-trigger:hover {
+    color: #FFFFFF;  // 选择器更具体，优先级更高
+}
+```
+
+**选择器优先级层级**：
+| 方法 | 优先级 | 示例 | 适用场景 |
+|-----|--------|------|---------|
+| 单类选择器 | 低 | `.login-trigger` | 独立组件，无冲突 |
+| 嵌套选择器 | 中 | `.wrapper .login-trigger` | 需要覆盖原生样式 |
+| 多级嵌套 | 高 | `.page-header .wrapper .login-trigger` | 强覆盖，避免冲突 |
+| `!important` | 最高 | `color: #FFF !important` | **最后手段**，覆盖计算样式 |
+
+**何时使用 `!important`**：
+- ✅ 覆盖无法控制的第三方样式
+- ✅ 覆盖内联样式
+- ✅ 紧急修复，临时方案
+- ❌ 常规样式覆盖（应提升选择器）
+
+**示例：覆盖原生按钮样式**
+
+原生 Magento 定义了 `@button__hover__color: #555555;`，要覆盖：
+
+```less
+// 方法1：提升选择器优先级（推荐）
+.login-dropdown-wrapper .login-trigger:hover {
+    color: #FFFFFF;  // 优先级：0,0,2,0 > 原生
+}
+
+// 方法2：使用 !important（不推荐）
+.login-trigger:hover {
+    color: #FFFFFF !important;
+}
+```
+
+#### 3.1.6 样式冲突排查流程
+
+当样式不生效时，按以下步骤排查：
+
+```
+Step 1: 打开浏览器开发者工具
+├── 选中元素
+└── 查看 Computed 样式
+
+Step 2: 找到覆盖的样式
+├── 查看 Styles 面板
+├── 找到被划掉的样式
+└── 记录选择器
+
+Step 3: 提升优先级
+├── 增加父级选择器
+├── 或使用更具体的选择器
+└── 测试验证
+
+Step 4: 最后才用 !important
+└── 仅在提升选择器无效时使用
+```
     color: @folix-text-primary !important;  // 覆盖原生白色文字
 }
 ```
