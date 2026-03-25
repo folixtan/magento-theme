@@ -124,19 +124,43 @@ Folix/game-theme/
 }
 ```
 
-#### 3.1.3 变量使用
+#### 3.1.4 变量使用规范
+
+**新增变量规则**：
+```less
+// ✅ 新增变量必须添加到 _variables.less 或 _theme.less
+// _variables.less - 主题专属变量
+@folix-text-tertiary: #64748B;  // 三级文字颜色
+
+// _theme.less - 覆盖 Magento 原生变量
+@navigation__background: @folix-bg-card;
+
+// ❌ 禁止在样式文件中直接定义变量
+// _navigation.less 中不应该有变量定义
+```
+
+**变量使用原则**：
 ```less
 // ✅ 正确：使用已定义的变量
 color: @folix-text-primary;
 background: @folix-secondary;
 
-// ❌ 错误：硬编码颜色值
+// ❌ 错误：使用未定义的变量（会导致编译错误或异常值）
+color: @folix-text-tertiary;  // 必须先在 _variables.less 中定义
+
+// ❌ 错误：硬编码颜色值（应优先使用变量）
 color: #1E293B;  // 除非变量未定义
 
 // ✅ 优先使用 Magento 原生变量
 color: @primary__color;
 border: @border-width__base solid @border-color__base;
 ```
+
+**变量分类**：
+| 文件 | 用途 | 示例 |
+|-----|------|------|
+| `_variables.less` | 主题专属变量 | `@folix-primary`, `@folix-text-tertiary` |
+| `_theme.less` | 覆盖 Magento 原生变量 | `@navigation__background`, `@primary__color` |
 
 #### 3.1.4 覆盖原则
 ```less

@@ -189,19 +189,26 @@
                     }
                 }
                 
-                // 激活状态 - 橙色高亮
+                // 激活状态 - 利用原生样式（border-left: 8px）
                 &.active > a {
                     color: @folix-secondary;
                     background: @folix-bg-page;
-                    border-left: 3px solid @folix-secondary;
+                    border-color: @folix-secondary;
+                    border-style: solid;
+                    border-width: 0 0 0 8px;
+                    padding-left: 12px;  // 20px - 8px
+                    
+                    span {
+                        margin-left: -8px;  // 文字位置修正
+                    }
                 }
                 
                 //
-                //  子菜单（默认隐藏）
+                //  子菜单（所有层级默认隐藏）
                 //  _____________________________________________
                 
                 .submenu {
-                    display: none;  // 默认隐藏
+                    display: none !important;  // 强制隐藏所有层级子菜单
                     background: @folix-bg-page;
                     
                     li {
@@ -217,12 +224,24 @@
                                 background: rgba(255, 107, 53, 0.05);
                             }
                         }
+                        
+                        // 第二层子菜单
+                        .submenu {
+                            li a {
+                                padding-left: 60px;  // 第三层缩进
+                            }
+                            
+                            // 第三层子菜单
+                            .submenu li a {
+                                padding-left: 80px;  // 第四层缩进
+                            }
+                        }
                     }
                 }
                 
                 // 子菜单展开状态
                 &.open > .submenu {
-                    display: block;
+                    display: block !important;
                 }
                 
                 //
