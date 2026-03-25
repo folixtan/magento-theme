@@ -1,0 +1,302 @@
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    
+    // ========================================================================
+    //  Top Bar - 移动端隐藏（内容在菜单里显示）
+    //  ========================================================================
+    
+    .panel.wrapper {
+        display: none;
+    }
+    
+    // ========================================================================
+    //  Main Bar - 移动端布局
+    //  左：汉堡菜单（橙色）| 中：搜索图标 | 右：登录按钮
+    //  ========================================================================
+    
+    .header.content {
+        height: auto;
+        min-height: 50px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        
+        // 清除浮动
+        &:before,
+        &:after {
+            display: none;
+        }
+        
+        // ====================================================================
+        //  汉堡菜单按钮 - 左侧，橙色
+        //  ====================================================================
+        
+        .nav-toggle {
+            display: block;
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
+            z-index: 14;
+            margin: 0;
+            padding: 0;
+            order: 0;
+            flex-shrink: 0;
+            
+            &:before {
+                color: @folix-secondary;  // 橙色
+                font-size: 28px;
+                line-height: 1;
+            }
+            
+            &:hover:before {
+                color: @folix-secondary-dark;
+            }
+        }
+        
+        // ====================================================================
+        //  Logo - 移动端隐藏
+        //  ====================================================================
+        
+        .logo {
+            display: none;
+        }
+        
+        // ====================================================================
+        //  PC端导航 - 移动端隐藏
+        //  ====================================================================
+        
+        .navigation {
+            display: none;
+        }
+        
+        // ====================================================================
+        //  搜索框 - 中间，点击显示输入框
+        //  ====================================================================
+        
+        .block-search {
+            order: 1;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            
+            .block-title {
+                display: none;
+            }
+            
+            .block-content {
+                margin: 0;
+            }
+            
+            // 搜索图标
+            .label {
+                display: inline-block;
+                cursor: pointer;
+                padding: 10px;
+                text-decoration: none;
+                
+                > span {
+                    border: 0;
+                    clip: rect(0, 0, 0, 0);
+                    height: 1px;
+                    margin: -1px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    width: 1px;
+                }
+                
+                &:before {
+                    content: '\e615';
+                    font-family: 'luma-icons';
+                    font-size: 24px;
+                    color: @folix-text-primary;
+                    display: inline-block;
+                    -webkit-font-smoothing: antialiased;
+                }
+                
+                &:hover:before {
+                    color: @folix-secondary;
+                }
+            }
+            
+            // 搜索输入框 - 默认隐藏
+            .control {
+                position: absolute;
+                top: 100%;
+                left: -15px;
+                right: -15px;
+                background: #FFFFFF;
+                padding: 15px;
+                border-top: 1px solid @folix-border-light;
+                display: none;
+                z-index: 100;
+                
+                input {
+                    width: 100%;
+                    height: 44px;
+                    padding: 0 16px;
+                    font-size: 16px;
+                    border: 2px solid @folix-border;
+                    border-radius: @folix-radius;
+                    background: #FFFFFF;
+                    
+                    &:focus {
+                        border-color: @folix-primary;
+                        outline: none;
+                    }
+                }
+            }
+            
+            // 点击后显示搜索框
+            .label.active + .control {
+                display: block;
+            }
+            
+            // 搜索按钮 - 隐藏
+            .action.search {
+                display: none;
+            }
+        }
+        
+        // ====================================================================
+        //  购物车 - 右侧
+        //  ====================================================================
+        
+        .minicart-wrapper {
+            order: 2;
+            margin: 0;
+            
+            .action.showcart {
+                padding: 10px;
+                
+                &:before {
+                    font-size: 24px;
+                    color: @folix-text-primary;
+                }
+                
+                .text {
+                    display: none;
+                }
+            }
+        }
+        
+        // ====================================================================
+        //  登录按钮 - 右侧
+        //  ====================================================================
+        
+        .header-login-button {
+            order: 3;
+            margin: 0 0 0 10px;
+            
+            .action.login-primary {
+                padding: 8px 20px;
+                background: @folix-secondary;
+                color: #FFFFFF;
+                border-radius: @folix-radius;
+                font-size: 14px;
+                font-weight: 600;
+                
+                &:hover {
+                    background: @folix-secondary-dark;
+                }
+            }
+        }
+    }
+    
+    // ========================================================================
+    //  移动端导航容器 - 白色背景，激活项橙色
+    //  ========================================================================
+    
+    .mobile-nav-container {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100%;
+        background: #FFFFFF;
+        z-index: 100;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        
+        // 导航打开时显示
+        .nav-open & {
+            left: 0;
+        }
+        
+        // 导航菜单
+        .navigation {
+            display: block;
+            background: transparent;
+            padding: 0;
+            
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            
+            li {
+                margin: 0;
+                padding: 0;
+                border-bottom: 1px solid @folix-border-light;
+                
+                a {
+                    display: block;
+                    padding: 14px 20px;
+                    color: @folix-text-primary;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    
+                    &:hover,
+                    &:active {
+                        background: @folix-bg-page;
+                    }
+                }
+                
+                // 激活状态 - 橙色高亮
+                &.active > a {
+                    color: @folix-secondary;
+                    background: @folix-bg-page;
+                    border-left: 3px solid @folix-secondary;
+                }
+                
+                // 子菜单
+                .submenu {
+                    background: @folix-bg-page;
+                    
+                    li {
+                        a {
+                            padding-left: 40px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // 导航遮罩层
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        display: none;
+        cursor: pointer;
+        
+        .nav-open & {
+            display: block;
+        }
+    }
+}
