@@ -29,9 +29,14 @@
     .footer.content {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 40px 20px 0;
+        padding: 40px 20px;
         border-top: none;
-        text-align: center;  // 整体居中
+        
+        // Flex 布局
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: flex-start;
     }
     
     //
@@ -39,7 +44,9 @@
     //  _____________________________________________
     
     .page-footer .block.newsletter {
-        margin-bottom: 40px;
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
         
         .title {
             display: none;  // 扁平化设计，不显示标题
@@ -47,24 +54,20 @@
         
         .content {
             form {
-                display: inline-flex;
+                display: flex;
                 gap: 12px;
-                align-items: center;
             }
             
             .field.newsletter {
+                flex: 1;
                 margin: 0;
                 
                 .control {
-                    display: inline-block;
-                    
-                    &:before {
-                        line-height: 2.5;  // 用户指定
-                    }
+                    width: 100%;
                     
                     label {
                         display: flex;
-                        align-items: center;
+                        width: 100%;
                     }
                     
                     .label {
@@ -74,15 +77,13 @@
             }
             
             input#newsletter {
-                width: 350px;
-                padding: 0 16px;  // 取消上下padding
-                height: 44px;
+                width: 100%;
+                padding: 12px 16px;
                 background: rgba(255, 255, 255, 0.1);
                 border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: @folix-radius;
                 color: @folix-text-on-dark;
                 font-size: 14px;
-                margin-right: 0;  // 取消margin-right
                 
                 &:focus {
                     outline: none;
@@ -96,12 +97,11 @@
             }
             
             .actions {
-                display: inline-block;
+                flex-shrink: 0;
             }
             
             .action.subscribe {
-                height: 44px;
-                padding: 0 32px;
+                padding: 12px 24px;
                 background: @folix-secondary;
                 border: none;
                 border-radius: @folix-radius;
@@ -110,7 +110,6 @@
                 font-weight: 600;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                line-height: 44px;
                 
                 &:hover {
                     background: @folix-secondary-dark;
@@ -121,19 +120,21 @@
     }
     
     //
-    //  Footer Links - 底部链接（不使用flex）
+    //  Footer Links - 底部链接
     //  _____________________________________________
     
     .footer.content .links {
-        text-align: center;
-        margin-bottom: 30px;
+        flex: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        min-width: 300px;
         
-        // 多个 links 容器并排显示
+        // 多个 links 容器
         > .widget,
         > ul.footer.links {
-            display: inline-block;
-            vertical-align: top;
-            margin: 0 30px;
+            flex: 1;
+            min-width: 150px;
         }
     }
     
@@ -141,10 +142,9 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        text-align: left;  // 链接列表左对齐
         
         li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             
             &:last-child {
                 margin-bottom: 0;
@@ -162,25 +162,6 @@
             }
         }
     }
-    
-    //
-    //  Copyright - 版权信息
-    //  渐变背景
-    //  _____________________________________________
-    
-    .page-footer .copyright {
-        display: block;
-        padding: 20px;
-        background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-        color: #FFFFFF;
-        font-size: 13px;
-        text-align: center;
-        margin-top: 40px;
-        
-        span {
-            display: inline-block;
-        }
-    }
 }
 
 //
@@ -188,12 +169,12 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .page-footer .block.newsletter .content input#newsletter {
-        width: 400px;
+    .footer.content {
+        flex-wrap: nowrap;  // 桌面端不换行
     }
     
-    .footer.links {
-        min-width: 150px;
+    .page-footer .block.newsletter {
+        max-width: 350px;
     }
 }
 
@@ -203,27 +184,20 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .footer.content {
-        padding: 30px 20px 0;
+        flex-direction: column;
+        padding: 30px 20px;
     }
     
     .page-footer .block.newsletter {
-        .content {
-            form {
-                display: block;
-                text-align: center;
-            }
-            
-            .field.newsletter {
-                display: block;
-                margin-bottom: 12px;
-            }
-            
-            input#newsletter {
-                width: 100%;
-            }
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+        
+        .content form {
+            flex-direction: column;
             
             .actions {
-                display: block;
+                width: 100%;
                 
                 .action.subscribe {
                     width: 100%;
@@ -233,15 +207,8 @@
     }
     
     .footer.content .links {
-        > .widget,
-        > ul.footer.links {
-            display: block;
-            margin: 0 0 20px;
-            text-align: center;
-        }
-    }
-    
-    .footer.links {
-        text-align: center;
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
     }
 }
