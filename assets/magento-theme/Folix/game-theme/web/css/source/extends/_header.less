@@ -1016,6 +1016,15 @@
                     }
                 }
             }
+            
+            // 覆盖原生 Luma 的白色文字
+            .level0 > .level-top {
+                color: @folix-text-primary !important;
+                
+                &:hover {
+                    color: @folix-secondary !important;
+                }
+            }
         }
     }
     
