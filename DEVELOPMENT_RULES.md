@@ -36,7 +36,8 @@ Folix/game-theme/
 │           ├── mobile-header.js           # 移动端头部交互
 │           ├── slider.js                  # 幻灯片功能
 │           ├── modal.js                   # 模态框功能
-│           └── marquee.js                 # 跑马灯功能
+│           ├── marquee.js                 # 跑马灯功能
+│           └── login-dropdown.js          # 登录下拉菜单
 ├── web/
 │   └── css/
 │       └── source/
