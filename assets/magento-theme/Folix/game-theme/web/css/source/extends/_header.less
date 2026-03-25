@@ -679,11 +679,41 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     
     // ========================================================================
-    //  Top Bar - 移动端隐藏（内容在菜单里显示）
+    //  Top Bar - 移动端显示
+    //  右侧：语言/货币切换
     //  ========================================================================
     
     .panel.wrapper {
-        display: none;
+        display: block;  // ✅ 移动端显示 Top Bar
+        background: #FFFFFF;  // 白色背景
+        border-bottom: 1px solid @folix-border-light;
+    }
+    
+    .panel.header {
+        display: flex;
+        justify-content: flex-end;  // 内容靠右对齐
+        align-items: center;
+        padding: 10px 15px;
+        min-height: 44px;
+        max-width: none;
+        
+        // 隐藏左侧和中间内容
+        .header-links-left,
+        .header-links-center {
+            display: none;
+        }
+        
+        // 右侧容器 - 显示语言/货币切换
+        .header-links-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            
+            // APP下载链接 - 移动端隐藏
+            .app-download-link {
+                display: none;
+            }
+        }
     }
     
     // ========================================================================
