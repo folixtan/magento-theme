@@ -21,7 +21,10 @@
         margin-top: 0;
         color: @folix-text-on-dark;
     }
+    .copyright {
+          background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
     
+    }
     //
     //  Footer Content - 底部内容
     //  _____________________________________________
@@ -43,7 +46,7 @@
     //  Newsletter - 订阅表单
     //  _____________________________________________
     .block.newsletter .field .control:before {
-       line-height：3;
+       line-height:3;
     }
     .page-footer .block.newsletter {
         flex: 1;
@@ -86,7 +89,7 @@
                 border-radius: @folix-radius;
                 color: @folix-text-on-dark;
                 font-size: 14px;
-                
+                margin-right: 0;
                 &:focus {
                     outline: none;
                     border-color: @folix-primary;
@@ -163,11 +166,29 @@
    }
     .footer.content {
         flex-wrap: nowrap;  // 桌面端不换行
+        justify-content: space-between;
+            align-items: center;
+            flex-flow: row-reverse;
     }
-    
+    .footer.content .links a {
+       color:@text-highlight;
+       &:actvie{
+          color:@color-text__secondary-light;
+       }
+       &:hover {
+           
+       }
+    }
     .page-footer .block.newsletter {
         max-width: 350px;
+        .block.newsletter .field .control:before {
+           line-height: 2.5;
+        }
+        &input {
+           margin-right:0;
+        }
     }
+    
 }
 
 //
@@ -204,5 +225,5 @@
         gap: 5px;
         text-align: center;
     }
-    }
+    
 }
