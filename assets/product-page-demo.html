@@ -17,17 +17,14 @@
             --folix-primary: #4A90E2;
             --folix-secondary: #FF6B35;
             --folix-gradient: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
-            --folix-gradient-hover: linear-gradient(135deg, #3A80D2 0%, #5C4AD7 100%);
             
             /* 背景色 */
             --page-background: #F8FAFC;
             --card-background: #FFFFFF;
             --header-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-            --footer-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
             
             /* 边框色 */
             --border-color: #E5E7EB;
-            --border-color-hover: #4A90E2;
             
             /* 文字色 */
             --text-primary: #1E293B;
@@ -38,26 +35,21 @@
             /* 阴影 */
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
             --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-            --shadow-hover: 0 12px 32px rgba(74, 144, 226, 0.2);
             
             /* 圆角 */
             --radius-sm: 6px;
             --radius-md: 8px;
             --radius-lg: 12px;
-            --radius-xl: 16px;
             
             /* 间距 */
-            --indent-xs: 4px;
             --indent-s: 8px;
             --indent-m: 16px;
             --indent-l: 24px;
             --indent-xl: 32px;
-            --indent-2xl: 48px;
         }
         
         /* ========================================
-           Reset & Base Styles
+           Reset & Base
            ======================================== */
         * {
             margin: 0;
@@ -76,11 +68,6 @@
         a {
             color: var(--folix-primary);
             text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        
-        a:hover {
-            color: var(--folix-secondary);
         }
         
         ul, ol {
@@ -93,7 +80,7 @@
         }
         
         /* ========================================
-           Layout Container
+           Page Wrapper
            ======================================== */
         .page-wrapper {
             display: flex;
@@ -101,40 +88,177 @@
             min-height: 100vh;
         }
         
-        .page-main {
-            flex-grow: 1;
-        }
-        
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 var(--indent-l);
-        }
-        
         /* ========================================
-           HEADER - 深色框架
+           HEADER - 原生结构
            ======================================== */
         .page-header {
             background: var(--header-background);
             color: var(--text-white);
         }
         
+        /* Panel Wrapper - Top Bar */
+        .panel.wrapper {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .panel.header {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--indent-s) var(--indent-l);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header.links {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+        }
+        
+        .header.links li {
+            font-size: 13px;
+        }
+        
+        .header.links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.2s;
+        }
+        
+        .header.links a:hover {
+            color: var(--text-white);
+        }
+        
+        .greet.welcome {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+        
+        .authorization-link {
+            position: relative;
+        }
+        
+        .authorization-link::before {
+            content: 'or';
+            position: absolute;
+            left: -25px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+        }
+        
+        /* Language Switcher */
+        .switcher-language {
+            position: relative;
+        }
+        
+        .switcher-label {
+            display: none;
+        }
+        
+        .switcher-trigger {
+            padding: var(--indent-xs) var(--indent-s);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+            font-size: 13px;
+        }
+        
+        .switcher-trigger::after {
+            content: '▼';
+            font-size: 8px;
+            opacity: 0.6;
+        }
+        
+        .switcher-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-background);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            min-width: 120px;
+            z-index: 100;
+        }
+        
+        .switcher-language:hover .switcher-dropdown {
+            display: block;
+        }
+        
+        .switcher-dropdown li a {
+            display: block;
+            padding: var(--indent-s) var(--indent-m);
+            color: var(--text-primary);
+            font-size: 13px;
+        }
+        
+        .switcher-dropdown li a:hover {
+            background: var(--page-background);
+        }
+        
+        /* Header Content - Main Bar */
         .header.content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--indent-m) var(--indent-l);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: var(--indent-m) var(--indent-l);
-            max-width: 1280px;
-            margin: 0 auto;
+            gap: var(--indent-l);
         }
         
+        /* Nav Toggle (Mobile) */
+        .nav-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .nav-toggle span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text-white);
+            position: relative;
+        }
+        
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: var(--text-white);
+            left: 0;
+        }
+        
+        .nav-toggle span::before { top: -6px; }
+        .nav-toggle span::after { top: 6px; }
+        
+        /* Logo */
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--text-white);
             display: flex;
             align-items: center;
             gap: var(--indent-s);
+        }
+        
+        .logo img {
+            width: 120px;
+            height: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-white);
         }
         
         .logo-icon {
@@ -148,15 +272,32 @@
             font-size: 20px;
         }
         
-        .search-box {
+        /* Search Block */
+        .block-search {
             flex: 1;
-            max-width: 480px;
-            margin: 0 var(--indent-xl);
+            max-width: 500px;
         }
         
-        .search-box input {
+        .block-search .block-title {
+            display: none;
+        }
+        
+        .block-search .field.search {
+            position: relative;
+        }
+        
+        .block-search .label {
+            display: none;
+        }
+        
+        .block-search .control {
+            position: relative;
+        }
+        
+        .block-search input {
             width: 100%;
             padding: var(--indent-s) var(--indent-m);
+            padding-right: 45px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: var(--radius-lg);
             background: rgba(255, 255, 255, 0.1);
@@ -164,63 +305,190 @@
             font-size: 14px;
         }
         
-        .search-box input::placeholder {
+        .block-search input::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
         
-        .search-box input:focus {
+        .block-search input:focus {
             outline: none;
             border-color: var(--folix-primary);
             background: rgba(255, 255, 255, 0.15);
         }
         
-        .header-icons {
+        .block-search .action.search {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: var(--folix-gradient);
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .block-search .action.search span {
+            display: none;
+        }
+        
+        .block-search .action.search::before {
+            content: '🔍';
+            font-size: 16px;
+        }
+        
+        .nested {
+            display: none;
+        }
+        
+        /* Compare Wrapper */
+        .compare.wrapper {
+            display: none;
+        }
+        
+        /* Minicart */
+        .minicart-wrapper {
+            position: relative;
+        }
+        
+        .action.showcart {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+            padding: var(--indent-s) var(--indent-m);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-white);
+            cursor: pointer;
+        }
+        
+        .action.showcart .text {
+            font-size: 14px;
+        }
+        
+        .action.showcart::before {
+            content: '🛒';
+            font-size: 18px;
+        }
+        
+        .counter.qty {
+            background: var(--folix-secondary);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .counter.qty.empty {
+            display: none;
+        }
+        
+        /* Dropdown Dialog */
+        .mage-dropdown-dialog {
+            display: none !important;
+        }
+        
+        /* ========================================
+           NAV SECTIONS
+           ======================================== */
+        .nav-sections {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-items {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--indent-l);
+        }
+        
+        .nav-sections-item-title {
+            display: none;
+        }
+        
+        .navigation {
+            background: transparent;
+        }
+        
+        .navigation ul {
             display: flex;
             align-items: center;
             gap: var(--indent-m);
         }
         
-        .header-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .navigation .level0 {
             position: relative;
         }
         
-        .header-icon:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .navigation .level-top {
+            display: block;
+            padding: var(--indent-m) 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 14px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
         }
         
-        .header-icon .badge {
+        .navigation .level-top:hover {
+            color: var(--text-white);
+            border-bottom-color: var(--folix-primary);
+        }
+        
+        .navigation .level0.parent > .level-top::after {
+            content: '▼';
+            font-size: 8px;
+            margin-left: var(--indent-xs);
+            opacity: 0.6;
+        }
+        
+        .navigation .submenu {
+            display: none;
             position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 18px;
-            height: 18px;
-            background: var(--folix-secondary);
-            border-radius: 50%;
-            font-size: 11px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            top: 100%;
+            left: 0;
+            background: var(--card-background);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            min-width: 200px;
+            z-index: 100;
+            padding: var(--indent-s) 0;
+        }
+        
+        .navigation .level0:hover > .submenu {
+            display: block;
+        }
+        
+        .navigation .submenu a {
+            display: block;
+            padding: var(--indent-s) var(--indent-m);
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .navigation .submenu a:hover {
+            background: var(--page-background);
+            color: var(--folix-primary);
+        }
+        
+        .ui-menu-icon {
+            display: none;
         }
         
         /* ========================================
-           BREADCRUMB
+           BREADCRUMBS
            ======================================== */
         .breadcrumbs {
             padding: var(--indent-m) 0;
             background: var(--page-background);
         }
         
-        .breadcrumbs ul {
+        .breadcrumbs .items {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--indent-l);
             display: flex;
             align-items: center;
             flex-wrap: wrap;
@@ -236,7 +504,6 @@
         .breadcrumbs li:not(:last-child)::after {
             content: '/';
             color: var(--text-muted);
-            margin-left: var(--indent-xs);
         }
         
         .breadcrumbs a {
@@ -255,86 +522,61 @@
         }
         
         /* ========================================
-           PRODUCT DETAIL PAGE - 块布局
+           MAIN CONTENT - 原生结构
            ======================================== */
-        .product-detail-page {
-            padding: var(--indent-xl) 0;
+        .page-main {
+            flex-grow: 1;
         }
         
-        /* 页面标题区 */
-        .page-title-wrapper {
-            margin-bottom: var(--indent-xl);
+        .columns {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--indent-l);
         }
         
-        .page-title-wrapper h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--indent-s);
+        .column.main {
+            width: 100%;
         }
         
-        .page-title-wrapper .title-decoration {
-            width: 60px;
-            height: 4px;
-            background: var(--folix-gradient);
-            border-radius: 2px;
-        }
-        
-        /* 主布局 - 两列块布局 */
-        .product-detail-layout {
-            display: flex;
-            gap: var(--indent-xl);
-        }
-        
-        /* 左列 - 图片 + 描述 (60%) */
-        .product-detail-left {
-            flex: 0 0 60%;
-            display: flex;
-            flex-direction: column;
-            gap: var(--indent-xl);
-        }
-        
-        /* 右列 - 购物车 + 推荐 (40%) */
-        .product-detail-right {
-            flex: 0 0 40%;
-            display: flex;
-            flex-direction: column;
-            gap: var(--indent-l);
+        .page.messages {
+            display: none;
         }
         
         /* ========================================
-           产品图片 Gallery
+           PRODUCT VIEW LAYOUT
+           原生两列布局: product.media + product-info-main
            ======================================== */
-        .product.media {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
+        .product.media,
+        .product-info-main {
+            display: inline-block;
+            vertical-align: top;
         }
         
+        /* 图片区域 - 适当缩小 (35%) */
+        .product.media {
+            width: 35%;
+            padding-right: var(--indent-l);
+        }
+        
+        /* 产品信息区域 - 扩大 (65%) */
+        .product-info-main {
+            width: 65%;
+        }
+        
+        /* ========================================
+           PRODUCT MEDIA - 图片区域
+           ======================================== */
         .gallery-placeholder {
             position: relative;
-        }
-        
-        .gallery-main {
-            position: relative;
-            padding-bottom: 75%;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: var(--radius-lg);
             overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
         
-        .gallery-main img {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .gallery-placeholder__image {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        
-        .gallery-main:hover img {
-            transform: scale(1.05);
+            height: auto;
+            display: block;
         }
         
         /* 游戏图标覆盖层 */
@@ -352,14 +594,14 @@
         }
         
         .game-icon {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: var(--folix-gradient);
             border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
         }
         
         .game-info {
@@ -368,72 +610,455 @@
         
         .game-name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .game-developer {
-            font-size: 12px;
+            font-size: 11px;
             opacity: 0.8;
         }
         
-        /* 缩略图列表 */
-        .gallery-thumbnails {
-            display: flex;
-            gap: var(--indent-s);
-            padding: var(--indent-m);
-            background: var(--card-background);
-            border-top: 1px solid var(--border-color);
+        /* Skip Links */
+        .action-skip-wrapper {
+            display: none;
         }
         
-        .thumbnail-item {
-            width: 80px;
-            height: 80px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
-        }
-        
-        .thumbnail-item:hover,
-        .thumbnail-item.active {
-            border-color: var(--folix-primary);
-        }
-        
-        .thumbnail-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        /* Fotorama 隐藏（简化展示） */
+        .fotorama-item,
+        .fotorama--hidden {
+            display: none;
         }
         
         /* ========================================
-           产品描述 Tabs
+           PRODUCT INFO MAIN - 产品信息区域
+           ======================================== */
+        /* Page Title */
+        .page-title-wrapper.product {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+        
+        .page-title .base {
+            color: inherit;
+        }
+        
+        /* Product Reviews Summary */
+        .product-reviews-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+            margin-bottom: var(--indent-m);
+        }
+        
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .rating-result {
+            color: var(--folix-secondary);
+            font-size: 14px;
+        }
+        
+        .reviews-actions a {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .reviews-actions a:hover {
+            color: var(--folix-primary);
+        }
+        
+        /* Product Info Price */
+        .product-info-price {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xl);
+            margin-bottom: var(--indent-m);
+            padding-bottom: var(--indent-m);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .price-box {
+            display: flex;
+            align-items: baseline;
+            gap: var(--indent-s);
+        }
+        
+        .price-box .price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        .price-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .old-price .price {
+            font-size: 16px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        /* Product Info Stock SKU */
+        .product-info-stock-sku {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-l);
+            font-size: 13px;
+        }
+        
+        .stock.available {
+            color: #10B981;
+            font-weight: 500;
+        }
+        
+        .stock.available::before {
+            content: '✅ ';
+        }
+        
+        .availability.only {
+            color: var(--folix-secondary);
+            font-size: 12px;
+        }
+        
+        .product.attribute.sku {
+            display: flex;
+            gap: var(--indent-xs);
+        }
+        
+        .product.attribute.sku .type {
+            color: var(--text-secondary);
+        }
+        
+        .product.attribute.sku .value {
+            color: var(--text-primary);
+        }
+        
+        /* ========================================
+           PRODUCT ADD FORM - 表单区域
+           ======================================== */
+        .product-add-form {
+            margin-top: var(--indent-l);
+        }
+        
+        #product_addtocart_form {
+            display: block;
+        }
+        
+        /* Product Options Wrapper */
+        .product-options-wrapper {
+            margin-bottom: var(--indent-l);
+        }
+        
+        .fieldset {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-m);
+        }
+        
+        /* Swatch Options */
+        .swatch-opt {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-l);
+        }
+        
+        .swatch-attribute {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-s);
+        }
+        
+        .swatch-attribute-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .swatch-attribute-selected-option {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-left: var(--indent-s);
+        }
+        
+        .swatch-attribute-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--indent-s);
+        }
+        
+        /* 游戏充值档位卡片 */
+        .recharge-amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--indent-m);
+        }
+        
+        .recharge-card {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+            padding: var(--indent-m);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card-background);
+        }
+        
+        .recharge-card:hover {
+            border-color: var(--folix-primary);
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .recharge-card.selected {
+            border-color: var(--folix-secondary);
+            background: rgba(255, 107, 53, 0.08);
+        }
+        
+        .recharge-card-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--folix-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .recharge-card-info {
+            flex: 1;
+        }
+        
+        .recharge-amount {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .recharge-bonus {
+            font-size: 11px;
+            color: var(--folix-secondary);
+        }
+        
+        .recharge-price {
+            text-align: right;
+        }
+        
+        .recharge-price .price {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        .recharge-price .original {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        /* Swatch Option (原生样式保留) */
+        .swatch-option {
+            padding: var(--indent-s) var(--indent-m);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--card-background);
+            min-width: 50px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .swatch-option:hover {
+            border-color: var(--folix-primary);
+        }
+        
+        .swatch-option.selected {
+            border-color: var(--folix-primary);
+            background: var(--folix-gradient);
+            color: var(--text-white);
+        }
+        
+        .swatch-option.color {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        
+        .swatch-input {
+            display: none;
+        }
+        
+        /* ========================================
+           PRODUCT OPTIONS BOTTOM
+           ======================================== */
+        .product-options-bottom {
+            margin-top: var(--indent-l);
+        }
+        
+        .box-tocart {
+            margin-bottom: var(--indent-l);
+        }
+        
+        .box-tocart .fieldset {
+            flex-direction: row;
+            align-items: flex-end;
+            gap: var(--indent-l);
+        }
+        
+        /* Qty Field */
+        .field.qty {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-xs);
+        }
+        
+        .field.qty .label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .field.qty .control {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .field.qty input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .field.qty input:focus {
+            outline: none;
+        }
+        
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--page-background);
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+        
+        .qty-btn:hover {
+            background: var(--folix-primary);
+            color: var(--text-white);
+        }
+        
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: var(--indent-m);
+            flex-wrap: wrap;
+        }
+        
+        .action.tocart {
+            padding: var(--indent-m) var(--indent-xl);
+            background: var(--folix-secondary);
+            color: var(--text-white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .action.tocart:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .action.tocart span {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .paypal-logo {
+            display: none;
+        }
+        
+        #instant-purchase {
+            display: none;
+        }
+        
+        /* ========================================
+           PRODUCT SOCIAL LINKS
+           ======================================== */
+        .product-social-links {
+            margin-top: var(--indent-m);
+        }
+        
+        .product-addto-links {
+            display: flex;
+            gap: var(--indent-m);
+        }
+        
+        .product-addto-links .action {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        
+        .product-addto-links .action:hover {
+            color: var(--folix-primary);
+        }
+        
+        /* ========================================
+           PRODUCT INFO DETAILED - Tabs
            ======================================== */
         .product.info.detailed {
+            margin-top: var(--indent-xl);
+            clear: both;
+        }
+        
+        .product.data.items {
             background: var(--card-background);
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
         
-        .data.items {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* Tab 标题 */
         .data.item.title {
-            display: flex;
-            background: var(--card-background);
             border-bottom: 1px solid var(--border-color);
         }
         
         .data.item.title a {
-            flex: 1;
+            display: block;
             padding: var(--indent-m) var(--indent-l);
             color: var(--text-secondary);
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
         }
@@ -447,7 +1072,6 @@
             border-bottom-color: var(--folix-primary);
         }
         
-        /* Tab 内容 */
         .data.item.content {
             padding: var(--indent-l);
             display: none;
@@ -457,6 +1081,7 @@
             display: block;
         }
         
+        /* Description */
         .product.attribute.description .value p {
             margin-bottom: var(--indent-m);
             color: var(--text-secondary);
@@ -473,7 +1098,7 @@
             margin-bottom: var(--indent-s);
         }
         
-        /* 详细参数表 */
+        /* Additional Attributes Table */
         .additional-attributes-wrapper table {
             width: 100%;
             border-collapse: collapse;
@@ -504,476 +1129,204 @@
             color: var(--text-primary);
         }
         
-        /* ========================================
-           购物车信息卡片
-           ======================================== */
-        .product-info-main {
-            position: sticky;
-            top: var(--indent-l);
+        /* Table Caption */
+        .table-caption {
+            display: none;
         }
         
-        .product-info-card {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
+        /* Review Form */
+        .review-form {
+            max-width: 600px;
         }
         
-        /* 产品头部信息 */
-        .product-header {
-            padding: var(--indent-l);
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .product-name {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: var(--indent-s);
-        }
-        
-        .product-meta {
+        .review-fieldset {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: var(--indent-m);
+        }
+        
+        .review-legend {
             margin-bottom: var(--indent-m);
         }
         
-        .product-rating {
-            display: flex;
-            align-items: center;
-            gap: var(--indent-xs);
-        }
-        
-        .rating-stars {
-            color: var(--folix-secondary);
-            font-size: 16px;
-        }
-        
-        .rating-count {
-            color: var(--text-secondary);
-            font-size: 13px;
-        }
-        
-        .product-sku {
-            color: var(--text-muted);
-            font-size: 13px;
-        }
-        
-        /* 价格区域 */
-        .price-box {
-            display: flex;
-            align-items: baseline;
-            gap: var(--indent-m);
-        }
-        
-        .price-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-        
-        .price-wrapper .price {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--folix-secondary);
-        }
-        
-        .old-price .price {
-            font-size: 18px;
-            color: var(--text-muted);
-            text-decoration: line-through;
-        }
-        
-        .discount-badge {
-            background: var(--folix-secondary);
-            color: white;
-            padding: 2px 8px;
-            border-radius: var(--radius-sm);
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        /* 选择区域 */
-        .product-options-wrapper {
-            padding: var(--indent-l);
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .swatch-opt {
-            display: flex;
-            flex-direction: column;
-            gap: var(--indent-l);
-        }
-        
-        .swatch-attribute {
-            display: flex;
-            flex-direction: column;
-            gap: var(--indent-s);
-        }
-        
-        .swatch-attribute-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-        
-        /* 平台选择 - 游戏特有 */
-        .platform-options,
-        .server-options,
-        .amount-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--indent-s);
-        }
-        
-        .swatch-option {
-            padding: var(--indent-s) var(--indent-m);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: var(--card-background);
-            min-width: 60px;
-            text-align: center;
-        }
-        
-        .swatch-option:hover {
-            border-color: var(--folix-primary);
-            background: rgba(74, 144, 226, 0.05);
-        }
-        
-        .swatch-option.selected {
-            border-color: var(--folix-primary);
-            background: var(--folix-gradient);
-            color: var(--text-white);
-        }
-        
-        .swatch-option.text {
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        /* 平台图标选择 */
-        .swatch-option.platform {
-            display: flex;
-            align-items: center;
-            gap: var(--indent-xs);
-            padding: var(--indent-s) var(--indent-m);
-        }
-        
-        .platform-icon {
-            font-size: 18px;
-        }
-        
-        /* 面额选择 - 游戏特有 */
-        .swatch-option.amount {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-width: 80px;
-        }
-        
-        .amount-value {
-            font-weight: 600;
-            font-size: 16px;
-        }
-        
-        .amount-bonus {
-            font-size: 11px;
-            color: var(--folix-secondary);
-            margin-top: 2px;
-        }
-        
-        .swatch-option.amount.selected .amount-bonus {
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* 数量选择 */
-        .field.qty {
-            display: flex;
-            align-items: center;
-            gap: var(--indent-s);
-        }
-        
-        .qty-label {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-        
-        .qty-control {
-            display: flex;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-        
-        .qty-btn {
-            width: 36px;
-            height: 36px;
-            border: none;
-            background: var(--page-background);
-            cursor: pointer;
-            font-size: 18px;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-        }
-        
-        .qty-btn:hover {
-            background: var(--folix-primary);
-            color: var(--text-white);
-        }
-        
-        .qty-input {
-            width: 50px;
-            height: 36px;
-            border: none;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .qty-input:focus {
-            outline: none;
-        }
-        
-        /* 购物车按钮区 */
-        .actions {
-            padding: var(--indent-l);
-        }
-        
-        .action-btn {
-            width: 100%;
-            padding: var(--indent-m) var(--indent-l);
-            border: none;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-bottom: var(--indent-s);
-        }
-        
-        .action-btn.primary {
-            background: var(--folix-gradient);
-            color: var(--text-white);
-        }
-        
-        .action-btn.primary:hover {
-            background: var(--folix-gradient-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
-        }
-        
-        .action-btn.secondary {
-            background: transparent;
-            border: 2px solid var(--folix-primary);
-            color: var(--folix-primary);
-        }
-        
-        .action-btn.secondary:hover {
-            background: var(--folix-primary);
-            color: var(--text-white);
-        }
-        
-        .btn-icon {
-            margin-right: var(--indent-s);
-        }
-        
-        /* 社交链接 */
-        .product-social-links {
-            padding: var(--indent-m) var(--indent-l);
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: center;
-            gap: var(--indent-l);
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: var(--indent-xs);
-            color: var(--text-secondary);
-            font-size: 13px;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        
-        .social-link:hover {
-            color: var(--folix-primary);
-        }
-        
         /* ========================================
-           推荐产品区块
+           BLOCK RELATED - 相关产品
            ======================================== */
         .block.related {
+            margin-top: var(--indent-xl);
+            clear: both;
+        }
+        
+        .block-title {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .block-title strong {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .products-related {
             background: var(--card-background);
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
         }
         
-        .block-title {
-            padding: var(--indent-m) var(--indent-l);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: var(--indent-s);
-        }
-        
-        .block-title strong {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .block-title-icon {
-            font-size: 18px;
-        }
-        
-        .products-grid {
-            padding: var(--indent-m);
-        }
-        
         .product-items {
             display: flex;
-            flex-direction: column;
             gap: var(--indent-m);
+            padding: var(--indent-m);
+            overflow-x: auto;
         }
         
         .product-item {
-            display: flex;
-            gap: var(--indent-m);
+            flex: 0 0 200px;
             padding: var(--indent-m);
-            background: var(--page-background);
+            border: 1px solid var(--border-color);
             border-radius: var(--radius-md);
-            cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
         
         .product-item:hover {
-            background: rgba(74, 144, 226, 0.05);
-            transform: translateX(4px);
+            border-color: var(--folix-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .product-item-info {
+            display: block;
         }
         
         .product-item-photo {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-sm);
-            overflow: hidden;
-            flex-shrink: 0;
+            display: block;
+            margin-bottom: var(--indent-m);
         }
         
-        .product-item-photo img {
+        .product-image-container {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--page-background);
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+        }
+        
+        .product-image-photo {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
         
         .product-item-details {
-            flex: 1;
+            text-align: center;
         }
         
         .product-item-name {
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-primary);
-            margin-bottom: var(--indent-xs);
+            margin-bottom: var(--indent-s);
         }
         
         .product-item-name a {
-            color: inherit;
+            color: var(--text-primary);
         }
         
         .product-item-name a:hover {
             color: var(--folix-primary);
         }
         
-        .product-item-price {
-            font-size: 14px;
-            font-weight: 600;
+        .product-item-price .price {
+            font-size: 16px;
+            font-weight: 700;
             color: var(--folix-secondary);
         }
         
-        /* ========================================
-           Trust Badges
-           ======================================== */
-        .trust-badges {
-            display: flex;
-            justify-content: center;
-            gap: var(--indent-xl);
-            padding: var(--indent-xl);
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
-            margin-top: var(--indent-xl);
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .trust-badge {
-            display: flex;
-            align-items: center;
-            gap: var(--indent-s);
-        }
-        
-        .trust-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(74, 144, 226, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        
-        .trust-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .trust-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-        
-        .trust-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
+        .product-item-actions {
+            margin-top: var(--indent-s);
+            display: none;
         }
         
         /* ========================================
            FOOTER
            ======================================== */
         .page-footer {
-            background: var(--footer-background);
+            background: var(--header-background);
             color: var(--text-white);
-            margin-top: var(--indent-2xl);
+            margin-top: var(--indent-xl);
         }
         
         .footer.content {
             max-width: 1280px;
             margin: 0 auto;
             padding: var(--indent-xl) var(--indent-l);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: var(--indent-xl);
         }
         
-        .footer-links {
+        /* Newsletter Block */
+        .block.newsletter {
+            flex: 1;
+            max-width: 400px;
+        }
+        
+        .block.newsletter .title strong {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--indent-m);
+            display: block;
+        }
+        
+        .block.newsletter .content {
             display: flex;
-            justify-content: center;
-            gap: var(--indent-xl);
+            gap: var(--indent-s);
+        }
+        
+        .block.newsletter input {
+            flex: 1;
+            padding: var(--indent-s) var(--indent-m);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            font-size: 14px;
+        }
+        
+        .block.newsletter input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .block.newsletter .action.subscribe {
+            padding: var(--indent-s) var(--indent-m);
+            background: var(--folix-gradient);
+            color: var(--text-white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Footer Links */
+        .footer.links {
+            display: flex;
+            gap: var(--indent-l);
             flex-wrap: wrap;
         }
         
-        .footer-links a {
+        .footer.links a {
             color: rgba(255, 255, 255, 0.7);
             font-size: 13px;
         }
         
-        .footer-links a:hover {
+        .footer.links a:hover {
             color: var(--text-white);
         }
         
+        /* Copyright */
         .copyright {
             background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
             text-align: center;
@@ -983,138 +1336,86 @@
         }
         
         /* ========================================
-           响应式设计
+           RESPONSIVE
            ======================================== */
         @media screen and (max-width: 1024px) {
-            .product-detail-layout {
-                flex-direction: column;
-            }
-            
-            .product-detail-left,
-            .product-detail-right {
-                flex: none;
-                width: 100%;
-            }
-            
+            .product.media,
             .product-info-main {
-                position: static;
-            }
-            
-            .trust-badges {
-                flex-wrap: wrap;
-            }
-        }
-        
-        @media screen and (max-width: 768px) {
-            .header.content {
-                flex-wrap: wrap;
-                gap: var(--indent-m);
-            }
-            
-            .search-box {
-                order: 3;
-                max-width: 100%;
+                display: block;
                 width: 100%;
-                margin: 0;
             }
             
-            .gallery-thumbnails {
-                overflow-x: auto;
-                padding-bottom: var(--indent-m);
+            .product.media {
+                padding-right: 0;
+                margin-bottom: var(--indent-l);
             }
             
-            .thumbnail-item {
-                flex-shrink: 0;
+            .recharge-amount-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .platform-options,
-            .server-options,
-            .amount-options {
-                flex-wrap: wrap;
-            }
-            
-            .swatch-option.amount {
-                flex: 1 1 calc(33.333% - var(--indent-s));
-                min-width: 0;
-            }
-        }
-        
-        @media screen and (max-width: 640px) {
-            .container {
-                padding: 0 var(--indent-m);
-            }
-            
-            .page-title-wrapper h1 {
-                font-size: 22px;
-            }
-            
-            .product-header {
-                padding: var(--indent-m);
-            }
-            
-            .product-name {
-                font-size: 18px;
-            }
-            
-            .price-wrapper .price {
-                font-size: 24px;
-            }
-            
-            .trust-badges {
+            .footer.content {
                 flex-direction: column;
-                align-items: center;
             }
             
-            .footer-links {
-                flex-direction: column;
-                align-items: center;
-                gap: var(--indent-m);
+            .block.newsletter {
+                max-width: 100%;
             }
-        }
-        
-        /* ========================================
-           移动端导航栏（简化版）
-           ======================================== */
-        .nav-toggle {
-            display: none;
         }
         
         @media screen and (max-width: 768px) {
             .nav-toggle {
                 display: flex;
-                width: 40px;
-                height: 40px;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: var(--radius-md);
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
             }
             
-            .nav-toggle span {
-                display: block;
-                width: 20px;
-                height: 2px;
-                background: var(--text-white);
-                position: relative;
+            .nav-sections {
+                display: none;
             }
             
-            .nav-toggle span::before,
-            .nav-toggle span::after {
-                content: '';
-                position: absolute;
-                width: 20px;
-                height: 2px;
-                background: var(--text-white);
-                left: 0;
+            .panel.header {
+                flex-direction: column;
+                gap: var(--indent-s);
             }
             
-            .nav-toggle span::before {
-                top: -6px;
+            .header.content {
+                flex-wrap: wrap;
             }
             
-            .nav-toggle span::after {
-                top: 6px;
+            .block-search {
+                order: 3;
+                max-width: 100%;
+                width: 100%;
+                margin-top: var(--indent-m);
+            }
+            
+            .page-title {
+                font-size: 20px;
+            }
+            
+            .price-box .price {
+                font-size: 24px;
+            }
+            
+            .recharge-amount-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-items {
+                flex-wrap: wrap;
+            }
+            
+            .product-item {
+                flex: 0 0 calc(50% - var(--indent-m));
+            }
+        }
+        
+        @media screen and (max-width: 640px) {
+            .columns {
+                padding: 0 var(--indent-m);
+            }
+            
+            .product-item {
+                flex: 0 0 100%;
             }
         }
     </style>
@@ -1125,408 +1426,562 @@
              HEADER
              ======================================== -->
         <header class="page-header">
-            <div class="header content">
-                <div class="nav-toggle">
-                    <span>Toggle Nav</span>
-                </div>
-                
-                <a href="#" class="logo">
-                    <span class="logo-icon">🎮</span>
-                    <span>Folix</span>
-                </a>
-                
-                <div class="search-box">
-                    <input type="text" placeholder="Search games, items, skins...">
-                </div>
-                
-                <div class="header-icons">
-                    <div class="header-icon">
-                        <span>👤</span>
+            <!-- Panel Wrapper - Top Bar -->
+            <div class="panel wrapper">
+                <div class="panel header">
+                    <a class="action skip contentarea" href="#contentarea">
+                        <span>Skip to Content</span>
+                    </a>
+                    
+                    <!-- Language Switcher -->
+                    <div class="switcher language switcher-language" data-ui-id="language-switcher" id="switcher-language">
+                        <strong class="label switcher-label"><span>Language</span></strong>
+                        <div class="actions dropdown options switcher-options">
+                            <div class="action toggle switcher-trigger" id="switcher-language-trigger">
+                                <strong class="view-default">
+                                    <span>🌐 English</span>
+                                </strong>
+                            </div>
+                            <ul class="dropdown switcher-dropdown">
+                                <li class="view-zh_cn switcher-option">
+                                    <a href="#">简体中文</a>
+                                </li>
+                                <li class="view-oj switcher-option">
+                                    <a href="#">日本語</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="header-icon">
-                        <span>❤️</span>
-                        <span class="badge">3</span>
-                    </div>
-                    <div class="header-icon">
-                        <span>🛒</span>
-                        <span class="badge">2</span>
-                    </div>
-                </div>
-            </div>
-        </header>
-        
-        <!-- ========================================
-             MAIN CONTENT
-             ======================================== -->
-        <main class="page-main">
-            <!-- Breadcrumb -->
-            <div class="breadcrumbs">
-                <div class="container">
-                    <ul class="items">
-                        <li class="item home">
-                            <a href="#" title="Go to Home Page">Home</a>
+                    
+                    <!-- Header Links -->
+                    <ul class="header links">
+                        <li class="greet welcome">
+                            <span class="not-logged-in">Default welcome msg!</span>
                         </li>
-                        <li class="item category">
-                            <a href="#">Game Recharge</a>
+                        <li class="link authorization-link" data-label="or">
+                            <a href="#">Sign In</a>
                         </li>
-                        <li class="item category">
-                            <a href="#">Mobile Legends</a>
-                        </li>
-                        <li class="item product">
-                            <strong>Diamonds</strong>
+                        <li>
+                            <a href="#" id="idJI4s6BG3">Create an Account</a>
                         </li>
                     </ul>
                 </div>
             </div>
             
-            <!-- Product Detail -->
-            <div class="product-detail-page">
-                <div class="container">
-                    <!-- 页面标题 -->
-                    <div class="page-title-wrapper">
-                        <h1>Mobile Legends: Bang Bang Diamonds</h1>
-                        <div class="title-decoration"></div>
-                    </div>
-                    
-                    <!-- 主布局 - 两列块布局 -->
-                    <div class="product-detail-layout">
-                        <!-- 左列 - 图片 + 描述 (60%) -->
-                        <div class="product-detail-left">
-                            <!-- 产品图片 Gallery -->
-                            <div class="product media">
-                                <div class="gallery-placeholder">
-                                    <div class="gallery-main">
-                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%231a1a2e' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='%234A90E2' text-anchor='middle' dy='.3em'%3EMobile Legends%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='24' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EDiamonds Recharge%3C/text%3E%3C/svg%3E" alt="Mobile Legends Diamonds">
-                                        
-                                        <!-- 游戏图标覆盖层 -->
-                                        <div class="game-overlay">
-                                            <div class="game-icon">🎮</div>
-                                            <div class="game-info">
-                                                <div class="game-name">Mobile Legends</div>
-                                                <div class="game-developer">Moonton</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="gallery-thumbnails">
-                                        <div class="thumbnail-item active">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect fill='%234A90E2' width='80' height='80'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EMain%3C/text%3E%3C/svg%3E" alt="Thumbnail 1">
-                                        </div>
-                                        <div class="thumbnail-item">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect fill='%236C5CE7' width='80' height='80'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3ESkin%3C/text%3E%3C/svg%3E" alt="Thumbnail 2">
-                                        </div>
-                                        <div class="thumbnail-item">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect fill='%23FF6B35' width='80' height='80'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EHero%3C/text%3E%3C/svg%3E" alt="Thumbnail 3">
-                                        </div>
-                                        <div class="thumbnail-item">
-                                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect fill='%232563EB' width='80' height='80'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EEvent%3C/text%3E%3C/svg%3E" alt="Thumbnail 4">
-                                        </div>
+            <!-- Header Content - Main Bar -->
+            <div class="header content">
+                <span data-action="toggle-nav" class="action nav-toggle">
+                    <span>Toggle Nav</span>
+                </span>
+                
+                <a class="logo" href="#" title="Folix" aria-label="store logo">
+                    <span class="logo-icon">🎮</span>
+                    <span class="logo-text">Folix</span>
+                </a>
+                
+                <!-- Minicart -->
+                <div data-block="minicart" class="minicart-wrapper">
+                    <a class="action showcart" href="#" data-bind="scope: 'minicart_content'">
+                        <span class="text">My Cart</span>
+                        <span class="counter qty empty">
+                            <span class="counter-number"></span>
+                            <span class="counter-label"></span>
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Search Block -->
+                <div class="block block-search">
+                    <div class="block block-title"><strong>Search</strong></div>
+                    <div class="block block-content">
+                        <form class="form minisearch" id="search_mini_form" action="#" method="get">
+                            <div class="field search">
+                                <label class="label" for="search" data-role="minisearch-label">
+                                    <span>Search</span>
+                                </label>
+                                <div class="control">
+                                    <input id="search" type="text" name="q" value="" placeholder="Search games, items, skins..." class="input-text" maxlength="128">
+                                    <div id="search_autocomplete" class="search-autocomplete"></div>
+                                    <div class="nested">
+                                        <a class="action advanced" href="#" data-action="advanced-search">
+                                            Advanced Search
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="actions">
+                                <button type="submit" title="Search" class="action search" aria-label="Search">
+                                    <span>Search</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Compare Wrapper -->
+                <ul class="compare wrapper">
+                    <li class="item link compare" data-bind="scope: 'compareProducts'" data-role="compare-products-link">
+                        <a class="action compare no-display" title="Compare Products">
+                            Compare Products
+                            <span class="counter qty"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        
+        <!-- ========================================
+             NAV SECTIONS
+             ======================================== -->
+        <div class="sections nav-sections">
+            <div class="section-items nav-sections-items mage-tabs-disabled" role="tablist">
+                <div class="section-item-title nav-sections-item-title active" data-role="collapsible" role="tab">
+                    <a class="nav-sections-item-switch" data-toggle="switch" href="#store.menu">Menu</a>
+                </div>
+                <div class="section-item-content nav-sections-item-content" id="store.menu" data-role="content" role="tabpanel">
+                    <nav class="navigation" data-action="navigation">
+                        <ul id="ui-id-1" role="menu" tabindex="0" class="ui-menu ui-widget ui-widget-content">
+                            <li class="level0 nav-1 category-item first level-top ui-menu-item">
+                                <a href="#" class="level-top ui-menu-item-wrapper"><span>🎮 Game Recharge</span></a>
+                            </li>
+                            <li class="level0 nav-2 category-item level-top parent ui-menu-item">
+                                <a href="#" class="level-top ui-menu-item-wrapper"><span>📱 Mobile Games</span></a>
+                            </li>
+                            <li class="level0 nav-3 category-item level-top parent ui-menu-item">
+                                <a href="#" class="level-top ui-menu-item-wrapper"><span>💻 PC Games</span></a>
+                            </li>
+                            <li class="level0 nav-4 category-item level-top ui-menu-item">
+                                <a href="#" class="level-top ui-menu-item-wrapper"><span>🎁 Gift Cards</span></a>
+                            </li>
+                            <li class="level0 nav-5 category-item last level-top ui-menu-item">
+                                <a href="#" class="level-top ui-menu-item-wrapper"><span>🔥 Sale</span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========================================
+             BREADCRUMBS
+             ======================================== -->
+        <div class="breadcrumbs">
+            <ul class="items">
+                <li class="item home">
+                    <a href="#" title="Go to Home Page">Home</a>
+                </li>
+                <li class="item category">
+                    <a href="#">Game Recharge</a>
+                </li>
+                <li class="item category">
+                    <a href="#">Mobile Legends</a>
+                </li>
+                <li class="item product">
+                    <strong>Diamonds</strong>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- ========================================
+             MAIN CONTENT
+             ======================================== -->
+        <main id="maincontent" class="page-main">
+            <a id="contentarea" tabindex="-1"></a>
+            
+            <div class="page messages">
+                <div data-placeholder="messages"></div>
+            </div>
+            
+            <div class="columns">
+                <div class="column main">
+                    <input name="form_key" type="hidden" value="demo_form_key">
+                    
+                    <!-- ========================================
+                         PRODUCT MEDIA - 图片区域 (35%)
+                         ======================================== -->
+                    <div class="product media">
+                        <a id="gallery-prev-area" tabindex="-1"></a>
+                        <div class="action-skip-wrapper">
+                            <a class="action skip gallery-next-area" href="#gallery-next-area">
+                                <span>Skip to the end of the images gallery</span>
+                            </a>
+                        </div>
+                        
+                        <div class="gallery-placeholder" data-gallery-role="gallery-placeholder">
+                            <img alt="Mobile Legends Diamonds" class="gallery-placeholder__image" 
+                                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a1a2e'/%3E%3Cstop offset='100%25' style='stop-color:%2316213e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23bg)' width='500' height='500'/%3E%3Ccircle cx='250' cy='200' r='80' fill='%234A90E2' opacity='0.3'/%3E%3Ccircle cx='250' cy='200' r='60' fill='%236C5CE7' opacity='0.4'/%3E%3Ctext x='250' y='210' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dy='.3em'%3E🎮%3C/text%3E%3Ctext x='250' y='320' font-family='Arial' font-size='20' fill='%234A90E2' text-anchor='middle' dy='.3em'%3EMobile Legends%3C/text%3E%3Ctext x='250' y='360' font-family='Arial' font-size='14' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EDiamonds Recharge%3C/text%3E%3C/svg%3E">
                             
-                            <!-- 产品描述 Tabs -->
-                            <div class="product info detailed">
-                                <div class="data items">
-                                    <!-- Tab: Description -->
-                                    <div class="data item title active" data-role="collapsible">
-                                        <a class="data switch" href="#description">
-                                            Description
-                                        </a>
-                                    </div>
-                                    <div class="data item content active" id="description" data-role="content">
-                                        <div class="product attribute description">
-                                            <div class="value">
-                                                <p>Mobile Legends: Bang Bang is one of the most popular MOBA games in Southeast Asia. Diamonds are the premium in-game currency that allows you to purchase skins, heroes, and other exclusive items.</p>
-                                                <p>With Mobile Legends Diamonds, you can:</p>
-                                                <ul>
-                                                    <li>Unlock premium hero skins with stunning visual effects</li>
-                                                    <li>Purchase new heroes to expand your roster</li>
-                                                    <li>Get exclusive emotes and recall effects</li>
-                                                    <li>Participate in lucky draw events</li>
-                                                    <li>Buy Starlight Pass for monthly rewards</li>
-                                                </ul>
-                                                <p>Diamonds will be delivered to your game account instantly after purchase. Please ensure you enter the correct User ID and Zone ID.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Tab: More Information -->
-                                    <div class="data item title" data-role="collapsible">
-                                        <a class="data switch" href="#additional">
-                                            More Information
-                                        </a>
-                                    </div>
-                                    <div class="data item content" id="additional" data-role="content">
-                                        <div class="additional-attributes-wrapper">
-                                            <table class="data table additional-attributes">
-                                                <tbody>
-                                                    <tr>
-                                                        <th class="col label">Game</th>
-                                                        <td class="col data">Mobile Legends: Bang Bang</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="col label">Developer</th>
-                                                        <td class="col data">Moonton</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="col label">Currency</th>
-                                                        <td class="col data">Diamonds</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="col label">Delivery</th>
-                                                        <td class="col data">Instant (1-5 minutes)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="col label">Platform</th>
-                                                        <td class="col data">Android, iOS, PC</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="col label">Region</th>
-                                                        <td class="col data">Global (All Servers)</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Tab: Reviews -->
-                                    <div class="data item title" data-role="collapsible">
-                                        <a class="data switch" href="#reviews">
-                                            Reviews (2,341)
-                                        </a>
-                                    </div>
-                                    <div class="data item content" id="reviews" data-role="content">
-                                        <div style="padding: var(--indent-m); text-align: center; color: var(--text-secondary);">
-                                            <p>⭐⭐⭐⭐⭐ Average Rating: 4.8/5</p>
-                                            <p style="margin-top: var(--indent-s); font-size: 13px;">
-                                                "Fast delivery! Got my diamonds in less than 2 minutes." - Alex G.
-                                            </p>
-                                            <p style="margin-top: var(--indent-s); font-size: 13px;">
-                                                "Best price I've found. Will definitely buy again!" - Sarah M.
-                                            </p>
-                                        </div>
-                                    </div>
+                            <!-- 游戏图标覆盖层 -->
+                            <div class="game-overlay">
+                                <div class="game-icon">🎮</div>
+                                <div class="game-info">
+                                    <div class="game-name">Mobile Legends</div>
+                                    <div class="game-developer">Moonton</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- 右列 - 购物车 + 推荐 (40%) -->
-                        <div class="product-detail-right">
-                            <!-- 购物车信息卡片 -->
-                            <div class="product-info-main">
-                                <div class="product-info-card">
-                                    <!-- 产品头部信息 -->
-                                    <div class="product-header">
-                                        <h2 class="product-name">Mobile Legends Diamonds</h2>
-                                        <div class="product-meta">
-                                            <div class="product-rating">
-                                                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
-                                                <span class="rating-count">(2,341 reviews)</span>
+                        <div class="action-skip-wrapper">
+                            <a class="action skip gallery-prev-area" href="#gallery-prev-area">
+                                <span>Skip to the beginning of the images gallery</span>
+                            </a>
+                        </div>
+                        <a id="gallery-next-area" tabindex="-1"></a>
+                    </div>
+                    
+                    <!-- ========================================
+                         PRODUCT INFO MAIN - 产品信息区域 (65%)
+                         ======================================== -->
+                    <div class="product-info-main">
+                        <!-- Page Title -->
+                        <div class="page-title-wrapper product">
+                            <h1 class="page-title">
+                                <span class="base" data-ui-id="page-title-wrapper" itemprop="name">Mobile Legends: Bang Bang Diamonds</span>
+                            </h1>
+                        </div>
+                        
+                        <!-- Product Reviews Summary -->
+                        <div class="product-reviews-summary">
+                            <div class="rating-summary">
+                                <span class="rating-result">⭐⭐⭐⭐⭐</span>
+                                <span>4.8</span>
+                            </div>
+                            <div class="reviews-actions">
+                                <a class="action add" href="#review-form">
+                                    Be the first to review this product
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Info Price -->
+                        <div class="product-info-price">
+                            <div class="price-box price-final_price" data-role="priceBox" data-product-id="1396">
+                                <span class="price-label">From</span>
+                                <span class="price-container price-final_price">
+                                    <span class="price-wrapper">
+                                        <span class="price">$0.99</span>
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="product-info-stock-sku">
+                                <div class="stock available" title="Availability">
+                                    <span>In stock</span>
+                                </div>
+                                <div class="product attribute sku">
+                                    <strong class="type">SKU</strong>
+                                    <div class="value" itemprop="sku">ML-DIAMOND</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- ========================================
+                             PRODUCT ADD FORM
+                             ======================================== -->
+                        <div class="product-add-form">
+                            <form data-product-sku="ML-DIAMOND" action="#" method="post" id="product_addtocart_form" novalidate="novalidate">
+                                <input type="hidden" name="product" value="1396">
+                                <input type="hidden" name="selected_configurable_option" value="">
+                                <input type="hidden" name="related_product" id="related-products-field" value="">
+                                <input type="hidden" name="item" value="1396">
+                                <input name="form_key" type="hidden" value="demo_form_key">
+                                
+                                <!-- Product Options Wrapper -->
+                                <div class="product-options-wrapper" id="product-options-wrapper">
+                                    <div class="fieldset" tabindex="0">
+                                        <!-- 游戏充值档位选择 -->
+                                        <div class="swatch-opt" data-role="swatch-options">
+                                            <div class="swatch-attribute" data-attribute-code="amount">
+                                                <span id="option-label-amount" class="swatch-attribute-label">💎 Select Diamond Amount</span>
+                                                <div class="swatch-attribute-options recharge-amount-grid">
+                                                    <div class="recharge-card" data-amount="86" data-price="0.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">86 💎</div>
+                                                            <div class="recharge-bonus">+5 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$0.99</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="recharge-card selected" data-amount="172" data-price="1.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">172 💎</div>
+                                                            <div class="recharge-bonus">+12 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$1.99</div>
+                                                            <div class="original">$2.39</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="recharge-card" data-amount="257" data-price="2.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">257 💎</div>
+                                                            <div class="recharge-bonus">+20 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$2.99</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="recharge-card" data-amount="344" data-price="3.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">344 💎</div>
+                                                            <div class="recharge-bonus">+30 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$3.99</div>
+                                                            <div class="original">$4.79</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="recharge-card" data-amount="514" data-price="5.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">514 💎</div>
+                                                            <div class="recharge-bonus">+50 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$5.99</div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="recharge-card" data-amount="706" data-price="7.99">
+                                                        <div class="recharge-card-icon">💎</div>
+                                                        <div class="recharge-card-info">
+                                                            <div class="recharge-amount">706 💎</div>
+                                                            <div class="recharge-bonus">+75 bonus</div>
+                                                        </div>
+                                                        <div class="recharge-price">
+                                                            <div class="price">$7.99</div>
+                                                            <div class="original">$9.59</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <span class="product-sku">SKU: ML-DIAMOND</span>
-                                        </div>
-                                        <div class="price-box">
-                                            <span class="price-label">From</span>
-                                            <span class="price-wrapper">
-                                                <span class="price">$0.99</span>
-                                            </span>
-                                            <span class="old-price">
-                                                <span class="price">$1.19</span>
-                                            </span>
-                                            <span class="discount-badge">-17%</span>
                                         </div>
                                     </div>
-                                    
-                                    <!-- 选择区域 -->
-                                    <div class="product-options-wrapper">
-                                        <div class="swatch-opt" data-role="swatch-options">
-                                            <!-- 平台选择 -->
-                                            <div class="swatch-attribute platform" data-attribute-code="platform">
-                                                <span class="swatch-attribute-label">Platform</span>
-                                                <div class="swatch-attribute-options platform-options">
-                                                    <div class="swatch-option platform selected" data-option-id="android">
-                                                        <span class="platform-icon">🤖</span>
-                                                        <span>Android</span>
-                                                    </div>
-                                                    <div class="swatch-option platform" data-option-id="ios">
-                                                        <span class="platform-icon">🍎</span>
-                                                        <span>iOS</span>
-                                                    </div>
-                                                    <div class="swatch-option platform" data-option-id="pc">
-                                                        <span class="platform-icon">💻</span>
-                                                        <span>PC</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- 区服选择 -->
-                                            <div class="swatch-attribute server" data-attribute-code="server">
-                                                <span class="swatch-attribute-label">Server Region</span>
-                                                <div class="swatch-attribute-options server-options">
-                                                    <div class="swatch-option text selected" data-option-id="global">Global</div>
-                                                    <div class="swatch-option text" data-option-id="sea">SEA</div>
-                                                    <div class="swatch-option text" data-option-id="na">NA</div>
-                                                    <div class="swatch-option text" data-option-id="eu">EU</div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- 面额选择 -->
-                                            <div class="swatch-attribute amount" data-attribute-code="amount">
-                                                <span class="swatch-attribute-label">Diamonds Amount</span>
-                                                <div class="swatch-attribute-options amount-options">
-                                                    <div class="swatch-option amount" data-option-id="86">
-                                                        <span class="amount-value">86 💎</span>
-                                                        <span class="amount-bonus">+5 bonus</span>
-                                                    </div>
-                                                    <div class="swatch-option amount selected" data-option-id="172">
-                                                        <span class="amount-value">172 💎</span>
-                                                        <span class="amount-bonus">+12 bonus</span>
-                                                    </div>
-                                                    <div class="swatch-option amount" data-option-id="257">
-                                                        <span class="amount-value">257 💎</span>
-                                                        <span class="amount-bonus">+20 bonus</span>
-                                                    </div>
-                                                    <div class="swatch-option amount" data-option-id="344">
-                                                        <span class="amount-value">344 💎</span>
-                                                        <span class="amount-bonus">+30 bonus</span>
-                                                    </div>
-                                                    <div class="swatch-option amount" data-option-id="514">
-                                                        <span class="amount-value">514 💎</span>
-                                                        <span class="amount-bonus">+50 bonus</span>
-                                                    </div>
-                                                    <div class="swatch-option amount" data-option-id="706">
-                                                        <span class="amount-value">706 💎</span>
-                                                        <span class="amount-bonus">+75 bonus</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <!-- 数量选择 -->
+                                </div>
+                                
+                                <!-- Product Options Bottom -->
+                                <div class="product-options-bottom">
+                                    <div class="box-tocart">
+                                        <div class="fieldset">
                                             <div class="field qty">
-                                                <label class="qty-label">Quantity</label>
-                                                <div class="qty-control">
+                                                <label class="label" for="qty"><span>Qty</span></label>
+                                                <div class="control">
                                                     <button type="button" class="qty-btn qty-minus">−</button>
-                                                    <input type="number" class="qty-input" value="1" min="1" max="100">
+                                                    <input type="number" name="qty" id="qty" min="1" value="1" title="Qty" class="input-text qty">
                                                     <button type="button" class="qty-btn qty-plus">+</button>
                                                 </div>
                                             </div>
+                                            <div class="actions">
+                                                <button type="submit" title="Add to Cart" class="action primary tocart" id="product-addtocart-button">
+                                                    <span>⚡ Add to Cart - Instant Delivery</span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                    <!-- 购物车按钮区 -->
-                                    <div class="actions">
-                                        <button type="button" class="action-btn primary tocart" id="product-addtocart-button">
-                                            <span class="btn-icon">🛒</span>
-                                            <span>Add to Cart</span>
-                                        </button>
-                                        <button type="button" class="action-btn secondary">
-                                            <span class="btn-icon">⚡</span>
-                                            <span>Buy Now - Instant Delivery</span>
-                                        </button>
-                                    </div>
-                                    
-                                    <!-- 社交链接 -->
-                                    <div class="product-social-links">
-                                        <a href="#" class="social-link towishlist">
-                                            <span>❤️</span>
-                                            <span>Add to Wishlist</span>
-                                        </a>
-                                        <a href="#" class="social-link tocompare">
-                                            <span>⚖️</span>
-                                            <span>Add to Compare</span>
-                                        </a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Product Social Links -->
+                        <div class="product-social-links">
+                            <div class="product-addto-links" data-role="add-to-links">
+                                <a href="#" class="action towishlist" data-action="add-to-wishlist">
+                                    <span>❤️ Add to Wish List</span>
+                                </a>
+                                <a href="#" class="action tocompare" data-role="add-to-links">
+                                    <span>⚖️ Add to Compare</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ========================================
+                         PRODUCT INFO DETAILED - Tabs
+                         ======================================== -->
+                    <div class="product info detailed">
+                        <div class="product data items mage-tabs-disabled" role="tablist">
+                            <!-- Tab: Details -->
+                            <div class="data item title active" data-role="collapsible" id="tab-label-description" role="tab">
+                                <a class="data switch" tabindex="-1" data-toggle="trigger" href="#description">
+                                    Details
+                                </a>
+                            </div>
+                            <div class="data item content active" aria-labelledby="tab-label-description" id="description" data-role="content">
+                                <div class="product attribute description">
+                                    <div class="value">
+                                        <p>Mobile Legends: Bang Bang is one of the most popular MOBA games in Southeast Asia. Diamonds are the premium in-game currency that allows you to purchase skins, heroes, and other exclusive items.</p>
+                                        <p>With Mobile Legends Diamonds, you can:</p>
+                                        <ul>
+                                            <li>Unlock premium hero skins with stunning visual effects</li>
+                                            <li>Purchase new heroes to expand your roster</li>
+                                            <li>Get exclusive emotes and recall effects</li>
+                                            <li>Participate in lucky draw events</li>
+                                            <li>Buy Starlight Pass for monthly rewards</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- 推荐产品 -->
-                            <div class="block related">
-                                <div class="block-title">
-                                    <span class="block-title-icon">🔥</span>
-                                    <strong>Popular Choices</strong>
+                            <!-- Tab: More Information -->
+                            <div class="data item title" data-role="collapsible" id="tab-label-additional" role="tab">
+                                <a class="data switch" tabindex="-1" data-toggle="trigger" href="#additional">
+                                    More Information
+                                </a>
+                            </div>
+                            <div class="data item content" aria-labelledby="tab-label-additional" id="additional" data-role="content">
+                                <div class="additional-attributes-wrapper table-wrapper">
+                                    <table class="data table additional-attributes" id="product-attribute-specs-table">
+                                        <caption class="table-caption">More Information</caption>
+                                        <tbody>
+                                            <tr>
+                                                <th class="col label" scope="row">Game</th>
+                                                <td class="col data">Mobile Legends: Bang Bang</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="col label" scope="row">Developer</th>
+                                                <td class="col data">Moonton</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="col label" scope="row">Currency</th>
+                                                <td class="col data">Diamonds</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="col label" scope="row">Delivery</th>
+                                                <td class="col data">Instant (1-5 minutes)</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="col label" scope="row">Platform</th>
+                                                <td class="col data">Android, iOS, PC</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="col label" scope="row">Region</th>
+                                                <td class="col data">Global (All Servers)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="products-grid">
-                                    <ol class="product-items">
-                                        <li class="item product product-item">
+                            </div>
+                            
+                            <!-- Tab: Reviews -->
+                            <div class="data item title" data-role="collapsible" id="tab-label-reviews" role="tab">
+                                <a class="data switch" tabindex="-1" data-toggle="trigger" href="#reviews">
+                                    Reviews
+                                </a>
+                            </div>
+                            <div class="data item content" aria-labelledby="tab-label-reviews" id="reviews" data-role="content">
+                                <div style="padding: var(--indent-m); text-align: center; color: var(--text-secondary);">
+                                    <p>⭐⭐⭐⭐⭐ Average Rating: 4.8/5 (2,341 reviews)</p>
+                                    <p style="margin-top: var(--indent-s); font-size: 13px;">
+                                        "Fast delivery! Got my diamonds in less than 2 minutes." - Alex G.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ========================================
+                         BLOCK RELATED - 相关产品
+                         ======================================== -->
+                    <div class="block related" data-limit="0" data-shuffle="0" data-shuffle-weighted="0">
+                        <div class="block-title title">
+                            <strong id="block-related-heading" role="heading" aria-level="2">Related Products</strong>
+                        </div>
+                        <div class="block-content content" aria-labelledby="block-related-heading">
+                            <div class="products wrapper grid products-grid products-related">
+                                <ol class="products list items product-items">
+                                    <li class="item product product-item">
+                                        <div class="product-item-info">
                                             <a href="#" class="product photo product-item-photo">
-                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%23FF6B35' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EWeekly%3C/text%3E%3C/svg%3E" alt="Weekly Pass">
+                                                <span class="product-image-container">
+                                                    <span class="product-image-wrapper">
+                                                        <img class="product-image-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Crect fill='%23FF6B35' width='152' height='152'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EWeekly%3C/text%3E%3C/svg%3E" loading="lazy" alt="Weekly Pass">
+                                                    </span>
+                                                </span>
                                             </a>
                                             <div class="product details product-item-details">
                                                 <strong class="product name product-item-name">
                                                     <a href="#">Weekly Diamond Pass</a>
                                                 </strong>
-                                                <div class="price-box">
+                                                <div class="price-box price-final_price">
                                                     <span class="price-wrapper">
                                                         <span class="price">$4.99</span>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="item product product-item">
+                                        </div>
+                                    </li>
+                                    <li class="item product product-item">
+                                        <div class="product-item-info">
                                             <a href="#" class="product photo product-item-photo">
-                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%234A90E2' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EStarlight%3C/text%3E%3C/svg%3E" alt="Starlight Pass">
+                                                <span class="product-image-container">
+                                                    <span class="product-image-wrapper">
+                                                        <img class="product-image-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Crect fill='%234A90E2' width='152' height='152'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EStarlight%3C/text%3E%3C/svg%3E" loading="lazy" alt="Starlight Pass">
+                                                    </span>
+                                                </span>
                                             </a>
                                             <div class="product details product-item-details">
                                                 <strong class="product name product-item-name">
                                                     <a href="#">Starlight Pass</a>
                                                 </strong>
-                                                <div class="price-box">
+                                                <div class="price-box price-final_price">
                                                     <span class="price-wrapper">
                                                         <span class="price">$9.99</span>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </li>
-                                        <li class="item product product-item">
+                                        </div>
+                                    </li>
+                                    <li class="item product product-item">
+                                        <div class="product-item-info">
                                             <a href="#" class="product photo product-item-photo">
-                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%236C5CE7' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EMCOC%3C/text%3E%3C/svg%3E" alt="MCOC Crystals">
+                                                <span class="product-image-container">
+                                                    <span class="product-image-wrapper">
+                                                        <img class="product-image-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Crect fill='%236C5CE7' width='152' height='152'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EPUBG%3C/text%3E%3C/svg%3E" loading="lazy" alt="PUBG UC">
+                                                    </span>
+                                                </span>
                                             </a>
                                             <div class="product details product-item-details">
                                                 <strong class="product name product-item-name">
-                                                    <a href="#">Marvel Contest Crystals</a>
+                                                    <a href="#">PUBG Mobile UC</a>
                                                 </strong>
-                                                <div class="price-box">
+                                                <div class="price-box price-final_price">
                                                     <span class="price-wrapper">
-                                                        <span class="price">$5.99</span>
+                                                        <span class="price">$0.99</span>
                                                     </span>
                                                 </div>
                                             </div>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Trust Badges -->
-                    <div class="trust-badges">
-                        <div class="trust-badge">
-                            <div class="trust-icon">🔒</div>
-                            <div class="trust-text">
-                                <span class="trust-title">Secure Payment</span>
-                                <span class="trust-desc">100% Safe & Encrypted</span>
-                            </div>
-                        </div>
-                        <div class="trust-badge">
-                            <div class="trust-icon">⚡</div>
-                            <div class="trust-text">
-                                <span class="trust-title">Instant Delivery</span>
-                                <span class="trust-desc">Within 1-5 Minutes</span>
-                            </div>
-                        </div>
-                        <div class="trust-badge">
-                            <div class="trust-icon">💬</div>
-                            <div class="trust-text">
-                                <span class="trust-title">24/7 Support</span>
-                                <span class="trust-desc">Always Here to Help</span>
-                            </div>
-                        </div>
-                        <div class="trust-badge">
-                            <div class="trust-icon">✅</div>
-                            <div class="trust-text">
-                                <span class="trust-title">Money Back</span>
-                                <span class="trust-desc">Guaranteed Refund</span>
+                                        </div>
+                                    </li>
+                                    <li class="item product product-item">
+                                        <div class="product-item-info">
+                                            <a href="#" class="product photo product-item-photo">
+                                                <span class="product-image-container">
+                                                    <span class="product-image-wrapper">
+                                                        <img class="product-image-photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='152' viewBox='0 0 152 152'%3E%3Crect fill='%2310B981' width='152' height='152'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='12' fill='white' text-anchor='middle' dy='.3em'%3EFF%3C/text%3E%3C/svg%3E" loading="lazy" alt="Free Fire">
+                                                    </span>
+                                                </span>
+                                            </a>
+                                            <div class="product details product-item-details">
+                                                <strong class="product name product-item-name">
+                                                    <a href="#">Free Fire Diamonds</a>
+                                                </strong>
+                                                <div class="price-box price-final_price">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$0.99</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
                     </div>
@@ -1539,12 +1994,34 @@
              ======================================== -->
         <footer class="page-footer">
             <div class="footer content">
+                <!-- Newsletter -->
+                <div class="block newsletter">
+                    <div class="title"><strong>Newsletter</strong></div>
+                    <div class="content">
+                        <form class="form subscribe" novalidate="novalidate" action="#" method="post" id="newsletter-validate-detail">
+                            <div class="field newsletter">
+                                <div class="control">
+                                    <label for="newsletter">
+                                        <span class="label">Sign Up for Our Newsletter:</span>
+                                        <input name="email" type="email" id="newsletter" placeholder="Enter your email address">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="actions">
+                                <button class="action subscribe primary" title="Subscribe" type="submit">
+                                    <span>Subscribe</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Footer Links -->
                 <ul class="footer links">
                     <li class="nav item"><a href="#">Privacy and Cookie Policy</a></li>
                     <li class="nav item"><a href="#">Terms of Service</a></li>
                     <li class="nav item"><a href="#">Contact Us</a></li>
                     <li class="nav item"><a href="#">FAQ</a></li>
-                    <li class="nav item"><a href="#">About Us</a></li>
                 </ul>
             </div>
         </footer>
@@ -1554,134 +2031,60 @@
     </div>
     
     <!-- ========================================
-         JavaScript - 交互逻辑
+         JavaScript
          ======================================== -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ========================================
             // Tab 切换
-            // ========================================
             const tabTitles = document.querySelectorAll('.data.item.title');
-            
             tabTitles.forEach(title => {
                 title.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
-                    // 移除所有 active 状态
                     tabTitles.forEach(t => t.classList.remove('active'));
                     document.querySelectorAll('.data.item.content').forEach(c => c.classList.remove('active'));
-                    
-                    // 添加当前 active 状态
                     this.classList.add('active');
                     const targetId = this.querySelector('a').getAttribute('href').substring(1);
                     document.getElementById(targetId).classList.add('active');
                 });
             });
             
-            // ========================================
-            // 平台选择
-            // ========================================
-            const platformOptions = document.querySelectorAll('.swatch-option.platform');
-            platformOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    platformOptions.forEach(o => o.classList.remove('selected'));
+            // 充值档位选择
+            const rechargeCards = document.querySelectorAll('.recharge-card');
+            const priceDisplay = document.querySelector('.price-box .price');
+            
+            rechargeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    rechargeCards.forEach(c => c.classList.remove('selected'));
                     this.classList.add('selected');
-                });
-            });
-            
-            // ========================================
-            // 区服选择
-            // ========================================
-            const serverOptions = document.querySelectorAll('.swatch-option.text');
-            const allServerOptions = document.querySelectorAll('.swatch-attribute.server .swatch-option.text');
-            
-            allServerOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    allServerOptions.forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                });
-            });
-            
-            // ========================================
-            // 面额选择
-            // ========================================
-            const amountOptions = document.querySelectorAll('.swatch-option.amount');
-            const prices = {
-                '86': '$0.99',
-                '172': '$1.99',
-                '257': '$2.99',
-                '344': '$3.99',
-                '514': '$5.99',
-                '706': '$7.99'
-            };
-            
-            amountOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    amountOptions.forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                    
-                    // 更新价格显示
-                    const amountId = this.dataset.optionId;
-                    const priceElement = document.querySelector('.price-wrapper .price');
-                    if (priceElement && prices[amountId]) {
-                        priceElement.textContent = prices[amountId];
+                    const price = this.dataset.price;
+                    if (priceDisplay) {
+                        priceDisplay.textContent = '$' + price;
                     }
                 });
             });
             
-            // ========================================
-            // 数量选择
-            // ========================================
-            const qtyInput = document.querySelector('.qty-input');
+            // 数量控制
+            const qtyInput = document.getElementById('qty');
             const qtyMinus = document.querySelector('.qty-minus');
             const qtyPlus = document.querySelector('.qty-plus');
             
             qtyMinus.addEventListener('click', function() {
-                const currentValue = parseInt(qtyInput.value) || 1;
-                if (currentValue > 1) {
-                    qtyInput.value = currentValue - 1;
-                }
+                const val = parseInt(qtyInput.value) || 1;
+                if (val > 1) qtyInput.value = val - 1;
             });
             
             qtyPlus.addEventListener('click', function() {
-                const currentValue = parseInt(qtyInput.value) || 1;
-                if (currentValue < 100) {
-                    qtyInput.value = currentValue + 1;
-                }
+                const val = parseInt(qtyInput.value) || 1;
+                if (val < 100) qtyInput.value = val + 1;
             });
             
-            // ========================================
-            // 缩略图切换
-            // ========================================
-            const thumbnails = document.querySelectorAll('.thumbnail-item');
-            const mainImage = document.querySelector('.gallery-main img');
-            
-            const thumbnailImages = [
-                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%231a1a2e' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='%234A90E2' text-anchor='middle' dy='.3em'%3EMobile Legends%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='24' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EDiamonds Recharge%3C/text%3E%3C/svg%3E",
-                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%231a1a2e' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='%236C5CE7' text-anchor='middle' dy='.3em'%3EPremium Skins%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='24' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EUnlock with Diamonds%3C/text%3E%3C/svg%3E",
-                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%231a1a2e' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3ENew Heroes%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='24' fill='%234A90E2' text-anchor='middle' dy='.3em'%3EPurchase Now%3C/text%3E%3C/svg%3E",
-                "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect fill='%231a1a2e' width='800' height='600'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='48' fill='%232563EB' text-anchor='middle' dy='.3em'%3EStarlight Pass%3C/text%3E%3Ctext x='50%25' y='60%25' font-family='Arial' font-size='24' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EMonthly Rewards%3C/text%3E%3C/svg%3E"
-            ];
-            
-            thumbnails.forEach((thumb, index) => {
-                thumb.addEventListener('click', function() {
-                    thumbnails.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                    mainImage.src = thumbnailImages[index];
-                });
-            });
-            
-            // ========================================
             // 购物车按钮
-            // ========================================
-            const addToCartBtn = document.getElementById('product-addtocart-button');
-            addToCartBtn.addEventListener('click', function() {
-                const selectedPlatform = document.querySelector('.swatch-option.platform.selected span:last-child').textContent;
-                const selectedServer = document.querySelector('.swatch-attribute.server .swatch-option.selected').textContent;
-                const selectedAmount = document.querySelector('.swatch-option.amount.selected .amount-value').textContent;
-                const quantity = document.querySelector('.qty-input').value;
-                
-                alert(`Added to Cart!\n\nPlatform: ${selectedPlatform}\nServer: ${selectedServer}\nAmount: ${selectedAmount}\nQuantity: ${quantity}`);
+            document.getElementById('product-addtocart-button').addEventListener('click', function(e) {
+                e.preventDefault();
+                const selected = document.querySelector('.recharge-card.selected');
+                const amount = selected ? selected.dataset.amount : '172';
+                const qty = qtyInput.value;
+                alert(`Added to Cart!\n\nDiamonds: ${amount} 💎\nQuantity: ${qty}\n\nYour order will be delivered instantly!`);
             });
         });
     </script>
