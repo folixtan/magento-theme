@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Legends Diamonds - Folix Game Theme</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           CSS Variables - 游戏主题配色
+           ======================================== */
+        :root {
+            /* 主色 */
+            --folix-primary: #4A90E2;
+            --folix-secondary: #FF6B35;
+            --folix-gradient: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            --folix-gradient-hover: linear-gradient(135deg, #3A80D2 0%, #5C4AD7 100%);
+            
+            /* 背景色 */
+            --page-background: #F8FAFC;
+            --card-background: #FFFFFF;
+            --header-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            --footer-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            
+            /* 边框色 */
+            --border-color: #E5E7EB;
+            --border-color-hover: #4A90E2;
+            
+            /* 文字色 */
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --text-white: #FFFFFF;
+            
+            /* 阴影 */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 12px 32px rgba(74, 144, 226, 0.2);
+            
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* 间距 */
+            --indent-xs: 4px;
+            --indent-s: 8px;
+            --indent-m: 16px;
+            --indent-l: 24px;
+            --indent-xl: 32px;
+            --indent-2xl: 48px;
+        }
+        
+        /* ========================================
+           Reset & Base Styles
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--page-background);
+        }
+        
+        a {
+            color: var(--folix-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--folix-secondary);
+        }
+        
+        ul, ol {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* ========================================
+           Layout Container - 原生Magento结构
+           ======================================== */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .page-main {
+            flex-grow: 1;
+        }
+        
+        .columns {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--indent-l);
+        }
+        
+        .column.main {
+            width: 100%;
+        }
+        
+        /* ========================================
+           HEADER - 深色框架
+           ======================================== */
+        .page-header {
+            background: var(--header-background);
+            color: var(--text-white);
+        }
+        
+        .header.content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--indent-m) var(--indent-l);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--folix-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 480px;
+            margin: 0 var(--indent-xl);
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: var(--indent-s) var(--indent-m);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            font-size: 14px;
+        }
+        
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--folix-primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+        }
+        
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .header-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-icon .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            background: var(--folix-secondary);
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ========================================
+           BREADCRUMB
+           ======================================== */
+        .breadcrumbs {
+            padding: var(--indent-m) 0;
+            background: var(--page-background);
+        }
+        
+        .breadcrumbs ul {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--indent-xs);
+        }
+        
+        .breadcrumbs li {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .breadcrumbs li:not(:last-child)::after {
+            content: '/';
+            color: var(--text-muted);
+            margin-left: var(--indent-xs);
+        }
+        
+        .breadcrumbs a {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--folix-primary);
+        }
+        
+        .breadcrumbs strong {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        /* ========================================
+           产品顶部区域 - 单图+信息并排
+           参考: 左图右文字的通栏布局
+           ======================================== */
+        .product-top-section {
+            display: flex;
+            gap: var(--indent-xl);
+            margin-bottom: var(--indent-xl);
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* 左侧 - 产品单图区域 */
+        .product.media {
+            flex: 0 0 45%;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-placeholder__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center bottom;
+        }
+        
+        /* 游戏信息覆盖层 */
+        .game-overlay {
+            position: absolute;
+            top: var(--indent-m);
+            left: var(--indent-m);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            padding: var(--indent-s) var(--indent-m);
+            border-radius: var(--radius-md);
+        }
+        
+        .game-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--folix-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .game-info {
+            color: var(--text-white);
+        }
+        
+        .game-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .game-developer {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        /* 右侧 - 产品标题信息 */
+        .product-header-info {
+            flex: 1;
+            padding: var(--indent-xl);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .product-title-wrapper {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .product-title-wrapper h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--indent-s);
+            line-height: 1.3;
+        }
+        
+        .product-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        /* 标签区 */
+        .product-tags {
+            display: flex;
+            gap: var(--indent-s);
+            margin-bottom: var(--indent-m);
+            flex-wrap: wrap;
+        }
+        
+        .product-tag {
+            padding: var(--indent-xs) var(--indent-m);
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--folix-primary);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .product-tag.global {
+            background: rgba(255, 107, 53, 0.1);
+            color: var(--folix-secondary);
+        }
+        
+        /* 评分区 */
+        .product-reviews-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+            margin-bottom: var(--indent-m);
+            padding-bottom: var(--indent-m);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .rating-stars {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .rating-stars .star {
+            color: var(--folix-secondary);
+            font-size: 18px;
+        }
+        
+        .rating-score {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .rating-count {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        /* 价格区 */
+        .product-info-price {
+            display: flex;
+            align-items: baseline;
+            gap: var(--indent-m);
+            margin-bottom: var(--indent-m);
+        }
+        
+        .price-box {
+            display: flex;
+            align-items: baseline;
+            gap: var(--indent-s);
+        }
+        
+        .price-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .price-wrapper .price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        .old-price .price {
+            font-size: 18px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        .discount-badge {
+            background: var(--folix-secondary);
+            color: white;
+            padding: 2px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        /* SKU和库存 */
+        .product-info-stock-sku {
+            display: flex;
+            gap: var(--indent-l);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .stock.available {
+            color: #10B981;
+            font-weight: 500;
+        }
+        
+        .product.attribute.sku {
+            display: flex;
+            gap: var(--indent-xs);
+        }
+        
+        .product.attribute.sku .type {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        /* ========================================
+           主内容区域 - 两列布局
+           ======================================== */
+        .product-detail-layout {
+            display: flex;
+            gap: var(--indent-xl);
+        }
+        
+        .product-detail-left {
+            flex: 0 0 60%;
+        }
+        
+        .product-detail-right {
+            flex: 0 0 40%;
+        }
+        
+        /* ========================================
+           充值档位选择区 - 网格卡片布局
+           ======================================== */
+        .product-options-wrapper {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            padding: var(--indent-l);
+            margin-bottom: var(--indent-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .options-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--indent-m);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .options-title-icon {
+            font-size: 18px;
+        }
+        
+        /* 充值档位网格 */
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--indent-m);
+        }
+        
+        .amount-card {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+            padding: var(--indent-m);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--card-background);
+        }
+        
+        .amount-card:hover {
+            border-color: var(--folix-primary);
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .amount-card.selected {
+            border-color: var(--folix-secondary);
+            background: rgba(255, 107, 53, 0.08);
+        }
+        
+        .amount-card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .amount-card-info {
+            flex: 1;
+        }
+        
+        .amount-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .amount-bonus {
+            font-size: 12px;
+            color: var(--folix-secondary);
+            margin-top: 2px;
+        }
+        
+        .amount-card-price {
+            text-align: right;
+        }
+        
+        .amount-card-price .price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        .amount-card-price .original-price {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        
+        /* ========================================
+           产品描述 Tabs
+           ======================================== */
+        .product.info.detailed {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .data.items {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .data.item.title {
+            display: flex;
+            background: var(--card-background);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data.item.title a {
+            flex: 1;
+            padding: var(--indent-m) var(--indent-l);
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+        
+        .data.item.title a:hover {
+            color: var(--folix-primary);
+        }
+        
+        .data.item.title.active a {
+            color: var(--folix-primary);
+            border-bottom-color: var(--folix-primary);
+        }
+        
+        .data.item.content {
+            padding: var(--indent-l);
+            display: none;
+        }
+        
+        .data.item.content.active {
+            display: block;
+        }
+        
+        .product.attribute.description .value p {
+            margin-bottom: var(--indent-m);
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .product.attribute.description .value ul {
+            list-style: disc;
+            padding-left: var(--indent-l);
+            color: var(--text-secondary);
+        }
+        
+        .product.attribute.description .value ul li {
+            margin-bottom: var(--indent-s);
+        }
+        
+        /* 详细参数表 */
+        .additional-attributes-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .additional-attributes-wrapper tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .additional-attributes-wrapper tr:last-child {
+            border-bottom: none;
+        }
+        
+        .additional-attributes-wrapper th,
+        .additional-attributes-wrapper td {
+            padding: var(--indent-m);
+            text-align: left;
+        }
+        
+        .additional-attributes-wrapper th {
+            width: 30%;
+            color: var(--text-secondary);
+            font-weight: 500;
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .additional-attributes-wrapper td {
+            color: var(--text-primary);
+        }
+        
+        /* ========================================
+           订单信息卡片 - 右侧
+           ======================================== */
+        .product-info-main {
+            position: sticky;
+            top: var(--indent-l);
+        }
+        
+        .order-info-card {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--indent-l);
+        }
+        
+        .order-info-header {
+            padding: var(--indent-m) var(--indent-l);
+            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            color: var(--text-white);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .order-info-content {
+            padding: var(--indent-l);
+        }
+        
+        /* 表单字段 */
+        .fieldset {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-m);
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-xs);
+        }
+        
+        .field .label {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .field .control {
+            position: relative;
+        }
+        
+        .field input,
+        .field select {
+            width: 100%;
+            padding: var(--indent-m);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            color: var(--text-primary);
+            background: var(--card-background);
+            transition: all 0.2s ease;
+        }
+        
+        .field input:focus,
+        .field select:focus {
+            outline: none;
+            border-color: var(--folix-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .field input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .field .note {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: var(--indent-xs);
+        }
+        
+        /* 总计区域 */
+        .order-total {
+            margin-top: var(--indent-l);
+            padding-top: var(--indent-m);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--indent-s);
+        }
+        
+        .total-label {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .total-value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .total-value.highlight {
+            color: var(--folix-secondary);
+            font-size: 18px;
+        }
+        
+        .total-stars {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+            color: #FFB800;
+            font-size: 13px;
+        }
+        
+        /* 购物车按钮区 */
+        .actions {
+            margin-top: var(--indent-l);
+        }
+        
+        .action-btn {
+            width: 100%;
+            padding: var(--indent-m) var(--indent-l);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: var(--indent-s);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--indent-s);
+        }
+        
+        .action-btn.primary {
+            background: var(--folix-secondary);
+            color: var(--text-white);
+        }
+        
+        .action-btn.primary:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .action-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--folix-primary);
+            color: var(--folix-primary);
+        }
+        
+        .action-btn.secondary:hover {
+            background: var(--folix-primary);
+            color: var(--text-white);
+        }
+        
+        /* 社交链接 */
+        .product-social-links {
+            margin-top: var(--indent-m);
+            padding-top: var(--indent-m);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            gap: var(--indent-l);
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        
+        .social-link:hover {
+            color: var(--folix-primary);
+        }
+        
+        /* ========================================
+           推荐产品区块
+           ======================================== */
+        .block.related {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .block-title {
+            padding: var(--indent-m) var(--indent-l);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .block-title strong {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .block-title-icon {
+            font-size: 18px;
+        }
+        
+        .products-grid {
+            padding: var(--indent-m);
+        }
+        
+        .product-items {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-m);
+        }
+        
+        .product-item {
+            display: flex;
+            gap: var(--indent-m);
+            padding: var(--indent-m);
+            background: var(--page-background);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .product-item:hover {
+            background: rgba(74, 144, 226, 0.05);
+            transform: translateX(4px);
+        }
+        
+        .product-item-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .product-item-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-item-details {
+            flex: 1;
+        }
+        
+        .product-item-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: var(--indent-xs);
+        }
+        
+        .product-item-name a {
+            color: inherit;
+        }
+        
+        .product-item-name a:hover {
+            color: var(--folix-primary);
+        }
+        
+        .product-item-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--folix-secondary);
+        }
+        
+        /* ========================================
+           Trust Badges
+           ======================================== */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: var(--indent-xl);
+            padding: var(--indent-xl);
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            margin-top: var(--indent-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .trust-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .trust-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .trust-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+        
+        .trust-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .page-footer {
+            background: var(--footer-background);
+            color: var(--text-white);
+            margin-top: var(--indent-2xl);
+        }
+        
+        .footer.content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--indent-xl) var(--indent-l);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--indent-xl);
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--text-white);
+        }
+        
+        .copyright {
+            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+            text-align: center;
+            padding: var(--indent-m);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+        }
+        
+        /* ========================================
+           响应式设计
+           ======================================== */
+        @media screen and (max-width: 1024px) {
+            .product-top-section {
+                flex-direction: column;
+            }
+            
+            .product.media {
+                flex: none;
+                min-height: 300px;
+            }
+            
+            .product-detail-layout {
+                flex-direction: column;
+            }
+            
+            .product-detail-left,
+            .product-detail-right {
+                flex: none;
+                width: 100%;
+            }
+            
+            .product-info-main {
+                position: static;
+            }
+            
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .trust-badges {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .header.content {
+                flex-wrap: wrap;
+                gap: var(--indent-m);
+            }
+            
+            .search-box {
+                order: 3;
+                max-width: 100%;
+                width: 100%;
+                margin: 0;
+            }
+            
+            .product-header-info {
+                padding: var(--indent-l);
+            }
+            
+            .product-title-wrapper h1 {
+                font-size: 22px;
+            }
+            
+            .amount-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .amount-card {
+                padding: var(--indent-m);
+            }
+        }
+        
+        @media screen and (max-width: 640px) {
+            .columns {
+                padding: 0 var(--indent-m);
+            }
+            
+            .product-title-wrapper h1 {
+                font-size: 20px;
+            }
+            
+            .price-wrapper .price {
+                font-size: 24px;
+            }
+            
+            .trust-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--indent-m);
+            }
+        }
+        
+        /* ========================================
+           移动端导航栏（简化版）
+           ======================================== */
+        .nav-toggle {
+            display: none;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-toggle {
+                display: flex;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: var(--radius-md);
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+            
+            .nav-toggle span {
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: var(--text-white);
+                position: relative;
+            }
+            
+            .nav-toggle span::before,
+            .nav-toggle span::after {
+                content: '';
+                position: absolute;
+                width: 20px;
+                height: 2px;
+                background: var(--text-white);
+                left: 0;
+            }
+            
+            .nav-toggle span::before {
+                top: -6px;
+            }
+            
+            .nav-toggle span::after {
+                top: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ========================================
+             HEADER
+             ======================================== -->
+        <header class="page-header">
+            <div class="header content">
+                <div class="nav-toggle">
+                    <span>Toggle Nav</span>
+                </div>
+                
+                <a href="#" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span>Folix</span>
+                </a>
+                
+                <div class="search-box">
+                    <input type="text" placeholder="Search games, items, skins...">
+                </div>
+                
+                <div class="header-icons">
+                    <div class="header-icon">
+                        <span>👤</span>
+                    </div>
+                    <div class="header-icon">
+                        <span>❤️</span>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="header-icon">
+                        <span>🛒</span>
+                        <span class="badge">2</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- ========================================
+             MAIN CONTENT
+             ======================================== -->
+        <main id="maincontent" class="page-main">
+            <a id="contentarea" tabindex="-1"></a>
+            
+            <!-- Breadcrumb -->
+            <div class="breadcrumbs">
+                <div class="columns">
+                    <ul class="items">
+                        <li class="item home">
+                            <a href="#" title="Go to Home Page">Home</a>
+                        </li>
+                        <li class="item category">
+                            <a href="#">Game Recharge</a>
+                        </li>
+                        <li class="item category">
+                            <a href="#">Mobile Legends</a>
+                        </li>
+                        <li class="item product">
+                            <strong>Diamonds</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="columns">
+                <div class="column main">
+                    <!-- ========================================
+                         产品顶部区域 - 单图+信息并排
+                         ======================================== -->
+                    <div class="product-top-section">
+                        <!-- 左侧 - 产品单图区域 -->
+                        <div class="product media">
+                            <div class="gallery-placeholder">
+                                <img class="gallery-placeholder__image" 
+                                     src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%231a1a2e'/%3E%3Cstop offset='100%25' style='stop-color:%2316213e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23bg)' width='600' height='400'/%3E%3Ccircle cx='300' cy='180' r='80' fill='%234A90E2' opacity='0.3'/%3E%3Ccircle cx='300' cy='180' r='60' fill='%236C5CE7' opacity='0.4'/%3E%3Ctext x='300' y='190' font-family='Arial' font-size='48' fill='white' text-anchor='middle' dy='.3em'%3E🎮%3C/text%3E%3Ctext x='300' y='300' font-family='Arial' font-size='24' fill='%234A90E2' text-anchor='middle' dy='.3em'%3EMobile Legends%3C/text%3E%3Ctext x='300' y='340' font-family='Arial' font-size='16' fill='%23FF6B35' text-anchor='middle' dy='.3em'%3EDiamonds Recharge%3C/text%3E%3C/svg%3E" 
+                                     alt="Mobile Legends Diamonds">
+                                
+                                <!-- 游戏信息覆盖层 -->
+                                <div class="game-overlay">
+                                    <div class="game-icon">🎮</div>
+                                    <div class="game-info">
+                                        <div class="game-name">Mobile Legends</div>
+                                        <div class="game-developer">Moonton</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 右侧 - 产品标题信息 -->
+                        <div class="product-header-info">
+                            <div class="product-title-wrapper">
+                                <h1 class="page-title">
+                                    <span class="base">Mobile Legends: Bang Bang Diamonds</span>
+                                </h1>
+                                <p class="product-subtitle">Premium in-game currency for skins, heroes, and exclusive items</p>
+                            </div>
+                            
+                            <!-- 标签区 -->
+                            <div class="product-tags">
+                                <span class="product-tag">🔥 Best Seller</span>
+                                <span class="product-tag global">🌐 Global</span>
+                                <span class="product-tag">⚡ Instant Delivery</span>
+                            </div>
+                            
+                            <!-- 评分区 -->
+                            <div class="product-reviews-summary">
+                                <div class="rating-stars">
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                    <span class="star">⭐</span>
+                                </div>
+                                <span class="rating-score">4.8</span>
+                                <span class="rating-count">(2,341 reviews)</span>
+                            </div>
+                            
+                            <!-- 价格区 -->
+                            <div class="product-info-price">
+                                <div class="price-box price-final_price">
+                                    <span class="price-label">From</span>
+                                    <span class="price-wrapper">
+                                        <span class="price">$0.99</span>
+                                    </span>
+                                    <span class="old-price">
+                                        <span class="price">$1.19</span>
+                                    </span>
+                                    <span class="discount-badge">-17%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- SKU和库存 -->
+                            <div class="product-info-stock-sku">
+                                <div class="stock available" title="Availability">
+                                    <span>✅ In stock</span>
+                                </div>
+                                <div class="product attribute sku">
+                                    <strong class="type">SKU:</strong>
+                                    <div class="value">ML-DIAMOND</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ========================================
+                         主内容区域 - 两列布局
+                         ======================================== -->
+                    <div class="product-detail-layout">
+                        <!-- 左列 (60%) -->
+                        <div class="product-detail-left">
+                            <!-- 充值档位选择区 -->
+                            <div class="product-options-wrapper" id="product-options-wrapper">
+                                <div class="fieldset">
+                                    <h3 class="options-title">
+                                        <span class="options-title-icon">💎</span>
+                                        Select Recharge Amount
+                                    </h3>
+                                    
+                                    <div class="amount-grid">
+                                        <div class="amount-card" data-amount="86" data-price="0.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">86 <small>💎</small></div>
+                                                <div class="amount-bonus">+5 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$0.99</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amount-card selected" data-amount="172" data-price="1.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">172 <small>💎</small></div>
+                                                <div class="amount-bonus">+12 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$1.99</div>
+                                                <div class="original-price">$2.39</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amount-card" data-amount="257" data-price="2.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">257 <small>💎</small></div>
+                                                <div class="amount-bonus">+20 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$2.99</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amount-card" data-amount="344" data-price="3.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">344 <small>💎</small></div>
+                                                <div class="amount-bonus">+30 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$3.99</div>
+                                                <div class="original-price">$4.79</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amount-card" data-amount="514" data-price="5.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">514 <small>💎</small></div>
+                                                <div class="amount-bonus">+50 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$5.99</div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amount-card" data-amount="706" data-price="7.99">
+                                            <div class="amount-card-icon">💎</div>
+                                            <div class="amount-card-info">
+                                                <div class="amount-value">706 <small>💎</small></div>
+                                                <div class="amount-bonus">+75 bonus</div>
+                                            </div>
+                                            <div class="amount-card-price">
+                                                <div class="price">$7.99</div>
+                                                <div class="original-price">$9.59</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 产品描述 Tabs -->
+                            <div class="product info detailed">
+                                <div class="data items">
+                                    <!-- Tab: Description -->
+                                    <div class="data item title active" data-role="collapsible">
+                                        <a class="data switch" href="#description">
+                                            Description
+                                        </a>
+                                    </div>
+                                    <div class="data item content active" id="description" data-role="content">
+                                        <div class="product attribute description">
+                                            <div class="value">
+                                                <p>Mobile Legends: Bang Bang is one of the most popular MOBA games in Southeast Asia. Diamonds are the premium in-game currency that allows you to purchase skins, heroes, and other exclusive items.</p>
+                                                <p>With Mobile Legends Diamonds, you can:</p>
+                                                <ul>
+                                                    <li>Unlock premium hero skins with stunning visual effects</li>
+                                                    <li>Purchase new heroes to expand your roster</li>
+                                                    <li>Get exclusive emotes and recall effects</li>
+                                                    <li>Participate in lucky draw events</li>
+                                                    <li>Buy Starlight Pass for monthly rewards</li>
+                                                </ul>
+                                                <p>Diamonds will be delivered to your game account instantly after purchase. Please ensure you enter the correct User ID and Zone ID.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Tab: More Information -->
+                                    <div class="data item title" data-role="collapsible">
+                                        <a class="data switch" href="#additional">
+                                            More Information
+                                        </a>
+                                    </div>
+                                    <div class="data item content" id="additional" data-role="content">
+                                        <div class="additional-attributes-wrapper table-wrapper">
+                                            <table class="data table additional-attributes" id="product-attribute-specs-table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th class="col label">Game</th>
+                                                        <td class="col data">Mobile Legends: Bang Bang</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="col label">Developer</th>
+                                                        <td class="col data">Moonton</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="col label">Currency</th>
+                                                        <td class="col data">Diamonds</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="col label">Delivery</th>
+                                                        <td class="col data">Instant (1-5 minutes)</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="col label">Platform</th>
+                                                        <td class="col data">Android, iOS, PC</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="col label">Region</th>
+                                                        <td class="col data">Global (All Servers)</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Tab: Reviews -->
+                                    <div class="data item title" data-role="collapsible">
+                                        <a class="data switch" href="#reviews">
+                                            Reviews (2,341)
+                                        </a>
+                                    </div>
+                                    <div class="data item content" id="reviews" data-role="content">
+                                        <div style="padding: var(--indent-m); text-align: center; color: var(--text-secondary);">
+                                            <p>⭐⭐⭐⭐⭐ Average Rating: 4.8/5</p>
+                                            <p style="margin-top: var(--indent-s); font-size: 13px;">
+                                                "Fast delivery! Got my diamonds in less than 2 minutes." - Alex G.
+                                            </p>
+                                            <p style="margin-top: var(--indent-s); font-size: 13px;">
+                                                "Best price I've found. Will definitely buy again!" - Sarah M.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 右列 (40%) -->
+                        <div class="product-detail-right">
+                            <!-- 订单信息卡片 -->
+                            <div class="product-info-main">
+                                <div class="order-info-card">
+                                    <div class="order-info-header">
+                                        <span>📋</span>
+                                        <span>Order Information</span>
+                                    </div>
+                                    <div class="order-info-content">
+                                        <form class="form form-login" id="order-form">
+                                            <!-- User ID -->
+                                            <div class="field required">
+                                                <label class="label" for="user-id">
+                                                    <span>User ID</span>
+                                                </label>
+                                                <div class="control">
+                                                    <input type="text" id="user-id" name="user_id" placeholder="Enter your User ID" class="input-text" data-validate="{required:true}">
+                                                    <p class="note">Find your User ID in game settings</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Zone ID -->
+                                            <div class="field required">
+                                                <label class="label" for="zone-id">
+                                                    <span>Zone ID (Server)</span>
+                                                </label>
+                                                <div class="control">
+                                                    <input type="text" id="zone-id" name="zone_id" placeholder="Enter your Zone ID" class="input-text" data-validate="{required:true}">
+                                                    <p class="note">Example: 1234, 5678</p>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Platform -->
+                                            <div class="field">
+                                                <label class="label" for="platform">
+                                                    <span>Platform</span>
+                                                </label>
+                                                <div class="control">
+                                                    <select id="platform" name="platform" class="select">
+                                                        <option value="android">Android</option>
+                                                        <option value="ios">iOS</option>
+                                                        <option value="pc">PC</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Quantity -->
+                                            <div class="field qty">
+                                                <label class="label" for="qty">
+                                                    <span>Quantity</span>
+                                                </label>
+                                                <div class="control" style="display: flex; align-items: center; gap: var(--indent-s);">
+                                                    <button type="button" class="qty-btn qty-minus" style="width: 36px; height: 36px; border: 1px solid var(--border-color); background: var(--page-background); border-radius: var(--radius-sm); cursor: pointer; font-size: 18px;">−</button>
+                                                    <input type="number" id="qty" name="qty" value="1" min="1" max="100" class="input-text" style="width: 60px; text-align: center; padding: var(--indent-s);">
+                                                    <button type="button" class="qty-btn qty-plus" style="width: 36px; height: 36px; border: 1px solid var(--border-color); background: var(--page-background); border-radius: var(--radius-sm); cursor: pointer; font-size: 18px;">+</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 总计区域 -->
+                                            <div class="order-total">
+                                                <div class="total-row">
+                                                    <span class="total-label">Diamonds</span>
+                                                    <span class="total-value" id="total-diamonds">172 💎</span>
+                                                </div>
+                                                <div class="total-row">
+                                                    <span class="total-label">Bonus</span>
+                                                    <span class="total-value" id="total-bonus">+12 💎</span>
+                                                </div>
+                                                <div class="total-row">
+                                                    <span class="total-label">Total</span>
+                                                    <span class="total-value highlight" id="total-price">$1.99</span>
+                                                </div>
+                                                <div class="total-row">
+                                                    <span class="total-label">Earn STARs</span>
+                                                    <span class="total-stars" id="total-stars">⭐ +20 STARs</span>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 购物车按钮区 -->
+                                            <div class="actions">
+                                                <button type="button" class="action-btn primary tocart" id="product-addtocart-button">
+                                                    <span>⚡</span>
+                                                    <span>Buy Now - Instant Delivery</span>
+                                                </button>
+                                                <button type="button" class="action-btn secondary">
+                                                    <span>🛒</span>
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </div>
+                                            
+                                            <!-- 社交链接 -->
+                                            <div class="product-social-links">
+                                                <a href="#" class="social-link towishlist">
+                                                    <span>❤️</span>
+                                                    <span>Wishlist</span>
+                                                </a>
+                                                <a href="#" class="social-link tocompare">
+                                                    <span>⚖️</span>
+                                                    <span>Compare</span>
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 推荐产品 -->
+                            <div class="block related">
+                                <div class="block-title">
+                                    <span class="block-title-icon">🔥</span>
+                                    <strong>Popular Choices</strong>
+                                </div>
+                                <div class="products-grid">
+                                    <ol class="product-items">
+                                        <li class="item product product-item">
+                                            <a href="#" class="product photo product-item-photo">
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%23FF6B35' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EWeekly%3C/text%3E%3C/svg%3E" alt="Weekly Pass">
+                                            </a>
+                                            <div class="product details product-item-details">
+                                                <strong class="product name product-item-name">
+                                                    <a href="#">Weekly Diamond Pass</a>
+                                                </strong>
+                                                <div class="price-box">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$4.99</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item product product-item">
+                                            <a href="#" class="product photo product-item-photo">
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%234A90E2' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EStarlight%3C/text%3E%3C/svg%3E" alt="Starlight Pass">
+                                            </a>
+                                            <div class="product details product-item-details">
+                                                <strong class="product name product-item-name">
+                                                    <a href="#">Starlight Pass</a>
+                                                </strong>
+                                                <div class="price-box">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$9.99</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item product product-item">
+                                            <a href="#" class="product photo product-item-photo">
+                                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%236C5CE7' width='60' height='60'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='10' fill='white' text-anchor='middle' dy='.3em'%3EMCOC%3C/text%3E%3C/svg%3E" alt="Marvel Crystals">
+                                            </a>
+                                            <div class="product details product-item-details">
+                                                <strong class="product name product-item-name">
+                                                    <a href="#">Marvel Contest Crystals</a>
+                                                </strong>
+                                                <div class="price-box">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$5.99</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Trust Badges -->
+                    <div class="trust-badges">
+                        <div class="trust-badge">
+                            <div class="trust-icon">🔒</div>
+                            <div class="trust-text">
+                                <span class="trust-title">Secure Payment</span>
+                                <span class="trust-desc">100% Safe & Encrypted</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-icon">⚡</div>
+                            <div class="trust-text">
+                                <span class="trust-title">Instant Delivery</span>
+                                <span class="trust-desc">Within 1-5 Minutes</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-icon">💬</div>
+                            <div class="trust-text">
+                                <span class="trust-title">24/7 Support</span>
+                                <span class="trust-desc">Always Here to Help</span>
+                            </div>
+                        </div>
+                        <div class="trust-badge">
+                            <div class="trust-icon">✅</div>
+                            <div class="trust-text">
+                                <span class="trust-title">Money Back</span>
+                                <span class="trust-desc">Guaranteed Refund</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- ========================================
+             FOOTER
+             ======================================== -->
+        <footer class="page-footer">
+            <div class="footer content">
+                <ul class="footer links">
+                    <li class="nav item"><a href="#">Privacy and Cookie Policy</a></li>
+                    <li class="nav item"><a href="#">Terms of Service</a></li>
+                    <li class="nav item"><a href="#">Contact Us</a></li>
+                    <li class="nav item"><a href="#">FAQ</a></li>
+                    <li class="nav item"><a href="#">About Us</a></li>
+                </ul>
+            </div>
+        </footer>
+        <small class="copyright">
+            <span>Copyright © 2024 Folix Game Store. All rights reserved.</span>
+        </small>
+    </div>
+    
+    <!-- ========================================
+         JavaScript - 交互逻辑
+         ======================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ========================================
+            // Tab 切换
+            // ========================================
+            const tabTitles = document.querySelectorAll('.data.item.title');
+            
+            tabTitles.forEach(title => {
+                title.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有 active 状态
+                    tabTitles.forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.data.item.content').forEach(c => c.classList.remove('active'));
+                    
+                    // 添加当前 active 状态
+                    this.classList.add('active');
+                    const targetId = this.querySelector('a').getAttribute('href').substring(1);
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+            
+            // ========================================
+            // 充值档位选择
+            // ========================================
+            const amountCards = document.querySelectorAll('.amount-card');
+            const totalDiamonds = document.getElementById('total-diamonds');
+            const totalBonus = document.getElementById('total-bonus');
+            const totalPrice = document.getElementById('total-price');
+            const totalStars = document.getElementById('total-stars');
+            const qtyInput = document.getElementById('qty');
+            
+            const amountData = {
+                '86': { bonus: 5, price: 0.99 },
+                '172': { bonus: 12, price: 1.99 },
+                '257': { bonus: 20, price: 2.99 },
+                '344': { bonus: 30, price: 3.99 },
+                '514': { bonus: 50, price: 5.99 },
+                '706': { bonus: 75, price: 7.99 }
+            };
+            
+            function updateTotal() {
+                const selectedCard = document.querySelector('.amount-card.selected');
+                if (!selectedCard) return;
+                
+                const amount = selectedCard.dataset.amount;
+                const qty = parseInt(qtyInput.value) || 1;
+                const data = amountData[amount];
+                
+                const diamonds = parseInt(amount) * qty;
+                const bonus = data.bonus * qty;
+                const price = (data.price * qty).toFixed(2);
+                const stars = Math.floor(data.price * qty * 10);
+                
+                totalDiamonds.textContent = `${diamonds} 💎`;
+                totalBonus.textContent = `+${bonus} 💎`;
+                totalPrice.textContent = `$${price}`;
+                totalStars.textContent = `⭐ +${stars} STARs`;
+            }
+            
+            amountCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    amountCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    updateTotal();
+                });
+            });
+            
+            // ========================================
+            // 数量选择
+            // ========================================
+            const qtyMinus = document.querySelector('.qty-minus');
+            const qtyPlus = document.querySelector('.qty-plus');
+            
+            qtyMinus.addEventListener('click', function() {
+                const currentValue = parseInt(qtyInput.value) || 1;
+                if (currentValue > 1) {
+                    qtyInput.value = currentValue - 1;
+                    updateTotal();
+                }
+            });
+            
+            qtyPlus.addEventListener('click', function() {
+                const currentValue = parseInt(qtyInput.value) || 1;
+                if (currentValue < 100) {
+                    qtyInput.value = currentValue + 1;
+                    updateTotal();
+                }
+            });
+            
+            qtyInput.addEventListener('change', updateTotal);
+            
+            // ========================================
+            // 购物车按钮
+            // ========================================
+            const addToCartBtn = document.getElementById('product-addtocart-button');
+            addToCartBtn.addEventListener('click', function() {
+                const selectedCard = document.querySelector('.amount-card.selected');
+                const amount = selectedCard.dataset.amount;
+                const userId = document.getElementById('user-id').value;
+                const zoneId = document.getElementById('zone-id').value;
+                const platform = document.getElementById('platform').value;
+                const qty = qtyInput.value;
+                
+                if (!userId || !zoneId) {
+                    alert('Please enter your User ID and Zone ID');
+                    return;
+                }
+                
+                alert(`Order Confirmed!\n\nAmount: ${amount} 💎\nUser ID: ${userId}\nZone ID: ${zoneId}\nPlatform: ${platform}\nQuantity: ${qty}\nTotal: ${totalPrice.textContent}\n\nYour diamonds will be delivered within 1-5 minutes!`);
+            });
+        });
+    </script>
+</body>
+</html>
