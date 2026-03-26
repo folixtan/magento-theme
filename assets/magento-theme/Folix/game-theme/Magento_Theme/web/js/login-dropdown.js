@@ -1,9 +1,13 @@
 /**
- * Folix Game Theme - Login Dropdown
+ * Folix Game Theme - Login Dropdown Component
+ * 
+ * Magento 2 UI Component 规范：
+ * - 返回函数接收 (element, config) 参数
+ * - 或使用 $.widget 创建 jQuery UI Widget
  * 
  * 功能：
- * 1. PC端：鼠标移入展开，移出关闭
- * 2. 移动端：点击展开/收起
+ * 1. PC端：hover展开/关闭
+ * 2. 移动端：click展开/关闭
  * 3. 登录/注册表单切换
  * 4. 点击外部关闭
  * 5. 第三方登录预留接口
@@ -16,236 +20,242 @@ define([
 ], function ($, mediaCheck) {
     'use strict';
 
-    console.log('[Folix] Login Dropdown JS Loaded');
-
-    var $body = $('body'),
-        $wrapper = null,
-        $trigger = null,
-        $dropdown = null;
-
     /**
-     * 初始化变量
+     * Login Dropdown Component Factory
+     * 
+     * @param {HTMLElement|String} element - DOM元素或选择器
+     * @param {Object} config - 配置对象
      */
-    function initVars() {
-        $wrapper = $('.login-dropdown-wrapper');
-        $trigger = $('.login-trigger');
-        $dropdown = $('.login-dropdown');
+    function loginDropdown(element, config) {
+        // 支持传入选择器字符串
+        var $element = typeof element === 'string' ? $(element) : $(element);
         
-        console.log('[Folix] Elements found:', {
-            wrapper: $wrapper.length,
-            trigger: $trigger.length,
-            dropdown: $dropdown.length
-        });
-    }
-
-    /**
-     * 切换下拉菜单
-     */
-    function toggleDropdown() {
-        var isOpen = $dropdown.hasClass('open');
-        
-        if (isOpen) {
-            closeDropdown();
-        } else {
-            openDropdown();
-        }
-    }
-
-    /**
-     * 打开下拉菜单
-     */
-    function openDropdown() {
-        console.log('[Folix] Opening dropdown');
-        $dropdown.addClass('open');
-        $trigger.addClass('active');
-        
-        // 添加遮罩（移动端）
-        if ($(window).width() < 768) {
-            addOverlay();
-        }
-    }
-
-    /**
-     * 关闭下拉菜单
-     */
-    function closeDropdown() {
-        console.log('[Folix] Closing dropdown');
-        $dropdown.removeClass('open');
-        $trigger.removeClass('active');
-        
-        // 移除遮罩
-        removeOverlay();
-    }
-
-    /**
-     * 添加遮罩（移动端）
-     */
-    function addOverlay() {
-        if ($('.login-overlay').length === 0) {
-            $body.append('<div class="login-overlay"></div>');
-        }
-    }
-
-    /**
-     * 移除遮罩
-     */
-    function removeOverlay() {
-        $('.login-overlay').remove();
-    }
-
-    /**
-     * 切换标签（登录/注册）
-     */
-    function switchTab(tabName) {
-        console.log('[Folix] Switching to tab:', tabName);
-        
-        var $tabs = $dropdown.find('.dropdown-tab'),
-            $panels = $dropdown.find('.dropdown-panel');
-        
-        // 更新标签状态
-        $tabs.removeClass('active');
-        $tabs.filter('[data-tab="' + tabName + '"]').addClass('active');
-        
-        // 更新面板状态
-        $panels.removeClass('active');
-        $panels.filter('#' + tabName + '-panel').addClass('active');
-    }
-
-    /**
-     * 初始化PC端事件（hover）
-     */
-    function initDesktopEvents() {
-        console.log('[Folix] Initializing desktop events (hover)');
-        
-        var hoverTimeout = null;
-        
-        // 鼠标移入展开
-        $wrapper.off('mouseenter.folixLogin').on('mouseenter.folixLogin', function (e) {
-            clearTimeout(hover_timeout);
-            openDropdown();
-        });
-        
-        // 鼠标移出关闭
-        $wrapper.off('mouseleave.folixLogin').on('mouseleave.folixLogin', function (e) {
-            hover_timeout = setTimeout(function () {
-                closeDropdown();
-            }, 200);  // 200ms 延迟，避免误关闭
-        });
-        
-        // 移除点击事件
-        $trigger.off('click.folixLogin');
-    }
-
-    /**
-     * 初始化移动端事件（click）
-     */
-    function initMobileEvents() {
-        console.log('[Folix] Initializing mobile events (click)');
-        
-        // 移除hover事件
-        $wrapper.off('mouseenter.folixLogin mouseleave.folixLogin');
-        
-        // 点击触发按钮
-        $trigger.off('click.folixLogin').on('click.folixLogin', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleDropdown();
-        });
-    }
-
-    /**
-     * 初始化公共事件
-     */
-    function initCommonEvents() {
-        console.log('[Folix] Initializing common events');
-        
-        // 点击下拉菜单内部（阻止冒泡）
-        $dropdown.off('click.folixLogin').on('click.folixLogin', function (e) {
-            e.stopPropagation();
-        });
-        
-        // 点击外部关闭（移动端）
-        $(document).off('click.folixLogin').on('click.folixLogin', function (e) {
-            if ($dropdown.hasClass('open') && $(window).width() < 768) {
-                closeDropdown();
-            }
-        });
-        
-        // 标签切换
-        $dropdown.find('.dropdown-tab').off('click.folixLogin').on('click.folixLogin', function (e) {
-            e.preventDefault();
-            var tabName = $(this).data('tab');
-            switchTab(tabName);
-        });
-        
-        // 遮罩点击关闭（移动端）
-        $body.off('click.folixLoginOverlay').on('click.folixLoginOverlay', '.login-overlay', function (e) {
-            closeDropdown();
-        });
-        
-        // ESC 键关闭
-        $(document).off('keydown.folixLogin').on('keydown.folixLogin', function (e) {
-            if (e.keyCode === 27 && $dropdown.hasClass('open')) {
-                closeDropdown();
-            }
-        });
-        
-        // 第三方登录按钮（预留）
-        $dropdown.find('.btn-social').off('click.folixLogin').on('click.folixLogin', function (e) {
-            e.preventDefault();
-            var provider = $(this).hasClass('btn-google') ? 'google' : 'facebook';
-            console.log('[Folix] Social login clicked:', provider);
-            alert('第三方登录功能即将上线：' + provider);
-        });
-    }
-
-    /**
-     * 初始化
-     */
-    function init() {
-        initVars();
-        
-        if ($wrapper.length === 0) {
-            console.log('[Folix] Login dropdown not found');
+        // 确保 $element 存在
+        if (!$element.length) {
+            console.warn('[Folix] Login Dropdown: element not found');
             return;
         }
-        
-        initCommonEvents();
-        
-        // 响应式初始化
-        mediaCheck({
-            media: '(min-width: 768px)',
-            entry: function () {
-                console.log('[Folix] Entering desktop mode');
+
+        var $wrapper = $element.closest('.login-dropdown-wrapper'),
+            $trigger = $wrapper.find('.login-trigger'),
+            $dropdown = $element.hasClass('login-dropdown') ? $element : $wrapper.find('.login-dropdown'),
+            $body = $('body'),
+            hoverTimeout = null,
+            defaults = {
+                hoverDelay: 200,
+                mobileBreakpoint: 768
+            };
+
+        // 合并配置
+        config = $.extend({}, defaults, config || {});
+
+        console.log('[Folix] Login Dropdown Component initialized');
+
+        /**
+         * 切换下拉菜单
+         */
+        function toggleDropdown() {
+            if ($dropdown.hasClass('open')) {
+                closeDropdown();
+            } else {
+                openDropdown();
+            }
+        }
+
+        /**
+         * 打开下拉菜单
+         */
+        function openDropdown() {
+            $dropdown.addClass('open');
+            $trigger.addClass('active');
+            
+            // 添加遮罩（移动端）
+            if ($(window).width() < config.mobileBreakpoint) {
+                addOverlay();
+            }
+        }
+
+        /**
+         * 关闭下拉菜单
+         */
+        function closeDropdown() {
+            $dropdown.removeClass('open');
+            $trigger.removeClass('active');
+            removeOverlay();
+        }
+
+        /**
+         * 添加遮罩（移动端）
+         */
+        function addOverlay() {
+            if ($('.login-overlay').length === 0) {
+                $body.append('<div class="login-overlay"></div>');
+            }
+        }
+
+        /**
+         * 移除遮罩
+         */
+        function removeOverlay() {
+            $('.login-overlay').remove();
+        }
+
+        /**
+         * 切换标签（登录/注册）
+         * @param {String} tabName - 标签名称
+         */
+        function switchTab(tabName) {
+            var $tabs = $dropdown.find('.dropdown-tab'),
+                $panels = $dropdown.find('.dropdown-panel');
+            
+            // 更新标签状态
+            $tabs.removeClass('active');
+            $tabs.filter('[data-tab="' + tabName + '"]').addClass('active');
+            
+            // 更新面板状态
+            $panels.removeClass('active');
+            $panels.filter('#' + tabName + '-panel').addClass('active');
+        }
+
+        /**
+         * 初始化PC端事件（hover）
+         */
+        function initDesktopEvents() {
+            // 移除可能存在的click事件
+            $trigger.off('click.loginDropdown');
+            
+            // 鼠标移入展开
+            $wrapper.off('mouseenter.loginDropdown').on('mouseenter.loginDropdown', function () {
+                clearTimeout(hoverTimeout);
+                openDropdown();
+            });
+            
+            // 鼠标移出关闭
+            $wrapper.off('mouseleave.loginDropdown').on('mouseleave.loginDropdown', function () {
+                hoverTimeout = setTimeout(function () {
+                    closeDropdown();
+                }, config.hoverDelay);
+            });
+        }
+
+        /**
+         * 初始化移动端事件（click）
+         */
+        function initMobileEvents() {
+            // 移除hover事件
+            $wrapper.off('mouseenter.loginDropdown mouseleave.loginDropdown');
+            
+            // 点击触发按钮
+            $trigger.off('click.loginDropdown').on('click.loginDropdown', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleDropdown();
+            });
+        }
+
+        /**
+         * 初始化公共事件
+         */
+        function initCommonEvents() {
+            // 点击下拉菜单内部（阻止冒泡）
+            $dropdown.on('click.loginDropdown', function (e) {
+                e.stopPropagation();
+            });
+            
+            // 点击外部关闭
+            $(document).on('click.loginDropdown', function (e) {
+                if ($dropdown.hasClass('open')) {
+                    if (!$(e.target).closest($wrapper).length) {
+                        closeDropdown();
+                    }
+                }
+            });
+            
+            // 标签切换
+            $dropdown.find('.dropdown-tab').on('click.loginDropdown', function (e) {
+                e.preventDefault();
+                switchTab($(this).data('tab'));
+            });
+            
+            // 遮罩点击关闭（移动端）
+            $body.on('click.loginDropdownOverlay', '.login-overlay', function () {
+                closeDropdown();
+            });
+            
+            // ESC 键关闭
+            $(document).on('keydown.loginDropdown', function (e) {
+                if (e.keyCode === 27 && $dropdown.hasClass('open')) {
+                    closeDropdown();
+                }
+            });
+            
+            // 第三方登录按钮（预留）
+            $dropdown.find('.btn-social').on('click.loginDropdown', function (e) {
+                e.preventDefault();
+                var provider = $(this).hasClass('btn-google') ? 'google' : 'facebook';
+                
+                // 触发自定义事件，供外部监听
+                $element.trigger('socialLoginClick', [provider]);
+            });
+        }
+
+        /**
+         * 初始化响应式
+         */
+        function initResponsive() {
+            // 使用 matchMedia 响应式切换
+            mediaCheck({
+                media: '(min-width: ' + config.mobileBreakpoint + 'px)',
+                entry: function () {
+                    initDesktopEvents();
+                },
+                exit: function () {
+                    initMobileEvents();
+                }
+            });
+            
+            // 立即执行一次检查
+            if ($(window).width() >= config.mobileBreakpoint) {
                 initDesktopEvents();
-            },
-            exit: function () {
-                console.log('[Folix] Exiting desktop mode');
+            } else {
                 initMobileEvents();
             }
-        });
-        
-        // 立即执行一次检查
-        if ($(window).width() >= 768) {
-            initDesktopEvents();
-        } else {
-            initMobileEvents();
         }
-        
-        console.log('[Folix] Login dropdown initialized');
+
+        /**
+         * 清理事件（销毁时调用）
+         */
+        function destroy() {
+            $wrapper.off('.loginDropdown');
+            $trigger.off('.loginDropdown');
+            $dropdown.off('.loginDropdown');
+            $(document).off('.loginDropdown');
+            $body.off('.loginDropdownOverlay');
+            removeOverlay();
+        }
+
+        // 初始化
+        initCommonEvents();
+        initResponsive();
+
+        // 暴露公共方法到 jQuery data
+        $element.data('loginDropdown', {
+            open: openDropdown,
+            close: closeDropdown,
+            toggle: toggleDropdown,
+            switchTab: switchTab,
+            destroy: destroy
+        });
+
+        // 返回公共接口
+        return {
+            open: openDropdown,
+            close: closeDropdown,
+            toggle: toggleDropdown,
+            switchTab: switchTab,
+            destroy: destroy
+        };
     }
 
-    // 声明 hover_timeout 变量
-    var hover_timeout;
-    
-    // 立即初始化
-    init();
-    
-    // 返回公共接口
-    return {
-        open: openDropdown,
-        close: closeDropdown,
-        toggle: toggleDropdown,
-        switchTab: switchTab
-    };
+    return loginDropdown;
 });
