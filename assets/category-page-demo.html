@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Recharge - Folix Game Theme</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========================================
+           CSS Variables - 游戏主题配色
+           ======================================== */
+        :root {
+            /* 主色 */
+            --folix-primary: #4A90E2;
+            --folix-secondary: #FF6B35;
+            --folix-gradient: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            
+            /* 背景色 */
+            --page-background: #F8FAFC;
+            --card-background: #FFFFFF;
+            --header-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            --footer-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            
+            /* 边框色 */
+            --border-color: #E5E7EB;
+            --border-color-hover: #4A90E2;
+            
+            /* 文字色 */
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --text-muted: #94A3B8;
+            --text-white: #FFFFFF;
+            
+            /* 阴影 */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 12px 32px rgba(74, 144, 226, 0.2);
+            
+            /* 圆角 */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            /* 间距 */
+            --indent-xs: 4px;
+            --indent-s: 8px;
+            --indent-m: 16px;
+            --indent-l: 24px;
+            --indent-xl: 32px;
+            
+            /* 断点参考 */
+            --screen-s: 640px;
+            --screen-m: 768px;
+            --screen-l: 1024px;
+        }
+        
+        /* ========================================
+           Reset & Base Styles
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background-color: var(--page-background);
+        }
+        
+        a {
+            color: var(--folix-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--folix-secondary);
+        }
+        
+        ul, ol {
+            list-style: none;
+        }
+        
+        /* ========================================
+           Layout Container
+           ======================================== */
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .page-main {
+            flex-grow: 1;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--indent-l);
+        }
+        
+        /* ========================================
+           HEADER - 深色框架
+           ======================================== */
+        .page-header {
+            background: var(--header-background);
+            color: var(--text-white);
+        }
+        
+        .header.content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--indent-m) var(--indent-l);
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--folix-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .header-links {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-l);
+        }
+        
+        .header-links a {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+        
+        .header-links a:hover {
+            color: var(--text-white);
+        }
+        
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-m);
+        }
+        
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .header-icon:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* ========================================
+           BREADCRUMB
+           ======================================== */
+        .breadcrumbs {
+            padding: var(--indent-m) 0;
+            background: var(--page-background);
+        }
+        
+        .breadcrumbs ul {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--indent-xs);
+        }
+        
+        .breadcrumbs li {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .breadcrumbs li:not(:last-child)::after {
+            content: '›';
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        .breadcrumbs a {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .breadcrumbs a:hover {
+            color: var(--folix-primary);
+        }
+        
+        .breadcrumbs strong {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .breadcrumbs {
+                display: none;
+            }
+        }
+        
+        /* ========================================
+           PAGE TITLE
+           ======================================== */
+        .page-title-wrapper {
+            padding: var(--indent-l) 0 var(--indent-m);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: baseline;
+            gap: var(--indent-l);
+        }
+        
+        .page-title h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .page-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--folix-gradient);
+            border-radius: 2px;
+        }
+        
+        .toolbar-amount {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+        
+        .toolbar-number {
+            font-weight: 600;
+            color: var(--folix-primary);
+        }
+        
+        /* ========================================
+           TOOLBAR
+           基于原生 _toolbar.less
+           ======================================== */
+        .toolbar {
+            margin-bottom: var(--indent-l);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--indent-m);
+        }
+        
+        .toolbar-products {
+            background: transparent;
+            padding: var(--indent-s) 0;
+        }
+        
+        /* Modes - Grid/List 切换 */
+        .modes {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-xs);
+        }
+        
+        .modes-label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        .modes-mode {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .modes-mode:first-child {
+            border-radius: var(--radius-md) 0 0 var(--radius-md);
+        }
+        
+        .modes-mode:last-child {
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            border-left: none;
+        }
+        
+        .modes-mode:hover {
+            background: #F8FAFC;
+            color: var(--folix-primary);
+        }
+        
+        .modes-mode.active {
+            background: var(--folix-primary);
+            border-color: var(--folix-primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+        }
+        
+        .modes-mode span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        /* Grid Icon */
+        .modes-mode.mode-grid::before {
+            content: '⊞';
+        }
+        
+        /* List Icon */
+        .modes-mode.mode-list::before {
+            content: '☰';
+        }
+        
+        /* Sorter */
+        .sorter {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .sorter-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .sorter-options {
+            padding: 8px 32px 8px 12px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        
+        .sorter-options:focus {
+            outline: none;
+            border-color: var(--folix-primary);
+        }
+        
+        .sorter-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .sorter-action:hover {
+            border-color: var(--folix-primary);
+            color: var(--folix-primary);
+        }
+        
+        .sorter-action span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        .sorter-action.sort-asc::before {
+            content: '↑';
+        }
+        
+        .sorter-action.sort-desc::before {
+            content: '↓';
+        }
+        
+        /* Limiter */
+        .limiter {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .limiter-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        .limiter-options {
+            padding: 8px 32px 8px 12px;
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            color: var(--text-primary);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        
+        .limiter-text {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .modes {
+                order: 2;
+            }
+            
+            .toolbar-amount {
+                order: 1;
+            }
+            
+            .sorter {
+                order: 3;
+            }
+        }
+        
+        /* ========================================
+           COLUMNS LAYOUT
+           ======================================== */
+        .columns {
+            display: flex;
+            gap: var(--indent-xl);
+            margin-top: var(--indent-m);
+        }
+        
+        .column.main {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .sidebar-main {
+            width: 260px;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-additional {
+            width: 240px;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .columns {
+                flex-direction: column;
+            }
+            
+            .sidebar-main {
+                width: 100%;
+            }
+            
+            .sidebar-additional {
+                display: none;
+            }
+        }
+        
+        /* ========================================
+           SIDEBAR FILTER
+           基于原生 _module.less (LayeredNavigation)
+           ======================================== */
+        .block.filter {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            padding: var(--indent-l);
+            margin-bottom: var(--indent-l);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .block-title {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .block-title strong {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--folix-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .block-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding-bottom: var(--indent-m);
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: var(--indent-m);
+        }
+        
+        /* Filter Options */
+        .filter-options {
+            margin: 0;
+        }
+        
+        .filter-options-item {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--indent-m);
+            margin-bottom: var(--indent-m);
+        }
+        
+        .filter-options-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .filter-options-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-primary);
+            padding: 0 0 var(--indent-m);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+        }
+        
+        .filter-options-title:hover {
+            color: var(--folix-primary);
+        }
+        
+        .filter-options-title::after {
+            content: '▼';
+            font-size: 10px;
+            color: var(--text-muted);
+            transition: transform 0.2s ease;
+        }
+        
+        .filter-options-item.active .filter-options-title::after {
+            transform: rotate(180deg);
+        }
+        
+        .filter-options-content {
+            display: none;
+            padding: 0;
+        }
+        
+        .filter-options-item.active .filter-options-content {
+            display: block;
+        }
+        
+        .filter-options-content .item {
+            margin: var(--indent-s) 0;
+        }
+        
+        .filter-options-content a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--indent-xs) var(--indent-s);
+            margin: 0 calc(var(--indent-s) * -1);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-options-content a:hover {
+            background: #F8FAFC;
+            color: var(--folix-primary);
+        }
+        
+        .filter-options-content .count {
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+        
+        .filter-options-content .count::before {
+            content: '(';
+        }
+        
+        .filter-options-content .count::after {
+            content: ')';
+        }
+        
+        /* Swatch Filter - 游戏面值选择 */
+        .swatch-attribute {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .swatch-attribute:last-child {
+            margin-bottom: 0;
+        }
+        
+        .swatch-attribute-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--indent-s);
+        }
+        
+        /* Size/Amount Swatch */
+        .swatch-option.text {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 44px;
+            height: 36px;
+            padding: 0 var(--indent-m);
+            background: #F8FAFC;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .swatch-option.text:hover {
+            border-color: var(--folix-primary);
+            background: rgba(74, 144, 226, 0.05);
+        }
+        
+        .swatch-option.text.selected {
+            border-color: var(--folix-primary);
+            background: var(--folix-primary);
+            color: white;
+            box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+        }
+        
+        /* Color Swatch */
+        .swatch-option.color {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .swatch-option.color:hover {
+            transform: scale(1.15);
+            border-color: var(--folix-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+        
+        .swatch-option.color.selected {
+            border-color: var(--folix-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+        }
+        
+        /* Filter Actions */
+        .filter-actions {
+            margin-top: var(--indent-l);
+            padding-top: var(--indent-l);
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .filter-actions a {
+            display: inline-block;
+            padding: var(--indent-s) var(--indent-m);
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-actions a:hover {
+            border-color: var(--folix-primary);
+            color: var(--folix-primary);
+        }
+        
+        /* Compare & Wishlist Blocks */
+        .block-compare,
+        .block-wishlist {
+            background: var(--card-background);
+            border-radius: var(--radius-lg);
+            padding: var(--indent-l);
+            margin-bottom: var(--indent-l);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .block-compare .block-title strong,
+        .block-wishlist .block-title strong {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .block-compare .empty,
+        .block-wishlist .empty {
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: var(--indent-m) 0;
+        }
+        
+        /* ========================================
+           PRODUCT GRID
+           基于原生 _listings.less
+           ======================================== */
+        .products-grid {
+            margin-bottom: var(--indent-xl);
+        }
+        
+        .product-items {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            /* 原生使用 inline-block + margin-left 布局 */
+            font-size: 0; /* 消除inline-block间隙 */
+            letter-spacing: -1px;
+        }
+        
+        .product-item {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 2%;
+            width: calc((100% - 2%) / 2);
+            margin-bottom: var(--indent-l);
+            font-size: 14px;
+            letter-spacing: normal;
+        }
+        
+        .product-item:nth-child(2n + 1) {
+            margin-left: 0;
+        }
+        
+        /* Tablet: 3列 */
+        @media (min-width: 640px) {
+            .product-item {
+                width: calc((100% - 4%) / 3);
+            }
+            
+            .product-item:nth-child(2n + 1) {
+                margin-left: 2%;
+            }
+            
+            .product-item:nth-child(3n + 1) {
+                margin-left: 0;
+            }
+        }
+        
+        /* Desktop: 4列 */
+        @media (min-width: 1024px) {
+            .product-item {
+                width: calc((100% - 6%) / 4);
+            }
+            
+            .product-item:nth-child(3n + 1) {
+                margin-left: 2%;
+            }
+            
+            .product-item:nth-child(4n + 1) {
+                margin-left: 0;
+            }
+        }
+        
+        /* Large Desktop: 5列 */
+        @media (min-width: 1280px) {
+            .product-item {
+                width: calc((100% - 8%) / 5);
+            }
+            
+            .product-item:nth-child(4n + 1) {
+                margin-left: 2%;
+            }
+            
+            .product-item:nth-child(5n + 1) {
+                margin-left: 0;
+            }
+        }
+        
+        /* ========================================
+           PRODUCT CARD
+           ======================================== */
+        .product-item-info {
+            position: relative;
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .product-item-info:hover {
+            transform: translateY(-4px);
+            border-color: var(--folix-primary);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        /* Product Image */
+        .product-item-photo {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+        }
+        
+        .product-image-container {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+        
+        .product-image-wrapper {
+            display: block;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-item-info:hover .product-image-photo {
+            transform: scale(1.05);
+        }
+        
+        /* 游戏充值卡图片占位 */
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            color: white;
+            padding: var(--indent-l);
+        }
+        
+        .product-image-placeholder .game-icon {
+            font-size: 48px;
+            margin-bottom: var(--indent-s);
+        }
+        
+        .product-image-placeholder .game-name {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        /* Product Details */
+        .product-item-details {
+            padding: var(--indent-m);
+        }
+        
+        /* Product Name */
+        .product-item-name {
+            margin: 0 0 var(--indent-s);
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .product-item-link {
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+        
+        .product-item-link:hover {
+            color: var(--folix-primary);
+        }
+        
+        /* Rating Summary */
+        .product-reviews-summary {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+            margin-bottom: var(--indent-s);
+        }
+        
+        .rating-summary {
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating-summary .label {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        .rating-result {
+            position: relative;
+            width: 80px;
+            height: 16px;
+            background: #E5E7EB;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .rating-result::before {
+            content: '★★★★★';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #E5E7EB;
+        }
+        
+        .rating-result span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .rating-result span::before {
+            content: '★★★★★';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: var(--folix-secondary);
+        }
+        
+        .rating-result span span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        .reviews-actions {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .reviews-actions a {
+            color: var(--text-muted);
+        }
+        
+        .reviews-actions a:hover {
+            color: var(--folix-primary);
+        }
+        
+        /* Price Box */
+        .price-box {
+            margin: 0 0 var(--indent-m);
+        }
+        
+        .price-container {
+            display: inline-block;
+        }
+        
+        .price-wrapper {
+            display: inline-block;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--folix-secondary);
+            white-space: nowrap;
+        }
+        
+        .price-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-right: var(--indent-xs);
+        }
+        
+        /* Swatch Options on Product Card */
+        .swatch-opt {
+            margin-bottom: var(--indent-m);
+        }
+        
+        .product-item .swatch-attribute {
+            margin-bottom: var(--indent-s);
+        }
+        
+        .product-item .swatch-attribute-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        
+        .product-item .swatch-option {
+            min-width: 36px;
+            height: 28px;
+            padding: 0 var(--indent-s);
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .product-item .swatch-option:hover {
+            border-color: var(--folix-primary);
+        }
+        
+        .product-item .swatch-option.selected {
+            border-color: var(--folix-primary);
+            background: rgba(74, 144, 226, 0.1);
+            color: var(--folix-primary);
+        }
+        
+        /* Product Actions - 原生hover展开 */
+        .product-item-inner {
+            display: none;
+            padding: var(--indent-m);
+            border-top: 1px solid var(--border-color);
+            background: #FAFBFC;
+        }
+        
+        .product-item-info:hover .product-item-inner {
+            display: block;
+        }
+        
+        .product-item-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--indent-s);
+        }
+        
+        .actions-primary {
+            flex: 1;
+        }
+        
+        .actions-secondary {
+            display: flex;
+            gap: var(--indent-xs);
+        }
+        
+        /* Add to Cart Button */
+        .action.tocart {
+            display: block;
+            width: 100%;
+            padding: 10px var(--indent-m);
+            background: var(--folix-gradient);
+            border: none;
+            border-radius: var(--radius-md);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(74, 144, 226, 0.3);
+        }
+        
+        .action.tocart:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+        }
+        
+        .action.tocart span {
+            color: white;
+        }
+        
+        /* Wishlist & Compare Buttons */
+        .action.towishlist,
+        .action.tocompare {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            font-size: 0;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .action.towishlist::before {
+            content: '♡';
+            font-size: 16px;
+        }
+        
+        .action.towishlist:hover {
+            background: var(--folix-secondary);
+            border-color: var(--folix-secondary);
+            color: white;
+        }
+        
+        .action.towishlist:hover::before {
+            content: '♥';
+        }
+        
+        .action.tocompare::before {
+            content: '⇄';
+            font-size: 14px;
+        }
+        
+        .action.tocompare:hover {
+            background: var(--folix-primary);
+            border-color: var(--folix-primary);
+            color: white;
+        }
+        
+        .action.towishlist span,
+        .action.tocompare span {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        /* Mobile Product Card */
+        @media (max-width: 640px) {
+            .product-item-details {
+                padding: var(--indent-s);
+            }
+            
+            .product-item-name {
+                font-size: 13px;
+            }
+            
+            .price {
+                font-size: 16px;
+            }
+            
+            .product-reviews-summary {
+                display: none;
+            }
+            
+            .product-item-inner {
+                display: block;
+                padding: var(--indent-s);
+            }
+            
+            .action.tocart {
+                padding: 8px var(--indent-s);
+                font-size: 12px;
+            }
+        }
+        
+        /* ========================================
+           FOOTER - 深色框架
+           ======================================== */
+        .page-footer {
+            background: var(--footer-background);
+            color: var(--text-white);
+            margin-top: var(--indent-xl);
+        }
+        
+        .footer.content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--indent-xl) var(--indent-l);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: var(--indent-xl);
+        }
+        
+        .footer-block {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-block h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--indent-m);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .footer-block ul {
+            list-style: none;
+        }
+        
+        .footer-block li {
+            margin-bottom: var(--indent-s);
+        }
+        
+        .footer-block a {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-block a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            padding: var(--indent-m);
+            text-align: center;
+            font-size: 13px;
+        }
+        
+        .copyright span {
+            color: white;
+        }
+        
+        /* ========================================
+           UTILITY CLASSES
+           ======================================== */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+        
+        .clearfix::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- ========================================
+             HEADER
+             ======================================== -->
+        <header class="page-header">
+            <div class="header content">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🎮</span>
+                    <span>FOLIX</span>
+                </a>
+                
+                <nav class="header-links">
+                    <a href="#">PC Games</a>
+                    <a href="#">Mobile Games</a>
+                    <a href="#">Console Games</a>
+                    <a href="#">Gift Cards</a>
+                </nav>
+                
+                <div class="header-icons">
+                    <div class="header-icon">🔍</div>
+                    <div class="header-icon">👤</div>
+                    <div class="header-icon">🛒</div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- ========================================
+             MAIN CONTENT
+             ======================================== -->
+        <main class="page-main">
+            <div class="container">
+                <!-- Breadcrumb -->
+                <div class="breadcrumbs">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Mobile Games</a></li>
+                        <li><a href="#">iOS Games</a></li>
+                        <li><strong>Game Credits</strong></li>
+                    </ul>
+                </div>
+                
+                <!-- Page Title -->
+                <div class="page-title-wrapper">
+                    <div class="page-title">
+                        <h1>GAME CREDITS</h1>
+                        <span class="toolbar-amount">
+                            <span class="toolbar-number">24</span> Items
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Toolbar Top -->
+                <div class="toolbar toolbar-products">
+                    <div class="modes">
+                        <span class="modes-label" id="modes-label">View as</span>
+                        <strong class="modes-mode active mode-grid" title="Grid">
+                            <span>Grid</span>
+                        </strong>
+                        <a class="modes-mode mode-list" href="#" title="List">
+                            <span>List</span>
+                        </a>
+                    </div>
+                    
+                    <p class="toolbar-amount">
+                        <span class="toolbar-number">24</span> Items
+                    </p>
+                    
+                    <div class="toolbar-sorter sorter">
+                        <label class="sorter-label" for="sorter">Sort By</label>
+                        <select id="sorter" class="sorter-options">
+                            <option value="position" selected>Position</option>
+                            <option value="name">Product Name</option>
+                            <option value="price">Price</option>
+                            <option value="new">Newest</option>
+                        </select>
+                        <a title="Set Descending Direction" href="#" class="action sorter-action sort-asc">
+                            <span>Set Descending Direction</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Columns Layout -->
+                <div class="columns">
+                    <!-- Sidebar -->
+                    <div class="sidebar sidebar-main">
+                        <!-- Filter Block -->
+                        <div class="block filter">
+                            <div class="block-title filter-title">
+                                <strong>Shop By</strong>
+                            </div>
+                            
+                            <div class="block-content filter-content">
+                                <strong class="block-subtitle filter-subtitle">Shopping Options</strong>
+                                
+                                <div class="filter-options">
+                                    <!-- Platform Filter -->
+                                    <div class="filter-options-item active">
+                                        <div class="filter-options-title">Platform</div>
+                                        <div class="filter-options-content">
+                                            <ol class="items">
+                                                <li class="item">
+                                                    <a href="#">
+                                                        iOS
+                                                        <span class="count">12<span class="filter-count-label">items</span></span>
+                                                    </a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">
+                                                        Android
+                                                        <span class="count">8<span class="filter-count-label">items</span></span>
+                                                    </a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">
+                                                        PC
+                                                        <span class="count">4<span class="filter-count-label">items</span></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Game Type Filter -->
+                                    <div class="filter-options-item active">
+                                        <div class="filter-options-title">Game Type</div>
+                                        <div class="filter-options-content">
+                                            <ol class="items">
+                                                <li class="item">
+                                                    <a href="#">MOBA<span class="count">8<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">RPG<span class="count">6<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">Strategy<span class="count">5<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">Casual<span class="count">5<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Price Filter -->
+                                    <div class="filter-options-item active">
+                                        <div class="filter-options-title">Price</div>
+                                        <div class="filter-options-content">
+                                            <ol class="items">
+                                                <li class="item">
+                                                    <a href="#">$0 - $10<span class="count">6<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">$10 - $25<span class="count">8<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">$25 - $50<span class="count">6<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">$50+<span class="count">4<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Amount/Value Filter - 游戏面值 -->
+                                    <div class="filter-options-item active">
+                                        <div class="filter-options-title">Amount</div>
+                                        <div class="filter-options-content">
+                                            <div class="swatch-attribute amount">
+                                                <div class="swatch-attribute-options">
+                                                    <div class="swatch-option text">$5</div>
+                                                    <div class="swatch-option text">$10</div>
+                                                    <div class="swatch-option text selected">$25</div>
+                                                    <div class="swatch-option text">$50</div>
+                                                    <div class="swatch-option text">$100</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Region Filter -->
+                                    <div class="filter-options-item">
+                                        <div class="filter-options-title">Region</div>
+                                        <div class="filter-options-content">
+                                            <ol class="items">
+                                                <li class="item">
+                                                    <a href="#">Global<span class="count">15<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">US<span class="count">5<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                                <li class="item">
+                                                    <a href="#">EU<span class="count">4<span class="filter-count-label">items</span></span></a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="filter-actions">
+                                    <a href="#">Clear All</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Compare Block -->
+                        <div class="block block-compare">
+                            <div class="block-title">
+                                <strong>Compare Products</strong>
+                            </div>
+                            <div class="empty">You have no items to compare.</div>
+                        </div>
+                        
+                        <!-- Wishlist Block -->
+                        <div class="block block-wishlist">
+                            <div class="block-title">
+                                <strong>My Wish List</strong>
+                            </div>
+                            <div class="empty">You have no items in your wish list.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Column -->
+                    <div class="column main">
+                        <!-- Product Grid -->
+                        <div class="products wrapper grid products-grid">
+                            <ol class="products list items product-items">
+                                <!-- Product 1 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder">
+                                                        <span class="game-icon">🎮</span>
+                                                        <span class="game-name">Mobile Legends</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Mobile Legends Diamonds</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="92%">
+                                                        <span style="width: 92%;"><span>92%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">128 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$4.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <!-- Swatch Options -->
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option">86⬥</div>
+                                                        <div class="swatch-option selected">172⬥</div>
+                                                        <div class="swatch-option">344⬥</div>
+                                                        <div class="swatch-option">514⬥</div>
+                                                        <div class="swatch-option">706⬥</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Actions - Hover展开 -->
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 2 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #7C3AED 0%, #EC4899 100%);">
+                                                        <span class="game-icon">⚔️</span>
+                                                        <span class="game-name">Genshin Impact</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Genshin Impact Genesis Crystals</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="88%">
+                                                        <span style="width: 88%;"><span>88%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">256 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$0.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option selected">60💎</div>
+                                                        <div class="swatch-option">300💎</div>
+                                                        <div class="swatch-option">980💎</div>
+                                                        <div class="swatch-option">1980💎</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 3 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #059669 0%, #10B981 100%);">
+                                                        <span class="game-icon">🏆</span>
+                                                        <span class="game-name">PUBG Mobile</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">PUBG Mobile UC</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="85%">
+                                                        <span style="width: 85%;"><span>85%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">89 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$4.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option">60UC</div>
+                                                        <div class="swatch-option selected">325UC</div>
+                                                        <div class="swatch-option">660UC</div>
+                                                        <div class="swatch-option">1800UC</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 4 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #DC2626 0%, #F97316 100%);">
+                                                        <span class="game-icon">🔥</span>
+                                                        <span class="game-name">Free Fire</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Free Fire Diamonds</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="90%">
+                                                        <span style="width: 90%;"><span>90%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">156 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$0.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option selected">100💎</div>
+                                                        <div class="swatch-option">310💎</div>
+                                                        <div class="swatch-option">520💎</div>
+                                                        <div class="swatch-option">1060💎</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 5 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #3B82F6 0%, #06B6D4 100%);">
+                                                        <span class="game-icon">⚡</span>
+                                                        <span class="game-name">Roblox</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Roblox Robux</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="95%">
+                                                        <span style="width: 95%;"><span>95%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">342 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$4.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option">400R$</div>
+                                                        <div class="swatch-option selected">800R$</div>
+                                                        <div class="swatch-option">1700R$</div>
+                                                        <div class="swatch-option">4500R$</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 6 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%);">
+                                                        <span class="game-icon">🎯</span>
+                                                        <span class="game-name">Call of Duty</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Call of Duty Mobile CP</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="87%">
+                                                        <span style="width: 87%;"><span>87%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">67 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$0.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option selected">80CP</div>
+                                                        <div class="swatch-option">400CP</div>
+                                                        <div class="swatch-option">880CP</div>
+                                                        <div class="swatch-option">2400CP</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 7 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #F59E0B 0%, #EAB308 100%);">
+                                                        <span class="game-icon">🌟</span>
+                                                        <span class="game-name">League of Legends</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">League of Legends RP</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="91%">
+                                                        <span style="width: 91%;"><span>91%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">198 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$5.00</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option">650RP</div>
+                                                        <div class="swatch-option selected">1380RP</div>
+                                                        <div class="swatch-option">2800RP</div>
+                                                        <div class="swatch-option">5000RP</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                
+                                <!-- Product 8 -->
+                                <li class="item product product-item">
+                                    <div class="product-item-info">
+                                        <a href="#" class="product photo product-item-photo">
+                                            <span class="product-image-container">
+                                                <span class="product-image-wrapper">
+                                                    <span class="product-image-placeholder" style="background: linear-gradient(135deg, #EC4899 0%, #F43F5E 100%);">
+                                                        <span class="game-icon">💎</span>
+                                                        <span class="game-name">Valorant</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <div class="product details product-item-details">
+                                            <strong class="product name product-item-name">
+                                                <a class="product-item-link" href="#">Valorant Points</a>
+                                            </strong>
+                                            <div class="product-reviews-summary short">
+                                                <div class="rating-summary">
+                                                    <span class="label"><span>Rating:</span></span>
+                                                    <div class="rating-result" title="89%">
+                                                        <span style="width: 89%;"><span>89%</span></span>
+                                                    </div>
+                                                </div>
+                                                <div class="reviews-actions">
+                                                    <a href="#">145 Reviews</a>
+                                                </div>
+                                            </div>
+                                            <div class="price-box">
+                                                <span class="price-container">
+                                                    <span class="price-wrapper">
+                                                        <span class="price">$4.99</span>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            
+                                            <div class="swatch-opt">
+                                                <div class="swatch-attribute" data-attribute-code="amount">
+                                                    <div class="swatch-attribute-options">
+                                                        <div class="swatch-option">475VP</div>
+                                                        <div class="swatch-option selected">1000VP</div>
+                                                        <div class="swatch-option">2050VP</div>
+                                                        <div class="swatch-option">5350VP</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="product-item-inner">
+                                                <div class="product actions product-item-actions">
+                                                    <div class="actions-primary">
+                                                        <button type="submit" class="action tocart primary">
+                                                            <span>Add to Cart</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="actions-secondary">
+                                                        <a href="#" class="action towishlist" title="Add to Wish List">
+                                                            <span>Add to Wish List</span>
+                                                        </a>
+                                                        <a href="#" class="action tocompare" title="Add to Compare">
+                                                            <span>Add to Compare</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                        
+                        <!-- Toolbar Bottom -->
+                        <div class="toolbar toolbar-products">
+                            <div class="limiter">
+                                <label class="limiter-label" for="limiter">Show</label>
+                                <select id="limiter" class="limiter-options">
+                                    <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36">36</option>
+                                </select>
+                                <span class="limiter-text">per page</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- ========================================
+             FOOTER
+             ======================================== -->
+        <footer class="page-footer">
+            <div class="footer content">
+                <div class="footer-block">
+                    <h4>About Us</h4>
+                    <ul>
+                        <li><a href="#">About Folix</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-block">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-block">
+                    <h4>Payment Methods</h4>
+                    <ul>
+                        <li><a href="#">Credit Card</a></li>
+                        <li><a href="#">PayPal</a></li>
+                        <li><a href="#">Apple Pay</a></li>
+                        <li><a href="#">Google Pay</a></li>
+                    </ul>
+                </div>
+                <div class="footer-block">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <span>© 2024 Folix Game Store. All rights reserved.</span>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- ========================================
+         JAVASCRIPT
+         ======================================== -->
+    <script>
+        // Filter Options Toggle
+        document.querySelectorAll('.filter-options-title').forEach(title => {
+            title.addEventListener('click', function() {
+                const item = this.closest('.filter-options-item');
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Swatch Selection
+        document.querySelectorAll('.swatch-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                e.preventDefault();
+                const parent = this.closest('.swatch-attribute-options');
+                parent.querySelectorAll('.swatch-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+        
+        // View Mode Toggle
+        document.querySelectorAll('.modes-mode').forEach(mode => {
+            mode.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.modes-mode').forEach(m => m.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
