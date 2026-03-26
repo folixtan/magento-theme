@@ -10,38 +10,66 @@
     
     <style>
         /* ========================================
-           CSS Variables - 游戏主题配色
+           CSS Variables - 使用主题定义的颜色
+           来源: _theme.less + _variables.less
            ======================================== */
         :root {
-            /* 主色 */
-            --folix-primary: #4A90E2;
-            --folix-secondary: #FF6B35;
-            --folix-gradient: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            /* 主色 - Primary */
+            --theme__color__primary: #4A90E2;
+            --theme__color__primary-alt: #6C5CE7;
+            --theme__color__secondary: #FF6B35;
             
-            /* 背景色 */
-            --page-background: #F8FAFC;
-            --card-background: #FFFFFF;
-            --header-background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            /* 强调色 - Accent */
+            --color-accent__primary: #FF6B35;
+            --color-accent__coral: #FF8E72;
+            --color-accent__gold: #FFA000;
             
-            /* 边框色 */
-            --border-color: #E5E7EB;
+            /* 渐变 */
+            --folix-gradient-primary: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            --folix-gradient-secondary: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
+            --folix-gradient-dark: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
             
             /* 文字色 */
-            --text-primary: #1E293B;
-            --text-secondary: #64748B;
-            --text-muted: #94A3B8;
-            --text-white: #FFFFFF;
+            --primary__color: #1E293B;
+            --primary__color__lighter: #64748B;
+            --primary__color__light: #94A3B8;
+            --color-text__primary: #2D3436;
+            --color-text__secondary: #94A3B8;
+            --color-text__tertiary: #9CA3AF;
+            --color-text__white: #FFFFFF;
+            
+            /* 背景色 */
+            --page__background-color: #F8FAFC;
+            --panel__background-color: #F1F5F9;
+            --secondary__color: #E2E8F0;
+            --secondary__color__light: #F1F5F9;
+            
+            /* 边框色 */
+            --border-color__base: #E2E8F0;
+            
+            /* 状态色 */
+            --folix-success: #10B981;
+            --folix-error: #EF4444;
             
             /* 阴影 */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --folix-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --folix-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --folix-shadow-md: 0 4px 14px rgba(74, 144, 226, 0.12);
+            --folix-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --folix-shadow-primary: 0 4px 14px rgba(74, 144, 226, 0.25);
+            --folix-shadow-secondary: 0 4px 14px rgba(255, 107, 53, 0.25);
             
             /* 圆角 */
-            --radius-sm: 6px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 16px;
+            --folix-radius-sm: 4px;
+            --folix-radius: 6px;
+            --folix-radius-md: 8px;
+            --folix-radius-lg: 12px;
+            --folix-radius-xl: 16px;
+            
+            /* 过渡 */
+            --folix-transition-fast: 0.15s ease;
+            --folix-transition: 0.2s ease;
+            --folix-transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             
             /* 间距 */
             --indent-xs: 4px;
@@ -65,13 +93,18 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 14px;
             line-height: 1.5;
-            color: var(--text-primary);
-            background-color: var(--page-background);
+            color: var(--primary__color);
+            background-color: var(--page__background-color);
         }
         
         a {
-            color: var(--folix-primary);
+            color: var(--theme__color__primary);
             text-decoration: none;
+            transition: color var(--folix-transition);
+        }
+        
+        a:hover {
+            color: var(--theme__color__secondary);
         }
         
         ul, ol {
@@ -96,8 +129,8 @@
            HEADER - 深色框架
            ======================================== */
         .page-header {
-            background: var(--header-background);
-            color: var(--text-white);
+            background: var(--folix-gradient-dark);
+            color: var(--color-text__white);
         }
         
         .header.content {
@@ -119,8 +152,8 @@
         .logo-icon {
             width: 36px;
             height: 36px;
-            background: var(--folix-gradient);
-            border-radius: var(--radius-sm);
+            background: var(--folix-gradient-primary);
+            border-radius: var(--folix-radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -130,7 +163,7 @@
         .logo-text {
             font-size: 24px;
             font-weight: 800;
-            color: var(--text-white);
+            color: var(--color-text__white);
         }
         
         /* Search Block */
@@ -148,10 +181,11 @@
             padding: var(--indent-s) var(--indent-m);
             padding-right: 45px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius-lg);
+            border-radius: var(--folix-radius-lg);
             background: rgba(255, 255, 255, 0.1);
-            color: var(--text-white);
+            color: var(--color-text__white);
             font-size: 14px;
+            transition: all var(--folix-transition);
         }
         
         .block-search input::placeholder {
@@ -160,7 +194,7 @@
         
         .block-search input:focus {
             outline: none;
-            border-color: var(--folix-primary);
+            border-color: var(--theme__color__primary);
             background: rgba(255, 255, 255, 0.15);
         }
         
@@ -171,10 +205,16 @@
             transform: translateY(-50%);
             width: 32px;
             height: 32px;
-            background: var(--folix-gradient);
+            background: var(--folix-gradient-primary);
             border: none;
-            border-radius: var(--radius-sm);
+            border-radius: var(--folix-radius);
             cursor: pointer;
+            transition: all var(--folix-transition);
+        }
+        
+        .block-search .action.search:hover {
+            transform: translateY(-50%) scale(1.05);
+            box-shadow: var(--folix-shadow-primary);
         }
         
         .block-search .action.search span {
@@ -203,11 +243,12 @@
             justify-content: center;
             cursor: pointer;
             position: relative;
-            transition: all 0.2s;
+            transition: all var(--folix-transition);
         }
         
         .header-icon:hover {
             background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
         }
         
         .header-icon .badge {
@@ -216,7 +257,7 @@
             right: -4px;
             width: 18px;
             height: 18px;
-            background: var(--folix-secondary);
+            background: var(--color-accent__primary);
             border-radius: 50%;
             font-size: 11px;
             font-weight: 600;
@@ -230,7 +271,7 @@
            ======================================== */
         .breadcrumbs {
             padding: var(--indent-m) 0;
-            background: var(--page-background);
+            background: var(--page__background-color);
         }
         
         .breadcrumbs .items {
@@ -251,27 +292,23 @@
         
         .breadcrumbs li:not(:last-child)::after {
             content: '/';
-            color: var(--text-muted);
+            color: var(--primary__color__light);
             margin-left: var(--indent-xs);
         }
         
         .breadcrumbs a {
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-size: 13px;
         }
         
-        .breadcrumbs a:hover {
-            color: var(--folix-primary);
-        }
-        
         .breadcrumbs strong {
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-weight: 500;
             font-size: 13px;
         }
         
         /* ========================================
-           MAIN CONTENT - 原生结构
+           MAIN CONTENT
            ======================================== */
         .page-main {
             flex-grow: 1;
@@ -287,14 +324,8 @@
             width: 100%;
         }
         
-        .page.messages {
-            display: none;
-        }
-        
         /* ========================================
            产品详情两列布局 - 60/40
-           原生: product.media + product-info-main
-           定制: 使用Flexbox + 两列比例
            ======================================== */
         .product-detail-wrapper {
             display: flex;
@@ -317,13 +348,12 @@
         
         /* ========================================
            PRODUCT MEDIA - 图片区域
-           原生结构: .product.media > .gallery-placeholder
            ======================================== */
         .product.media {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--folix-shadow);
         }
         
         .gallery-placeholder {
@@ -336,16 +366,9 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
         }
         
-        .fotorama__wrap {
-            position: relative;
-        }
-        
         .fotorama__stage {
             position: relative;
             min-height: 380px;
-        }
-        
-        .fotorama__stage__frame {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -368,15 +391,15 @@
             background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(8px);
             padding: var(--indent-s) var(--indent-m);
-            border-radius: var(--radius-md);
+            border-radius: var(--folix-radius-md);
             z-index: 10;
         }
         
         .game-badge-icon {
             width: 40px;
             height: 40px;
-            background: var(--folix-gradient);
-            border-radius: var(--radius-sm);
+            background: var(--folix-gradient-primary);
+            border-radius: var(--folix-radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -384,7 +407,7 @@
         }
         
         .game-badge-info {
-            color: var(--text-white);
+            color: var(--color-text__white);
         }
         
         .game-badge-name {
@@ -410,13 +433,13 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--folix-transition-smooth);
             z-index: 10;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--folix-shadow-md);
         }
         
         .fotorama__arr:hover {
-            background: var(--text-white);
+            background: var(--color-text__white);
             transform: translateY(-50%) scale(1.1);
         }
         
@@ -429,13 +452,13 @@
         }
         
         .fotorama__arr span {
-            font-size: 18px;
+            font-size: 16px;
         }
         
         /* 缩略图列表 */
         .fotorama__nav-wrap {
             padding: var(--indent-m);
-            background: var(--card-background);
+            background: var(--color-text__white);
         }
         
         .fotorama__nav {
@@ -447,19 +470,19 @@
         .fotorama__thumb {
             width: 60px;
             height: 60px;
-            border-radius: var(--radius-md);
+            border-radius: var(--folix-radius-md);
             overflow: hidden;
             border: 2px solid transparent;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--folix-transition);
         }
         
         .fotorama__thumb:hover {
-            border-color: var(--folix-primary);
+            border-color: var(--theme__color__primary);
         }
         
         .fotorama__thumb--active {
-            border-color: var(--folix-secondary);
+            border-color: var(--color-accent__primary);
         }
         
         .fotorama__thumb img {
@@ -469,15 +492,13 @@
         }
         
         /* ========================================
-           产品描述面板 - 左侧块设计
-           原生结构: .product.info.detailed > .product.data.items
-           定制: 块状卡片风格
+           产品描述面板 - 手风琴设计
            ======================================== */
         .product.info.detailed {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--folix-shadow);
         }
         
         .product.data.items {
@@ -485,55 +506,72 @@
             flex-direction: column;
         }
         
-        /* Tab 标题 */
+        /* Tab 标题 - 手风琴样式 */
         .data.item.title {
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color__base);
+            background: var(--panel__background-color);
         }
         
         .data.item.title a {
             display: flex;
             align-items: center;
-            gap: var(--indent-s);
+            justify-content: space-between;
             padding: var(--indent-m) var(--indent-l);
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s;
+            font-size: 14px;
+            transition: all var(--folix-transition);
             border-left: 3px solid transparent;
         }
         
         .data.item.title a:hover {
-            color: var(--folix-primary);
-            background: rgba(74, 144, 226, 0.03);
+            color: var(--theme__color__primary);
+            background: var(--secondary__color__light);
         }
         
         .data.item.title.active a {
-            color: var(--folix-primary);
-            background: rgba(74, 144, 226, 0.05);
-            border-left-color: var(--folix-primary);
+            color: var(--theme__color__primary);
+            background: var(--color-text__white);
+            border-left-color: var(--theme__color__primary);
         }
         
+        /* 展开/折叠图标 */
+        .data.item.title a::after {
+            content: '▼';
+            font-size: 10px;
+            transition: transform var(--folix-transition-smooth);
+        }
+        
+        .data.item.title.active a::after {
+            transform: rotate(180deg);
+        }
+        
+        /* Tab 图标 */
         .data.item.title a::before {
-            font-size: 18px;
+            margin-right: var(--indent-s);
+            font-size: 16px;
         }
         
         .data.item.title:nth-child(1) a::before { content: '📋'; }
         .data.item.title:nth-child(3) a::before { content: '⚙️'; }
         .data.item.title:nth-child(5) a::before { content: '⭐'; }
         
-        /* Tab 内容 */
+        /* Tab 内容 - 带动画 */
         .data.item.content {
-            padding: var(--indent-l);
-            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--folix-transition-smooth), padding var(--folix-transition-smooth);
+            padding: 0 var(--indent-l);
         }
         
         .data.item.content.active {
-            display: block;
+            max-height: 800px;
+            padding: var(--indent-l);
         }
         
         /* 描述内容 */
         .product.attribute.description .value {
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             line-height: 1.8;
         }
         
@@ -563,15 +601,21 @@
             align-items: flex-start;
             gap: var(--indent-m);
             padding: var(--indent-m);
-            background: var(--page-background);
-            border-radius: var(--radius-md);
+            background: var(--page__background-color);
+            border-radius: var(--folix-radius-md);
+            transition: all var(--folix-transition);
+        }
+        
+        .feature-item:hover {
+            background: var(--panel__background-color);
+            transform: translateX(4px);
         }
         
         .feature-icon {
             width: 40px;
             height: 40px;
             background: rgba(74, 144, 226, 0.1);
-            border-radius: var(--radius-sm);
+            border-radius: var(--folix-radius);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -582,13 +626,13 @@
         .feature-content h4 {
             font-size: 14px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             margin-bottom: var(--indent-xs);
         }
         
         .feature-content p {
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--primary__color__light);
             line-height: 1.5;
         }
         
@@ -599,7 +643,12 @@
         }
         
         .additional-attributes-wrapper tr {
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color__base);
+            transition: background var(--folix-transition);
+        }
+        
+        .additional-attributes-wrapper tr:hover {
+            background: var(--panel__background-color);
         }
         
         .additional-attributes-wrapper tr:last-child {
@@ -614,13 +663,13 @@
         
         .additional-attributes-wrapper th {
             width: 40%;
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-weight: 500;
             background: rgba(74, 144, 226, 0.03);
         }
         
         .additional-attributes-wrapper td {
-            color: var(--text-primary);
+            color: var(--primary__color);
         }
         
         /* 评价列表 */
@@ -632,8 +681,14 @@
         
         .review-item {
             padding: var(--indent-m);
-            background: var(--page-background);
-            border-radius: var(--radius-md);
+            background: var(--page__background-color);
+            border-radius: var(--folix-radius-md);
+            transition: all var(--folix-transition);
+        }
+        
+        .review-item:hover {
+            background: var(--panel__background-color);
+            transform: translateX(4px);
         }
         
         .review-header {
@@ -645,29 +700,28 @@
         
         .review-author {
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-size: 14px;
         }
         
         .review-date {
             font-size: 12px;
-            color: var(--text-muted);
+            color: var(--primary__color__light);
         }
         
         .review-rating {
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
             margin-bottom: var(--indent-s);
         }
         
         .review-content {
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-size: 13px;
             line-height: 1.6;
         }
         
         /* ========================================
            产品信息区域 - 右侧
-           原生结构: .product-info-main
            ======================================== */
         .product-info-main {
             position: sticky;
@@ -676,11 +730,11 @@
         
         /* 产品标题卡片 */
         .product-title-card {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             padding: var(--indent-l);
             margin-bottom: var(--indent-l);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--folix-shadow);
         }
         
         .page-title-wrapper.product {
@@ -690,12 +744,8 @@
         .page-title {
             font-size: 22px;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--primary__color);
             line-height: 1.3;
-        }
-        
-        .page-title .base {
-            color: inherit;
         }
         
         /* 标签 */
@@ -709,15 +759,24 @@
         .product-tag {
             padding: var(--indent-xs) var(--indent-m);
             background: rgba(74, 144, 226, 0.1);
-            color: var(--folix-primary);
-            border-radius: var(--radius-md);
+            color: var(--theme__color__primary);
+            border-radius: var(--folix-radius-md);
             font-size: 11px;
             font-weight: 500;
+            transition: all var(--folix-transition);
+        }
+        
+        .product-tag:hover {
+            background: rgba(74, 144, 226, 0.2);
         }
         
         .product-tag.hot {
             background: rgba(255, 107, 53, 0.1);
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
+        }
+        
+        .product-tag.hot:hover {
+            background: rgba(255, 107, 53, 0.2);
         }
         
         /* 评分 */
@@ -727,7 +786,7 @@
             gap: var(--indent-m);
             margin-bottom: var(--indent-m);
             padding-bottom: var(--indent-m);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color__base);
         }
         
         .rating-summary {
@@ -742,19 +801,19 @@
         }
         
         .rating-result .star {
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
             font-size: 14px;
         }
         
         .rating-score {
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-size: 14px;
         }
         
         .reviews-actions {
             font-size: 13px;
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
         }
         
         /* 价格 */
@@ -773,28 +832,19 @@
         
         .price-label {
             font-size: 13px;
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
         }
         
         .price-wrapper .price {
             font-size: 26px;
             font-weight: 700;
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
         }
         
         .old-price .price {
             font-size: 16px;
-            color: var(--text-muted);
+            color: var(--primary__color__light);
             text-decoration: line-through;
-        }
-        
-        .discount-badge {
-            background: var(--folix-secondary);
-            color: white;
-            padding: 2px 8px;
-            border-radius: var(--radius-sm);
-            font-size: 11px;
-            font-weight: 600;
         }
         
         /* 库存SKU */
@@ -806,7 +856,7 @@
         }
         
         .stock.available {
-            color: #10B981;
+            color: var(--folix-success);
             font-weight: 500;
         }
         
@@ -817,24 +867,22 @@
         .product.attribute.sku {
             display: flex;
             gap: var(--indent-xs);
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
         }
         
         .product.attribute.sku .value {
-            color: var(--text-primary);
+            color: var(--primary__color);
         }
         
         /* ========================================
            充值档位选择区
-           原生结构: .product-options-wrapper
-           定制: 网格卡片布局
            ======================================== */
         .product-options-wrapper {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             padding: var(--indent-l);
             margin-bottom: var(--indent-l);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--folix-shadow);
         }
         
         .swatch-opt {
@@ -851,7 +899,7 @@
         
         .swatch-attribute-label {
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-size: 14px;
             display: flex;
             align-items: center;
@@ -874,28 +922,47 @@
             display: flex;
             flex-direction: column;
             padding: var(--indent-m);
-            border: 2px solid var(--border-color);
-            border-radius: var(--radius-md);
+            border: 2px solid var(--border-color__base);
+            border-radius: var(--folix-radius-md);
             cursor: pointer;
-            transition: all 0.2s;
-            background: var(--card-background);
+            transition: all var(--folix-transition-smooth);
+            background: var(--color-text__white);
             text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .swatch-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: background var(--folix-transition);
         }
         
         .swatch-option:hover {
-            border-color: var(--folix-primary);
-            background: rgba(74, 144, 226, 0.05);
+            border-color: var(--theme__color__primary);
+            background: rgba(74, 144, 226, 0.03);
+            transform: translateY(-2px);
+            box-shadow: var(--folix-shadow-primary);
         }
         
         .swatch-option.selected {
-            border-color: var(--folix-secondary);
-            background: rgba(255, 107, 53, 0.08);
+            border-color: var(--color-accent__primary);
+            background: rgba(255, 107, 53, 0.05);
+        }
+        
+        .swatch-option.selected::before {
+            background: var(--color-accent__primary);
         }
         
         .swatch-option-amount {
             font-size: 15px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             display: flex;
             align-items: center;
             gap: var(--indent-xs);
@@ -903,20 +970,20 @@
         
         .swatch-option-bonus {
             font-size: 11px;
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
             margin-top: 2px;
         }
         
         .swatch-option-price {
             font-size: 15px;
             font-weight: 700;
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
             margin-top: var(--indent-xs);
         }
         
         .swatch-option-original {
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--primary__color__light);
             text-decoration: line-through;
         }
         
@@ -924,17 +991,17 @@
            订单信息卡片
            ======================================== */
         .order-info-card {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--folix-shadow-md);
             margin-bottom: var(--indent-l);
         }
         
         .order-info-header {
             padding: var(--indent-m) var(--indent-l);
-            background: var(--folix-gradient);
-            color: var(--text-white);
+            background: var(--folix-gradient-primary);
+            color: var(--color-text__white);
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -971,7 +1038,7 @@
         
         .field .label {
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-size: 13px;
         }
         
@@ -983,28 +1050,28 @@
         .field select {
             width: 100%;
             padding: var(--indent-m);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color__base);
+            border-radius: var(--folix-radius-md);
             font-size: 14px;
-            color: var(--text-primary);
-            background: var(--card-background);
-            transition: all 0.2s;
+            color: var(--primary__color);
+            background: var(--color-text__white);
+            transition: all var(--folix-transition);
         }
         
         .field input:focus,
         .field select:focus {
             outline: none;
-            border-color: var(--folix-primary);
+            border-color: var(--theme__color__primary);
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
         }
         
         .field input::placeholder {
-            color: var(--text-muted);
+            color: var(--primary__color__light);
         }
         
         .field .note {
             font-size: 11px;
-            color: var(--text-muted);
+            color: var(--primary__color__light);
             margin-top: var(--indent-xs);
         }
         
@@ -1022,8 +1089,8 @@
         .field.qty .control {
             display: flex;
             align-items: center;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color__base);
+            border-radius: var(--folix-radius-md);
             overflow: hidden;
         }
         
@@ -1041,23 +1108,23 @@
             width: 36px;
             height: 36px;
             border: none;
-            background: var(--page-background);
+            background: var(--page__background-color);
             cursor: pointer;
             font-size: 16px;
-            color: var(--text-secondary);
-            transition: all 0.2s;
+            color: var(--primary__color__lighter);
+            transition: all var(--folix-transition);
         }
         
         .qty-btn:hover {
-            background: var(--folix-primary);
-            color: var(--text-white);
+            background: var(--theme__color__primary);
+            color: var(--color-text__white);
         }
         
         /* 订单总计 */
         .order-total {
             margin-top: var(--indent-l);
             padding-top: var(--indent-m);
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color__base);
         }
         
         .total-row {
@@ -1068,18 +1135,18 @@
         }
         
         .total-label {
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-size: 13px;
         }
         
         .total-value {
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
             font-size: 13px;
         }
         
         .total-value.highlight {
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
             font-size: 18px;
         }
         
@@ -1087,11 +1154,11 @@
             display: flex;
             align-items: center;
             gap: var(--indent-xs);
-            color: #FFB800;
+            color: var(--color-accent__gold);
             font-size: 12px;
         }
         
-        /* 操作按钮 */
+        /* 操作按钮 - 只保留立即充值 */
         .box-tocart {
             margin-top: var(--indent-m);
         }
@@ -1105,53 +1172,51 @@
         .action.tocart {
             width: 100%;
             padding: var(--indent-m) var(--indent-l);
-            background: var(--folix-secondary);
-            color: var(--text-white);
+            background: var(--folix-gradient-secondary);
+            color: var(--color-text__white);
             border: none;
-            border-radius: var(--radius-md);
+            border-radius: var(--folix-radius-md);
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all var(--folix-transition-smooth);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: var(--indent-s);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .action.tocart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .action.tocart:hover::before {
+            left: 100%;
         }
         
         .action.tocart:hover {
-            background: #E55A2B;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+            box-shadow: var(--folix-shadow-secondary);
         }
         
-        .action.secondary {
-            width: 100%;
-            padding: var(--indent-m) var(--indent-l);
-            background: transparent;
-            color: var(--folix-primary);
-            border: 2px solid var(--folix-primary);
-            border-radius: var(--radius-md);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--indent-s);
-        }
-        
-        .action.secondary:hover {
-            background: var(--folix-primary);
-            color: var(--text-white);
+        .action.tocart:active {
+            transform: translateY(0);
         }
         
         /* 收藏对比 */
         .product-social-links {
             margin-top: var(--indent-m);
             padding-top: var(--indent-m);
-            border-top: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color__base);
         }
         
         .product-addto-links {
@@ -1164,30 +1229,29 @@
             display: flex;
             align-items: center;
             gap: var(--indent-xs);
-            color: var(--text-secondary);
+            color: var(--primary__color__lighter);
             font-size: 13px;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color var(--folix-transition);
         }
         
         .product-addto-links .action:hover {
-            color: var(--folix-primary);
+            color: var(--theme__color__primary);
         }
         
         /* ========================================
            相关产品块
-           原生结构: .block.related
            ======================================== */
         .block.related {
-            background: var(--card-background);
-            border-radius: var(--radius-lg);
+            background: var(--color-text__white);
+            border-radius: var(--folix-radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--folix-shadow);
         }
         
         .block-title {
             padding: var(--indent-m) var(--indent-l);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color__base);
             display: flex;
             align-items: center;
             gap: var(--indent-s);
@@ -1196,7 +1260,7 @@
         .block-title strong {
             font-size: 16px;
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--primary__color);
         }
         
         .block-title::before {
@@ -1215,16 +1279,16 @@
         }
         
         .product-item {
-            background: var(--page-background);
-            border-radius: var(--radius-md);
+            background: var(--page__background-color);
+            border-radius: var(--folix-radius-md);
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--folix-transition-smooth);
         }
         
         .product-item:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--folix-shadow-md);
         }
         
         .product-item-photo {
@@ -1243,7 +1307,7 @@
         .product-item-name {
             font-size: 13px;
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--primary__color);
             margin-bottom: var(--indent-xs);
             white-space: nowrap;
             overflow: hidden;
@@ -1255,21 +1319,21 @@
         }
         
         .product-item-name a:hover {
-            color: var(--folix-primary);
+            color: var(--theme__color__primary);
         }
         
         .product-item-price {
             font-size: 14px;
             font-weight: 700;
-            color: var(--folix-secondary);
+            color: var(--color-accent__primary);
         }
         
         /* ========================================
            FOOTER
            ======================================== */
         .page-footer {
-            background: var(--header-background);
-            color: var(--text-white);
+            background: var(--folix-gradient-dark);
+            color: var(--color-text__white);
             margin-top: var(--indent-2xl);
         }
         
@@ -1290,10 +1354,11 @@
         .footer-links a {
             color: rgba(255, 255, 255, 0.7);
             font-size: 13px;
+            transition: color var(--folix-transition);
         }
         
         .footer-links a:hover {
-            color: var(--text-white);
+            color: var(--color-text__white);
         }
         
         .copyright {
@@ -1355,9 +1420,7 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- ========================================
-             HEADER - 原生结构
-             ======================================== -->
+        <!-- HEADER -->
         <header class="page-header">
             <div class="header content">
                 <div class="logo">
@@ -1378,9 +1441,7 @@
                 </div>
                 
                 <div class="header-icons">
-                    <div class="header-icon">
-                        👤
-                    </div>
+                    <div class="header-icon">👤</div>
                     <div class="header-icon">
                         🛒
                         <span class="badge">3</span>
@@ -1389,13 +1450,11 @@
             </div>
         </header>
         
-        <!-- ========================================
-             BREADCRUMBS
-             ======================================== -->
+        <!-- BREADCRUMBS -->
         <div class="breadcrumbs">
             <ul class="items">
                 <li class="item home">
-                    <a href="#" title="Go to Home Page">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li class="item category">
                     <a href="#">Mobile Legends</a>
@@ -1409,9 +1468,7 @@
             </ul>
         </div>
         
-        <!-- ========================================
-             MAIN CONTENT
-             ======================================== -->
+        <!-- MAIN CONTENT -->
         <main class="page-main">
             <div class="columns">
                 <div class="column main">
@@ -1419,43 +1476,26 @@
                     <!-- 产品详情两列布局 -->
                     <div class="product-detail-wrapper">
                         
-                        <!-- ========================================
-                             左列: 图片 + 描述面板 (60%)
-                             ======================================== -->
+                        <!-- 左列: 图片 + 描述面板 (60%) -->
                         <div class="product-detail-left">
                             
-                            <!-- 产品图片 Gallery - 原生结构 -->
+                            <!-- 产品图片 Gallery -->
                             <div class="product media">
                                 <div class="gallery-placeholder">
-                                    <!-- Fotorama 容器 -->
-                                    <div class="fotorama-item fotorama--hidden">
-                                        <div class="fotorama__wrap">
-                                            <div class="fotorama__stage">
-                                                <!-- 游戏信息覆盖层 -->
-                                                <div class="game-badge-overlay">
-                                                    <div class="game-badge-icon">🎮</div>
-                                                    <div class="game-badge-info">
-                                                        <div class="game-badge-name">Mobile Legends</div>
-                                                        <div class="game-badge-developer">Moonton</div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="fotorama__stage__frame">
-                                                    <img class="fotorama__img" src="https://placehold.co/600x400/1a1a2e/FFFFFF?text=ML+Diamonds+Cover" alt="Mobile Legends Diamonds">
-                                                </div>
-                                                
-                                                <!-- 箭头 -->
-                                                <div class="fotorama__arr fotorama__arr--prev">
-                                                    <span>◀</span>
-                                                </div>
-                                                <div class="fotorama__arr fotorama__arr--next">
-                                                    <span>▶</span>
+                                    <div class="fotorama-item">
+                                        <div class="fotorama__stage">
+                                            <div class="game-badge-overlay">
+                                                <div class="game-badge-icon">🎮</div>
+                                                <div class="game-badge-info">
+                                                    <div class="game-badge-name">Mobile Legends</div>
+                                                    <div class="game-badge-developer">Moonton</div>
                                                 </div>
                                             </div>
+                                            <img class="fotorama__img" src="https://placehold.co/600x400/1a1a2e/FFFFFF?text=ML+Diamonds+Cover" alt="Mobile Legends Diamonds">
+                                            <div class="fotorama__arr fotorama__arr--prev"><span>◀</span></div>
+                                            <div class="fotorama__arr fotorama__arr--next"><span>▶</span></div>
                                         </div>
                                     </div>
-                                    
-                                    <!-- 缩略图列表 -->
                                     <div class="fotorama__nav-wrap">
                                         <div class="fotorama__nav">
                                             <div class="fotorama__thumb fotorama__thumb--active">
@@ -1475,7 +1515,7 @@
                                 </div>
                             </div>
                             
-                            <!-- 产品描述面板 - 原生结构 -->
+                            <!-- 产品描述面板 - 手风琴 -->
                             <div class="product info detailed">
                                 <div class="product data items">
                                     
@@ -1494,7 +1534,6 @@
                                                     <li><strong>24/7 Support</strong> - Our team is always here to help</li>
                                                 </ul>
                                                 
-                                                <!-- 特性亮点 -->
                                                 <div class="product-features">
                                                     <div class="feature-item">
                                                         <div class="feature-icon">⚡</div>
@@ -1604,9 +1643,7 @@
                             
                         </div>
                         
-                        <!-- ========================================
-                             右列: 产品信息 + 下单面板 (40%)
-                             ======================================== -->
+                        <!-- 右列: 产品信息 + 下单面板 (40%) -->
                         <div class="product-detail-right">
                             <div class="product-info-main">
                                 
@@ -1618,13 +1655,11 @@
                                         </h1>
                                     </div>
                                     
-                                    <!-- 标签 -->
                                     <div class="product-tags">
                                         <span class="product-tag hot">🔥 Best Seller</span>
                                         <span class="product-tag">🌐 Global</span>
                                     </div>
                                     
-                                    <!-- 评分 -->
                                     <div class="product-reviews-summary">
                                         <div class="rating-summary">
                                             <div class="rating-result">
@@ -1639,7 +1674,6 @@
                                         <span class="reviews-actions">(2,341 reviews)</span>
                                     </div>
                                     
-                                    <!-- 价格 -->
                                     <div class="product-info-price">
                                         <div class="price-box">
                                             <span class="price-label">From</span>
@@ -1649,9 +1683,8 @@
                                         </div>
                                     </div>
                                     
-                                    <!-- 库存SKU -->
                                     <div class="product-info-stock-sku">
-                                        <div class="stock available" title="Availability">
+                                        <div class="stock available">
                                             <span>In stock</span>
                                         </div>
                                         <div class="product attribute sku">
@@ -1663,42 +1696,40 @@
                                 
                                 <!-- 充值档位选择 -->
                                 <div class="product-options-wrapper">
-                                    <div id="product-options-wrapper">
-                                        <div class="fieldset">
-                                            <div class="swatch-opt">
-                                                <div class="swatch-attribute">
-                                                    <span class="swatch-attribute-label">Select Amount</span>
-                                                    <div class="swatch-attribute-options">
-                                                        <div class="swatch-option" data-value="86">
-                                                            <span class="swatch-option-amount">💎 86</span>
-                                                            <span class="swatch-option-bonus">+5 Bonus</span>
-                                                            <span class="swatch-option-price">$0.99</span>
-                                                        </div>
-                                                        <div class="swatch-option selected" data-value="172">
-                                                            <span class="swatch-option-amount">💎 172</span>
-                                                            <span class="swatch-option-bonus">+12 Bonus</span>
-                                                            <span class="swatch-option-price">$1.99 <span class="swatch-option-original">$2.39</span></span>
-                                                        </div>
-                                                        <div class="swatch-option" data-value="257">
-                                                            <span class="swatch-option-amount">💎 257</span>
-                                                            <span class="swatch-option-bonus">+20 Bonus</span>
-                                                            <span class="swatch-option-price">$2.99</span>
-                                                        </div>
-                                                        <div class="swatch-option" data-value="344">
-                                                            <span class="swatch-option-amount">💎 344</span>
-                                                            <span class="swatch-option-bonus">+30 Bonus</span>
-                                                            <span class="swatch-option-price">$3.99</span>
-                                                        </div>
-                                                        <div class="swatch-option" data-value="514">
-                                                            <span class="swatch-option-amount">💎 514</span>
-                                                            <span class="swatch-option-bonus">+50 Bonus</span>
-                                                            <span class="swatch-option-price">$5.99</span>
-                                                        </div>
-                                                        <div class="swatch-option" data-value="706">
-                                                            <span class="swatch-option-amount">💎 706</span>
-                                                            <span class="swatch-option-bonus">+70 Bonus</span>
-                                                            <span class="swatch-option-price">$7.99</span>
-                                                        </div>
+                                    <div class="fieldset">
+                                        <div class="swatch-opt">
+                                            <div class="swatch-attribute">
+                                                <span class="swatch-attribute-label">Select Amount</span>
+                                                <div class="swatch-attribute-options">
+                                                    <div class="swatch-option" data-value="86">
+                                                        <span class="swatch-option-amount">💎 86</span>
+                                                        <span class="swatch-option-bonus">+5 Bonus</span>
+                                                        <span class="swatch-option-price">$0.99</span>
+                                                    </div>
+                                                    <div class="swatch-option selected" data-value="172">
+                                                        <span class="swatch-option-amount">💎 172</span>
+                                                        <span class="swatch-option-bonus">+12 Bonus</span>
+                                                        <span class="swatch-option-price">$1.99 <span class="swatch-option-original">$2.39</span></span>
+                                                    </div>
+                                                    <div class="swatch-option" data-value="257">
+                                                        <span class="swatch-option-amount">💎 257</span>
+                                                        <span class="swatch-option-bonus">+20 Bonus</span>
+                                                        <span class="swatch-option-price">$2.99</span>
+                                                    </div>
+                                                    <div class="swatch-option" data-value="344">
+                                                        <span class="swatch-option-amount">💎 344</span>
+                                                        <span class="swatch-option-bonus">+30 Bonus</span>
+                                                        <span class="swatch-option-price">$3.99</span>
+                                                    </div>
+                                                    <div class="swatch-option" data-value="514">
+                                                        <span class="swatch-option-amount">💎 514</span>
+                                                        <span class="swatch-option-bonus">+50 Bonus</span>
+                                                        <span class="swatch-option-price">$5.99</span>
+                                                    </div>
+                                                    <div class="swatch-option" data-value="706">
+                                                        <span class="swatch-option-amount">💎 706</span>
+                                                        <span class="swatch-option-bonus">+70 Bonus</span>
+                                                        <span class="swatch-option-price">$7.99</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1714,7 +1745,6 @@
                                         </div>
                                         <div class="order-info-content">
                                             <div class="fieldset">
-                                                <!-- User ID -->
                                                 <div class="field user-id required">
                                                     <label class="label" for="user_id">User ID</label>
                                                     <div class="control">
@@ -1723,7 +1753,6 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <!-- Zone ID -->
                                                 <div class="field zone-id">
                                                     <label class="label" for="zone_id">Zone ID (Optional)</label>
                                                     <div class="control">
@@ -1731,7 +1760,6 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <!-- 数量 -->
                                                 <div class="field qty">
                                                     <label class="label" for="qty">Quantity</label>
                                                     <div class="control">
@@ -1741,7 +1769,6 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <!-- 订单总计 -->
                                                 <div class="order-total">
                                                     <div class="total-row">
                                                         <span class="total-label">💎 Diamonds</span>
@@ -1757,19 +1784,15 @@
                                                     </div>
                                                 </div>
                                                 
-                                                <!-- 按钮 -->
+                                                <!-- 只保留立即充值按钮 -->
                                                 <div class="box-tocart">
                                                     <div class="actions">
                                                         <button type="submit" class="action tocart primary">
                                                             <span>⚡ 立即充值 - 即时到账</span>
                                                         </button>
-                                                        <button type="button" class="action secondary">
-                                                            <span>🛒 加入购物车</span>
-                                                        </button>
                                                     </div>
                                                 </div>
                                                 
-                                                <!-- 收藏对比 -->
                                                 <div class="product-social-links">
                                                     <div class="product-addto-links">
                                                         <a href="#" class="action">❤️ 收藏</a>
@@ -1786,10 +1809,8 @@
                         
                     </div>
                     
-                    <!-- ========================================
-                         相关产品块
-                         ======================================== -->
-                    <div class="block related">
+                    <!-- 相关产品块 -->
+                    <div class="block.related">
                         <div class="block-title">
                             <strong>Related Products</strong>
                         </div>
@@ -1839,9 +1860,7 @@
             </div>
         </main>
         
-        <!-- ========================================
-             FOOTER
-             ======================================== -->
+        <!-- FOOTER -->
         <footer class="page-footer">
             <div class="footer content">
                 <div class="footer-links">
@@ -1859,18 +1878,29 @@
     </div>
     
     <script>
-        // Tab 切换
+        // 手风琴 Tab 切换 - 带动画
         document.querySelectorAll('.data.item.title a').forEach(tab => {
             tab.addEventListener('click', function(e) {
                 e.preventDefault();
                 
-                // 移除所有active
-                document.querySelectorAll('.data.item.title').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.data.item.content').forEach(c => c.classList.remove('active'));
+                const parent = this.parentElement;
+                const targetId = this.getAttribute('href');
+                const targetContent = document.querySelector(targetId);
                 
-                // 添加active
-                this.parentElement.classList.add('active');
-                document.querySelector(this.getAttribute('href')).classList.add('active');
+                // 切换当前项
+                if (parent.classList.contains('active')) {
+                    // 如果当前是激活状态，则关闭
+                    parent.classList.remove('active');
+                    targetContent.classList.remove('active');
+                } else {
+                    // 关闭所有其他项
+                    document.querySelectorAll('.data.item.title').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.data.item.content').forEach(c => c.classList.remove('active'));
+                    
+                    // 激活当前项
+                    parent.classList.add('active');
+                    targetContent.classList.add('active');
+                }
             });
         });
         
