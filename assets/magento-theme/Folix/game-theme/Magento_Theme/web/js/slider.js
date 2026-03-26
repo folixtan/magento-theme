@@ -5,6 +5,7 @@
  */
 define([
     'jquery',
+    'jquery/ui-modules/widget',
     'domReady!'
 ], function($) {
     'use strict';
