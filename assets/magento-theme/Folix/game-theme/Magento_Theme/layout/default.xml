@@ -99,15 +99,7 @@
             </container>
         </referenceContainer>
         
-        <!-- =================================================================
-             PAGE TOP - Hero Slider
-             首页专用，在main.content之前
-             ================================================================= -->
-        
-        <referenceContainer name="page.top">
-            <block class="Magento\Framework\View\Element\Template" name="hero.slider" before="-" template="Magento_Theme::html/slider/hero.phtml" />
-        </referenceContainer>
-        
+
    
         <!-- =================================================================
              LOGIN MODAL
