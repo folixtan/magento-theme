@@ -2,7 +2,7 @@
 //  * Folix Game Theme - PageBuilder Slider Styles
 //  * 
 //  * 美化 Magento PageBuilder Slider 组件
-//  * 基于 slick-carousel 实现
+//  * 基于原生样式扩展
 //  */
 
 //
@@ -13,90 +13,169 @@
     
     //
     //  PageBuilder Slider - 主容器
+    //  原生选择器: div[data-content-type='slider']
     //  _____________________________________________
     
-    .pagebuilder-slider {
-        position: relative;
+    div[data-content-type='slider'] {
+        // 新增圆角和阴影
         border-radius: @folix-radius-lg;
         overflow: hidden;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
         
-        // 初始化前隐藏
-        &:not(.slick-initialized) {
-            visibility: hidden;
-        }
+        // 原生已有: visibility: hidden
+        // 保留原生的 visibility 控制逻辑
         
-        &.slick-initialized {
-            visibility: visible;
-        }
-    }
-    
-    //
-    //  Slick List & Track
-    //  _____________________________________________
-    
-    .pagebuilder-slider .slick-list {
-        margin: 0;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .pagebuilder-slider .slick-track {
-        display: flex;
-        left: 0;
-        margin: 0 auto;
-        position: relative;
-        top: 0;
-    }
-    
-    //
-    //  Slick Slide - 幻灯片
-    //  _____________________________________________
-    
-    .pagebuilder-slider .slick-slide {
-        display: none;
-        float: left;
-        height: 100%;
-        min-height: 400px;
-        
-        > div {
-            width: 100%;
-            min-height: inherit;
-            line-height: 0;
+        // Slick List - 原生已有 min-height: inherit
+        .slick-list {
+            margin: 0;
             overflow: hidden;
+            position: relative;
         }
         
-        // 已初始化的幻灯片显示
-        .slick-initialized & {
+        // Slick Track - 原生已有 display: flex
+        .slick-track {
+            left: 0;
+            margin: 0 auto;
+            position: relative;
+            top: 0;
+        }
+        
+        // Slick Slide - 原生已有 display: none, float: left
+        .slick-slide {
+            min-height: 400px;  // 覆盖原生的 min-height: inherit
+            
+            > div {
+                width: 100%;
+                min-height: inherit;
+                line-height: 0;
+                overflow: hidden;
+            }
+        }
+        
+        // Slick Dots - 导航点
+        // 原生样式来自 products/_carousel.less
+        .slick-dots {
+            position: absolute;  // 新增: 绝对定位
+            bottom: 24px;        // 新增
+            left: 50%;           // 新增
+            transform: translateX(-50%);  // 新增
+            z-index: 10;         // 新增
             display: block;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: auto;
+            
+            li {
+                display: inline-block;
+                height: 14px;
+                margin: 0 6px;  // 覆盖原生的 0 5px
+                padding: 0;
+                cursor: pointer;
+                vertical-align: middle;
+                
+                button {
+                    width: 12px;   // 覆盖原生的 14px
+                    height: 12px;  // 覆盖原生的 14px
+                    border-radius: 50%;  // 新增: 圆形
+                    background: rgba(255, 255, 255, 0.5);  // 覆盖原生的 @color-white
+                    border: none;  // 覆盖原生的 border: 1px solid @color-gray80
+                    cursor: pointer;
+                    transition: all 0.3s ease;  // 新增
+                    font-size: 0;
+                    line-height: 0;
+                    padding: 0;
+                    text-indent: -99999px;  // 保留原生
+                    box-shadow: none;  // 保留原生
+                    
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.8);  // 覆盖原生的 border 样式
+                    }
+                }
+                
+                // 活动状态 - 扩展为胶囊形状
+                &.slick-active button {
+                    background: #FFFFFF;  // 保留原生颜色
+                    width: 32px;          // 新增: 胶囊形状
+                    border-radius: 6px;   // 新增
+                }
+            }
+        }
+        
+        // Slick Prev - 导航箭头
+        // 原生样式来自 slick/_slick.less
+        .slick-prev {
+            left: 20px;  // 覆盖原生的 left: 1px
+            
+            &:before {
+                content: "‹";  // 覆盖原生的 icon-caret-left
+                font-size: 32px;  // 覆盖原生的 38px
+                font-weight: 300;  // 新增
+                color: #FFFFFF;  // 覆盖原生的 @color-slick-middle-gray
+            }
+        }
+        
+        // Slick Next - 导航箭头
+        .slick-next {
+            right: 20px;  // 覆盖原生的 right: 1px
+            
+            &:before {
+                content: "›";  // 覆盖原生的 icon-caret-right
+                font-size: 32px;
+                font-weight: 300;
+                color: #FFFFFF;
+            }
+        }
+        
+        // Slick Prev & Next - 公共样式
+        .slick-prev,
+        .slick-next {
+            background: rgba(255, 255, 255, 0.2);  // 覆盖原生的 rgba(252, 252, 252, .4)
+            backdrop-filter: blur(10px);  // 新增: 毛玻璃效果
+            border-radius: 50%;  // 新增: 圆形
+            width: 50px;   // 覆盖原生的 60px
+            height: 50px;  // 覆盖原生的 60px
+            z-index: 10;   // 新增
+            
+            &:hover,
+            &:focus {
+                background: rgba(255, 255, 255, 0.35);  // 覆盖原生
+                
+                &:before {
+                    color: #FFFFFF;  // 覆盖原生的 @color-slick-dark-gray
+                }
+            }
+            
+            &.slick-disabled {
+                opacity: 0.3;  // 覆盖原生的 0.2
+                cursor: not-allowed;  // 新增
+            }
         }
     }
     
     //
     //  Slide Wrapper - 幻灯片包装器
+    //  原生选择器: .pagebuilder-slide-wrapper
     //  _____________________________________________
     
     .pagebuilder-slide-wrapper {
-        position: relative;
-        min-height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        min-height: 400px;  // 新增默认高度
+        display: flex;      // 新增
+        align-items: center;  // 新增
+        justify-content: center;  // 新增
+        background-size: cover;  // 新增
+        background-position: center;  // 新增
+        background-repeat: no-repeat;  // 新增
     }
     
     //
     //  Slide Overlay - 遮罩层
+    //  原生选择器: .pagebuilder-overlay
     //  _____________________________________________
     
     .pagebuilder-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        // 原生已有 position, border-radius, padding 等
         
         // 渐变遮罩 - 游戏风格
         &.pagebuilder-poster-overlay {
@@ -106,6 +185,7 @@
     
     //
     //  Slide Content - 幻灯片内容
+    //  原生选择器: .pagebuilder-poster-content
     //  _____________________________________________
     
     .pagebuilder-poster-content {
@@ -143,7 +223,7 @@
                 margin-bottom: 20px;
             }
             
-            // 按钮样式
+            // Primary 按钮
             .pagebuilder-button-primary {
                 display: inline-block;
                 padding: 14px 36px;
@@ -156,8 +236,6 @@
                 cursor: pointer;
                 box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                text-transform: none;
-                letter-spacing: 0;
                 
                 &:hover {
                     transform: translateY(-3px);
@@ -166,6 +244,7 @@
                 }
             }
             
+            // Secondary 按钮
             .pagebuilder-button-secondary {
                 display: inline-block;
                 padding: 14px 36px;
@@ -185,114 +264,6 @@
             }
         }
     }
-    
-    //
-    //  Slick Dots - 导航点
-    //  _____________________________________________
-    
-    .pagebuilder-slider .slick-dots {
-        display: block;
-        position: absolute;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        width: auto;
-        z-index: 10;
-        
-        li {
-            display: inline-block;
-            margin: 0 6px;
-            cursor: pointer;
-            
-            button {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.5);
-                border: none;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                font-size: 0;
-                line-height: 0;
-                padding: 0;
-                
-                &:hover {
-                    background: rgba(255, 255, 255, 0.8);
-                }
-            }
-            
-            // 活动状态 - 扩展为胶囊形状
-            &.slick-active button {
-                background: #FFFFFF;
-                width: 32px;
-                border-radius: 6px;
-            }
-        }
-    }
-    
-    //
-    //  Slick Arrows - 导航箭头
-    //  _____________________________________________
-    
-    .pagebuilder-slider .slick-prev,
-    .pagebuilder-slider .slick-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        border: none;
-        color: #FFFFFF;
-        font-size: 0;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        
-        &:before {
-            font-size: 24px;
-            color: #FFFFFF;
-            line-height: 1;
-        }
-        
-        &:hover {
-            background: rgba(255, 255, 255, 0.35);
-        }
-        
-        &.slick-disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-    }
-    
-    .pagebuilder-slider .slick-prev {
-        left: 20px;
-        
-        &:before {
-            content: "‹";
-            font-size: 32px;
-            font-weight: 300;
-        }
-    }
-    
-    .pagebuilder-slider .slick-next {
-        right: 20px;
-        
-        &:before {
-            content: "›";
-            font-size: 32px;
-            font-weight: 300;
-        }
-    }
 }
 
 //
@@ -300,8 +271,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .pagebuilder-slider .slick-slide {
-        min-height: 450px;
+    div[data-content-type='slider'] {
+        .slick-slide {
+            min-height: 450px;
+        }
     }
     
     .pagebuilder-slide-wrapper {
@@ -322,12 +295,47 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    .pagebuilder-slider {
+    div[data-content-type='slider'] {
         border-radius: 0;
-    }
-    
-    .pagebuilder-slider .slick-slide {
-        min-height: 300px;
+        
+        .slick-slide {
+            min-height: 300px;
+        }
+        
+        .slick-dots {
+            bottom: 16px;
+            
+            li {
+                margin: 0 4px;
+                
+                button {
+                    width: 10px;
+                    height: 10px;
+                }
+                
+                &.slick-active button {
+                    width: 24px;
+                }
+            }
+        }
+        
+        .slick-prev,
+        .slick-next {
+            width: 40px;
+            height: 40px;
+            
+            &:before {
+                font-size: 20px;
+            }
+        }
+        
+        .slick-prev {
+            left: 10px;
+        }
+        
+        .slick-next {
+            right: 10px;
+        }
     }
     
     .pagebuilder-slide-wrapper {
@@ -357,40 +365,5 @@
                 font-size: 14px;
             }
         }
-    }
-    
-    .pagebuilder-slider .slick-dots {
-        bottom: 16px;
-        
-        li {
-            margin: 0 4px;
-            
-            button {
-                width: 10px;
-                height: 10px;
-            }
-            
-            &.slick-active button {
-                width: 24px;
-            }
-        }
-    }
-    
-    .pagebuilder-slider .slick-prev,
-    .pagebuilder-slider .slick-next {
-        width: 40px;
-        height: 40px;
-        
-        &:before {
-            font-size: 20px;
-        }
-    }
-    
-    .pagebuilder-slider .slick-prev {
-        left: 10px;
-    }
-    
-    .pagebuilder-slider .slick-next {
-        right: 10px;
     }
 }
