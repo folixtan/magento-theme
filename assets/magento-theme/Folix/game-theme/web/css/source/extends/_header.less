@@ -682,6 +682,14 @@
     //  Top Bar - 移动端显示
     //  右侧：语言/货币切换
     //  ========================================================================
+    .header-links-right {
+        .panel.header .switcher
+        {
+         display:block;
+ 
+       }
+    
+    }
     
     .panel.wrapper {
         display: block;  // ✅ 移动端显示 Top Bar
@@ -697,11 +705,7 @@
         min-height: 44px;
         max-width: none;
         
-        // 隐藏左侧和中间内容
-        .header-links-left,
-        .header-links-center {
-            display: none;
-        }
+       
         
         // 右侧容器 - 显示语言/货币切换
         .header-links-right {
@@ -709,10 +713,7 @@
             align-items: center;
             gap: 15px;
             
-            // APP下载链接 - 移动端隐藏
-            .app-download-link {
-                display: none;
-            }
+            
         }
     }
     

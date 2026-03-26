@@ -45,9 +45,7 @@
     //
     //  Newsletter - 订阅表单
     //  _____________________________________________
-    .block.newsletter .field .control:before {
-       line-height:3;
-    }
+  
     .page-footer .block.newsletter {
         flex: 1;
         min-width: 300px;
@@ -176,13 +174,19 @@
           color:@color-text__secondary-light;
        }
        &:hover {
-           
+           color:@color-text__secondary;
        }
     }
     .page-footer .block.newsletter {
         max-width: 350px;
-        .block.newsletter .field .control:before {
-           line-height: 2.5;
+        .field {
+           .control{
+           &:before {
+              line-height: 2.5;
+           }
+          
+          }
+        
         }
         &input {
            margin-right:0;
