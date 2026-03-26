@@ -221,6 +221,10 @@ $badges = $viewModel->getBadges($product);
 
 ### 3.3 模板文件：覆盖加入购物车按钮
 
+> ⚠️ **重要**：覆盖 = 复制原生内容 + 添加新功能，不是只写新内容！
+
+**原生模板位置**：`vendor/magento/module-catalog/view/frontend/templates/product/view/addtocart.phtml`
+
 **文件**: `app/design/frontend/Folix/game-theme/Magento_Catalog/templates/product/view/addtocart.phtml`
 
 ```php
@@ -228,13 +232,21 @@ $badges = $viewModel->getBadges($product);
 /**
  * Folix Game Theme - Add to Cart Button
  * 
- * 自定义游戏风格加入购物车按钮
+ * 覆盖说明：
+ * 1. 复制原生内容（保留原生功能）
+ * 2. 添加数量增减按钮（新功能）
+ * 3. 修改按钮样式（新样式）
+ * 
+ * 原生模板：vendor/magento/module-catalog/view/frontend/templates/product/view/addtocart.phtml
  */
 
 /** @var $block \Magento\Catalog\Block\Product\View */
 ?>
-<?php $_product = $block->getProduct(); ?>
-<?php $buttonTitle = __('Add to Cart'); ?>
+<?php 
+// ============ 原生代码开始（必须保留）============
+$_product = $block->getProduct(); 
+$buttonTitle = __('Add to Cart'); 
+?>
 <?php if ($_product->isSaleable()): ?>
 <div class="box-tocart">
     <div class="fieldset">
@@ -244,19 +256,29 @@ $badges = $viewModel->getBadges($product);
                 <span><?= $block->escapeHtml(__('Qty')) ?></span>
             </label>
             <div class="control">
-                <!-- 数量增减按钮 -->
+                <?php 
+                // ============ 新增：数量增减按钮 ============
+                ?>
                 <button type="button" class="qty-btn qty-minus" data-action="decrease">
                     <span>−</span>
                 </button>
+                
+                <?php 
+                // ============ 原生代码（必须保留）============
+                ?>
                 <input type="number"
                        name="qty"
                        id="qty"
-                       min="1"
+                       min="0"
                        value="<?= $block->getProductDefaultQty() * 1 ?>"
                        title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
                        class="input-text qty"
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                 />
+                
+                <?php 
+                // ============ 新增：数量增减按钮 ============
+                ?>
                 <button type="button" class="qty-btn qty-plus" data-action="increase">
                     <span>+</span>
                 </button>
@@ -270,8 +292,14 @@ $badges = $viewModel->getBadges($product);
                     class="action primary tocart folix-btn-gradient"
                     id="product-addtocart-button"
                     disabled>
+                <?php 
+                // ============ 新增：按钮图标 ============
+                ?>
                 <span class="btn-icon">🛒</span>
-                <span class="btn-text"><?= $block->escapeHtml($buttonTitle) ?></span>
+                <?php 
+                // ============ 原生代码 ============
+                ?>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
             </button>
             <?= $block->getChildHtml('', true) ?>
         </div>
@@ -279,16 +307,49 @@ $badges = $viewModel->getBadges($product);
 </div>
 <?php endif; ?>
 
+<?php 
+// ============ 原生代码（必须保留）============
+?>
 <script type="text/x-magento-init">
 {
     "#product_addtocart_form": {
         "Magento_Catalog/js/validate-product": {}
-    },
+    }
+}
+</script>
+
+<?php 
+// ============ 新增：数量控制初始化 ============
+?>
+<script type="text/x-magento-init">
+{
     ".box-tocart": {
         "Magento_Catalog/js/qty-controls": {}
     }
 }
 </script>
+```
+
+### 覆盖开发的关键原则
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  1. 找到原生模板：vendor/magento/.../xxx.phtml                   │
+│  2. 复制全部内容：不要遗漏任何原生代码                            │
+│  3. 在复制的基础上修改：添加/修改你需要的部分                     │
+│  4. 测试验证：确保原生功能正常 + 新功能正常                       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 常见错误
+
+```
+❌ 错误1：只写新增内容，原生功能丢失
+❌ 错误2：复制时遗漏原生代码
+❌ 错误3：修改时删除了重要的原生 class/data 属性
+❌ 错误4：没有保留原生的 JavaScript 初始化
+
+✅ 正确：完整复制 + 谨慎修改 + 充分测试
 ```
 
 ### 3.4 模板文件：社交分享
