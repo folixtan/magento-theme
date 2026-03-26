@@ -252,7 +252,67 @@ $block->hasStoreName()
 
 ---
 
-## 十、总结
+---
+
+## 十、模板定制步骤（Walkthrough）
+
+> 来源: https://developer.adobe.com/commerce/frontend-core/guide/templates/walkthrough
+
+### 定制现有模板的步骤
+
+1. **定位模板** - 使用浏览器调试工具找到要修改的页面/block 关联的模板
+2. **复制模板** - 按照模板存储约定复制到主题文件夹
+3. **修改模板** - 进行必要的更改
+
+### 添加新模板的步骤
+
+1. **创建模板** - 在主题目录中按照约定创建模板文件
+2. **关联布局** - 在布局文件中将模板分配给 block
+
+### 实战示例：在评论表单添加消息
+
+**需求**：在产品评论表单添加鼓励文字
+
+**步骤**：
+
+1. **定位原模板**：
+   ```
+   <Magento_Review_module_dir>/view/frontend/templates/form.phtml
+   ```
+
+2. **复制到主题**：
+   ```
+   app/design/frontend/ExampleCorp/orange/Magento_Review/templates/form.phtml
+   ```
+
+3. **修改模板**：
+   ```php
+   <!-- 在 <form> 之前添加 -->
+   <div class="review-notice">
+       <p>Share your experience! Your review helps other customers make better decisions.</p>
+   </div>
+   
+   <form action="..." method="post">
+       ...
+   </form>
+   ```
+
+### 重要提醒
+
+如果添加新的 `.html` 模板后修改它，更改不会立即生效，需要：
+
+```bash
+# 清除静态文件
+rm -rf pub/static/frontend/*
+rm -rf var/view_preprocessed/*
+
+# 或者使用 Grunt
+grunt clean:<theme_name>
+```
+
+---
+
+## 十一、总结
 
 | 操作 | 方法 | 文件位置 |
 |------|------|---------|
