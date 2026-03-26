@@ -653,6 +653,22 @@
             justify-content: center;
         }
         
+        /* 收藏按钮 - 图片右上角 */
+        .product-item-photo .action.towishlist {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: var(--folix-transition-smooth);
+        }
+        
+        .product-item-info:hover .action.towishlist {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
         .product-image-placeholder {
             text-align: center;
             color: white;
@@ -829,51 +845,40 @@
             color: white;
         }
         
-        /* Wishlist & Compare Buttons */
-        .action.towishlist,
-        .action.tocompare {
-            display: inline-flex;
+        /* Wishlist Button - 图片右上角 */
+        .action.towishlist {
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: var(--folix-bg-card);
-            border: 1px solid var(--folix-border);
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: none;
             border-radius: 50%;
             font-size: 0;
             color: var(--folix-text-muted);
             cursor: pointer;
             transition: var(--folix-transition);
+            box-shadow: var(--folix-shadow);
         }
         
         .action.towishlist::before {
             content: '♡';
-            font-size: 16px;
+            font-size: 18px;
         }
         
         .action.towishlist:hover {
             background: var(--theme__color__secondary);
-            border-color: var(--theme__color__secondary);
             color: white;
+            transform: scale(1.1);
         }
         
         .action.towishlist:hover::before {
             content: '♥';
         }
         
-        .action.tocompare::before {
-            content: '⇄';
-            font-size: 14px;
-        }
-        
-        .action.tocompare:hover {
-            background: var(--theme__color__primary);
-            border-color: var(--theme__color__primary);
-            color: white;
-        }
-        
-        .action.towishlist span,
-        .action.tocompare span {
+        .action.towishlist span {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -1304,6 +1309,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1349,14 +1358,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1375,6 +1376,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1412,14 +1417,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1438,6 +1435,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1475,14 +1476,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1501,6 +1494,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1538,14 +1535,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1564,6 +1553,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1601,14 +1594,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1627,6 +1612,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1664,14 +1653,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1690,6 +1671,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1726,14 +1711,6 @@
                                                             <span>Add to Cart</span>
                                                         </button>
                                                     </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1752,6 +1729,10 @@
                                                     </span>
                                                 </span>
                                             </span>
+                                            <!-- 收藏按钮 - 图片右上角 -->
+                                            <a href="#" class="action towishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </a>
                                         </a>
                                         <div class="product details product-item-details">
                                             <strong class="product name product-item-name">
@@ -1788,14 +1769,6 @@
                                                         <button type="submit" class="action tocart primary">
                                                             <span>Add to Cart</span>
                                                         </button>
-                                                    </div>
-                                                    <div class="actions-secondary">
-                                                        <a href="#" class="action towishlist" title="Add to Wish List">
-                                                            <span>Add to Wish List</span>
-                                                        </a>
-                                                        <a href="#" class="action tocompare" title="Add to Compare">
-                                                            <span>Add to Compare</span>
-                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
