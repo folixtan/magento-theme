@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Folix Game Theme</title>
+    <!--
+    ========================================
+    Folix Game Theme - Customer Dashboard
+    
+    配色方案:
+    - Body背景: #F8FAFC (浅灰蓝)
+    - 卡片背景: #FFFFFF (纯白)
+    - 主题蓝: #4A90E2
+    - 强调橙: #FF6B35
+    - 文字: #1E293B (深蓝灰)
+    
+    布局:
+    - 保持原生Magento结构不变
+    - 两列/三列响应式布局
+    ========================================
+    -->
+    <style>
+        :root {
+            /* 主题色 */
+            --theme__color__primary: #4A90E2;
+            --theme__color__secondary: #FF6B35;
+            
+            /* 强调色 */
+            --color-accent__primary: #6C5CE7;
+            
+            /* 背景色 */
+            --folix-bg-page: #F8FAFC;
+            --folix-bg-card: #FFFFFF;
+            --folix-bg-panel: #F1F5F9;
+            
+            /* 文字色 */
+            --folix-text-primary: #1E293B;
+            --folix-text-secondary: #475569;
+            --folix-text-muted: #94A3B8;
+            
+            /* 边框色 */
+            --folix-border: #E2E8F0;
+            --folix-border-light: #F1F5F9;
+            
+            /* 渐变 */
+            --folix-gradient-primary: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
+            --folix-gradient-secondary: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
+            --folix-gradient-dark: linear-gradient(135deg, #1E3A8A 0%, #3730A3 100%);
+            
+            /* 圆角 */
+            --folix-radius: 8px;
+            --folix-radius-md: 10px;
+            --folix-radius-lg: 12px;
+            
+            /* 阴影 */
+            --folix-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --folix-shadow-md: 0 8px 24px rgba(74, 144, 226, 0.12);
+            --folix-shadow-primary: 0 4px 14px rgba(74, 144, 226, 0.3);
+            
+            /* 状态色 */
+            --folix-success: #10B981;
+            --folix-warning: #F59E0B;
+            --folix-error: #EF4444;
+            
+            /* 过渡 */
+            --folix-transition: all 0.2s ease;
+            
+            /* 字重 */
+            --font-weight__semibold: 600;
+            --font-weight__bold: 700;
+            
+            /* 间距 */
+            --indent-xs: 8px;
+            --indent-s: 12px;
+            --indent-base: 16px;
+            --indent-m: 20px;
+            --indent-l: 24px;
+            --indent-xl: 32px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--folix-bg-page);
+            color: var(--folix-text-primary);
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+        
+        a {
+            color: var(--theme__color__primary);
+            text-decoration: none;
+            transition: var(--folix-transition);
+        }
+        
+        a:hover {
+            color: var(--theme__color__secondary);
+        }
+        
+        /* Header */
+        .page-header {
+            background: var(--folix-bg-card);
+            border-bottom: 3px solid var(--theme__color__secondary);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--folix-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--theme__color__primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--folix-bg-panel);
+            border-radius: var(--folix-radius);
+            cursor: pointer;
+            transition: var(--folix-transition);
+        }
+        
+        .header-icon:hover {
+            background: var(--theme__color__primary);
+            color: white;
+        }
+        
+        .user-welcome {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--folix-gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: var(--font-weight__semibold);
+            font-size: 14px;
+        }
+        
+        .user-name {
+            font-size: 14px;
+            font-weight: var(--font-weight__semibold);
+            color: var(--folix-text-primary);
+        }
+        
+        /* Page Main */
+        .page-main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: var(--indent-l) var(--indent-l) var(--indent-xl);
+        }
+        
+        /* Messages */
+        .page.messages {
+            margin-bottom: var(--indent-l);
+        }
+        
+        .messages {
+            display: flex;
+            flex-direction: column;
+            gap: var(--indent-s);
+        }
+        
+        .message {
+            padding: var(--indent-base) var(--indent-m);
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .message-success {
+            background: #D1FAE5;
+            border-left: 4px solid var(--folix-success);
+            color: #065F46;
+        }
+        
+        .message-success::before {
+            content: '✓';
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Page Title */
+        .page-title-wrapper {
+            margin-bottom: var(--indent-xl);
+        }
+        
+        .page-title {
+            margin: 0;
+        }
+        
+        .page-title .base {
+            font-size: 32px;
+            font-weight: var(--font-weight__bold);
+            color: var(--folix-text-primary);
+        }
+        
+        /* Columns */
+        .columns {
+            display: flex;
+            gap: var(--indent-l);
+        }
+        
+        .column.main {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .sidebar-main {
+            width: 260px;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-additional {
+            width: 260px;
+            flex-shrink: 0;
+        }
+        
+        /* Account Navigation */
+        .block.account-nav {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--folix-shadow);
+        }
+        
+        .block.account-nav .title {
+            padding: var(--indent-base) var(--indent-m);
+            background: var(--folix-bg-panel);
+            border-bottom: 1px solid var(--folix-border);
+        }
+        
+        .block.account-nav .title strong {
+            font-size: 14px;
+            font-weight: var(--font-weight__bold);
+            color: var(--folix-text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .block.account-nav .content {
+            padding: var(--indent-s) 0;
+        }
+        
+        .account-nav .nav.items {
+            list-style: none;
+        }
+        
+        .account-nav .nav.item a,
+        .account-nav .nav.item strong {
+            display: flex;
+            align-items: center;
+            padding: var(--indent-s) var(--indent-m);
+            font-size: 14px;
+            color: var(--folix-text-secondary);
+            text-decoration: none;
+            transition: var(--folix-transition);
+            border-left: 3px solid transparent;
+        }
+        
+        .account-nav .nav.item a:hover {
+            color: var(--theme__color__primary);
+            background: rgba(74, 144, 226, 0.05);
+            border-left-color: var(--theme__color__primary);
+        }
+        
+        .account-nav .nav.item.current strong {
+            color: var(--theme__color__secondary);
+            font-weight: var(--font-weight__semibold);
+            background: rgba(255, 107, 53, 0.05);
+            border-left-color: var(--theme__color__secondary);
+        }
+        
+        .nav.item .delimiter {
+            display: block;
+            height: 1px;
+            background: var(--folix-border-light);
+            margin: var(--indent-xs) var(--indent-m);
+        }
+        
+        .nav.item a[href*="logout"] {
+            color: var(--folix-error);
+        }
+        
+        .nav.item a[href*="logout"]:hover {
+            background: rgba(239, 68, 68, 0.05);
+            border-left-color: var(--folix-error);
+        }
+        
+        /* Dashboard Blocks */
+        .block-dashboard-info,
+        .block-dashboard-addresses {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--folix-shadow);
+            margin-bottom: var(--indent-l);
+            position: relative;
+        }
+        
+        .block-dashboard-info::before,
+        .block-dashboard-addresses::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: var(--folix-gradient-secondary);
+        }
+        
+        .block-title {
+            padding: var(--indent-m) var(--indent-l);
+            border-bottom: 1px solid var(--folix-border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .block-title strong {
+            font-size: 16px;
+            font-weight: var(--font-weight__semibold);
+            color: var(--folix-text-primary);
+        }
+        
+        .block-title .action.edit {
+            font-size: 13px;
+            color: var(--theme__color__primary);
+            font-weight: var(--font-weight__semibold);
+        }
+        
+        .block-title .action.edit:hover {
+            color: var(--theme__color__secondary);
+        }
+        
+        .block-content {
+            padding: var(--indent-l);
+            display: flex;
+            gap: var(--indent-l);
+            flex-wrap: wrap;
+        }
+        
+        /* Box Cards */
+        .box {
+            flex: 1;
+            min-width: 240px;
+            padding: var(--indent-m);
+            background: var(--folix-bg-page);
+            border: 1px solid var(--folix-border-light);
+            border-radius: var(--folix-radius-md);
+        }
+        
+        .box-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--indent-base);
+            padding-bottom: var(--indent-s);
+            border-bottom: 1px solid var(--folix-border-light);
+        }
+        
+        .box-title span {
+            font-size: 14px;
+            font-weight: var(--font-weight__semibold);
+            color: var(--folix-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .box-content {
+            margin-bottom: var(--indent-base);
+        }
+        
+        .box-content p {
+            margin: 0 0 var(--indent-xs);
+            font-size: 14px;
+            color: var(--folix-text-primary);
+            line-height: 1.6;
+        }
+        
+        .box-content address {
+            font-style: normal;
+            font-size: 14px;
+            color: var(--folix-text-secondary);
+            line-height: 1.6;
+        }
+        
+        .box-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--indent-s);
+        }
+        
+        .box-actions a {
+            font-size: 13px;
+            color: var(--theme__color__primary);
+            text-decoration: none;
+        }
+        
+        .box-actions a:hover {
+            color: var(--theme__color__secondary);
+            text-decoration: underline;
+        }
+        
+        .box-actions .change-password {
+            color: var(--theme__color__secondary);
+            font-weight: var(--font-weight__semibold);
+        }
+        
+        /* Sidebar Blocks */
+        .sidebar-additional .block {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--folix-shadow);
+            margin-bottom: var(--indent-l);
+        }
+        
+        .sidebar-additional .block-title {
+            padding: var(--indent-base) var(--indent-m);
+            border-bottom: 1px solid var(--folix-border-light);
+        }
+        
+        .sidebar-additional .block-title strong {
+            font-size: 14px;
+            font-weight: var(--font-weight__semibold);
+            color: var(--folix-text-primary);
+        }
+        
+        .sidebar-additional .block-content {
+            padding: var(--indent-m);
+        }
+        
+        .sidebar-additional .empty {
+            padding: var(--indent-base);
+            text-align: center;
+            color: var(--folix-text-muted);
+            font-size: 13px;
+            font-style: italic;
+        }
+        
+        /* Footer */
+        .page-footer {
+            background: var(--folix-gradient-dark);
+            color: white;
+            padding: var(--indent-xl) var(--indent-l);
+            margin-top: auto;
+        }
+        
+        .footer.content {
+            max-width: 1280px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1023px) {
+            .columns {
+                flex-direction: column;
+            }
+            
+            .sidebar-main,
+            .sidebar-additional,
+            .column.main {
+                width: 100%;
+            }
+            
+            /* Tablet: Horizontal nav */
+            .block.account-nav .content {
+                padding: 0;
+            }
+            
+            .account-nav .nav.items {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            
+            .account-nav .nav.item a,
+            .account-nav .nav.item strong {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            
+            .account-nav .nav.item a:hover {
+                border-bottom-color: var(--theme__color__primary);
+            }
+            
+            .account-nav .nav.item.current strong {
+                border-bottom-color: var(--theme__color__secondary);
+            }
+            
+            .nav.item .delimiter {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .page-main {
+                padding: var(--indent-base) var(--indent-base) var(--indent-l);
+            }
+            
+            .page-title .base {
+                font-size: 24px;
+            }
+            
+            .block-title {
+                padding: var(--indent-base);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--indent-xs);
+            }
+            
+            .block-content {
+                padding: var(--indent-base);
+                flex-direction: column;
+            }
+            
+            .box {
+                min-width: 100%;
+            }
+            
+            .user-name {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="page-header">
+        <div class="logo">
+            <span>🎮</span>
+            <span>FOLIX</span>
+        </div>
+        
+        <div class="header-icons">
+            <div class="user-welcome">
+                <div class="user-avatar">SB</div>
+                <span class="user-name">silk b2b1</span>
+            </div>
+            <div class="header-icon">🛒</div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="page-main">
+        <!-- Messages -->
+        <div class="page messages">
+            <div class="messages">
+                <div class="message message-success">
+                    <div>Thank you for registering with Main Website Store.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Page Title -->
+        <div class="page-title-wrapper">
+            <h1 class="page-title">
+                <span class="base">My Account</span>
+            </h1>
+        </div>
+        
+        <!-- Columns Layout -->
+        <div class="columns">
+            <!-- Sidebar Main - Account Navigation -->
+            <div class="sidebar sidebar-main">
+                <div class="block account-nav">
+                    <div class="title">
+                        <strong>My Account</strong>
+                    </div>
+                    <div class="content">
+                        <nav class="account-nav">
+                            <ul class="nav items">
+                                <li class="nav item current">
+                                    <strong>My Dashboard</strong>
+                                </li>
+                                <li class="nav item">
+                                    <span class="delimiter"></span>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">Address Book</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">Account Information</a>
+                                </li>
+                                <li class="nav item">
+                                    <span class="delimiter"></span>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">My Orders</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">My Downloadable Products</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">Newsletter Subscriptions</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">Stored Payment Methods</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">My Product Reviews</a>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">My Wish List</a>
+                                </li>
+                                <li class="nav item">
+                                    <span class="delimiter"></span>
+                                </li>
+                                <li class="nav item">
+                                    <a href="#">Sign Out</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Column -->
+            <div class="column main">
+                <!-- Account Information Block -->
+                <div class="block block-dashboard-info">
+                    <div class="block-title">
+                        <strong>Account Information</strong>
+                    </div>
+                    <div class="block-content">
+                        <!-- Contact Information -->
+                        <div class="box box-information">
+                            <strong class="box-title">
+                                <span>Contact Information</span>
+                            </strong>
+                            <div class="box-content">
+                                <p>
+                                    silk b2b1<br>
+                                    iwei_b2b@os189.com<br>
+                                </p>
+                            </div>
+                            <div class="box-actions">
+                                <a class="action edit" href="#">Edit</a>
+                                <a href="#" class="action change-password">Change Password</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Newsletter -->
+                        <div class="box box-newsletter">
+                            <strong class="box-title">
+                                <span>Newsletters</span>
+                            </strong>
+                            <div class="box-content">
+                                <p>You aren't subscribed to our newsletter.</p>
+                            </div>
+                            <div class="box-actions">
+                                <a class="action edit" href="#">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Address Book Block -->
+                <div class="block block-dashboard-addresses">
+                    <div class="block-title">
+                        <strong>Address Book</strong>
+                        <a class="action edit" href="#">Manage Addresses</a>
+                    </div>
+                    <div class="block-content">
+                        <!-- Default Billing Address -->
+                        <div class="box box-billing-address">
+                            <strong class="box-title">
+                                <span>Default Billing Address</span>
+                            </strong>
+                            <div class="box-content">
+                                <address>
+                                    You have not set a default billing address.
+                                </address>
+                            </div>
+                            <div class="box-actions">
+                                <a class="action edit" href="#">Edit Address</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Default Shipping Address -->
+                        <div class="box box-shipping-address">
+                            <strong class="box-title">
+                                <span>Default Shipping Address</span>
+                            </strong>
+                            <div class="box-content">
+                                <address>
+                                    You have not set a default shipping address.
+                                </address>
+                            </div>
+                            <div class="box-actions">
+                                <a class="action edit" href="#">Edit Address</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar Additional -->
+            <div class="sidebar sidebar-additional">
+                <!-- Compare Products -->
+                <div class="block block-compare">
+                    <div class="block-title">
+                        <strong>Compare Products</strong>
+                    </div>
+                    <div class="block-content">
+                        <div class="empty">You have no items to compare.</div>
+                    </div>
+                </div>
+                
+                <!-- My Wish List -->
+                <div class="block block-wishlist">
+                    <div class="block-title">
+                        <strong>My Wish List</strong>
+                    </div>
+                    <div class="block-content">
+                        <strong class="subtitle">Last Added Items</strong>
+                        <div class="empty">You have no items in your wish list.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="page-footer">
+        <div class="footer content">
+            <span>© 2024 Folix Game Store. All rights reserved.</span>
+        </div>
+    </footer>
+</body>
+</html>
