@@ -1,8 +1,10 @@
 // /**
 //  * Folix Game Theme - Footer Styles
 //  * 
-//  * 背景色和 Top Bar 一致
-//  * 深蓝渐变背景 #1E293B → #0F172A
+//  * 模块：Magento_Theme
+//  * 位置：Magento_Theme/web/css/source/extend/_footer.less
+//  * 
+//  * 深蓝渐变背景，与 Top Bar 一致
 //  */
 
 //
@@ -13,18 +15,17 @@
     
     //
     //  Page Footer - 页面底部
-    //  背景色和 Top Bar 一致
     //  _____________________________________________
     
     .page-footer {
-      
         margin-top: 0;
         color: @folix-text-on-dark;
     }
-    .copyright {
-          background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
     
+    .copyright {
+        background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
     }
+    
     //
     //  Footer Content - 底部内容
     //  _____________________________________________
@@ -34,8 +35,6 @@
         margin: 0 auto;
         padding: 40px 20px;
         border-top: none;
-        
-        // Flex 布局
         display: flex;
         flex-wrap: wrap;
         gap: 40px;
@@ -45,14 +44,14 @@
     //
     //  Newsletter - 订阅表单
     //  _____________________________________________
-  
+    
     .page-footer .block.newsletter {
         flex: 1;
         min-width: 300px;
         max-width: 400px;
         
         .title {
-            display: none;  // 扁平化设计，不显示标题
+            display: none;
         }
         
         .content {
@@ -74,7 +73,7 @@
                     }
                     
                     .label {
-                        display: none;  // 隐藏标签文字
+                        display: none;
                     }
                 }
             }
@@ -88,6 +87,7 @@
                 color: @folix-text-on-dark;
                 font-size: 14px;
                 margin-right: 0;
+                
                 &:focus {
                     outline: none;
                     border-color: @folix-primary;
@@ -125,7 +125,6 @@
     //
     //  Footer Links - 底部链接
     //  _____________________________________________
-  
     
     .footer.links {
         list-style: none;
@@ -158,41 +157,36 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-   .page-footer {
-
+    .page-footer {
         background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
-   }
+    }
+    
     .footer.content {
-        flex-wrap: nowrap;  // 桌面端不换行
+        flex-wrap: nowrap;
         justify-content: space-between;
-            align-items: center;
-            flex-flow: row-reverse;
+        align-items: center;
+        flex-flow: row-reverse;
     }
+    
     .footer.content .links a {
-       color:@text-highlight;
-       &:actvie{
-          color:@color-text__secondary-light;
-       }
-       &:hover {
-           color:@color-text__secondary;
-       }
-    }
-    .page-footer .block.newsletter {
-        max-width: 350px;
-        .field {
-           .control{
-           &:before {
-              line-height: 2.5;
-           }
-          
-          }
+        color: @text-highlight;
         
+        &:active {
+            color: @color-text__secondary-light;
         }
-        &input {
-           margin-right:0;
+        
+        &:hover {
+            color: @color-text__secondary;
         }
     }
     
+    .page-footer .block.newsletter {
+        max-width: 350px;
+        
+        .field .control:before {
+            line-height: 2.5;
+        }
+    }
 }
 
 //
@@ -225,9 +219,8 @@
     
     .footer.content .links {
         width: 100%;
-                  flex-direction: column;
+        flex-direction: column;
         gap: 5px;
         text-align: center;
     }
-    
 }

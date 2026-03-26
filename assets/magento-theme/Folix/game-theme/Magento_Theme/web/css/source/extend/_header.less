@@ -1,17 +1,13 @@
 // /**
 //  * Folix Game Theme - Header Styles
 //  * 
-//  * 严格按照原型设计
+//  * 模块：Magento_Theme
+//  * 位置：Magento_Theme/web/css/source/extend/_header.less
 //  * 
-//  * Top Bar (header.panel): 
-//  *   - 深蓝渐变背景 #1E293B → #0F172A
-//  *   - 高度 40px
-//  *   - 左侧：链接 | 右侧：APP + 语言切换
-//  * 
-//  * Main Bar (header.content):
-//  *   - 白色背景
-//  *   - 高度 70px
-//  *   - 底部橙色边框 3px
+//  * 包含：
+//  * - Top Bar (header.panel)
+//  * - Main Bar (header.content)
+//  * - 移动端头部样式
 //  */
 
 //
@@ -28,7 +24,7 @@
         background: #FFFFFF;
         margin-bottom: 0;
         border: none;
-        border-bottom: 3px solid #FF6B35;  // 橙色底边框移到这里
+        border-bottom: 3px solid #FF6B35;  // 橙色底边框
     }
     
     // ========================================================================
@@ -44,7 +40,6 @@
     // ========================================================================
     //  PANEL HEADER - Top Bar 内容
     //  Flex布局：左 | 中 | 右
-    //  通过 padding 控制高度（约60px）
     //  ========================================================================
     
     .panel.header {
@@ -53,10 +48,9 @@
         align-items: center;
         max-width: 1200px;
         margin: 0 auto;
-        padding: 22px 20px;  // 上下22px + 文字14px ≈ 58px（接近60px）
+        padding: 22px 20px;
         min-height: 60px;
         
-        // 清除浮动
         &:before,
         &:after {
             display: none !important;
@@ -94,10 +88,6 @@
                     &:hover {
                         color: #FF6B35;
                     }
-                    
-                    .link-icon {
-                        font-size: 14px;
-                    }
                 }
             }
         }
@@ -115,7 +105,6 @@
         padding: 0 20px;
         overflow: hidden;
         
-        // 如果放跑马灯
         .header-marquee {
             width: 100%;
             color: #E2E8F0;
@@ -133,7 +122,6 @@
         gap: 16px;
         flex-shrink: 0;
         
-        // APP下载链接
         .app-download-link {
             display: inline-flex;
             align-items: center;
@@ -150,7 +138,6 @@
             }
         }
         
-        // 语言切换
         .switcher {
             margin: 0;
             
@@ -172,13 +159,9 @@
                 border: 1px solid rgba(255, 255, 255, 0.2);
                 border-radius: 4px;
                 
-                strong {
-                    font-weight: 500;
-                    
-                    span {
-                        color: #E2E8F0;
-                        font-size: 12px;
-                    }
+                strong span {
+                    color: #E2E8F0;
+                    font-size: 12px;
                 }
             }
             
@@ -196,18 +179,16 @@
                 padding: 8px 0;
                 margin: 4px 0 0 0;
                 
-                li {
-                    a {
-                        display: block;
-                        padding: 8px 16px;
-                        color: #E2E8F0;
-                        font-size: 13px;
-                        text-decoration: none;
-                        
-                        &:hover {
-                            background: rgba(255, 255, 255, 0.1);
-                            color: #FF6B35;
-                        }
+                li a {
+                    display: block;
+                    padding: 8px 16px;
+                    color: #E2E8F0;
+                    font-size: 13px;
+                    text-decoration: none;
+                    
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.1);
+                        color: #FF6B35;
                     }
                 }
             }
@@ -233,7 +214,6 @@
         height: 70px;
         gap: 20px;
         
-        // 清除浮动
         &:before,
         &:after {
             display: none;
@@ -282,14 +262,13 @@
             order: 2;
             clear: none;
             float: none;
-            margin-bottom: 0 !important;  // 覆盖 Luma 的 margin-bottom: 25px，防止撑开导航
+            margin-bottom: 0 !important;
             
             .nav-sections-items {
                 display: flex;
                 align-items: center;
             }
             
-            // 隐藏移动端的标签
             .nav-sections-item-title {
                 display: none;
             }
@@ -344,10 +323,10 @@
                     }
                 }
                 
-                // 二级菜单（不重叠一级导航）
+                // 二级菜单
                 .level0.submenu {
                     position: absolute;
-                    top: calc(100% + 5px);  // 增加间距，避免重叠
+                    top: calc(100% + 5px);
                     left: 0;
                     background: #FFFFFF;
                     border: 1px solid #E5E7EB;
@@ -358,7 +337,7 @@
                     z-index: 100;
                     
                     .level1 {
-                        position: relative;  // 为三级菜单定位
+                        position: relative;
                         
                         a {
                             display: flex;
@@ -371,42 +350,39 @@
                             transition: all 0.2s ease;
                             
                             &:hover {
-                                background: #DBEAFE;  // 浅蓝高亮
+                                background: #DBEAFE;
                                 color: #4A90E2;
                             }
                         }
                         
-                        // 三级菜单（在右侧展开）
+                        // 三级菜单
                         .submenu {
                             position: absolute;
                             top: 0;
-                            left: 100%;  // 在右侧展开
+                            left: 100%;
                             background: #FFFFFF;
                             border: 1px solid #E5E7EB;
                             border-radius: 6px;
                             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
                             min-width: 150px;
                             padding: 8px 0;
-                            margin-left: 5px;  // 间距
+                            margin-left: 5px;
                             z-index: 101;
                             
-                            .level2 {
-                                a {
-                                    padding: 10px 16px;
-                                    color: #1E293B;
-                                    font-size: 14px;
-                                    
-                                    &:hover {
-                                        background: #DBEAFE;
-                                        color: #4A90E2;
-                                    }
+                            .level2 a {
+                                padding: 10px 16px;
+                                color: #1E293B;
+                                font-size: 14px;
+                                
+                                &:hover {
+                                    background: #DBEAFE;
+                                    color: #4A90E2;
                                 }
                             }
                         }
                     }
                 }
                 
-                // 悬停显示子菜单
                 .level0:hover > .submenu {
                     display: block;
                 }
@@ -415,7 +391,7 @@
         
         // ====================================================================
         //  搜索框
-        //  ========================================================================
+        //  ====================================================================
         
         .block-search {
             flex-shrink: 0;
@@ -438,7 +414,7 @@
             .form.minisearch {
                 display: flex;
                 position: relative;
-                align-items: center;  // 确保垂直居中对齐
+                align-items: center;
             }
             
             .field.search {
@@ -460,11 +436,11 @@
                     padding: 0;
                     background: #F9FAFB;
                     transition: all 0.3s ease;
-                    position: relative;  // 确保相对定位
+                    position: relative;
                     
                     input {
                         width: 100%;
-                        height: 44px;  // 调整到 44px，与登录按钮一致
+                        height: 44px;
                         padding: 0 16px;
                         font-size: 14px;
                         border: none;
@@ -479,15 +455,12 @@
                         }
                     }
                     
-                    // 聚焦时整个控制框外发光
                     &:focus-within {
                         border-color: #4A90E2;
-                        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2),
-                                    0 0 0 1px rgba(74, 144, 226, 0.1);
+                        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
                         background: #FFFFFF;
                     }
                     
-                    // 隐藏 Luma 原生的下拉和嵌套元素
                     .nested,
                     .search-autocomplete {
                         display: none !important;
@@ -497,24 +470,20 @@
             
             .actions {
                 display: flex;
-                align-items: center;  // 确保垂直居中对齐
+                align-items: center;
                 position: relative;
                 z-index: 10;
-                margin: 0;  // 清除可能的 margin
-                padding: 0;  // 清除可能的 padding
+                margin: 0;
+                padding: 0;
                 
                 .action.search {
-                    // 覆盖 Luma 的绝对定位样式
                     position: relative !important;
                     right: auto !important;
                     top: auto !important;
-                    
-                    // 使用 flex 布局
                     display: inline-flex !important;
                     align-items: center;
                     justify-content: center;
-                    
-                    height: 44px;  // 调整到 44px，与登录按钮一致
+                    height: 44px;
                     padding: 0 20px !important;
                     background: linear-gradient(90deg, #FF6B35 0%, #EA580C 100%) !important;
                     border: none !important;
@@ -529,7 +498,6 @@
                     margin: 0 !important;
                     
                     span {
-                        // 显示文字，隐藏图标
                         display: inline !important;
                         position: static !important;
                         clip: auto !important;
@@ -540,7 +508,6 @@
                     }
                     
                     &:before {
-                        // 隐藏 Luma 的图标
                         display: none !important;
                     }
                     
@@ -573,7 +540,7 @@
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                padding: 8px 16px;  // 左右内边距保持 16px
+                padding: 8px 16px;
                 background: transparent;
                 border: 1px solid #E5E7EB;
                 border-radius: 6px;
@@ -626,7 +593,7 @@
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
-                height: 44px;  // 调整到 44px
+                height: 44px;
                 padding: 0 24px;
                 background: linear-gradient(135deg, #4A90E2 0%, #6C5CE7 100%);
                 color: #FFFFFF;
@@ -662,7 +629,6 @@
         height: 45px;
     }
     
-    // 隐藏移动端导航按钮
     .header.content .nav-toggle {
         display: none;
     }
@@ -672,41 +638,31 @@
 //  Mobile (< 768px)
 //  _____________________________________________
 
-//
-//  Mobile (< 768px)
-//  _____________________________________________
-
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     
     // ========================================================================
     //  Top Bar - 移动端显示
-    //  右侧：语言/货币切换
     //  ========================================================================
+    
     .panel.wrapper {
-        display: block;  // ✅ 移动端显示 Top Bar
-        background: #FFFFFF;  // 白色背景
+        display: block;
+        background: #FFFFFF;
         border-bottom: 1px solid @folix-border-light;
     }
     
     .panel.header {
-   
         padding: 10px 15px;
-  
-       
         
-        // 右侧容器 - 显示语言/货币切换
         .header-links-right {
             display: flex;
             align-items: center;
             gap: 15px;
-            
-            
         }
     }
     
     // ========================================================================
     //  Main Bar - 移动端布局
-    //  左：汉堡菜单（橙色）| 中：搜索图标 | 右：登录按钮
+    //  左：汉堡菜单 | 中：搜索图标 | 右：登录按钮
     //  ========================================================================
     
     .header.content {
@@ -718,16 +674,12 @@
         justify-content: space-between;
         gap: 10px;
         
-        // 清除浮动
         &:before,
         &:after {
             display: none;
         }
         
-        // ====================================================================
-        //  汉堡菜单按钮 - 左侧，橙色
-        //  ====================================================================
-        
+        // 汉堡菜单按钮
         .nav-toggle {
             display: block;
             position: relative;
@@ -741,7 +693,7 @@
             flex-shrink: 0;
             
             &:before {
-                color: @folix-secondary;  // 橙色
+                color: @folix-secondary;
                 font-size: 28px;
                 line-height: 1;
             }
@@ -751,26 +703,15 @@
             }
         }
         
-        // ====================================================================
-        //  Logo - 移动端隐藏
-        //  ====================================================================
-        
         .logo {
             display: none;
         }
-        
-        // ====================================================================
-        //  PC端导航 - 移动端隐藏
-        //  ====================================================================
         
         .navigation {
             display: none;
         }
         
-        // ====================================================================
-        //  搜索框 - 中间，点击显示输入框
-        //  ====================================================================
-        
+        // 搜索框
         .block-search {
             order: 1;
             margin: 0 auto;
@@ -785,7 +726,6 @@
                 margin: 0;
             }
             
-            // 搜索图标
             .label {
                 display: inline-block;
                 cursor: pointer;
@@ -817,7 +757,6 @@
                 }
             }
             
-            // 搜索输入框 - 默认隐藏
             .control {
                 position: absolute;
                 top: 100%;
@@ -845,21 +784,16 @@
                 }
             }
             
-            // 点击后显示搜索框
             .label.active + .control {
                 display: block;
             }
             
-            // 搜索按钮 - 隐藏
             .action.search {
                 display: none;
             }
         }
         
-        // ====================================================================
-        //  购物车 - 右侧
-        //  ====================================================================
-        
+        // 购物车
         .minicart-wrapper {
             order: 2;
             margin: 0;
@@ -878,10 +812,7 @@
             }
         }
         
-        // ====================================================================
-        //  登录按钮 - 右侧
-        //  ====================================================================
-        
+        // 登录按钮
         .header-login-button {
             order: 3;
             margin: 0 0 0 10px;
@@ -898,6 +829,90 @@
                     background: @folix-secondary-dark;
                 }
             }
+        }
+    }
+    
+    // ========================================================================
+    //  移动端导航容器
+    //  ========================================================================
+    
+    .mobile-nav-container {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100%;
+        background: #FFFFFF;
+        z-index: 100;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        
+        .nav-open & {
+            left: 0;
+        }
+        
+        .navigation {
+            display: block;
+            background: transparent;
+            padding: 0;
+            
+            ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            
+            li {
+                margin: 0;
+                padding: 0;
+                border-bottom: 1px solid @folix-border-light;
+                
+                a {
+                    display: block;
+                    padding: 14px 20px;
+                    color: @folix-text-primary;
+                    font-size: 15px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    
+                    &:hover,
+                    &:active {
+                        background: @folix-bg-page;
+                    }
+                }
+                
+                &.active > a {
+                    color: @folix-secondary;
+                    background: @folix-bg-page;
+                    border-left: 3px solid @folix-secondary;
+                }
+                
+                .submenu {
+                    background: @folix-bg-page;
+                    
+                    li a {
+                        padding-left: 40px;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+    
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        display: none;
+        cursor: pointer;
+        
+        .nav-open & {
+            display: block;
         }
     }
 }

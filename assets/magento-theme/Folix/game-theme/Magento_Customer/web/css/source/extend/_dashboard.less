@@ -1,6 +1,9 @@
 // /**
 //  * Folix Game Theme - Customer Dashboard Styles
 //  * 
+//  * 模块：Magento_Customer
+//  * 位置：Magento_Customer/web/css/source/extend/_dashboard.less
+//  * 
 //  * 设计理念：
 //  * - 保持原生Magento布局结构不变
 //  * - 应用Folix游戏主题配色方案
@@ -14,34 +17,33 @@
 
 & when (@media-common = true) {
     
-    // ========================================================================
+    //
     //  PAGE MAIN - 主内容区域
-    //  浅色背景
-    //  ========================================================================
+    //  _____________________________________________
     
     .page-main {
         background: @folix-bg-page;
-        padding-top: @indent-l;
-        padding-bottom: @indent-xl;
+        padding-top: @indent__l;
+        padding-bottom: @indent__xl;
     }
     
-    // ========================================================================
+    //
     //  BREADCRUMBS - 面包屑
-    //  ========================================================================
+    //  _____________________________________________
     
     .breadcrumbs {
-        margin-bottom: @indent-l;
+        margin-bottom: @indent__l;
         
         ul {
             display: flex;
             flex-wrap: wrap;
-            gap: @indent-xs;
+            gap: @indent__xs;
         }
         
         li {
             display: flex;
             align-items: center;
-            gap: @indent-xs;
+            gap: @indent__xs;
             font-size: 13px;
             
             &:not(:last-child)::after {
@@ -64,12 +66,12 @@
         }
     }
     
-    // ========================================================================
+    //
     //  PAGE TITLE - 页面标题
-    //  ========================================================================
+    //  _____________________________________________
     
     .page-title-wrapper {
-        margin-bottom: @indent-xl;
+        margin-bottom: @indent__xl;
         
         .page-title {
             margin: 0;
@@ -78,30 +80,25 @@
                 font-size: 32px;
                 font-weight: @font-weight__bold;
                 color: @folix-text-primary;
-                
-                // 渐变文字效果（可选）
-                // background: @folix-gradient-primary;
-                // -webkit-background-clip: text;
-                // -webkit-text-fill-color: transparent;
             }
         }
     }
     
-    // ========================================================================
+    //
     //  MESSAGES - 消息提示
-    //  ========================================================================
+    //  _____________________________________________
     
     .page.messages {
-        margin-bottom: @indent-l;
+        margin-bottom: @indent__l;
         
         .messages {
             display: flex;
             flex-direction: column;
-            gap: @indent-s;
+            gap: @indent__s;
         }
         
         .message {
-            padding: @indent-base @indent-m;
+            padding: @indent__base @indent__m;
             border-radius: @folix-radius-md;
             font-size: 14px;
             
@@ -131,21 +128,19 @@
         }
     }
     
-    // ========================================================================
+    //
     //  COLUMNS LAYOUT - 两列布局
-    //  ========================================================================
+    //  _____________________________________________
     
     .columns {
         display: flex;
-        gap: @indent-l;
+        gap: @indent__l;
         
-        // 主内容区域
         .column.main {
             flex: 1;
             min-width: 0;
         }
         
-        // 侧边栏
         .sidebar-main {
             width: 260px;
             flex-shrink: 0;
@@ -157,9 +152,9 @@
         }
     }
     
-    // ========================================================================
+    //
     //  ACCOUNT NAVIGATION - 账户导航（侧边栏）
-    //  ========================================================================
+    //  _____________________________________________
     
     .block.account-nav {
         background: @folix-bg-card;
@@ -168,9 +163,8 @@
         overflow: hidden;
         box-shadow: @folix-shadow;
         
-        // 标题
         .title {
-            padding: @indent-base @indent-m;
+            padding: @indent__base @indent__m;
             background: @folix-bg-panel;
             border-bottom: 1px solid @folix-border;
             
@@ -183,12 +177,10 @@
             }
         }
         
-        // 导航内容
         .content {
-            padding: @indent-s 0;
+            padding: @indent__s 0;
         }
         
-        // 导航列表
         .account-nav {
             .nav.items {
                 list-style: none;
@@ -203,7 +195,7 @@
                 strong {
                     display: flex;
                     align-items: center;
-                    padding: @indent-s @indent-m;
+                    padding: @indent__s @indent__m;
                     font-size: 14px;
                     color: @folix-text-secondary;
                     text-decoration: none;
@@ -217,7 +209,6 @@
                     border-left-color: @theme__color__primary;
                 }
                 
-                // 当前页高亮
                 &.current {
                     strong {
                         color: @theme__color__secondary;
@@ -227,20 +218,19 @@
                     }
                 }
                 
-                // 分隔线
                 .delimiter {
                     display: block;
                     height: 1px;
                     background: @folix-border-light;
-                    margin: @indent-xs @indent-m;
+                    margin: @indent__xs @indent__m;
                 }
             }
         }
     }
     
-    // ========================================================================
+    //
     //  DASHBOARD INFO BLOCKS - 信息卡片
-    //  ========================================================================
+    //  _____________________________________________
     
     .block-dashboard-info,
     .block-dashboard-addresses {
@@ -249,9 +239,8 @@
         border-radius: @folix-radius-lg;
         overflow: hidden;
         box-shadow: @folix-shadow;
-        margin-bottom: @indent-l;
+        margin-bottom: @indent__l;
         
-        // 顶部装饰条
         &::before {
             content: '';
             display: block;
@@ -259,9 +248,8 @@
             background: @folix-gradient-secondary;
         }
         
-        // Block 标题
         .block-title {
-            padding: @indent-m @indent-l;
+            padding: @indent__m @indent__l;
             border-bottom: 1px solid @folix-border-light;
             display: flex;
             justify-content: space-between;
@@ -273,7 +261,6 @@
                 color: @folix-text-primary;
             }
             
-            // 编辑链接在标题右侧
             .action.edit {
                 font-size: 13px;
                 color: @theme__color__primary;
@@ -285,34 +272,32 @@
             }
         }
         
-        // Block 内容
         .block-content {
-            padding: @indent-l;
+            padding: @indent__l;
             display: flex;
-            gap: @indent-l;
+            gap: @indent__l;
             flex-wrap: wrap;
         }
     }
     
-    // ========================================================================
+    //
     //  BOX CARDS - 信息盒子
-    //  ========================================================================
+    //  _____________________________________________
     
     .box {
         flex: 1;
         min-width: 240px;
-        padding: @indent-m;
+        padding: @indent__m;
         background: @folix-bg-page;
         border: 1px solid @folix-border-light;
         border-radius: @folix-radius-md;
         
-        // Box 标题
         .box-title {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: @indent-base;
-            padding-bottom: @indent-s;
+            margin-bottom: @indent__base;
+            padding-bottom: @indent__s;
             border-bottom: 1px solid @folix-border-light;
             
             span {
@@ -324,12 +309,11 @@
             }
         }
         
-        // Box 内容
         .box-content {
-            margin-bottom: @indent-base;
+            margin-bottom: @indent__base;
             
             p {
-                margin: 0 0 @indent-xs;
+                margin: 0 0 @indent__xs;
                 font-size: 14px;
                 color: @folix-text-primary;
                 line-height: 1.6;
@@ -343,11 +327,10 @@
             }
         }
         
-        // Box 操作按钮
         .box-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: @indent-s;
+            gap: @indent__s;
             
             a {
                 font-size: 13px;
@@ -368,9 +351,9 @@
         }
     }
     
-    // ========================================================================
+    //
     //  SIDEBAR BLOCKS - 侧边栏小部件
-    //  ========================================================================
+    //  _____________________________________________
     
     .sidebar-additional {
         .block {
@@ -379,11 +362,11 @@
             border-radius: @folix-radius-lg;
             overflow: hidden;
             box-shadow: @folix-shadow;
-            margin-bottom: @indent-l;
+            margin-bottom: @indent__l;
         }
         
         .block-title {
-            padding: @indent-base @indent-m;
+            padding: @indent__base @indent__m;
             border-bottom: 1px solid @folix-border-light;
             display: flex;
             justify-content: space-between;
@@ -402,19 +385,17 @@
         }
         
         .block-content {
-            padding: @indent-m;
+            padding: @indent__m;
         }
         
-        // 空状态
         .empty {
-            padding: @indent-base;
+            padding: @indent__base;
             text-align: center;
             color: @folix-text-muted;
             font-size: 13px;
             font-style: italic;
         }
         
-        // 愿望清单/比较产品
         .block-wishlist,
         .block-compare,
         .block-reorder {
@@ -423,7 +404,7 @@
                 font-size: 13px;
                 font-weight: @font-weight__semibold;
                 color: @folix-text-secondary;
-                margin-bottom: @indent-s;
+                margin-bottom: @indent__s;
             }
             
             .product-items {
@@ -433,27 +414,25 @@
             }
             
             .product-item {
-                padding: @indent-s 0;
+                padding: @indent__s 0;
                 border-bottom: 1px solid @folix-border-light;
                 
                 &:last-child {
                     border-bottom: none;
                 }
                 
-                .product-item-name {
-                    a {
-                        font-size: 13px;
-                        color: @folix-text-primary;
-                        
-                        &:hover {
-                            color: @theme__color__primary;
-                        }
+                .product-item-name a {
+                    font-size: 13px;
+                    color: @folix-text-primary;
+                    
+                    &:hover {
+                        color: @theme__color__primary;
                     }
                 }
             }
             
             .actions-toolbar {
-                margin-top: @indent-s;
+                margin-top: @indent__s;
                 
                 .action {
                     font-size: 13px;
@@ -467,39 +446,31 @@
         }
     }
     
-    // ========================================================================
-    //  AUTHENTICATION POPUP - 登录弹窗（隐藏状态）
-    //  ========================================================================
-    
-    #authenticationPopup {
-        // 默认隐藏，由JS控制显示
-    }
+    //
+    //  AUTHENTICATION POPUP - 登录弹窗
+    //  _____________________________________________
     
     .block-authentication {
-        .block-title {
-            strong {
-                font-size: 18px;
-                font-weight: @font-weight__semibold;
-                color: @folix-text-primary;
-            }
+        .block-title strong {
+            font-size: 18px;
+            font-weight: @font-weight__semibold;
+            color: @folix-text-primary;
         }
         
-        .actions-toolbar {
-            .action {
-                padding: @indent-s @indent-m;
-                border-radius: @folix-radius;
-                font-weight: @font-weight__semibold;
-                transition: @folix-transition;
+        .actions-toolbar .action {
+            padding: @indent__s @indent__m;
+            border-radius: @folix-radius;
+            font-weight: @font-weight__semibold;
+            transition: @folix-transition;
+            
+            &.primary {
+                background: @folix-gradient-primary;
+                color: white;
+                border: none;
                 
-                &.primary {
-                    background: @folix-gradient-primary;
-                    color: white;
-                    border: none;
-                    
-                    &:hover {
-                        transform: translateY(-2px);
-                        box-shadow: @folix-shadow-primary;
-                    }
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: @folix-shadow-primary;
                 }
             }
         }
@@ -511,20 +482,10 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    .columns {
-        // 桌面端三列布局（如果有两个侧边栏）
-        .sidebar-main + .column.main + .sidebar-additional {
-            // 三列情况
-        }
-    }
-    
     .block-dashboard-info,
     .block-dashboard-addresses {
-        .block-content {
-            // 桌面端两列盒子
-            .box {
-                min-width: 280px;
-            }
+        .block-content .box {
+            min-width: 280px;
         }
     }
 }
@@ -544,7 +505,6 @@
         }
     }
     
-    // 平板上侧边栏显示为水平列表
     .block.account-nav {
         .content {
             padding: 0;
@@ -559,7 +519,7 @@
         .nav.item {
             a,
             strong {
-                padding: @indent-s @indent-base;
+                padding: @indent__s @indent__base;
                 border-left: none;
                 border-bottom: 3px solid transparent;
             }
@@ -581,19 +541,17 @@
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     .page-main {
-        padding-top: @indent-base;
-        padding-bottom: @indent-l;
+        padding-top: @indent__base;
+        padding-bottom: @indent__l;
     }
     
-    .page-title-wrapper {
-        .page-title .base {
-            font-size: 24px;
-        }
+    .page-title-wrapper .page-title .base {
+        font-size: 24px;
     }
     
     .columns {
         flex-direction: column;
-        gap: @indent-m;
+        gap: @indent__m;
         
         .sidebar-main,
         .sidebar-additional,
@@ -601,7 +559,6 @@
             width: 100%;
         }
         
-        // 移动端侧边栏在内容之后
         .sidebar-main {
             order: 1;
         }
@@ -618,10 +575,10 @@
     .block-dashboard-info,
     .block-dashboard-addresses {
         .block-title {
-            padding: @indent-base;
+            padding: @indent__base;
             flex-direction: column;
             align-items: flex-start;
-            gap: @indent-xs;
+            gap: @indent__xs;
             
             .action.edit {
                 align-self: flex-start;
@@ -629,9 +586,9 @@
         }
         
         .block-content {
-            padding: @indent-base;
+            padding: @indent__base;
             flex-direction: column;
-            gap: @indent-base;
+            gap: @indent__base;
         }
         
         .box {
@@ -653,9 +610,7 @@
         }
     }
     
-    .sidebar-additional {
-        .block {
-            margin-bottom: @indent-base;
-        }
+    .sidebar-additional .block {
+        margin-bottom: @indent__base;
     }
 }

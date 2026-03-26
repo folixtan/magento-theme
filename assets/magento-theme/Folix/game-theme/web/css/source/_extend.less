@@ -1,25 +1,41 @@
 // /**
-//  * Folix Game Theme - Style Extend
+//  * Folix Game Theme - Global Style Extend
 //  * 
 //  * 核心文件：扩展父主题样式
 //  * 
-//  * 注意：
-//  * - _variables.less 和 _theme.less 由Magento自动加载，无需手动引入
-//  * - 此文件中的样式会覆盖父主题的同名选择器
-//  * - 使用 @import 引入自定义模块化样式文件
+//  * 文件组织结构：
+//  * - 全局样式：web/css/source/ （此文件所在位置）
+//  * - 模块样式：Magento_XXX/web/css/source/_extend.less
+//  * 
+//  * Magento 自动加载机制：
+//  * - _variables.less 和 _theme.less：自动加载，无需引入
+//  * - 此文件（_extend.less）：所有页面都会加载
+//  * - 模块 _extend.less：只在对应模块页面加载
 //  */
 
 //
-//  引入模块化样式文件
+//  全局样式引入
 //  _____________________________________________
 
-@import 'extends/_global.less';       // 全局样式：body、html
-@import 'extends/_header.less';       // 头部样式
-@import 'extends/_footer.less';       // 底部样式
-@import 'extends/_navigation.less';   // 导航样式
-@import 'extends/_buttons.less';      // 按钮样式
-@import 'extends/_components.less';   // 自定义组件（Hero Slider, Promo Banner）
-@import 'extends/_login-dropdown.less'; // 登录下拉菜单
-@import 'extends/_slider.less';      // PageBuilder Slider 美化
-@import 'extends/_dashboard.less';   // 客户Dashboard页面
-@import 'extends/_abstracts.less';    // 抽象类（需要 &:extend 使用）
+@import '_global.less';       // 全局基础样式：body、html、链接、标题
+@import '_buttons.less';      // 全局按钮样式
+@import '_abstracts.less';    // 抽象类（需要 &:extend 使用）
+
+//
+//  模块样式说明
+//  _____________________________________________
+//
+//  以下模块样式在各自模块目录下，Magento 会自动加载：
+//  
+//  - Magento_Theme/web/css/source/_extend.less
+//    包含：header, footer, navigation, pages
+//  
+//  - Magento_Customer/web/css/source/_extend.less
+//    包含：login-dropdown, dashboard
+//  
+//  - Magento_Cms/web/css/source/_extend.less
+//    包含：slider, components
+//  
+//  - Magento_Catalog/web/css/source/_extend.less
+//    包含：products, product-view
+//

@@ -1,6 +1,9 @@
 // /**
 //  * Folix Game Theme - Login Dropdown Styles
 //  * 
+//  * 模块：Magento_Customer
+//  * 位置：Magento_Customer/web/css/source/extend/_login-dropdown.less
+//  * 
 //  * 设计理念：
 //  * - 扁平化设计，卡片风格
 //  * - 游戏时尚感：渐变色装饰、圆角、微阴影
@@ -24,7 +27,7 @@
     }
     
     //
-    //  Login Trigger Button（使用div，避免原生button样式冲突）
+    //  Login Trigger Button
     //  _____________________________________________
     
     .login-dropdown-wrapper .login-trigger {
@@ -40,7 +43,7 @@
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        user-select: none;  // 防止文字选中
+        user-select: none;
         
         .login-icon {
             display: flex;
@@ -57,14 +60,12 @@
             color: #FFFFFF;
         }
         
-        // 键盘焦点样式
         &:focus {
             outline: none;
             box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
         }
     }
     
-    // Hover 状态 - 独立选择器，优先级更高
     .login-dropdown-wrapper .login-trigger:hover {
         background: @folix-secondary-dark;
         color: #FFFFFF;
@@ -76,7 +77,6 @@
         }
     }
     
-    // Active 状态
     .login-dropdown-wrapper .login-trigger.active {
         background: @folix-secondary-dark;
         color: #FFFFFF;
@@ -87,7 +87,7 @@
     }
     
     //
-    //  Login Dropdown Panel - 使用CSS控制显示
+    //  Login Dropdown Panel
     //  _____________________________________________
     
     .login-dropdown {
@@ -100,32 +100,23 @@
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
         overflow: hidden;
         z-index: 100;
-        pointer-events: none;  // 默认不响应事件
+        pointer-events: none;
         opacity: 0;
         transform: translateY(-10px);
-        visibility: hidden;  // 使用 visibility 而不是 display
+        visibility: hidden;
         transition: all 0.3s ease;
         
-        // 展开状态
         &.open {
             opacity: 1;
             transform: translateY(0);
             visibility: visible;
-            pointer-events: auto;  // 展开时响应事件
+            pointer-events: auto;
         }
-        
-        //
-        //  顶部装饰条（渐变色）
-        //  _____________________________________________
         
         .dropdown-decoration {
             height: 4px;
             background: linear-gradient(90deg, @folix-primary 0%, @folix-secondary 100%);
         }
-        
-        //
-        //  标签切换
-        //  _____________________________________________
         
         .dropdown-tabs {
             display: flex;
@@ -152,7 +143,6 @@
                     color: @folix-secondary;
                     background: #FFFFFF;
                     
-                    // 底部指示器
                     &:after {
                         content: '';
                         position: absolute;
@@ -168,10 +158,6 @@
             }
         }
         
-        //
-        //  表单内容
-        //  _____________________________________________
-        
         .dropdown-content {
             padding: 24px;
         }
@@ -184,10 +170,6 @@
                 display: block;
             }
         }
-        
-        //
-        //  表单字段
-        //  _____________________________________________
         
         .field-group {
             position: relative;
@@ -216,7 +198,7 @@
             }
             
             .field-label {
-                display: none;  // 扁平化设计，使用 placeholder
+                display: none;
             }
         }
         
@@ -247,10 +229,6 @@
             }
         }
         
-        //
-        //  主按钮
-        //  _____________________________________________
-        
         .btn-primary {
             width: 100%;
             padding: 12px 24px;
@@ -272,10 +250,6 @@
                 transform: translateY(0);
             }
         }
-        
-        //
-        //  第三方登录
-        //  _____________________________________________
         
         .social-login {
             margin-top: 24px;
@@ -368,10 +342,11 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     .login-dropdown {
-        width: 400px;  // 桌面端稍宽
+        width: 400px;
     }
+    
     .login-dropdown-wrapper {
-       order:4;
+        order: 4;
     }
 }
 
@@ -384,7 +359,7 @@
         padding: 6px 12px;
         
         .login-text {
-            display: none;  // 移动端只显示图标
+            display: none;
         }
     }
     
