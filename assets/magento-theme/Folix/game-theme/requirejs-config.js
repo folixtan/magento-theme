@@ -21,28 +21,26 @@ var config = {
             // }
         }
     },
-    
+
     paths: {
         // 自定义模块路径别名（可选）
         // 'folixSlider': 'Magento_Theme/js/slider'
     },
-    
+
     shim: {
         // 第三方库 shim 配置（如有需要）
         // 'vendor/some-library': ['jquery']
     },
-    
-    // 全局配置
+
     map: {
         '*': {
             // 可以在这里覆盖原生组件
             // 'menu': 'Magento_Theme/js/custom-menu'
         }
     },
-    
-    // 依赖配置
+
+    // 页面加载时自动执行的模块
     deps: [
-        // 页面加载时自动执行的模块
-        // 'Magento_Theme/js/mobile-header'
+        'Magento_Theme/js/mobile-header'
     ]
 };

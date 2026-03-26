@@ -14,9 +14,8 @@
 define([
     'jquery',
     'jquery/ui-modules/widget',
-    'matchMedia',
     'domReady!'
-], function ($, mediaCheck) {
+], function ($) {
     'use strict';
 
     $.widget('folix.loginDropdown', {
@@ -37,7 +36,10 @@ define([
             this.hoverTimeout = null;
             this.isMobile = false;
 
-            console.log('[Folix] Login Dropdown Component initialized');
+            console.log('[Folix] Login Dropdown initialized', {
+                breakpoint: this.options.mobileBreakpoint,
+                element: this.element[0]
+            });
 
             this._initCommonEvents();
             this._initResponsive();
@@ -105,21 +107,30 @@ define([
         _initResponsive: function () {
             var self = this;
 
-            mediaCheck({
-                media: '(min-width: ' + this.options.mobileBreakpoint + 'px)',
-                entry: function () {
+            console.log('[Folix] Login Dropdown responsive, breakpoint:', this.options.mobileBreakpoint);
+
+            // 使用 window.matchMedia 替代 mediaCheck（更可靠）
+            var mq = window.matchMedia('(min-width: ' + this.options.mobileBreakpoint + 'px)');
+            
+            var handleMediaChange = function (mql) {
+                if (mql.matches) {
+                    console.log('[Folix] Login Dropdown: desktop mode');
                     self._initDesktopEvents();
-                },
-                exit: function () {
+                } else {
+                    console.log('[Folix] Login Dropdown: mobile mode');
                     self._initMobileEvents();
                 }
-            });
+            };
 
-            // 立即执行一次检查
-            if (window.innerWidth >= this.options.mobileBreakpoint) {
-                this._initDesktopEvents();
+            // 初始检查
+            handleMediaChange(mq);
+
+            // 监听变化
+            if (mq.addEventListener) {
+                mq.addEventListener('change', handleMediaChange);
             } else {
-                this._initMobileEvents();
+                // 兼容旧浏览器
+                mq.addListener(handleMediaChange);
             }
         },
 
@@ -187,7 +198,7 @@ define([
             this.$trigger.addClass('active');
 
             // 添加遮罩（移动端）
-            if (this.isMobile || window.innerWidth < this.options.mobileBreakpoint) {
+            if (this.isMobile) {
                 this._addOverlay();
             }
 
