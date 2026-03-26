@@ -326,3 +326,162 @@ grunt clean:<theme_name>
 1. **扩展优先** - 使用 `<referenceContainer>` 扩展而非覆盖
 2. **主题覆盖** - 在主题目录中创建同名文件
 3. **不修改核心** - 永远不要直接修改 `vendor/` 目录
+
+---
+
+## 十二、实战示例：修改迷你购物车布局
+
+> 来源: https://developer.adobe.com/commerce/frontend-core/guide/templates/sample
+
+### 需求
+
+Blank 主题中，迷你购物车的产品列表在 **"Go to Checkout"** 按钮下方：
+
+```
+┌─────────────────────────────┐
+│  Go to Checkout             │
+├─────────────────────────────┤
+│  Product 1                  │
+│  Product 2                  │
+│  Product 3                  │
+└─────────────────────────────┘
+```
+
+ExampleCorp 想要把产品列表移到按钮上方：
+
+```
+┌─────────────────────────────┐
+│  Product 1                  │
+│  Product 2                  │
+│  Product 3                  │
+├─────────────────────────────┤
+│  Go to Checkout             │
+└─────────────────────────────┘
+```
+
+### 解决步骤
+
+#### 1. 定位模板
+
+迷你购物车模板位置：
+```
+vendor/magento/module-checkout/view/frontend/web/template/minicart/content.html
+```
+
+#### 2. 复制到主题
+
+```
+app/design/frontend/ExampleCorp/orange/Magento_Checkout/web/template/minicart/content.html
+```
+
+#### 3. 修改模板顺序
+
+**原始代码结构**：
+```html
+<!-- ko foreach: getCartItems() -->
+    <!-- 产品列表 -->
+<!-- /ko -->
+
+<div class="actions">
+    <div class="primary">
+        <!-- Go to Checkout 按钮 -->
+    </div>
+</div>
+```
+
+**修改后代码结构**（交换顺序）：
+```html
+<div class="actions">
+    <div class="primary">
+        <!-- Go to Checkout 按钮 -->
+    </div>
+</div>
+
+<!-- ko foreach: getCartItems() -->
+    <!-- 产品列表 -->
+<!-- /ko -->
+```
+
+### 关键学习点
+
+| 要点 | 说明 |
+|------|------|
+| **模板类型** | HTML 模板（Knockout JS）也遵循同样的覆盖规则 |
+| **路径约定** | `web/template/` 目录存放 Knockout 模板 |
+| **修改方式** | 直接复制原模板，按需修改 HTML 结构 |
+| **生效方式** | 主题模板自动覆盖模块模板 |
+
+### 注意事项
+
+修改 Knockout 模板（`.html`）后需要清除缓存：
+
+```bash
+rm -rf pub/static/frontend/*
+rm -rf var/view_preprocessed/*
+```
+
+---
+
+## 十三、模板类型对比
+
+| 模板类型 | 文件扩展名 | 用途 | 位置 |
+|---------|----------|------|------|
+| **PHTML 模板** | `.phtml` | 服务端渲染，PHP 模板 | `templates/` 目录 |
+| **HTML 模板** | `.html` | Knockout JS 客户端模板 | `web/template/` 目录 |
+
+### PHTML 模板特点
+
+```php
+<?php
+// 可以使用 PHP 代码
+$product = $block->getProduct();
+?>
+<div class="product-name">
+    <?= $escaper->escapeHtml($product->getName()) ?>
+</div>
+```
+
+### HTML 模板特点（Knockout）
+
+```html
+<!-- 使用 Knockout 绑定 -->
+<div class="product-name" data-bind="text: product().name"></div>
+
+<!-- ko foreach: items -->
+    <div data-bind="text: name"></div>
+<!-- /ko -->
+```
+
+---
+
+## 十四、Folix 主题实战建议
+
+### 覆盖模板的正确姿势
+
+```bash
+# 1. 找到原模板位置
+vendor/magento/module-theme/view/frontend/templates/html/header.phtml
+
+# 2. 复制到主题目录（保持相同路径）
+app/design/frontend/Folix/game-theme/Magento_Theme/templates/html/header.phtml
+
+# 3. 修改模板内容
+# 只修改需要改的部分，不要重写整个文件
+```
+
+### 扩展布局的正确姿势
+
+```xml
+<!-- app/design/frontend/Folix/game-theme/Magento_Theme/layout/default.xml -->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- 使用 referenceContainer 扩展，不要覆盖 -->
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template" 
+                   name="custom.header.notice" 
+                   template="Magento_Theme::html/header/notice.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
+```
