@@ -15,8 +15,6 @@
             <container name="product.detail.wrapper" htmlTag="div" htmlClass="product-detail-wrapper" before="-">
                 <!-- 左列 60% - 产品图片 + Tabs -->
                 <container name="product.detail.left" htmlTag="div" htmlClass="product-detail-left">
-                    <!-- 产品图片 Gallery - 移动到此处 -->
-                    <block class="Magento\Catalog\Block\Product\View" name="product.info.media" as="media" template="Magento_Catalog::product/view/gallery.phtml" before="-"/>
                 </container>
                 
                 <!-- 右列 40% - 产品信息 -->
@@ -32,6 +30,9 @@
         
         <!-- 移动产品主信息区域到右侧 -->
         <move element="product.info.main" destination="product.detail.right" after="page.main.title"/>
+        
+        <!-- 移动产品图片区域到左侧（原生的 product.info.media 是 container，包含 Gallery） -->
+        <move element="product.info.media" destination="product.detail.left" before="-"/>
         
         <!-- 移动产品详情 Tabs 到左侧（在 Gallery 之后） -->
         <move element="product.info.details" destination="product.detail.left" after="product.info.media"/>
