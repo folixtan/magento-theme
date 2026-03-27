@@ -84,7 +84,7 @@
     // 缩放按钮
     .fotorama__zoom-in,
     .fotorama__zoom-out {
-        display: none; // 隐藏或按需样式
+        display: none;
     }
 
     // 游戏徽章覆盖层
@@ -209,12 +209,12 @@
 
     // 缩略图箭头
     .fotorama__thumb__arr {
-        display: none; // 隐藏或按需样式
+        display: none;
     }
 
     // 全屏图标
     .fotorama__fullscreen-icon {
-        display: none; // 或自定义样式
+        display: none;
     }
 
     //
@@ -253,7 +253,6 @@
                 background: @folix-bg-hover;
             }
             
-            // 展开/折叠图标
             &:after {
                 content: '▼';
                 font-size: 10px;
@@ -388,10 +387,6 @@
     //
     //  产品信息区域 - 右侧
     //  _____________________________________________
-
-    .product-info-main {
-        // 移动端不 sticky
-    }
 
     // 产品标题卡片
     .product-title-card,
@@ -811,10 +806,9 @@
 
 //
 //  Desktop (≥ 1024px) - 60/40 布局
-//  使用 @media 直接查询，不使用 .media-width mixin
 //  _____________________________________________
 
-@media all and (min-width: 1024px) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     
     .product-detail-wrapper {
         flex-direction: row;
@@ -869,10 +863,10 @@
 }
 
 //
-//  Tablet (768px - 1023px)
+//  Tablet (≥ 768px)
 //  _____________________________________________
 
-@media all and (min-width: 768px) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     
     .swatch-attribute-options {
         grid-template-columns: repeat(2, 1fr);
@@ -883,7 +877,7 @@
 //  Mobile (< 768px)
 //  _____________________________________________
 
-@media all and (max-width: 767px) {
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     
     .swatch-attribute-options {
         grid-template-columns: 1fr;
