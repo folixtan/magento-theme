@@ -230,6 +230,8 @@
     .data.item.title {
         border-bottom: 1px solid @folix-border;
         background: @folix-bg-panel;
+        float: none;
+        width: 100%;
         
         a {
             display: flex;
@@ -266,12 +268,16 @@
         }
     }
 
-    // Tab 内容 - 不控制显示/隐藏，让 Magento JS 处理
+    // Tab 内容 - 覆盖父主题的 float: right 和 margin-left: -100%
+    .product.data.items > .item.content,
     .data.item.content {
+        float: none;
+        margin-left: 0;
+        margin-top: 0;
+        width: 100%;
         padding: @indent__l;
         background: @folix-bg-card;
-        
-        // 当 display: none 时 Magento 会隐藏，这里只添加样式
+        box-sizing: border-box;
     }
 
     // 描述内容
@@ -1006,5 +1012,26 @@
     
     .swatch-attribute-options {
         grid-template-columns: repeat(2, 1fr);
+    }
+    
+    //
+    //  Tabs - 桌面端保持手风琴样式
+    //  _____________________________________________
+    
+    .product.data.items {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .product.data.items > .item.title {
+        float: none;
+        width: 100%;
+    }
+    
+    .product.data.items > .item.content {
+        float: none;
+        margin-left: 0;
+        margin-top: 0;
+        width: 100%;
     }
 }
