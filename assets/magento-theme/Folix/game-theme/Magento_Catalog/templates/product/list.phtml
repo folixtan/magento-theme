@@ -2,8 +2,9 @@
 /**
  * Folix Game Theme - Product List Template
  *
- * 基于 Magento 原生模板修改
- * 修改内容：将收藏按钮移到图片右上角
+ * 基于 Magento 原生模板，最小改动：
+ * - 在图片区域添加右上角收藏按钮容器
+ * - 不改变原有结构
  *
  * 原生路径：Magento_Catalog::product/list.phtml
  */
@@ -63,19 +64,17 @@ $_helper = $block->getData('outputHelper');
                             . 'top:' . $productImage->getHeight() . 'px;';
                     }
                     ?>
-                    <?php // Product Image ?>
-                    <div class="product-item-photo-wrapper">
-                        <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
-                           class="product photo product-item-photo"
-                           tabindex="-1">
-                            <?= $productImage->toHtml() ?>
-                        </a>
-                        <?php // Wishlist Button - 图片右上角 ?>
-                        <div class="product-item-actions-top" data-role="add-to-links">
-                            <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
-                                <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
-                            <?php endif; ?>
-                        </div>
+                    <?php // Product Image - 保持原生结构 ?>
+                    <a href="<?= $escaper->escapeUrl($_product->getProductUrl()) ?>"
+                       class="product photo product-item-photo"
+                       tabindex="-1">
+                        <?= $productImage->toHtml() ?>
+                    </a>
+                    <?php // 收藏按钮 - 图片右上角（新增，不影响原有结构） ?>
+                    <div class="folix-wishlist-top" data-role="add-to-links">
+                        <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
+                            <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
+                        <?php endif; ?>
                     </div>
                     <div class="product details product-item-details">
                         <?php $_productNameStripped = $block->stripTags($_product->getName(), null, true); ?>
@@ -137,8 +136,7 @@ $_helper = $block->getData('outputHelper');
                                         $position,
                                         'product-item-info_' . $_product->getId() . ' div.actions-primary'
                                     ) : '' ?>
-                                <?php // 原位置的 actions-secondary 隐藏，由 CSS 控制 ?>
-                                <div data-role="add-to-links" class="actions-secondary" style="display: none;">
+                                <div data-role="add-to-links" class="actions-secondary">
                                     <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
                                         <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
                                     <?php endif; ?>
