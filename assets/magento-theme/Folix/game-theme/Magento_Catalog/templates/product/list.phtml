@@ -4,7 +4,7 @@
  *
  * 基于 Magento 原生模板，最小改动：
  * - 在图片区域添加右上角收藏按钮容器
- * - 不改变原有结构
+ * - 删除 hover 区域的收藏和比较按钮
  *
  * 原生路径：Magento_Catalog::product/list.phtml
  */
@@ -70,7 +70,7 @@ $_helper = $block->getData('outputHelper');
                        tabindex="-1">
                         <?= $productImage->toHtml() ?>
                     </a>
-                    <?php // 收藏按钮 - 图片右上角（新增，不影响原有结构） ?>
+                    <?php // 收藏按钮 - 图片右上角 ?>
                     <div class="folix-wishlist-top" data-role="add-to-links">
                         <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
                             <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
@@ -136,16 +136,7 @@ $_helper = $block->getData('outputHelper');
                                         $position,
                                         'product-item-info_' . $_product->getId() . ' div.actions-primary'
                                     ) : '' ?>
-                                <div data-role="add-to-links" class="actions-secondary">
-                                    <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
-                                        <?= $addToBlock->setProduct($_product)->getChildHtml() ?>
-                                    <?php endif; ?>
-                                </div>
-                                <?= ($pos && strpos($pos, $viewMode . '-secondary')) ?
-                                    /* @noEscape */ $secureRenderer->renderStyleAsTag(
-                                        $position,
-                                        'product-item-info_' . $_product->getId() . ' div.actions-secondary'
-                                    ) : '' ?>
+                                <?php // 删除 actions-secondary，收藏和比较按钮只保留在右上角 ?>
                             </div>
                             <?php if ($showDescription): ?>
                                 <div class="product description product-item-description">

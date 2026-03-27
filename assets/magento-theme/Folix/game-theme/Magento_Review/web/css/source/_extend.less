@@ -1,0 +1,169 @@
+// /**
+//  * Folix Game Theme - Review Styles
+//  *
+//  * 模块：Magento_Review
+//  * 位置：Magento_Review/web/css/source/_extend.less
+//  *
+//  * 评论样式：简洁星星 + 数字格式
+//  */
+
+//
+//  Common (All devices)
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  产品列表页评论摘要
+    //  _____________________________________________
+
+    .product-reviews-summary {
+        display: flex;
+        align-items: center;
+        margin: 6px 0;
+        
+        // 隐藏空评论提示
+        &.empty {
+            display: none;
+        }
+        
+        // 评分容器
+        .rating-summary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            
+            // 星星容器
+            .rating-result {
+                width: 80px;
+                height: 16px;
+                display: flex;
+                
+                &:before {
+                    content: '★★★★★';
+                    color: #e0e0e0;
+                    font-size: 14px;
+                    letter-spacing: 2px;
+                }
+                
+                > span {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    overflow: hidden;
+                    z-index: 1;
+                    
+                    &:before {
+                        content: '★★★★★';
+                        color: #f5a623;
+                        font-size: 14px;
+                        letter-spacing: 2px;
+                    }
+                }
+            }
+            
+            // 隐藏 "of 100%" 文字
+            .label {
+                display: none;
+            }
+        }
+        
+        // 评论数量
+        .reviews-actions {
+            margin-left: 8px;
+            font-size: 12px;
+            color: @folix-text-muted;
+            
+            a {
+                color: @folix-text-muted;
+                
+                &:hover {
+                    color: @folix-primary;
+                }
+            }
+        }
+    }
+
+    //
+    //  产品详情页评论
+    //  _____________________________________________
+
+    .product-info-main {
+        .product-reviews-summary {
+            .rating-summary {
+                .rating-result {
+                    &:before,
+                    > span:before {
+                        font-size: 16px;
+                    }
+                }
+            }
+            
+            .reviews-actions {
+                font-size: 14px;
+            }
+        }
+    }
+
+    //
+    //  评论列表样式
+    //  _____________________________________________
+
+    .review-list {
+        .review-items {
+            .review-item {
+                padding: 16px 0;
+                border-bottom: 1px solid @folix-border;
+                
+                &:last-child {
+                    border-bottom: none;
+                }
+                
+                .review-title {
+                    font-weight: @font-weight__semibold;
+                    margin-bottom: 8px;
+                }
+                
+                .review-content {
+                    color: @folix-text-secondary;
+                    line-height: 1.6;
+                }
+                
+                .review-details {
+                    margin-top: 12px;
+                    font-size: 12px;
+                    color: @folix-text-muted;
+                    
+                    .review-author,
+                    .review-date {
+                        display: inline-block;
+                    }
+                    
+                    .review-author {
+                        margin-right: 12px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  Mobile (< 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    
+    .product-reviews-summary {
+        .rating-summary .rating-result {
+            &:before,
+            > span:before {
+                font-size: 12px;
+            }
+        }
+        
+        .reviews-actions {
+            font-size: 11px;
+        }
+    }
+}

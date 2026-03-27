@@ -7,22 +7,6 @@
 //  * 设计原则：
 //  * - 优先使用原生CSS，不覆盖原生类
 //  * - 只添加新元素（右上角收藏按钮）的样式
-//  * - 通过 CSS 隐藏原位置的收藏按钮
-//  *
-//  * 原生结构（不改动）：
-//  * .products-grid
-//  *   .product-items
-//  *     .product-item
-//  *       .product-item-info
-//  *         .product-item-photo
-//  *         .folix-wishlist-top (新增：右上角按钮)
-//  *         .product-item-details
-//  *           .product-item-name
-//  *           .price-box
-//  *           .product-item-inner (hover显示)
-//  *             .product-item-actions
-//  *               .actions-primary (Add to Cart)
-//  *               .actions-secondary (原位置收藏按钮 - CSS隐藏)
 //  */
 
 //
@@ -32,7 +16,7 @@
 & when (@media-common = true) {
 
     //
-    //  右上角收藏按钮（新增）
+    //  右上角收藏按钮
     //  _____________________________________________
 
     .folix-wishlist-top {
@@ -41,8 +25,7 @@
         right: 8px;
         z-index: 10;
         opacity: 0;
-        transform: scale(0.8);
-        transition: opacity 0.3s ease, transform 0.3s ease;
+        transition: opacity 0.3s ease;
         
         // 按钮通用样式
         .action {
@@ -51,15 +34,15 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                width: 36px;
-                height: 36px;
-                background: rgba(255, 255, 255, 0.9);
-                border: 1px solid @folix-border;
+                width: 32px;
+                height: 32px;
+                margin-bottom: 4px;
+                background: rgba(255, 255, 255, 0.95);
+                border: none;
                 border-radius: 50%;
-                color: @folix-text-secondary;
-                font-size: 16px;
-                transition: all 0.2s ease;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                color: #666;
+                font-size: 14px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
                 
                 span {
                     display: none;
@@ -67,9 +50,8 @@
                 
                 &:hover {
                     background: @folix-primary;
-                    border-color: @folix-primary;
                     color: #fff;
-                    transform: scale(1.1);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 }
             }
             
@@ -77,7 +59,7 @@
             &.towishlist {
                 &:before {
                     content: '♡';
-                    font-size: 18px;
+                    font-size: 16px;
                 }
                 
                 &:hover:before {
@@ -89,7 +71,7 @@
             &.tocompare {
                 &:before {
                     content: '⇄';
-                    font-size: 16px;
+                    font-size: 14px;
                 }
             }
         }
@@ -103,20 +85,11 @@
     .product-item-info.active {
         .folix-wishlist-top {
             opacity: 1;
-            transform: scale(1);
         }
     }
 
     //
-    //  隐藏原位置的收藏按钮（hover区域）
-    //  _____________________________________________
-
-    .products-grid .product-item-inner .actions-secondary {
-        display: none;
-    }
-
-    //
-    //  产品卡片美化（仅添加主题风格，不改变布局）
+    //  产品卡片美化（不改变布局）
     //  _____________________________________________
 
     .products-grid .product-item-info {
@@ -126,29 +99,9 @@
         box-shadow: @folix-shadow;
         position: relative;
         overflow: visible;
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
         
         &:hover {
             box-shadow: @folix-shadow-lg;
-            border-color: @folix-primary;
-        }
-    }
-
-    //
-    //  价格样式美化
-    //  _____________________________________________
-
-    .products-grid .price-box {
-        .price {
-            color: @folix-primary;
-            font-weight: @font-weight__bold;
-            font-size: 16px;
-        }
-        
-        .old-price .price {
-            color: @folix-text-muted;
-            font-size: 14px;
-            text-decoration: line-through;
         }
     }
 
@@ -158,10 +111,11 @@
 
     .products-grid .product-item-name {
         font-weight: @font-weight__semibold;
+        font-size: 14px;
+        margin: 8px 0;
         
         a {
             color: @folix-text-primary;
-            transition: color 0.2s ease;
             
             &:hover {
                 color: @folix-primary;
@@ -170,26 +124,84 @@
     }
 
     //
-    //  Add to Cart 按钮美化
+    //  评论样式 - 简洁星星 + 数字
     //  _____________________________________________
 
-    .products-grid .action.tocart {
-        background: @folix-primary;
-        border-color: @folix-primary;
-        border-radius: @folix-radius-sm;
-        color: #fff;
-        font-weight: @font-weight__semibold;
-        padding: 10px 20px;
-        transition: all 0.2s ease;
+    .products-grid .product-reviews-summary {
+        margin: 4px 0 8px;
         
-        &:hover {
-            background: @folix-secondary;
-            border-color: @folix-secondary;
-            transform: translateY(-1px);
+        .rating-summary {
+            display: inline-block;
+            vertical-align: middle;
         }
         
-        span {
+        .reviews-actions {
+            display: inline-block;
+            margin-left: 6px;
+            vertical-align: middle;
+            font-size: 12px;
+            color: @folix-text-muted;
+        }
+        
+        .action.view {
+            color: @folix-text-muted;
+            
+            &:hover {
+                color: @folix-primary;
+            }
+        }
+    }
+
+    //
+    //  价格样式
+    //  _____________________________________________
+
+    .products-grid .price-box {
+        margin: 8px 0;
+        
+        .price {
+            color: @folix-primary;
+            font-weight: @font-weight__bold;
+            font-size: 16px;
+        }
+        
+        .old-price .price {
+            color: @folix-text-muted;
             font-size: 13px;
+            text-decoration: line-through;
+        }
+    }
+
+    //
+    //  Add to Cart 按钮 - 宽度100%
+    //  _____________________________________________
+
+    .products-grid .product-item-actions {
+        margin: 0;
+        
+        .actions-primary {
+            width: 100%;
+        }
+        
+        .action.tocart {
+            width: 100%;
+            background: @folix-primary;
+            border-color: @folix-primary;
+            border-radius: @folix-radius-sm;
+            color: #fff;
+            font-weight: @font-weight__semibold;
+            padding: 10px 16px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            
+            &:hover {
+                background: @folix-secondary;
+                border-color: @folix-secondary;
+            }
+            
+            span {
+                font-size: 13px;
+            }
         }
     }
 
@@ -202,7 +214,6 @@
             background: @folix-bg-card;
             border: 1px solid @folix-border;
             border-radius: @folix-radius-sm;
-            transition: all 0.2s ease;
             
             &:hover {
                 border-color: @folix-primary;
@@ -213,17 +224,6 @@
             background: @folix-primary;
             border-color: @folix-primary;
             color: #fff;
-            font-weight: @font-weight__semibold;
-        }
-        
-        .action {
-            span {
-                display: none;
-            }
-            
-            &:before {
-                font-size: 16px;
-            }
         }
     }
 
@@ -250,15 +250,14 @@
     // 移动端始终显示右上角按钮
     .folix-wishlist-top {
         opacity: 1;
-        transform: scale(1);
     }
     
-    // 移动端按钮稍大，方便触摸
+    // 移动端按钮稍大
     .folix-wishlist-top .action {
         &.towishlist,
         &.tocompare {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
         }
     }
 }
@@ -269,23 +268,8 @@
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
     
-    // Grid 列表样式增强
-    .products-grid {
-        // 产品卡片间距
-        .product-item {
-            margin-bottom: @indent__l;
-        }
-    }
-}
-
-//
-//  Large Desktop (≥ 1024px)
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-    
-    // 大屏卡片间距调整
+    // 产品卡片间距
     .products-grid .product-item {
-        margin-bottom: @indent__xl;
+        margin-bottom: @indent__l;
     }
 }
