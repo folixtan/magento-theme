@@ -87,39 +87,74 @@
         object-fit: contain;
     }
 
-    // 箭头
+    // 箭头 - 正确覆盖 Fotorama 箭头样式
+    // Fotorama 原始结构: .fotorama__arr > .fotorama__arr__arr
+    // .fotorama__arr 是容器，.fotorama__arr__arr 是内部图标
+    
     .fotorama__arr {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 10;
-        box-shadow: @folix-shadow-md;
+        width: 44px;
         
         &:hover {
-            background: #FFFFFF;
-            transform: translateY(-50%) scale(1.1);
+            .fotorama__arr__arr {
+                transform: scale(1.1);
+            }
         }
+    }
+    
+    // 箭头内部图标 - 自定义样式覆盖 sprite
+    .fotorama__arr__arr {
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        box-shadow: @folix-shadow-md;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         
-        span {
-            font-size: 16px;
+        // 使用伪元素绘制箭头
+        background-image: none;
+        
+        &::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-style: solid;
         }
     }
-
+    
+    // 前一个箭头
     .fotorama__arr--prev {
-        left: @indent__m;
+        left: 0;
+        
+        .fotorama__arr__arr {
+            &::before {
+                border-width: 6px 8px 6px 0;
+                border-color: transparent @folix-primary transparent transparent;
+            }
+            
+            &:hover::before {
+                border-right-color: @folix-secondary;
+            }
+        }
     }
-
+    
+    // 后一个箭头
     .fotorama__arr--next {
-        right: @indent__m;
+        right: 0;
+        
+        .fotorama__arr__arr {
+            &::before {
+                border-width: 6px 0 6px 8px;
+                border-color: transparent transparent transparent @folix-primary;
+            }
+            
+            &:hover::before {
+                border-left-color: @folix-secondary;
+            }
+        }
     }
 
     // 缩略图导航
