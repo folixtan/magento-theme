@@ -44,24 +44,47 @@
         margin-bottom: @indent__l;
     }
 
-    // Fotorama 画廊容器
+    // Fotorama 画廊容器 (Magento gallery.html)
     .fotorama-item {
         position: relative;
     }
 
+    // Fotorama 主包装器
+    .fotorama__wrap {
+        position: relative;
+    }
+
+    // 主图容器
     .fotorama__stage {
         position: relative;
         min-height: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     }
 
+    // 滑动轴
+    .fotorama__stage__shaft {
+        min-height: 300px;
+    }
+
+    // 主图
     .fotorama__img {
         max-width: 100%;
         max-height: 300px;
         object-fit: contain;
+    }
+
+    // 加载动画
+    .fotorama__spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    // 缩放按钮
+    .fotorama__zoom-in,
+    .fotorama__zoom-out {
+        display: none; // 隐藏或按需样式
     }
 
     // 游戏徽章覆盖层
@@ -150,6 +173,11 @@
         gap: @indent__s;
     }
 
+    .fotorama__nav--thumbs {
+        align-items: center;
+    }
+
+    // 缩略图
     .fotorama__thumb {
         width: 50px;
         height: 50px;
@@ -172,6 +200,21 @@
             height: 100%;
             object-fit: cover;
         }
+    }
+
+    // 缩略图边框
+    .fotorama__thumb-border {
+        border-color: @folix-secondary;
+    }
+
+    // 缩略图箭头
+    .fotorama__thumb__arr {
+        display: none; // 隐藏或按需样式
+    }
+
+    // 全屏图标
+    .fotorama__fullscreen-icon {
+        display: none; // 或自定义样式
     }
 
     //
