@@ -72,9 +72,9 @@
         <!-- 移动搜索框到正确位置 -->
         <move element="top.search" destination="header-wrapper" before="minicart" />
         
-        <!-- PC端导航菜单 -->
+        <!-- PC端导航菜单 - 使用原生模板 -->
         <referenceContainer name="header-wrapper">
-            <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.desktop" template="Magento_Theme::html/topmenu.phtml" after="logo">
+            <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.desktop" after="logo">
                 <arguments>
                     <argument name="css_class" xsi:type="string">desktop-nav</argument>
                 </arguments>
@@ -90,8 +90,8 @@
                 <!-- Logo 和关闭按钮 -->
                 <block class="Magento\Framework\View\Element\Template" name="mobile.nav.header" template="Magento_Theme::html/header/mobile-nav-header.phtml" before="-" />
                 
-                <!-- 主菜单 -->
-                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.mobile" template="Magento_Theme::html/topmenu.phtml" after="mobile.nav.header">
+                <!-- 主菜单 - 使用原生模板 -->
+                <block class="Magento\Theme\Block\Html\Topmenu" name="catalog.topnav.mobile" after="mobile.nav.header">
                     <arguments>
                         <argument name="css_class" xsi:type="string">mobile-nav</argument>
                     </arguments>
