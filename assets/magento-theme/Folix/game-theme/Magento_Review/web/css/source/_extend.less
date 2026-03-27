@@ -4,7 +4,7 @@
 //  * 模块：Magento_Review
 //  * 位置：Magento_Review/web/css/source/_extend.less
 //  *
-//  * 评论样式：简洁星星 + 数字格式
+//  * 评论样式：进度条风格（游戏风格）
 //  */
 
 //
@@ -14,68 +14,66 @@
 & when (@media-common = true) {
 
     //
-    //  产品列表页评论摘要
+    //  产品列表页评论摘要 - 进度条风格
     //  _____________________________________________
 
     .product-reviews-summary {
         display: flex;
         align-items: center;
-        margin: 6px 0;
+        margin: 0;
         
-        // 隐藏空评论提示
         &.empty {
             display: none;
         }
         
         // 评分容器
         .rating-summary {
-            position: relative;
-            display: inline-flex;
+            display: flex;
             align-items: center;
+            gap: 8px;
+        }
+        
+        // 进度条样式
+        .rating-result {
+            position: relative;
+            width: 80px;
+            height: 6px;
+            background: @folix-border;
+            border-radius: 3px;
+            overflow: hidden;
             
-            // 星星容器
-            .rating-result {
-                width: 80px;
-                height: 16px;
-                display: flex;
+            // 进度条填充（游戏渐变）
+            > span {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                background: linear-gradient(90deg, @folix-primary, @folix-secondary);
+                border-radius: 3px;
                 
                 &:before {
-                    content: '★★★★★';
-                    color: #e0e0e0;
-                    font-size: 14px;
-                    letter-spacing: 2px;
-                }
-                
-                > span {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    overflow: hidden;
-                    z-index: 1;
-                    
-                    &:before {
-                        content: '★★★★★';
-                        color: #f5a623;
-                        font-size: 14px;
-                        letter-spacing: 2px;
-                    }
+                    display: none;
                 }
             }
             
-            // 隐藏 "of 100%" 文字
-            .label {
+            &:before {
                 display: none;
             }
         }
         
+        // 隐藏 label
+        .label {
+            display: none;
+        }
+        
         // 评论数量
         .reviews-actions {
-            margin-left: 8px;
             font-size: 12px;
             color: @folix-text-muted;
             
             a {
                 color: @folix-text-muted;
+                text-decoration: none;
                 
                 &:hover {
                     color: @folix-primary;
@@ -85,18 +83,14 @@
     }
 
     //
-    //  产品详情页评论
+    //  产品详情页评论 - 大号进度条
     //  _____________________________________________
 
     .product-info-main {
         .product-reviews-summary {
-            .rating-summary {
-                .rating-result {
-                    &:before,
-                    > span:before {
-                        font-size: 16px;
-                    }
-                }
+            .rating-result {
+                width: 120px;
+                height: 8px;
             }
             
             .reviews-actions {
@@ -119,8 +113,24 @@
                     border-bottom: none;
                 }
                 
+                .review-ratings {
+                    margin-bottom: 12px;
+                    
+                    .rating-label {
+                        color: @folix-text-secondary;
+                        font-size: 13px;
+                        margin-right: 8px;
+                    }
+                    
+                    .rating-result {
+                        width: 100px;
+                        height: 6px;
+                    }
+                }
+                
                 .review-title {
                     font-weight: @font-weight__semibold;
+                    color: @folix-text-primary;
                     margin-bottom: 8px;
                 }
                 
@@ -146,6 +156,35 @@
             }
         }
     }
+    
+    //
+    //  评论表单样式
+    //  _____________________________________________
+
+    .review-field-rating {
+        .control {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .rating-label {
+            display: none;
+        }
+    }
+    
+    .review-control-vote {
+        label {
+            &:before {
+                color: @folix-border;
+            }
+        }
+        
+        input:checked ~ label:before,
+        label:hover:before,
+        label:hover ~ label:before {
+            color: @folix-primary;
+        }
+    }
 }
 
 //
@@ -155,15 +194,18 @@
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
     
     .product-reviews-summary {
-        .rating-summary .rating-result {
-            &:before,
-            > span:before {
-                font-size: 12px;
-            }
+        .rating-result {
+            width: 60px;
+            height: 5px;
         }
         
         .reviews-actions {
             font-size: 11px;
         }
+    }
+    
+    .product-info-main .product-reviews-summary .rating-result {
+        width: 80px;
+        height: 6px;
     }
 }
