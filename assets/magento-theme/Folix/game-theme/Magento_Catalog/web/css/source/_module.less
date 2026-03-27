@@ -266,17 +266,12 @@
         }
     }
 
-    // Tab 内容
+    // Tab 内容 - 不控制显示/隐藏，让 Magento JS 处理
     .data.item.content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 0 @indent__l;
+        padding: @indent__l;
+        background: @folix-bg-card;
         
-        &.active {
-            max-height: 800px;
-            padding: @indent__l;
-        }
+        // 当 display: none 时 Magento 会隐藏，这里只添加样式
     }
 
     // 描述内容
