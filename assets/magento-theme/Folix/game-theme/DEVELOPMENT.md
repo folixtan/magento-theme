@@ -27,25 +27,87 @@ Magento/blank (基础)
 
 ### 3. 主题样式架构
 
-#### CSS文件结构
+#### CSS文件结构规范 ⭐
+
+**所有样式文件统一放到 `web/css/source/` 下，按模块分目录：**
+
 ```
 web/css/source/
-├── _theme.less          # 覆盖父主题变量（优先）
-├── _variables.less      # 定义新变量
-├── _extend.less         # 扩展样式（主入口）
-├── extends/
-│   ├── _pages.less      # 页面级样式（头部、尾部）
-│   ├── _modules.less    # 模块级样式
-│   ├── _components.less # 组件级样式（按钮、徽章）
-│   └── _product.less    # 产品相关样式
-└── override/
-    └── _extend.less     # 覆盖样式（最后手段）
+├── _extend.less         # 入口文件，引入所有样式
+├── _variables.less      # 变量定义
+├── _theme.less          # 覆盖父主题变量
+├── _global.less         # 全局基础样式
+├── _buttons.less        # 按钮样式
+├── _abstracts.less      # 抽象类
+│
+├── Magento_Theme/       # Theme 模块样式
+│   ├── _header.less
+│   ├── _footer.less
+│   ├── _navigation.less
+│   └── _login-dropdown.less
+│
+├── Magento_Catalog/     # Catalog 模块样式
+│   ├── _catalog.less         # 产品列表
+│   └── _product-view.less    # 产品详情
+│
+├── Magento_Cms/         # CMS 模块样式
+│   ├── _slider.less
+│   └── _components.less
+│
+├── Magento_Customer/    # Customer 模块样式
+│   └── _customer.less
+│
+├── Magento_LayeredNavigation/
+│   └── _layered-navigation.less
+│
+└── Magento_Review/
+    └── _review.less
+```
+
+**模块目录下仅保留 `_module.less` 用于覆盖父主题变量，其他样式全部放到 `web/css/source/Magento_XXX/` 下。**
+
+#### _extend.less 示例
+```less
+// 全局样式
+@import '_global.less';
+@import '_buttons.less';
+@import '_abstracts.less';
+
+// 模块样式
+@import 'Magento_Theme/_header.less';
+@import 'Magento_Theme/_footer.less';
+@import 'Magento_Catalog/_product-view.less';
+// ... 其他模块
+```
+
+#### 媒体查询写法 ⭐
+```less
+// 通用样式（移动优先）
+& when (@media-common = true) {
+    .selector {
+        // 移动端样式
+    }
+}
+
+// 媒体查询 - 必须在 & when 块外部，与它平级
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .selector {
+        // 桌面端样式
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .selector {
+        // 移动端样式
+    }
+}
 ```
 
 #### 开发原则
-1. **扩展优先**: 使用`_extend.less`和`<referenceContainer>`
-2. **覆盖次之**: 使用`_theme.less`覆盖变量
-3. **新增最后**: 在`_variables.less`定义新变量
+1. **样式统一放 `web/css/source/`**：按模块分目录，不在模块目录下放样式
+2. **入口文件只做 import**：`_extend.less` 只引入其他文件，不写样式
+3. **扩展优先**: 使用`_extend.less`和`<referenceContainer>`
+4. **覆盖次之**: 使用`_theme.less`覆盖变量
 
 ### 4. 布局修改策略
 
