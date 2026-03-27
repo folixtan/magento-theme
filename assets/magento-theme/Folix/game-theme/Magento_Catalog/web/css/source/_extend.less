@@ -76,6 +76,11 @@
     //  Product Photo - 渐变背景
     //  _____________________________________________
 
+    // 图片包装器 - 相对定位，用于放置右上角按钮
+    .product-item-photo-wrapper {
+        position: relative;
+    }
+
     .product-item-photo {
         display: block;
         position: relative;
@@ -92,6 +97,81 @@
             right: 0;
             bottom: 0;
             z-index: 0;
+        }
+    }
+
+    //
+    //  Product Actions Top - 图片右上角按钮
+    //  _____________________________________________
+
+    .product-item-actions-top {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        gap: @indent__xs;
+        
+        // 默认隐藏，hover 时显示
+        opacity: 0;
+        transform: scale(0.8);
+        transition: @folix-transition-smooth;
+        
+        .action {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
+            width: 36px;
+            box-shadow: @folix-shadow;
+            transition: @folix-transition;
+            
+            &:before {
+                font-size: 16px;
+                margin: 0;
+            }
+            
+            &:hover {
+                background: @folix-secondary;
+                color: #FFFFFF;
+                transform: scale(1.1);
+            }
+            
+            span {
+                display: none;
+            }
+        }
+        
+        // 收藏按钮
+        .towishlist {
+            &:before {
+                content: '♡';
+            }
+            
+            &:hover:before {
+                content: '♥';
+            }
+        }
+        
+        // 比较按钮
+        .tocompare {
+            &:before {
+                content: '⇄';
+            }
+        }
+    }
+    
+    // Hover 时显示右上角按钮
+    .product-item-info:hover,
+    .product-item-info.active {
+        .product-item-actions-top {
+            opacity: 1;
+            transform: scale(1);
         }
     }
 
@@ -606,6 +686,12 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    
+    // 移动端始终显示右上角按钮
+    .product-item-actions-top {
+        opacity: 1;
+        transform: scale(1);
+    }
     
     // 移动端始终显示 actions
     .product-item-inner {
