@@ -3,23 +3,30 @@
 //  *
 //  * 完全覆盖父主题的 PDP 样式
 //  * 基于 product-page-60-40.html demo
+//  *
+//  * 文件结构：
+//  * - _variables.less: 继承父主题变量
+//  * - _module.less: 覆盖父主题样式（此文件）
+//  *
+//  * 注意：模块级 _module.less 优先级高于 _extend.less
 //  */
 
 //
-//  Common (All devices) - Mobile First
+//  导入变量
 //  _____________________________________________
+
+@import '_variables.less';
+
+//
+//  导入子模块
+//  _____________________________________________
+
 @import 'module/_listings.less';
 @import 'module/_toolbar.less';
 
 //
-//  Variables
+//  Common (All devices) - Mobile First
 //  _____________________________________________
-
-@product-info-price: @color-gray34;
-@product-h1-margin-bottom-desktop: @indent__s + @indent__xs;
-@product-price__muted__color: @color-gray40;
-
-& when (@media-common = true) {
 
     //
     //  Product Detail Wrapper - 60/40 布局
