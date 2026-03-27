@@ -8,7 +8,7 @@
 //  * - 左 60%：图片画廊 + 描述面板
 //  * - 右 40%：产品信息 + 下单面板
 //  *
-//  * 原则：移动优先，优先原生CSS
+//  * 原则：移动优先，必要时覆盖原生CSS
 //  */
 
 //
@@ -811,9 +811,10 @@
 
 //
 //  Desktop (≥ 1024px) - 60/40 布局
+//  使用 @media 直接查询，不使用 .media-width mixin
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+@media all and (min-width: 1024px) {
     
     .product-detail-wrapper {
         flex-direction: row;
@@ -871,7 +872,7 @@
 //  Tablet (768px - 1023px)
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+@media all and (min-width: 768px) {
     
     .swatch-attribute-options {
         grid-template-columns: repeat(2, 1fr);
@@ -882,7 +883,7 @@
 //  Mobile (< 768px)
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+@media all and (max-width: 767px) {
     
     .swatch-attribute-options {
         grid-template-columns: 1fr;
