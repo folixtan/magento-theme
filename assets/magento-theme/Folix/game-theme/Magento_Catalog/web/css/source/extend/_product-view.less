@@ -8,7 +8,9 @@
 //  * - 左 60%：图片画廊 + 描述面板
 //  * - 右 40%：产品信息 + 下单面板
 //  *
-//  * 原则：移动优先，必要时覆盖原生CSS
+//  * 响应式：
+//  * - < 768px：单列布局（移动端）
+//  * - ≥ 768px：两列布局（平板和桌面）
 //  */
 
 //
@@ -558,7 +560,7 @@
     // 档位网格
     .swatch-attribute-options {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: @indent__s;
     }
 
@@ -805,10 +807,14 @@
 }
 
 //
-//  Desktop (≥ 1024px) - 60/40 布局
+//  Desktop & Tablet (≥ 768px) - 两列布局
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    
+    //
+    //  60/40 两列布局
+    //  _____________________________________________
     
     .product-detail-wrapper {
         flex-direction: row;
@@ -831,7 +837,10 @@
         top: @indent__l;
     }
     
-    // 图片区域
+    //
+    //  图片区域
+    //  _____________________________________________
+    
     .fotorama__stage {
         min-height: 380px;
     }
@@ -840,56 +849,40 @@
         max-height: 380px;
     }
     
-    // 特性网格 - 两列
+    //
+    //  特性网格 - 两列
+    //  _____________________________________________
+    
     .product-features {
         grid-template-columns: repeat(2, 1fr);
     }
     
-    // 产品标题
+    //
+    //  产品标题
+    //  _____________________________________________
+    
     .page-title {
         font-size: 22px;
     }
     
-    // 产品标题卡片
     .product-title-card,
     .product-info-main > div:first-child {
         padding: @indent__l;
     }
     
-    // 价格
+    //
+    //  价格
+    //  _____________________________________________
+    
     .price-wrapper .price {
         font-size: 26px;
     }
-}
-
-//
-//  Tablet (≥ 768px)
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    
+    //
+    //  档位网格 - 两列
+    //  _____________________________________________
     
     .swatch-attribute-options {
         grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-//
-//  Mobile (< 768px)
-//  _____________________________________________
-
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-    
-    .swatch-attribute-options {
-        grid-template-columns: 1fr;
-    }
-    
-    .fotorama__arr {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .fotorama__thumb {
-        width: 40px;
-        height: 40px;
     }
 }
