@@ -5,12 +5,11 @@
 //  * 
 //  * 文件组织结构：
 //  * - 全局样式：web/css/source/ （此文件所在位置）
-//  * - 模块样式：Magento_XXX/web/css/source/_extend.less
+//  * - 模块样式：web/css/source/Magento_XXX/ （按模块分目录）
 //  * 
 //  * Magento 自动加载机制：
 //  * - _variables.less 和 _theme.less：自动加载，无需引入
 //  * - 此文件（_extend.less）：所有页面都会加载
-//  * - 模块 _extend.less：只在对应模块页面加载
 //  */
 
 //
@@ -22,18 +21,28 @@
 @import '_abstracts.less';    // 抽象类（需要 &:extend 使用）
 
 //
-//  模块样式说明
+//  模块样式引入
 //  _____________________________________________
-//
-//  以下模块样式在各自模块目录下，Magento 会自动加载：
-//  
-//  - Magento_Theme/web/css/source/_extend.less
-//    包含：header, footer, navigation
-//  
-//  - Magento_Customer/web/css/source/_extend.less
-//    包含：login-dropdown
-//  
-//  - Magento_Cms/web/css/source/_extend.less
-//    包含：slider, components
-//
-//
+
+//  Theme 模块 - Header、Footer、Navigation
+@import 'Magento_Theme/_header.less';
+@import 'Magento_Theme/_footer.less';
+@import 'Magento_Theme/_navigation.less';
+@import 'Magento_Theme/_login-dropdown.less';
+
+//  Catalog 模块 - 产品列表、产品详情
+@import 'Magento_Catalog/_catalog.less';
+@import 'Magento_Catalog/_product-view.less';
+
+//  CMS 模块 - Slider、组件
+@import 'Magento_Cms/_slider.less';
+@import 'Magento_Cms/_components.less';
+
+//  Layered Navigation 模块 - 分层导航
+@import 'Magento_LayeredNavigation/_layered-navigation.less';
+
+//  Review 模块 - 评论
+@import 'Magento_Review/_review.less';
+
+//  Customer 模块 - 客户相关
+@import 'Magento_Customer/_customer.less';
