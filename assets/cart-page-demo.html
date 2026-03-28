@@ -141,6 +141,13 @@
             gap: 24px;
         }
         
+        /* ===== Cart Main Content - 两列布局容器 ===== */
+        .cart-main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
         /* ===== Cart Summary ===== */
         .cart-summary {
             background: var(--folix-bg-card);
@@ -956,7 +963,9 @@
             
             <!-- Cart Container -->
             <div class="cart-container">
-                <!-- Cart Summary (移动端显示在顶部) -->
+                <!-- Cart Main Content - 两列布局容器 -->
+                <div class="cart-main-content">
+                    <!-- Cart Summary (移动端显示在顶部) -->
                 <div class="cart-summary">
                     <strong class="summary title">Summary</strong>
                     
@@ -1161,6 +1170,7 @@
                         </button>
                     </div>
                 </form>
+                </div><!-- /.cart-main-content -->
                 
                 <!-- Discount Code -->
                 <div class="cart-discount">
