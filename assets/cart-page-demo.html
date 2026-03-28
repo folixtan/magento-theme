@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Folix Game Theme</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            /* Brand Colors */
+            --folix-primary: #4A90E2;
+            --folix-primary-dark: #357ABD;
+            --folix-primary-light: #60A5FA;
+            
+            --folix-secondary: #FF6B35;
+            --folix-secondary-dark: #EA580C;
+            --folix-secondary-light: #FB923C;
+            
+            --folix-accent: #6C5CE7;
+            --folix-accent-dark: #5A4FCF;
+            
+            /* Text Colors */
+            --folix-text-primary: #1E293B;
+            --folix-text-secondary: #475569;
+            --folix-text-muted: #64748B;
+            --folix-text-light: #94A3B8;
+            
+            /* Background Colors */
+            --folix-bg-page: #F8FAFC;
+            --folix-bg-panel: #F1F5F9;
+            --folix-bg-card: #FFFFFF;
+            --folix-bg-hover: #E2E8F0;
+            --folix-bg-selected: #DBEAFE;
+            
+            /* Border Colors */
+            --folix-border: #E2E8F0;
+            
+            /* Status Colors */
+            --folix-success: #10B981;
+            --folix-success-dark: #059669;
+            --folix-success-bg: #D1FAE5;
+            --folix-warning: #F59E0B;
+            --folix-warning-bg: #FEF3C7;
+            --folix-error: #EF4444;
+            --folix-error-bg: #FEE2E2;
+            
+            /* Shadows */
+            --folix-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --folix-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            --folix-shadow-md: 0 4px 14px rgba(74, 144, 226, 0.12);
+            --folix-shadow-secondary: 0 4px 14px rgba(255, 107, 53, 0.25);
+            
+            /* Border Radius */
+            --folix-radius-sm: 4px;
+            --folix-radius: 6px;
+            --folix-radius-md: 8px;
+            --folix-radius-lg: 12px;
+            
+            /* Gradients */
+            --folix-gradient-secondary: linear-gradient(135deg, #FF6B35 0%, #EA580C 100%);
+        }
+        
+        /* ===== Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--folix-bg-page);
+            color: var(--folix-text-primary);
+            line-height: 1.5;
+        }
+        
+        a {
+            color: var(--folix-primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--folix-secondary);
+        }
+        
+        /* ===== Page Layout ===== */
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .page-header {
+            background: var(--folix-bg-card);
+            border-bottom: 1px solid var(--folix-border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header.content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--folix-primary);
+        }
+        
+        .page-main {
+            flex: 1;
+            padding: 32px 24px;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* ===== Page Title ===== */
+        .page-title-wrapper {
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--folix-text-primary);
+        }
+        
+        /* ===== Cart Container ===== */
+        .cart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        /* ===== Cart Summary ===== */
+        .cart-summary {
+            background: var(--folix-bg-card);
+            border-radius: var(--folix-radius-lg);
+            box-shadow: var(--folix-shadow-md);
+            padding: 24px;
+            order: -1;
+        }
+        
+        .summary.title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--folix-text-primary);
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--folix-border);
+        }
+        
+        .summary.title::before {
+            content: '📋';
+            font-size: 20px;
+        }
+        
+        /* Estimate Shipping */
+        .block.shipping {
+            margin-bottom: 24px;
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-md);
+            overflow: hidden;
+        }
+        
+        .block.shipping .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--folix-bg-panel);
+            cursor: pointer;
+        }
+        
+        .block.shipping .title strong {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--folix-text-primary);
+        }
+        
+        .block.shipping .title strong::before {
+            content: '📦';
+            font-size: 16px;
+        }
+        
+        .block.shipping .title::after {
+            content: '▼';
+            font-size: 10px;
+            color: var(--folix-text-muted);
+        }
+        
+        .block.shipping .content {
+            padding: 16px;
+        }
+        
+        .block.shipping .fieldset .field {
+            margin-bottom: 12px;
+        }
+        
+        .block.shipping .label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--folix-text-secondary);
+            margin-bottom: 4px;
+        }
+        
+        .block.shipping input,
+        .block.shipping select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            color: var(--folix-text-primary);
+            background: var(--folix-bg-card);
+        }
+        
+        .block.shipping input:focus,
+        .block.shipping select:focus {
+            outline: none;
+            border-color: var(--folix-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        /* Cart Totals */
+        .cart-totals {
+            margin-bottom: 24px;
+        }
+        
+        .data.table.totals {
+            width: 100%;
+        }
+        
+        .data.table.totals tbody tr {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+        
+        .data.table.totals .mark {
+            font-size: 14px;
+            color: var(--folix-text-secondary);
+        }
+        
+        .data.table.totals .amount {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--folix-text-primary);
+        }
+        
+        .data.table.totals .grand {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid var(--folix-border);
+        }
+        
+        .data.table.totals .grand .mark strong {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--folix-text-primary);
+        }
+        
+        .data.table.totals .grand .amount .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        /* Checkout Methods */
+        .checkout-methods-items {
+            margin-bottom: 24px;
+        }
+        
+        .checkout-methods-items .item {
+            margin-bottom: 8px;
+        }
+        
+        .action.primary.checkout {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--folix-gradient-secondary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--folix-radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .action.primary.checkout::before {
+            content: '🔥';
+            font-size: 18px;
+        }
+        
+        .action.primary.checkout:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--folix-shadow-secondary);
+        }
+        
+        /* ===== Cart Form ===== */
+        .form-cart {
+            flex: 1;
+        }
+        
+        .cart.table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+        
+        .cart.items.data.table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .cart.items.data.table thead tr {
+            background: var(--folix-bg-panel);
+        }
+        
+        .cart.items.data.table th {
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--folix-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--folix-border);
+            text-align: left;
+        }
+        
+        .cart.items.data.table th.col-price,
+        .cart.items.data.table th.col-qty,
+        .cart.items.data.table th.col-subtotal {
+            text-align: center;
+        }
+        
+        /* Cart Item */
+        tbody.cart.item {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            margin-bottom: 12px;
+            display: block;
+            transition: border-color 0.2s ease;
+        }
+        
+        tbody.cart.item:hover {
+            border-color: var(--folix-primary);
+        }
+        
+        tr.item-info {
+            display: block;
+        }
+        
+        tr.item-info .col {
+            display: block;
+            padding: 16px;
+        }
+        
+        tr.item-info .col.item {
+            display: flex;
+            gap: 12px;
+        }
+        
+        tr.item-info .col.price,
+        tr.item-info .col.qty,
+        tr.item-info .col.subtotal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 16px;
+            border-top: 1px solid var(--folix-border);
+        }
+        
+        tr.item-info .col.price::before { content: 'Price'; }
+        tr.item-info .col.qty::before { content: 'Qty'; }
+        tr.item-info .col.subtotal::before { content: 'Subtotal'; }
+        
+        tr.item-info .col.price::before,
+        tr.item-info .col.qty::before,
+        tr.item-info .col.subtotal::before {
+            font-size: 13px;
+            color: var(--folix-text-secondary);
+        }
+        
+        /* Product Photo */
+        .product-item-photo {
+            display: block;
+            flex-shrink: 0;
+        }
+        
+        .product-item-photo img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--folix-radius-md);
+        }
+        
+        /* Product Details */
+        .product-item-details {
+            flex: 1;
+        }
+        
+        .product-item-name {
+            margin-bottom: 4px;
+        }
+        
+        .product-item-name a {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--folix-text-primary);
+            text-decoration: none;
+        }
+        
+        .product-item-name a:hover {
+            color: var(--folix-primary);
+        }
+        
+        .item-options {
+            margin-top: 8px;
+        }
+        
+        .item-options dt {
+            font-size: 12px;
+            color: var(--folix-text-muted);
+            display: inline;
+        }
+        
+        .item-options dt::after {
+            content: ': ';
+        }
+        
+        .item-options dd {
+            font-size: 12px;
+            color: var(--folix-text-secondary);
+            display: inline;
+        }
+        
+        .item-options dd::after {
+            content: ' • ';
+            color: var(--folix-border);
+        }
+        
+        /* Price */
+        .col.price .price,
+        .col.subtotal .price {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--folix-secondary);
+        }
+        
+        /* Quantity */
+        .field.qty {
+            margin: 0;
+        }
+        
+        .control.qty {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-md);
+            overflow: hidden;
+            background: var(--folix-bg-card);
+        }
+        
+        .control.qty .label {
+            display: none;
+        }
+        
+        .control.qty input {
+            width: 50px;
+            height: 36px;
+            border: none;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--folix-text-primary);
+        }
+        
+        .control.qty input:focus {
+            outline: none;
+            background: var(--folix-bg-selected);
+        }
+        
+        /* Item Actions */
+        tr.item-actions {
+            display: block;
+        }
+        
+        tr.item-actions td {
+            display: block;
+            padding: 12px 16px 16px;
+        }
+        
+        .actions-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        .actions-toolbar .action {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 12px;
+            font-size: 13px;
+            color: var(--folix-primary);
+            text-decoration: none;
+            border-radius: var(--folix-radius-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .actions-toolbar .action:hover {
+            background: var(--folix-bg-hover);
+            color: var(--folix-secondary);
+        }
+        
+        .action-edit::before { content: '✏️'; margin-right: 4px; }
+        .action-delete::before { content: '🗑️'; margin-right: 4px; }
+        
+        /* Cart Main Actions */
+        .cart.main.actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-top: 16px;
+            border-top: 1px solid var(--folix-border);
+        }
+        
+        .cart.main.actions .action.continue {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--folix-bg-panel);
+            color: var(--folix-text-secondary);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .cart.main.actions .action.continue::before {
+            content: '←';
+            font-size: 16px;
+        }
+        
+        .cart.main.actions .action.continue:hover {
+            background: var(--folix-bg-hover);
+            color: var(--folix-primary);
+            border-color: var(--folix-primary);
+        }
+        
+        .cart.main.actions .action.update {
+            padding: 12px 16px;
+            background: var(--folix-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .cart.main.actions .action.update:hover {
+            background: var(--folix-primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        /* ===== Discount Code ===== */
+        .cart-discount {
+            margin-bottom: 24px;
+        }
+        
+        .block.discount {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            overflow: hidden;
+        }
+        
+        .block.discount .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--folix-bg-panel);
+            cursor: pointer;
+        }
+        
+        .block.discount .title strong {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--folix-text-primary);
+        }
+        
+        .block.discount .title strong::before {
+            content: '🎟️';
+            font-size: 16px;
+        }
+        
+        .block.discount .title::after {
+            content: '▼';
+            font-size: 10px;
+            color: var(--folix-text-muted);
+        }
+        
+        .block.discount .content {
+            padding: 16px;
+        }
+        
+        .block.discount .fieldset {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .block.discount .field {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .block.discount .label {
+            display: none;
+        }
+        
+        .block.discount input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            color: var(--folix-text-primary);
+            background: var(--folix-bg-card);
+        }
+        
+        .block.discount input:focus {
+            outline: none;
+            border-color: var(--folix-primary);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+        
+        .block.discount .actions-toolbar {
+            justify-content: flex-start;
+        }
+        
+        .block.discount .action {
+            padding: 12px 16px;
+            background: var(--folix-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--folix-radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .block.discount .action:hover {
+            background: var(--folix-primary-dark);
+        }
+        
+        /* ===== Cross Sell Products ===== */
+        .block.crosssell {
+            margin-top: 48px;
+        }
+        
+        .block.crosssell .block-title {
+            margin-bottom: 24px;
+        }
+        
+        .block.crosssell .block-title strong {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--folix-text-primary);
+        }
+        
+        .block.crosssell .block-title strong::before {
+            content: '🎮';
+            font-size: 20px;
+        }
+        
+        .products-grid .product-items {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        
+        .product-item {
+            margin: 0;
+        }
+        
+        .product-item-info {
+            background: var(--folix-bg-card);
+            border: 1px solid var(--folix-border);
+            border-radius: var(--folix-radius-lg);
+            padding: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .product-item-info:hover {
+            border-color: var(--folix-primary);
+            box-shadow: var(--folix-shadow-md);
+        }
+        
+        .product-item-photo {
+            margin-bottom: 12px;
+        }
+        
+        .product-item-photo img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--folix-radius-md);
+        }
+        
+        .product-item-name {
+            margin-bottom: 8px;
+        }
+        
+        .product-item-name a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--folix-text-primary);
+        }
+        
+        .price-box {
+            margin-bottom: 8px;
+        }
+        
+        .price-box .price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--folix-secondary);
+        }
+        
+        .product-item-actions .action.tocart {
+            width: 100%;
+            padding: 8px 12px;
+            background: var(--folix-primary);
+            color: #FFFFFF;
+            border: none;
+            border-radius: var(--folix-radius-md);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            display: block;
+            text-align: center;
+        }
+        
+        .product-item-actions .action.tocart:hover {
+            background: var(--folix-primary-dark);
+        }
+        
+        /* ===== Footer ===== */
+        .page-footer {
+            background: var(--folix-text-primary);
+            color: #94A3B8;
+            padding: 24px;
+            margin-top: 48px;
+        }
+        
+        .page-footer .copyright {
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        /* ===== Responsive ===== */
+        @media (min-width: 768px) {
+            .cart-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            
+            .form-cart {
+                padding-right: 24px;
+            }
+            
+            .cart-summary {
+                width: 320px;
+                flex-shrink: 0;
+                position: sticky;
+                top: 80px;
+                order: 1;
+            }
+            
+            .summary.title {
+                font-size: 20px;
+            }
+            
+            /* Table Layout */
+            .cart.table-wrapper {
+                overflow-x: visible;
+            }
+            
+            .cart.items.data.table thead {
+                display: table-header-group;
+            }
+            
+            tbody.cart.item {
+                display: table-row-group;
+                background: transparent;
+                border: none;
+                margin: 0;
+            }
+            
+            tbody.cart.item:hover {
+                background: var(--folix-bg-hover);
+            }
+            
+            tr.item-info {
+                display: table-row;
+            }
+            
+            tr.item-info .col {
+                display: table-cell;
+                vertical-align: middle;
+                padding: 16px;
+                border-bottom: 1px solid var(--folix-border);
+            }
+            
+            tr.item-info .col.item {
+                width: 45%;
+            }
+            
+            tr.item-info .col.price,
+            tr.item-info .col.qty,
+            tr.item-info .col.subtotal {
+                width: 15%;
+                text-align: center;
+                display: table-cell;
+                border-top: none;
+            }
+            
+            tr.item-info .col.price::before,
+            tr.item-info .col.qty::before,
+            tr.item-info .col.subtotal::before {
+                display: none;
+            }
+            
+            .product-item-photo {
+                float: left;
+                margin-right: 16px;
+                margin-bottom: 0;
+            }
+            
+            .product-item-photo img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .product-item-details {
+                display: table-cell;
+                vertical-align: top;
+                padding: 0;
+            }
+            
+            tr.item-actions {
+                display: table-row;
+            }
+            
+            tr.item-actions td {
+                display: table-cell;
+                padding: 0 16px 16px;
+            }
+            
+            .actions-toolbar {
+                justify-content: flex-start;
+            }
+            
+            .products-grid .product-items {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .cart-summary {
+                width: 360px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Header -->
+        <header class="page-header">
+            <div class="header content">
+                <a href="#" class="logo">🎮 Folix Games</a>
+                <nav>
+                    <a href="#" style="margin-right: 16px;">Home</a>
+                    <a href="#" style="margin-right: 16px;">Games</a>
+                    <a href="#">Contact</a>
+                </nav>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="page-main">
+            <!-- Page Title -->
+            <div class="page-title-wrapper">
+                <h1 class="page-title">
+                    <span class="base">Shopping Cart</span>
+                </h1>
+            </div>
+            
+            <!-- Cart Container -->
+            <div class="cart-container">
+                <!-- Cart Summary (移动端显示在顶部) -->
+                <div class="cart-summary">
+                    <strong class="summary title">Summary</strong>
+                    
+                    <!-- Estimate Shipping -->
+                    <div class="block shipping">
+                        <div class="title">
+                            <strong>Estimate Shipping and Tax</strong>
+                        </div>
+                        <div class="content">
+                            <form class="fieldset">
+                                <div class="field">
+                                    <label class="label">Country</label>
+                                    <div class="control">
+                                        <select>
+                                            <option>United States</option>
+                                            <option>Canada</option>
+                                            <option>United Kingdom</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">State/Province</label>
+                                    <div class="control">
+                                        <select>
+                                            <option>California</option>
+                                            <option>New York</option>
+                                            <option>Texas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Zip/Postal Code</label>
+                                    <div class="control">
+                                        <input type="text" placeholder="Enter zip code">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Cart Totals -->
+                    <div class="cart-totals">
+                        <table class="data table totals">
+                            <tbody>
+                                <tr>
+                                    <td class="mark">Subtotal</td>
+                                    <td class="amount">
+                                        <span class="price">$149.98</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="mark">Shipping</td>
+                                    <td class="amount">
+                                        <span class="price">$9.99</span>
+                                    </td>
+                                </tr>
+                                <tr class="grand totals">
+                                    <td class="mark">
+                                        <strong>Order Total</strong>
+                                    </td>
+                                    <td class="amount">
+                                        <span class="price">$159.97</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Checkout Methods -->
+                    <ul class="checkout-methods-items">
+                        <li class="item">
+                            <button class="action primary checkout">
+                                <span>Proceed to Checkout</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Cart Form -->
+                <form class="form form-cart">
+                    <div class="cart table-wrapper">
+                        <table id="shopping-cart-table" class="cart items data table">
+                            <caption class="table-caption">Shopping Cart Items</caption>
+                            <thead>
+                                <tr>
+                                    <th class="col item" scope="col"><span>Item</span></th>
+                                    <th class="col price" scope="col"><span>Price</span></th>
+                                    <th class="col qty" scope="col"><span>Qty</span></th>
+                                    <th class="col subtotal" scope="col"><span>Subtotal</span></th>
+                                </tr>
+                            </thead>
+                            
+                            <!-- Cart Item 1 -->
+                            <tbody class="cart item">
+                                <tr class="item-info">
+                                    <td data-th="Item" class="col item">
+                                        <a href="#" class="product-item-photo">
+                                            <img src="https://placehold.co/120x120/4A90E2/FFFFFF?text=Game+1" alt="Game Title">
+                                        </a>
+                                        <div class="product-item-details">
+                                            <strong class="product-item-name">
+                                                <a href="#">Epic Adventure RPG - Collector's Edition</a>
+                                            </strong>
+                                            <dl class="item-options">
+                                                <dt>Platform</dt>
+                                                <dd>PlayStation 5</dd>
+                                                <dt>Edition</dt>
+                                                <dd>Collector's</dd>
+                                            </dl>
+                                        </div>
+                                    </td>
+                                    <td data-th="Price" class="col price">
+                                        <span class="price">$69.99</span>
+                                    </td>
+                                    <td data-th="Qty" class="col qty">
+                                        <div class="field qty">
+                                            <div class="control qty">
+                                                <label>
+                                                    <span class="label">Qty</span>
+                                                    <input type="number" value="1" min="0">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Subtotal" class="col subtotal">
+                                        <span class="price">$69.99</span>
+                                    </td>
+                                </tr>
+                                <tr class="item-actions">
+                                    <td colspan="4">
+                                        <div class="actions-toolbar">
+                                            <a href="#" class="action action-edit">
+                                                <span>Edit</span>
+                                            </a>
+                                            <a href="#" class="action action-delete">
+                                                <span>Remove</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            
+                            <!-- Cart Item 2 -->
+                            <tbody class="cart item">
+                                <tr class="item-info">
+                                    <td data-th="Item" class="col item">
+                                        <a href="#" class="product-item-photo">
+                                            <img src="https://placehold.co/120x120/FF6B35/FFFFFF?text=Game+2" alt="Game Title">
+                                        </a>
+                                        <div class="product-item-details">
+                                            <strong class="product-item-name">
+                                                <a href="#">Space Shooter Pro - Digital Deluxe</a>
+                                            </strong>
+                                            <dl class="item-options">
+                                                <dt>Platform</dt>
+                                                <dd>Xbox Series X</dd>
+                                                <dt>Edition</dt>
+                                                <dd>Digital Deluxe</dd>
+                                            </dl>
+                                        </div>
+                                    </td>
+                                    <td data-th="Price" class="col price">
+                                        <span class="price">$79.99</span>
+                                    </td>
+                                    <td data-th="Qty" class="col qty">
+                                        <div class="field qty">
+                                            <div class="control qty">
+                                                <label>
+                                                    <span class="label">Qty</span>
+                                                    <input type="number" value="1" min="0">
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-th="Subtotal" class="col subtotal">
+                                        <span class="price">$79.99</span>
+                                    </td>
+                                </tr>
+                                <tr class="item-actions">
+                                    <td colspan="4">
+                                        <div class="actions-toolbar">
+                                            <a href="#" class="action action-edit">
+                                                <span>Edit</span>
+                                            </a>
+                                            <a href="#" class="action action-delete">
+                                                <span>Remove</span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Cart Main Actions -->
+                    <div class="cart main actions">
+                        <a href="#" class="action continue">
+                            <span>Continue Shopping</span>
+                        </a>
+                        <button type="submit" class="action update">
+                            <span>Update Shopping Cart</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Discount Code -->
+                <div class="cart-discount">
+                    <div class="block discount">
+                        <div class="title">
+                            <strong>Apply Discount Code</strong>
+                        </div>
+                        <div class="content">
+                            <div class="fieldset">
+                                <div class="field">
+                                    <label class="label">Enter discount code</label>
+                                    <div class="control">
+                                        <input type="text" placeholder="Enter discount code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="actions-toolbar">
+                                <button class="action">Apply Discount</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cross Sell Products -->
+                <div class="block crosssell">
+                    <div class="block-title">
+                        <strong>You may also like</strong>
+                    </div>
+                    <div class="products-grid">
+                        <ol class="product-items">
+                            <li class="product-item">
+                                <div class="product-item-info">
+                                    <a href="#" class="product-item-photo">
+                                        <img src="https://placehold.co/300x300/6C5CE7/FFFFFF?text=Game+3" alt="Product">
+                                    </a>
+                                    <div class="product-item-details">
+                                        <strong class="product-item-name">
+                                            <a href="#">Racing Champions 2024</a>
+                                        </strong>
+                                        <div class="price-box">
+                                            <span class="price">$59.99</span>
+                                        </div>
+                                        <div class="product-item-actions">
+                                            <button class="action tocart">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item">
+                                <div class="product-item-info">
+                                    <a href="#" class="product-item-photo">
+                                        <img src="https://placehold.co/300x300/10B981/FFFFFF?text=Game+4" alt="Product">
+                                    </a>
+                                    <div class="product-item-details">
+                                        <strong class="product-item-name">
+                                            <a href="#">Fantasy Quest Legends</a>
+                                        </strong>
+                                        <div class="price-box">
+                                            <span class="price">$49.99</span>
+                                        </div>
+                                        <div class="product-item-actions">
+                                            <button class="action tocart">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item">
+                                <div class="product-item-info">
+                                    <a href="#" class="product-item-photo">
+                                        <img src="https://placehold.co/300x300/F59E0B/FFFFFF?text=Game+5" alt="Product">
+                                    </a>
+                                    <div class="product-item-details">
+                                        <strong class="product-item-name">
+                                            <a href="#">Battle Arena Online</a>
+                                        </strong>
+                                        <div class="price-box">
+                                            <span class="price">$39.99</span>
+                                        </div>
+                                        <div class="product-item-actions">
+                                            <button class="action tocart">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item">
+                                <div class="product-item-info">
+                                    <a href="#" class="product-item-photo">
+                                        <img src="https://placehold.co/300x300/EF4444/FFFFFF?text=Game+6" alt="Product">
+                                    </a>
+                                    <div class="product-item-details">
+                                        <strong class="product-item-name">
+                                            <a href="#">Zombie Survival Horror</a>
+                                        </strong>
+                                        <div class="price-box">
+                                            <span class="price">$54.99</span>
+                                        </div>
+                                        <div class="product-item-actions">
+                                            <button class="action tocart">Add to Cart</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="page-footer">
+            <div class="copyright">
+                © 2024 Folix Games. All rights reserved.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
