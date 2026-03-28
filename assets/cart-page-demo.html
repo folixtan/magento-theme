@@ -142,11 +142,8 @@
         }
         
         /* ===== Cart Main Content - 两列布局容器 ===== */
-        .cart-main-content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
+        
+        /* ===== Cart Summary ===== */
         
         /* ===== Cart Summary ===== */
         .cart-summary {
@@ -804,22 +801,38 @@
         }
         
         /* ===== Responsive ===== */
-        /* 
-         * 布局说明：
-         * .cart-container
-         * ├── .cart-main-content (两列容器)
-         * │   ├── form.form-cart (产品列表)
-         * │   └── .cart-summary (摘要面板)
-         * ├── .cart-discount (折扣码，全宽)
-         * └── .block.crosssell (交叉销售，全宽)
-         */
         @media (min-width: 768px) {
-            /* 主内容容器 - 两列布局 */
-            .cart-main-content {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 24px;
+            /* 
+             * 原生布局：.cart-container 包含 .cart-summary 和 .form-cart
+             * 使用 CSS 让 .form-cart 在左侧，.cart-summary 在右侧
+             */
+            .cart-container {
+                position: relative;
+            }
+            
+            .cart-summary {
+                float: right;
+                width: 320px;
+                margin-left: -320px;
+                position: sticky;
+                top: 80px;
+            }
+            
+            .form-cart {
+                width: 100%;
+                padding-right: 340px;
+            }
+            
+            .cart-discount {
+                clear: both;
+                width: 100%;
+                padding-right: 340px;
+            }
+            
+            .block.crosssell {
+                clear: both;
+                width: 100%;
+                padding-right: 340px;
             }
             
             .form-cart {
@@ -837,13 +850,6 @@
             
             .summary.title {
                 font-size: 20px;
-            }
-            
-            /* 全宽元素：折扣码和交叉销售 */
-            .cart-discount,
-            .block.crosssell {
-                width: 100%;
-                margin-top: 24px;
             }
             
             /* Table Layout */
@@ -963,9 +969,7 @@
             
             <!-- Cart Container -->
             <div class="cart-container">
-                <!-- Cart Main Content - 两列布局容器 -->
-                <div class="cart-main-content">
-                    <!-- Cart Summary (移动端显示在顶部) -->
+                <!-- Cart Summary (移动端显示在顶部) -->
                 <div class="cart-summary">
                     <strong class="summary title">Summary</strong>
                     
@@ -1170,7 +1174,6 @@
                         </button>
                     </div>
                 </form>
-                </div><!-- /.cart-main-content -->
                 
                 <!-- Discount Code -->
                 <div class="cart-discount">
