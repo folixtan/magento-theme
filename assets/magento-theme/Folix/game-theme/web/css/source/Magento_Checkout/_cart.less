@@ -369,7 +369,7 @@
                 text-decoration: none;
                 border-radius: @folix-radius-sm;
                 transition: all 0.2s ease;
-                position: static;
+             
                 
                 &:hover {
                     background: @folix-bg-hover;
@@ -403,19 +403,13 @@
     //  _____________________________________________
 
     .cart.main.actions {
-        display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        align-items: center;
         gap: @indent__m;
-        margin-bottom: @indent__l;
-        padding: @indent__m 0;
-        
+
         .action {
             &.continue {
-                display: inline-flex;
-                align-items: center;
-                gap: @indent__s;
+     
                 padding: @indent__m @indent__l;
                 background: @folix-bg-panel;
                 color: @folix-text-secondary;
@@ -483,7 +477,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: @indent__m @indent__l;
+                padding: 0 @indent__l;
                 background: @folix-bg-panel;
                 cursor: pointer;
                 
@@ -512,7 +506,7 @@
                     width: 100%;
                     padding: @indent__m;
                     border: 1px solid @folix-border;
-                    border-radius: @folix-radius-md;
+                    border-radius: @folix-radius-md 0 0 @folix-radius-md;
                     font-size: 14px;
                     color: @folix-text-primary;
                     background: @folix-bg-card;
@@ -525,11 +519,11 @@
                 }
                 
                 .actions-toolbar .action {
-                    padding: @indent__m @indent__l;
+                    padding: 17px @indent__l;
                     background: @folix-primary;
                     color: #FFFFFF;
                     border: none;
-                    border-radius: @folix-radius-md;
+                    border-radius: 0  @folix-radius-md @folix-radius-md 0 ;
                     font-size: 14px;
                     font-weight: 500;
                     cursor: pointer;
@@ -542,72 +536,7 @@
         }
     }
 
-    //
-    //  Cross Sell
-    //  _____________________________________________
-
-    .block.crosssell {
-        margin-top: @indent__xl;
-        
-        .block-title strong {
-            display: flex;
-            align-items: center;
-            gap: @indent__s;
-            font-size: 18px;
-            font-weight: 700;
-            color: @folix-text-primary;
-            
-            &::before {
-                content: '🎮';
-                font-size: 20px;
-            }
-        }
-        
-        .product-item-info {
-            background: @folix-bg-card;
-            border: 1px solid @folix-border;
-            border-radius: @folix-radius-lg;
-            padding: @indent__m;
-            transition: all 0.2s ease;
-            width: auto;
-            
-            &:hover {
-                border-color: @folix-primary;
-                box-shadow: @folix-shadow-md;
-            }
-        }
-        
-        .product-item-name a {
-            font-size: 14px;
-            font-weight: 600;
-            color: @folix-text-primary;
-            
-            &:hover {
-                color: @folix-primary;
-            }
-        }
-        
-        .price-box .price {
-            font-size: 16px;
-            font-weight: 700;
-            color: @folix-secondary;
-        }
-        
-        .action.tocart {
-            padding: @indent__s @indent__m;
-            background: @folix-primary;
-            color: #FFFFFF;
-            border: none;
-            border-radius: @folix-radius-md;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            
-            &:hover {
-                background: @folix-primary-dark;
-            }
-        }
-    }
+  
     
     //
     //  Empty Cart
@@ -646,12 +575,22 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-    
+            .abs-shopping-cart-items-desktop, .block-cart-failed, .cart-container .form-cart, .cart-container .cart-gift-item  {
+                  width: 72%;
+            }
     .checkout-cart-index {
         .page-main {
             padding-left: @layout__width-xs-indent;
             padding-right: @layout__width-xs-indent;
         }
+        .cart-container { 
+             .cart-discount {
+                 width: 72%;
+             } 
+        }
+        .block.crosssell {
+             width: 72%;
+         }
     }
     
     //
@@ -678,30 +617,9 @@
         padding-right: @indent__l;
     }
     
-    //
-    //  Cart Discount - 全宽
-    //  _____________________________________________
+
     
-    .cart-discount {
-        width: ~"calc(100% - 360px)";
-        padding-right: @indent__l;
-    }
-    
-    //
-    //  Cross Sell - 全宽
-    //  _____________________________________________
-    
-    .block.crosssell {
-        width: ~"calc(100% - 360px)";
-        padding-right: @indent__l;
-        
-        .products-grid .product-items {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: @indent__m;
-        }
-    }
-    
+
     //
     //  Cart Table - 桌面端表格布局
     //  _____________________________________________
