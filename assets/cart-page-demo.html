@@ -797,16 +797,27 @@
         }
         
         /* ===== Responsive ===== */
+        /* 
+         * 布局说明：
+         * .cart-container
+         * ├── .cart-main-content (两列容器)
+         * │   ├── form.form-cart (产品列表)
+         * │   └── .cart-summary (摘要面板)
+         * ├── .cart-discount (折扣码，全宽)
+         * └── .block.crosssell (交叉销售，全宽)
+         */
         @media (min-width: 768px) {
-            .cart-container {
+            /* 主内容容器 - 两列布局 */
+            .cart-main-content {
+                display: flex;
                 flex-direction: row;
-                flex-wrap: wrap;
                 align-items: flex-start;
+                gap: 24px;
             }
             
             .form-cart {
                 flex: 1;
-                padding-right: 24px;
+                padding-right: 0;
             }
             
             .cart-summary {
@@ -814,7 +825,7 @@
                 flex-shrink: 0;
                 position: sticky;
                 top: 80px;
-                order: 1;
+                order: 0;
             }
             
             .summary.title {
@@ -824,12 +835,7 @@
             /* 全宽元素：折扣码和交叉销售 */
             .cart-discount,
             .block.crosssell {
-                flex: 0 0 100%;
                 width: 100%;
-                padding-right: 340px; /* 为右侧摘要面板留出空间 */
-            }
-            
-            .cart-discount {
                 margin-top: 24px;
             }
             

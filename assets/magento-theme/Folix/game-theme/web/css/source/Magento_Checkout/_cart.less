@@ -4,14 +4,13 @@
 //  * 模块：Magento_Checkout
 //  * 页面：Shopping Cart
 //  * 
-//  * 基于 Magento 2.4 默认模板结构
-//  * 
-//  * 布局结构：
+//  * 布局结构（通过 XML 调整）：
 //  * .cart-container
-//  * ├── .cart-summary (摘要面板)
-//  * ├── form.form-cart (购物车表单)
-//  * ├── .cart-discount (折扣码)
-//  * └── .block.crosssell (交叉销售)
+//  * ├── .cart-main-content (两列容器)
+//  * │   ├── form.form-cart (产品列表)
+//  * │   └── .cart-summary (摘要面板)
+//  * ├── .cart-discount (折扣码，全宽)
+//  * └── .block.crosssell (交叉销售，全宽)
 //  */
 
 //
@@ -47,11 +46,20 @@
     }
 
     //
-    //  Cart Container - 核心布局容器
-    //  Magento 结构：cart-summary + form-cart + cart-discount + block.crosssell
+    //  Cart Container - 外层容器
     //  _____________________________________________
 
     .cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: @indent__l;
+    }
+
+    //
+    //  Cart Main Content - 两列布局容器
+    //  _____________________________________________
+
+    .cart-main-content {
         display: flex;
         flex-direction: column;
         gap: @indent__l;
@@ -68,7 +76,7 @@
         padding: @indent__l;
         order: -1; // 移动端优先显示
 
-        // Summary Title - 匹配 Magento 的 <strong class="summary title">
+        // Summary Title
         .summary.title {
             display: flex;
             align-items: center;
@@ -86,7 +94,6 @@
             }
         }
         
-        // 区块标题
         .block .title strong {
             font-size: 14px;
             font-weight: 600;
@@ -132,7 +139,6 @@
                     }
                 }
                 
-                // 展开图标
                 &::after {
                     content: '▼';
                     font-size: 10px;
@@ -148,7 +154,6 @@
             .content {
                 padding: @indent__l;
                 
-                // 表单字段
                 .fieldset {
                     margin: 0;
                     
@@ -197,7 +202,6 @@
                     }
                 }
                 
-                // 配送方式
                 .items.methods {
                     margin-top: @indent__l;
                     
@@ -263,7 +267,6 @@
             overflow: visible;
         }
         
-        // 匹配 .data.table.totals
         .data.table.totals {
             width: 100%;
             
@@ -282,7 +285,7 @@
                         }
                         
                         &.tax {
-                            display: none; // 税费为0时隐藏
+                            display: none;
                         }
                         
                         &.grand {
@@ -420,26 +423,26 @@
     }
 
     //
-    //  Cart Form & Table - 匹配 Magento 默认模板
+    //  Cart Form & Table
     //  _____________________________________________
 
     .form-cart {
+        flex: 1;
+        min-width: 0;
+        
         .cart.table-wrapper {
             overflow-x: auto;
             margin-bottom: @indent__l;
         }
         
-        // 购物车表格 - 匹配 table.cart.items.data.table
         .cart.items.data.table {
             width: 100%;
             border-collapse: collapse;
             
-            // 表格标题
             caption {
                 display: none;
             }
             
-            // 表头
             thead {
                 tr {
                     background: @folix-bg-panel;
@@ -463,26 +466,24 @@
     }
 
     //
-    //  Cart Item - 匹配 tbody.cart.item 结构
+    //  Cart Item - 移动端卡片样式
     //  _____________________________________________
 
-    // 购物车项目容器
     tbody.cart.item {
         background: @folix-bg-card;
         border: 1px solid @folix-border;
         border-radius: @folix-radius-lg;
         margin-bottom: @indent__m;
         transition: border-color 0.2s ease;
-        display: block; // 移动端改为块级显示
+        display: block;
         
         &:hover {
             border-color: @folix-primary;
         }
     }
 
-    // 项目信息行
     tr.item-info {
-        display: block; // 移动端改为块级显示
+        display: block;
         
         .col {
             &.item {
@@ -514,7 +515,6 @@
         }
     }
 
-    // 操作按钮行
     tr.item-actions {
         display: block;
         
@@ -583,7 +583,6 @@
             }
         }
         
-        // 产品选项
         .item-options {
             margin-top: @indent__s;
             
@@ -804,12 +803,10 @@
     }
 
     //
-    //  Discount Code - 全宽元素
+    //  Discount Code - 全宽
     //  _____________________________________________
 
     .cart-discount {
-        margin-bottom: 0;
-        
         .block.discount {
             background: @folix-bg-card;
             border: 1px solid @folix-border;
@@ -922,12 +919,11 @@
     }
 
     //
-    //  Cross Sell Products - 全宽元素
+    //  Cross Sell Products - 全宽
     //  _____________________________________________
 
     .block.crosssell {
         margin-top: @indent__xl;
-        width: 100%;
         
         .block-title {
             margin-bottom: @indent__l;
@@ -1128,10 +1124,6 @@
 
 //
 //  Desktop (≥ 768px) - Two Column Layout
-//  布局说明：
-//  - .cart-container 使用 flex + flex-wrap
-//  - .form-cart + .cart-summary 成为一行（两列）
-//  - .cart-discount + .block.crosssell 独占一行（全宽）
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
@@ -1143,60 +1135,38 @@
         }
     }
     
-    .cart-container {
+    //
+    //  主内容区 - 两列布局
+    //  _____________________________________________
+    
+    .cart-main-content {
         flex-direction: row;
-        flex-wrap: wrap;
         align-items: flex-start;
-        align-content: flex-start;
+        gap: @indent__l;
     }
     
-    // ========================================
-    //  左列：产品列表 + 折扣码 + 交叉销售
-    // ========================================
-    
+    // 产品列表
     .form-cart {
         flex: 1;
         min-width: 0;
-        padding-right: @indent__l;
-        // 不设置 width，让它自动填充剩余空间
     }
     
-    // ========================================
-    //  右列：摘要面板（sticky）
-    // ========================================
-    
+    // 摘要面板
     .cart-summary {
         width: 320px;
         flex-shrink: 0;
         position: sticky;
         top: @indent__l;
-        order: 1; // 恢复正常顺序，放在右侧
+        order: 0; // 恢复正常顺序
         
         .summary.title {
             font-size: 20px;
         }
     }
     
-    // ========================================
-    //  全宽元素：折扣码和交叉销售
-    // ========================================
-    
-    .cart-discount {
-        flex: 0 0 100%;
-        width: 100%;
-        padding-right: 340px; // 为右侧摘要面板留出空间
-        margin-top: @indent__l;
-    }
-    
-    .block.crosssell {
-        flex: 0 0 100%;
-        width: 100%;
-        padding-right: 340px; // 为右侧摘要面板留出空间
-    }
-    
-    // ========================================
+    //
     //  桌面端表格布局
-    // ========================================
+    //  _____________________________________________
     
     .form-cart {
         .cart.table-wrapper {
@@ -1223,7 +1193,6 @@
             }
         }
         
-        // 购物车项目容器
         tbody.cart.item {
             display: table-row-group;
             background: transparent;
@@ -1235,7 +1204,6 @@
             }
         }
         
-        // 项目信息行
         tr.item-info {
             display: table-row;
             
@@ -1278,7 +1246,6 @@
             }
         }
         
-        // 操作按钮行
         tr.item-actions {
             display: table-row;
             
@@ -1288,7 +1255,6 @@
             }
         }
         
-        // 产品图片
         .product-item-photo {
             float: left;
             margin-right: @indent__l;
@@ -1304,7 +1270,6 @@
             }
         }
         
-        // 产品详情
         .product-item-details {
             display: table-cell;
             vertical-align: top;
@@ -1312,7 +1277,6 @@
             overflow: visible;
         }
         
-        // 操作按钮
         .actions-toolbar {
             justify-content: flex-start;
             background: transparent;
@@ -1321,13 +1285,15 @@
         }
     }
     
-    // 数量选择器
     .field.qty .control.qty {
         justify-content: center;
         display: inline-flex;
     }
     
-    // 交叉销售产品网格
+    //
+    //  交叉销售 - 4列
+    //  _____________________________________________
+    
     .block.crosssell {
         .products-grid {
             .product-items {
@@ -1344,11 +1310,6 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .cart-summary {
         width: 360px;
-    }
-    
-    .cart-discount,
-    .block.crosssell {
-        padding-right: 380px; // 为更大的摘要面板留出空间
     }
 }
 
