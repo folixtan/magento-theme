@@ -5,6 +5,13 @@
 //  * 页面：Shopping Cart
 //  * 
 //  * 基于 Magento 2.4 默认模板结构
+//  * 
+//  * 布局结构：
+//  * .cart-container
+//  * ├── .cart-summary (摘要面板)
+//  * ├── form.form-cart (购物车表单)
+//  * ├── .cart-discount (折扣码)
+//  * └── .block.crosssell (交叉销售)
 //  */
 
 //
@@ -41,6 +48,7 @@
 
     //
     //  Cart Container - 核心布局容器
+    //  Magento 结构：cart-summary + form-cart + cart-discount + block.crosssell
     //  _____________________________________________
 
     .cart-container {
@@ -796,11 +804,11 @@
     }
 
     //
-    //  Discount Code
+    //  Discount Code - 全宽元素
     //  _____________________________________________
 
     .cart-discount {
-        margin-bottom: @indent__l;
+        margin-bottom: 0;
         
         .block.discount {
             background: @folix-bg-card;
@@ -914,11 +922,12 @@
     }
 
     //
-    //  Cross Sell Products
+    //  Cross Sell Products - 全宽元素
     //  _____________________________________________
 
     .block.crosssell {
         margin-top: @indent__xl;
+        width: 100%;
         
         .block-title {
             margin-bottom: @indent__l;
@@ -1119,6 +1128,10 @@
 
 //
 //  Desktop (≥ 768px) - Two Column Layout
+//  布局说明：
+//  - .cart-container 使用 flex + flex-wrap
+//  - .form-cart + .cart-summary 成为一行（两列）
+//  - .cart-discount + .block.crosssell 独占一行（全宽）
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
@@ -1132,30 +1145,59 @@
     
     .cart-container {
         flex-direction: row;
+        flex-wrap: wrap;
         align-items: flex-start;
+        align-content: flex-start;
     }
     
-    // 产品列表区域
+    // ========================================
+    //  左列：产品列表 + 折扣码 + 交叉销售
+    // ========================================
+    
     .form-cart {
         flex: 1;
         min-width: 0;
         padding-right: @indent__l;
+        // 不设置 width，让它自动填充剩余空间
     }
     
-    // 摘要面板
+    // ========================================
+    //  右列：摘要面板（sticky）
+    // ========================================
+    
     .cart-summary {
         width: 320px;
         flex-shrink: 0;
         position: sticky;
         top: @indent__l;
-        order: 1; // 恢复正常顺序
+        order: 1; // 恢复正常顺序，放在右侧
         
         .summary.title {
             font-size: 20px;
         }
     }
     
-    // 桌面端表格布局
+    // ========================================
+    //  全宽元素：折扣码和交叉销售
+    // ========================================
+    
+    .cart-discount {
+        flex: 0 0 100%;
+        width: 100%;
+        padding-right: 340px; // 为右侧摘要面板留出空间
+        margin-top: @indent__l;
+    }
+    
+    .block.crosssell {
+        flex: 0 0 100%;
+        width: 100%;
+        padding-right: 340px; // 为右侧摘要面板留出空间
+    }
+    
+    // ========================================
+    //  桌面端表格布局
+    // ========================================
+    
     .form-cart {
         .cart.table-wrapper {
             overflow-x: visible;
@@ -1293,13 +1335,6 @@
             }
         }
     }
-    
-    // 折扣码
-    .cart-discount .block.discount .content {
-        .fieldset {
-            max-width: 400px;
-        }
-    }
 }
 
 //
@@ -1309,6 +1344,11 @@
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .cart-summary {
         width: 360px;
+    }
+    
+    .cart-discount,
+    .block.crosssell {
+        padding-right: 380px; // 为更大的摘要面板留出空间
     }
 }
 

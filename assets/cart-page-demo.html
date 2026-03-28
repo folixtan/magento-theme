@@ -800,10 +800,12 @@
         @media (min-width: 768px) {
             .cart-container {
                 flex-direction: row;
+                flex-wrap: wrap;
                 align-items: flex-start;
             }
             
             .form-cart {
+                flex: 1;
                 padding-right: 24px;
             }
             
@@ -817,6 +819,18 @@
             
             .summary.title {
                 font-size: 20px;
+            }
+            
+            /* 全宽元素：折扣码和交叉销售 */
+            .cart-discount,
+            .block.crosssell {
+                flex: 0 0 100%;
+                width: 100%;
+                padding-right: 340px; /* 为右侧摘要面板留出空间 */
+            }
+            
+            .cart-discount {
+                margin-top: 24px;
             }
             
             /* Table Layout */
