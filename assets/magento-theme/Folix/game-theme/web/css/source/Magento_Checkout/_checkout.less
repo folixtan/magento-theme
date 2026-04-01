@@ -1,0 +1,1392 @@
+// /**
+//  * Folix Game Theme - One Page Checkout Styles
+//  *
+//  * 基于 Magento 原生布局结构，仅覆盖样式
+//  * 不修改任何布局 XML 或模板
+//  *
+//  * 结账页面结构：
+//  * - 左侧：opc-wrapper（配送地址、配送方式、支付方式）
+//  * - 右侧：opc-sidebar（订单摘要）
+//  * - 顶部：进度条（opc-progress-bar）
+//  */
+
+//
+//  Common (All devices) - Mobile First
+//  _____________________________________________
+
+& when (@media-common = true) {
+
+    //
+    //  Page Layout
+    //  _____________________________________________
+
+    .checkout-index-index {
+        .page-title-wrapper {
+            margin-bottom: @indent__l;
+            
+            .page-title {
+                font-size: 28px;
+                font-weight: 700;
+                color: @folix-text-primary;
+            }
+        }
+        
+        // 隐藏导航栏（结账页面专注设计）
+        .nav-sections,
+        .nav-toggle {
+            display: none;
+        }
+        
+        .logo {
+            margin-left: 0;
+        }
+    }
+
+    //
+    //  Checkout Container
+    //  _____________________________________________
+
+    .checkout-container {
+        margin: 0 0 @indent__l;
+    }
+
+    //
+    //  Progress Bar - 步骤进度指示器
+    //  _____________________________________________
+
+    .opc-progress-bar {
+        &:extend(.abs-reset-list all);
+        margin: 0 0 @indent__xl;
+        counter-reset: step;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: @indent__s;
+    }
+
+    .opc-progress-bar-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        padding: @indent__s @indent__l;
+        background: @folix-bg-panel;
+        border-radius: @folix-radius-full;
+        font-size: 14px;
+        font-weight: 500;
+        color: @folix-text-muted;
+        transition: all @folix-transition-smooth;
+        
+        // 步骤序号
+        &::before {
+            counter-increment: step;
+            content: counter(step);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            margin-right: @indent__s;
+            background: @folix-border;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 600;
+            color: @folix-text-muted;
+            transition: all @folix-transition-smooth;
+        }
+        
+        // 已完成状态
+        &._complete {
+            cursor: pointer;
+            background: @folix-success-bg;
+            color: @folix-success;
+            
+            &::before {
+                background: @folix-success;
+                color: #FFFFFF;
+                font-family: @icons__font-name;
+                content: @icon-checkmark;
+            }
+            
+            &:hover {
+                background: @folix-success;
+                color: #FFFFFF;
+            }
+        }
+        
+        // 当前活动状态
+        &._active {
+            background: @folix-primary;
+            color: #FFFFFF;
+            font-weight: 600;
+            box-shadow: @folix-shadow-primary;
+            
+            &::before {
+                background: #FFFFFF;
+                color: @folix-primary;
+            }
+        }
+        
+        > span {
+            cursor: inherit;
+        }
+    }
+
+    //
+    //  OPC Wrapper - 左侧主内容区
+    //  _____________________________________________
+
+    .opc-wrapper {
+        margin: 0 0 @indent__l;
+        
+        .opc {
+            &:extend(.abs-reset-list all);
+        }
+        
+        // 步骤标题
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: @folix-text-primary;
+            padding: @indent__s 0;
+            margin-bottom: @indent__l;
+            border-bottom: 2px solid @folix-border;
+            display: flex;
+            align-items: center;
+            gap: @indent__s;
+            
+            // 步骤图标（通过 CSS 添加）
+            &::before {
+                content: '';
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 32px;
+                height: 32px;
+                background: @folix-gradient-primary;
+                border-radius: 50%;
+                font-size: 16px;
+            }
+        }
+        
+        // 步骤内容
+        .step-content {
+            margin: 0 0 @indent__xl;
+        }
+    }
+
+    //
+    //  Shipping Address - 配送地址
+    //  _____________________________________________
+
+    .checkout-shipping-address {
+        // 登录表单
+        .form-login {
+            background: @folix-bg-panel;
+            border-radius: @folix-radius-lg;
+            padding: @indent__l;
+            margin: 0 0 @indent__l;
+            
+            .fieldset {
+                .field {
+                    .label {
+                        font-weight: 500;
+                        color: @folix-text-secondary;
+                        margin-bottom: @indent__xs;
+                    }
+                    
+                    .control {
+                        input[type="text"],
+                        input[type="email"],
+                        input[type="password"] {
+                            width: 100%;
+                            padding: @indent__m;
+                            border: 1px solid @folix-border;
+                            border-radius: @folix-radius-md;
+                            font-size: 14px;
+                            color: @folix-text-primary;
+                            background: @folix-bg-card;
+                            transition: all @folix-transition;
+                            
+                            &:focus {
+                                outline: none;
+                                border-color: @folix-primary;
+                                box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+                            }
+                            
+                            &::placeholder {
+                                color: @folix-text-light;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 配送地址表单
+        .form-shipping-address {
+            margin: @indent__l 0;
+            
+            .fieldset {
+                .field {
+                    margin-bottom: @indent__m;
+                    
+                    .label {
+                        font-weight: 500;
+                        color: @folix-text-secondary;
+                        margin-bottom: @indent__xs;
+                    }
+                    
+                    .control {
+                        input[type="text"],
+                        input[type="tel"],
+                        input[type="email"],
+                        select {
+                            width: 100%;
+                            padding: @indent__m;
+                            border: 1px solid @folix-border;
+                            border-radius: @folix-radius-md;
+                            font-size: 14px;
+                            color: @folix-text-primary;
+                            background: @folix-bg-card;
+                            transition: all @folix-transition;
+                            
+                            &:focus {
+                                outline: none;
+                                border-color: @folix-primary;
+                                box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+                            }
+                            
+                            &::placeholder {
+                                color: @folix-text-light;
+                            }
+                        }
+                        
+                        select {
+                            appearance: none;
+                            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+                            background-repeat: no-repeat;
+                            background-position: right 12px center;
+                            padding-right: 36px;
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 地址卡片列表
+        .shipping-address-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: @indent__m;
+            margin: 0 0 @indent__l;
+        }
+        
+        .shipping-address-item {
+            flex: 1 1 calc(50% - @indent__s);
+            min-width: 250px;
+            padding: @indent__l;
+            background: @folix-bg-card;
+            border: 2px solid @folix-border;
+            border-radius: @folix-radius-lg;
+            position: relative;
+            transition: all @folix-transition-smooth;
+            cursor: pointer;
+            
+            &:hover {
+                border-color: @folix-primary-light;
+                box-shadow: @folix-shadow-md;
+            }
+            
+            // 选中状态
+            &.selected-item {
+                border-color: @folix-primary;
+                background: @folix-bg-selected;
+                
+                // 选中标记
+                &::after {
+                    content: '✓';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 32px;
+                    height: 32px;
+                    background: @folix-primary;
+                    color: #FFFFFF;
+                    border-radius: 0 @folix-radius-lg 0 @folix-radius-md;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+            
+            // 地址信息
+            .shipping-address-card {
+                .shipping-address-card-name {
+                    font-weight: 600;
+                    color: @folix-text-primary;
+                    margin-bottom: @indent__s;
+                }
+                
+                .shipping-address-card-details {
+                    font-size: 13px;
+                    color: @folix-text-secondary;
+                    line-height: 1.6;
+                }
+            }
+        }
+        
+        // 新增地址按钮
+        .action-show-popup {
+            display: inline-flex;
+            align-items: center;
+            gap: @indent__s;
+            padding: @indent__m @indent__l;
+            background: @folix-bg-panel;
+            border: 2px dashed @folix-border;
+            border-radius: @folix-radius-md;
+            color: @folix-primary;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all @folix-transition;
+            
+            > span::before {
+                content: '+';
+                font-size: 18px;
+                font-weight: 600;
+            }
+            
+            &:hover {
+                background: @folix-bg-hover;
+                border-color: @folix-primary;
+            }
+        }
+        
+        // 选择地址按钮
+        .action-select-shipping-item {
+            margin-top: @indent__m;
+            padding: @indent__s @indent__l;
+            background: @folix-primary;
+            color: #FFFFFF;
+            border: none;
+            border-radius: @folix-radius-md;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all @folix-transition;
+            
+            &:hover {
+                background: @folix-primary-dark;
+            }
+        }
+        
+        // 编辑地址链接
+        .edit-address-link {
+            position: absolute;
+            top: @indent__m;
+            right: @indent__m;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: @folix-bg-hover;
+            border-radius: 50%;
+            color: @folix-text-muted;
+            font-size: 14px;
+            transition: all @folix-transition;
+            
+            &:hover {
+                background: @folix-primary;
+                color: #FFFFFF;
+            }
+        }
+    }
+
+    //
+    //  Shipping Methods - 配送方式
+    //  _____________________________________________
+
+    .checkout-shipping-method {
+        .step-title {
+            margin-bottom: 0;
+        }
+        
+        .no-quotes-block {
+            padding: @indent__l;
+            background: @folix-warning-bg;
+            border-radius: @folix-radius-md;
+            color: @folix-warning;
+            text-align: center;
+        }
+        
+        // 配送方式表格
+        .table-checkout-shipping-method {
+            width: 100%;
+            margin: @indent__l 0;
+            border-collapse: collapse;
+            
+            thead {
+                th {
+                    padding: @indent__m @indent__l;
+                    background: @folix-bg-panel;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: @folix-text-secondary;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    text-align: left;
+                    
+                    &:first-child {
+                        border-radius: @folix-radius-md 0 0 0;
+                    }
+                    
+                    &:last-child {
+                        border-radius: 0 @folix-radius-md 0 0;
+                    }
+                }
+            }
+            
+            tbody {
+                tr {
+                    transition: background @folix-transition;
+                    
+                    &:hover {
+                        background: @folix-bg-hover;
+                    }
+                    
+                    &:first-child td {
+                        border-top: none;
+                    }
+                }
+                
+                td {
+                    padding: @indent__l;
+                    border-top: 1px solid @folix-border;
+                    
+                    &:first-child {
+                        width: 40px;
+                        text-align: center;
+                    }
+                }
+                
+                // 配送方式名称
+                .col-carrier {
+                    font-weight: 600;
+                    color: @folix-text-primary;
+                }
+                
+                // 方式描述
+                .col-method {
+                    color: @folix-text-secondary;
+                }
+                
+                // 价格
+                .col-price {
+                    font-weight: 600;
+                    color: @folix-secondary;
+                    
+                    .price {
+                        font-size: 16px;
+                    }
+                }
+            }
+            
+            // 单选按钮
+            input[type="radio"] {
+                width: 18px;
+                height: 18px;
+                accent-color: @folix-primary;
+                cursor: pointer;
+            }
+        }
+        
+        // 继续按钮
+        .methods-shipping {
+            .actions-toolbar {
+                margin-top: @indent__l;
+                
+                .action.primary.continue {
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: @indent__s;
+                    padding: @indent__m @indent__xl;
+                    background: @folix-gradient-secondary;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: @folix-radius-md;
+                    font-size: 16px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all @folix-transition-smooth;
+                    
+                    &::after {
+                        content: '→';
+                        font-size: 18px;
+                    }
+                    
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: @folix-shadow-secondary;
+                    }
+                }
+            }
+        }
+    }
+
+    //
+    //  Payment Methods - 支付方式
+    //  _____________________________________________
+
+    .checkout-payment-method {
+        .step-title {
+            border-bottom: 0;
+            margin-bottom: 0;
+        }
+        
+        .payment-method {
+            margin: @indent__m 0;
+            border: 1px solid @folix-border;
+            border-radius: @folix-radius-lg;
+            overflow: hidden;
+            background: @folix-bg-card;
+            transition: all @folix-transition;
+            
+            &:hover {
+                border-color: @folix-primary-light;
+            }
+            
+            &:first-child {
+                .payment-method-title {
+                    border-top: none;
+                }
+            }
+            
+            &._active {
+                border-color: @folix-primary;
+                box-shadow: @folix-shadow-md;
+                
+                .payment-method-title {
+                    background: @folix-bg-selected;
+                }
+            }
+        }
+        
+        // 支付方式标题
+        .payment-method-title {
+            display: flex;
+            align-items: center;
+            padding: @indent__l;
+            cursor: pointer;
+            
+            input[type="radio"] {
+                width: 18px;
+                height: 18px;
+                margin-right: @indent__m;
+                accent-color: @folix-primary;
+            }
+            
+            label {
+                font-weight: 600;
+                color: @folix-text-primary;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: @indent__s;
+            }
+            
+            // 支付图标
+            .payment-icon {
+                height: 24px;
+                width: auto;
+            }
+        }
+        
+        // 支付方式内容
+        .payment-method-content {
+            padding: @indent__l;
+            padding-top: 0;
+            border-top: 1px solid @folix-border;
+            background: @folix-bg-panel;
+            
+            .fieldset {
+                .field {
+                    margin-bottom: @indent__m;
+                    
+                    .label {
+                        font-weight: 500;
+                        color: @folix-text-secondary;
+                        margin-bottom: @indent__xs;
+                    }
+                    
+                    .control {
+                        input[type="text"],
+                        input[type="tel"],
+                        select {
+                            width: 100%;
+                            padding: @indent__m;
+                            border: 1px solid @folix-border;
+                            border-radius: @folix-radius-md;
+                            font-size: 14px;
+                            color: @folix-text-primary;
+                            background: @folix-bg-card;
+                            transition: all @folix-transition;
+                            
+                            &:focus {
+                                outline: none;
+                                border-color: @folix-primary;
+                                box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // 下单按钮
+        .actions-toolbar {
+            margin-top: @indent__l;
+            
+            .action.primary.checkout {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: @indent__s;
+                padding: @indent__m @indent__xl;
+                background: @folix-gradient-secondary;
+                color: #FFFFFF;
+                border: none;
+                border-radius: @folix-radius-md;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all @folix-transition-smooth;
+                
+                &::before {
+                    content: '🔒';
+                    font-size: 16px;
+                }
+                
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: @folix-shadow-secondary;
+                }
+            }
+        }
+        
+        .no-payments-block {
+            padding: @indent__l;
+            background: @folix-warning-bg;
+            border-radius: @folix-radius-md;
+            color: @folix-warning;
+            text-align: center;
+        }
+    }
+
+    //
+    //  Billing Address - 账单地址
+    //  _____________________________________________
+
+    .checkout-billing-address {
+        margin: @indent__l 0;
+        
+        .billing-address-details {
+            padding: @indent__l;
+            background: @folix-bg-panel;
+            border-radius: @folix-radius-md;
+            line-height: 1.8;
+            color: @folix-text-secondary;
+        }
+        
+        .billing-address-same-as-shipping-block {
+            margin-bottom: @indent__m;
+            
+            input[type="checkbox"] {
+                width: 18px;
+                height: 18px;
+                margin-right: @indent__s;
+                accent-color: @folix-primary;
+            }
+            
+            label {
+                font-weight: 500;
+                color: @folix-text-primary;
+                cursor: pointer;
+            }
+        }
+    }
+
+    //
+    //  Order Summary - 订单摘要
+    //  _____________________________________________
+
+    .opc-block-summary {
+        background: @folix-bg-card;
+        border-radius: @folix-radius-lg;
+        box-shadow: @folix-shadow-md;
+        padding: @indent__l;
+        margin: 0 0 @indent__l;
+        
+        > .title {
+            display: flex;
+            align-items: center;
+            gap: @indent__s;
+            font-size: 18px;
+            font-weight: 700;
+            color: @folix-text-primary;
+            margin-bottom: @indent__l;
+            padding-bottom: @indent__m;
+            border-bottom: 2px solid @folix-border;
+            
+            &::before {
+                content: '📋';
+                font-size: 20px;
+            }
+        }
+        
+        // 商品列表区域
+        .items-in-cart {
+            margin-bottom: @indent__l;
+            
+            > .title {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: @indent__m 0;
+                cursor: pointer;
+                border-bottom: 1px solid @folix-border;
+                
+                strong {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: @folix-text-primary;
+                }
+                
+                &::after {
+                    content: '▼';
+                    font-size: 10px;
+                    color: @folix-text-muted;
+                }
+            }
+            
+            &.active > .title::after {
+                content: '▲';
+            }
+        }
+        
+        // 商品列表包装器
+        .minicart-items-wrapper {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: @indent__m 0;
+            margin: 0;
+            border: 0;
+        }
+        
+        // 商品项
+        .product-item {
+            display: flex;
+            gap: @indent__m;
+            padding: @indent__m 0;
+            border-bottom: 1px solid @folix-border-light;
+            
+            &:last-child {
+                border-bottom: none;
+            }
+            
+            .product-image-container {
+                width: 60px;
+                flex-shrink: 0;
+                
+                img {
+                    border-radius: @folix-radius-sm;
+                }
+            }
+            
+            .product-item-details {
+                flex: 1;
+            }
+            
+            .product-item-name {
+                font-size: 14px;
+                font-weight: 600;
+                color: @folix-text-primary;
+                margin-bottom: @indent__xs;
+                
+                a {
+                    color: inherit;
+                    
+                    &:hover {
+                        color: @folix-primary;
+                    }
+                }
+            }
+            
+            .product-item-inner {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            .product-item-name-block {
+                font-size: 12px;
+                color: @folix-text-muted;
+            }
+            
+            .subtotal {
+                .price {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: @folix-secondary;
+                }
+            }
+            
+            .item-options {
+                margin-top: @indent__xs;
+                font-size: 12px;
+                color: @folix-text-muted;
+            }
+        }
+        
+        // 总计表格
+        .table-totals {
+            width: 100%;
+            margin-top: @indent__l;
+            
+            tbody tr {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: @indent__s 0;
+                
+                .mark {
+                    font-size: 14px;
+                    color: @folix-text-secondary;
+                    
+                    .value {
+                        display: block;
+                        font-size: 12px;
+                        color: @folix-text-muted;
+                    }
+                }
+                
+                .amount {
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: @folix-text-primary;
+                }
+            }
+            
+            // 小计
+            .totals.sub {
+                .mark,
+                .amount {
+                    color: @folix-text-muted;
+                }
+            }
+            
+            // 折扣
+            .discount.coupon {
+                .mark,
+                .amount {
+                    color: @folix-success;
+                }
+                
+                .amount .price {
+                    color: @folix-success;
+                }
+            }
+            
+            // 运费
+            .totals.shipping {
+                .mark,
+                .amount {
+                    color: @folix-text-secondary;
+                }
+            }
+            
+            // 税费
+            .totals-tax {
+                .mark,
+                .amount {
+                    font-size: 13px;
+                    color: @folix-text-muted;
+                }
+            }
+            
+            // 总计
+            .grand.totals {
+                margin-top: @indent__m;
+                padding-top: @indent__m;
+                border-top: 2px solid @folix-border;
+                
+                .mark strong {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: @folix-text-primary;
+                }
+                
+                .amount .price {
+                    font-size: 24px;
+                    font-weight: 700;
+                    color: @folix-secondary;
+                }
+            }
+        }
+        
+        // 编辑购物车链接
+        .actions-toolbar {
+            margin-top: @indent__l;
+            padding-top: @indent__l;
+            border-top: 1px solid @folix-border;
+            
+            .action {
+                display: inline-flex;
+                align-items: center;
+                gap: @indent__s;
+                color: @folix-primary;
+                font-size: 14px;
+                font-weight: 500;
+                
+                &:hover {
+                    color: @folix-secondary;
+                }
+            }
+        }
+    }
+
+    //
+    //  Authentication - 登录区域
+    //  _____________________________________________
+
+    .authentication-wrapper {
+        margin-bottom: @indent__l;
+        
+        .block-authentication {
+            background: @folix-bg-panel;
+            border-radius: @folix-radius-lg;
+            padding: @indent__l;
+        }
+        
+        .block-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: @folix-text-primary;
+            margin-bottom: @indent__l;
+        }
+        
+        .actions-toolbar {
+            .action {
+                &.action-login {
+                    padding: @indent__m @indent__xl;
+                    background: @folix-primary;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: @folix-radius-md;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all @folix-transition;
+                    
+                    &:hover {
+                        background: @folix-primary-dark;
+                    }
+                }
+                
+                &.remind,
+                &.create {
+                    color: @folix-primary;
+                    font-size: 13px;
+                    
+                    &:hover {
+                        color: @folix-secondary;
+                    }
+                }
+            }
+        }
+    }
+
+    //
+    //  Modals - 弹窗
+    //  _____________________________________________
+
+    .opc-wrapper {
+        .modal-popup {
+            .modal-inner-wrap {
+                border-radius: @folix-radius-lg;
+                box-shadow: @folix-shadow-xl;
+            }
+            
+            .modal-header {
+                padding: @indent__l;
+                border-bottom: 1px solid @folix-border;
+                
+                .modal-title {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: @folix-text-primary;
+                }
+                
+                .action-close {
+                    width: 32px;
+                    height: 32px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: @folix-bg-hover;
+                    border-radius: 50%;
+                    
+                    &:hover {
+                        background: @folix-error-bg;
+                    }
+                }
+            }
+            
+            .modal-content {
+                padding: @indent__l;
+            }
+            
+            .modal-footer {
+                padding: @indent__l;
+                border-top: 1px solid @folix-border;
+                
+                .action {
+                    padding: @indent__m @indent__xl;
+                    border-radius: @folix-radius-md;
+                    font-size: 14px;
+                    font-weight: 500;
+                    cursor: pointer;
+                    transition: all @folix-transition;
+                    
+                    &.action-primary {
+                        background: @folix-primary;
+                        color: #FFFFFF;
+                        border: none;
+                        
+                        &:hover {
+                            background: @folix-primary-dark;
+                        }
+                    }
+                    
+                    &.action-secondary {
+                        background: @folix-bg-panel;
+                        color: @folix-text-secondary;
+                        border: 1px solid @folix-border;
+                        
+                        &:hover {
+                            background: @folix-bg-hover;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //
+    //  Checkout Success Page
+    //  _____________________________________________
+
+    .checkout-onepage-success {
+        padding: @indent__xl 0;
+        
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: @folix-text-primary;
+            text-align: center;
+            
+            &::before {
+                content: '✓';
+                display: block;
+                width: 80px;
+                height: 80px;
+                margin: 0 auto @indent__l;
+                background: @folix-success-bg;
+                color: @folix-success;
+                border-radius: 50%;
+                font-size: 40px;
+                line-height: 80px;
+            }
+        }
+        
+        .checkout-success {
+            text-align: center;
+            
+            p {
+                font-size: 16px;
+                color: @folix-text-secondary;
+                margin-bottom: @indent__l;
+            }
+            
+            .order-number {
+                font-size: 18px;
+                font-weight: 600;
+                color: @folix-primary;
+                margin-bottom: @indent__xl;
+            }
+            
+            .actions-toolbar {
+                .primary,
+                .secondary {
+                    margin: @indent__s;
+                    
+                    .action {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: @indent__s;
+                        padding: @indent__m @indent__xl;
+                        border-radius: @folix-radius-md;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                    
+                    &.primary .action {
+                        background: @folix-primary;
+                        color: #FFFFFF;
+                        
+                        &:hover {
+                            background: @folix-primary-dark;
+                        }
+                    }
+                    
+                    &.secondary .action {
+                        background: @folix-bg-panel;
+                        color: @folix-text-secondary;
+                        border: 1px solid @folix-border;
+                        
+                        &:hover {
+                            background: @folix-bg-hover;
+                        }
+                    }
+                }
+            }
+        }
+        
+        .print {
+            display: inline-flex;
+            align-items: center;
+            gap: @indent__s;
+            padding: @indent__s @indent__l;
+            color: @folix-primary;
+            font-size: 14px;
+            
+            &:hover {
+                color: @folix-secondary;
+            }
+        }
+    }
+}
+
+//
+//  Mobile (max 767px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+    .opc-progress-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .opc-progress-bar-item {
+        justify-content: flex-start;
+        margin-bottom: @indent__s;
+    }
+    
+    .opc-wrapper {
+        .step-title {
+            font-size: 18px;
+        }
+        
+        .form-login,
+        .form-shipping-address,
+        .methods-shipping {
+            background: @folix-bg-panel;
+            margin: 0 -@indent__m @indent__m;
+            padding: @indent__l @indent__m;
+            border-radius: 0;
+        }
+    }
+    
+    .checkout-shipping-address {
+        .shipping-address-item {
+            flex: 1 1 100%;
+            margin-bottom: @indent__m;
+        }
+    }
+    
+    .checkout-shipping-method {
+        .table-checkout-shipping-method {
+            thead {
+                display: none;
+            }
+            
+            tbody {
+                tr {
+                    display: block;
+                    padding: @indent__m;
+                    border: 1px solid @folix-border;
+                    border-radius: @folix-radius-md;
+                    margin-bottom: @indent__s;
+                }
+                
+                td {
+                    display: block;
+                    padding: @indent__xs 0;
+                    border: none;
+                    
+                    &:first-child {
+                        width: auto;
+                        text-align: left;
+                        padding: 0;
+                        margin-bottom: @indent__s;
+                    }
+                    
+                    &::before {
+                        content: attr(data-th) ": ";
+                        font-weight: 500;
+                        color: @folix-text-muted;
+                    }
+                    
+                    &.col-price::before {
+                        content: "价格: ";
+                    }
+                }
+            }
+        }
+    }
+    
+    .opc-block-summary {
+        > .title {
+            font-size: 16px;
+        }
+        
+        .minicart-items-wrapper {
+            max-height: 200px;
+        }
+        
+        .table-totals .grand.totals {
+            .amount .price {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+//
+//  Desktop (≥ 768px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .checkout-index-index {
+        .page-main {
+            padding-left: @layout__width-xs-indent;
+            padding-right: @layout__width-xs-indent;
+        }
+    }
+    
+    //
+    //  Two Column Layout - 两栏布局
+    //  _____________________________________________
+    
+    .opc-wrapper {
+        width: 66.6666%;
+        float: left;
+        padding-right: @indent__xl;
+        box-sizing: border-box;
+    }
+    
+    .opc-sidebar {
+        width: 33.3333%;
+        float: right;
+        box-sizing: border-box;
+    }
+    
+    .opc-block-summary {
+        position: sticky;
+        top: @indent__l;
+        margin: 0;
+    }
+    
+    //
+    //  Shipping Methods Desktop
+    //  _____________________________________________
+    
+    .checkout-shipping-method {
+        .actions-toolbar {
+            .primary {
+                float: right;
+            }
+        }
+    }
+    
+    //
+    //  Payment Methods Desktop
+    //  _____________________________________________
+    
+    .checkout-payment-method {
+        .actions-toolbar {
+            .primary {
+                float: right;
+                margin: 0;
+            }
+        }
+    }
+    
+    //
+    //  Billing Address Desktop
+    //  _____________________________________________
+    
+    .checkout-billing-address {
+        .actions-toolbar {
+            .action-update {
+                float: right;
+            }
+            
+            .action-cancel {
+                margin: @indent__s @indent__l 0 0;
+            }
+        }
+    }
+    
+    //
+    //  Form Login Desktop
+    //  _____________________________________________
+    
+    .opc-wrapper {
+        .form-login,
+        .form-shipping-address {
+            max-width: 500px;
+        }
+    }
+}
+
+//
+//  Large Desktop (≥ 1024px)
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .opc-wrapper {
+        width: 62%;
+    }
+    
+    .opc-sidebar {
+        width: 38%;
+    }
+    
+    // 地址卡片大屏显示3列
+    .checkout-shipping-address {
+        .shipping-address-item {
+            flex: 1 1 calc(33.333% - @indent__m);
+        }
+    }
+    
+    .opc-wrapper {
+        .shipping-address-item::before {
+            display: none;
+        }
+    }
+}
