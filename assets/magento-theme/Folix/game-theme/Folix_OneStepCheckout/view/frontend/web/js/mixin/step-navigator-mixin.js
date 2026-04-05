@@ -1,7 +1,9 @@
 /**
  * Folix One Step Checkout - Step Navigator Mixin
  *
- * 强制显示支付步骤，跳过配送步骤（虚拟商品）
+ * 覆盖原生步骤导航，实现一步结账
+ * - 跳过配送步骤（虚拟商品无需配送）
+ * - 直接显示支付步骤
  *
  * @category    Folix
  * @package     Folix_OneStepCheckout
@@ -16,13 +18,22 @@ define([
     return function (targetStepNavigator) {
 
         /**
-         * 重写 nextStep - 跳过配送步骤
+         * 获取步骤 - 一步结账只需要支付步骤
+         * @returns {Array}
          */
-        var nextStep = wrapper.wrap(targetStepNavigator.nextStep, function (originalNextStep, data) {
+        targetStepNavigator.getSteps = function () {
+            return ['payment'];
+        };
+
+        /**
+         * 下一步 - 跳过配送步骤
+         */
+        targetStepNavigator.nextStep = wrapper.wrap(targetStepNavigator.nextStep, function (originalNextStep, data) {
+            // 虚拟商品直接跳到支付步骤
             var result = originalNextStep(data);
 
-            // 如果当前是认证步骤，下一步直接到支付步骤
-            if (this.isCustomerLoggedIn() && this.activeIndex() === 0) {
+            // 如果是从认证步骤，直接激活支付步骤
+            if (this.activeIndex() === 0) {
                 this.setActiveStep('payment');
             }
 
@@ -30,10 +41,10 @@ define([
         });
 
         /**
-         * 重写 gotoSection - 隐藏配送地址相关
+         * 跳转步骤 - 隐藏配送相关步骤
          */
-        var gotoSection = wrapper.wrap(targetStepNavigator.gotoSection, function (originalGotoSection, section, scroll) {
-            // 跳过配送地址步骤
+        targetStepNavigator.gotoSection = wrapper.wrap(targetStepNavigator.gotoSection, function (originalGotoSection, section, scroll) {
+            // 跳过配送步骤
             if (section === 'shippingAddress' || section === 'shippingMethod') {
                 section = 'billingAddress';
             }
@@ -42,11 +53,14 @@ define([
         });
 
         /**
-         * 获取可用步骤
+         * 返回上一步
          */
-        targetStepNavigator.getSteps = function () {
-            return ['login', 'payment'];
-        };
+        targetStepNavigator.prevStep = wrapper.wrap(targetStepNavigator.prevStep, function (originalPrevStep) {
+            // 虚拟商品无法返回配送步骤
+            if (this.activeIndex() > 0) {
+                return originalPrevStep();
+            }
+        });
 
         return targetStepNavigator;
     };
