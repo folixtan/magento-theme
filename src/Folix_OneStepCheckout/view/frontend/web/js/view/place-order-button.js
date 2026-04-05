@@ -2,30 +2,32 @@
  * Folix One Step Checkout - Place Order Button
  * 
  * 放在 sidebar 的 place-order region 中（在摘要底部）
- * 调用原生 place-order action
+ * 继承原生 payment/default.js 的 placeOrder 逻辑
  */
 define([
-    'jquery',
     'ko',
+    'jquery',
     'uiComponent',
-    'Magento_Checkout/js/model/quote',
     'Magento_Checkout/js/action/place-order',
-    'Magento_Checkout/js/model/payment/additional-validators',
     'Magento_Checkout/js/action/redirect-on-success',
+    'Magento_Checkout/js/model/quote',
+    'Magento_Checkout/js/model/payment/additional-validators',
     'Magento_Checkout/js/model/checkout-data-resolver',
-    'mage/translate',
-    'Magento_Ui/js/model/messages'
+    'Magento_Checkout/js/checkout-data',
+    'Magento_Ui/js/model/messages',
+    'mage/translate'
 ], function (
-    $,
     ko,
+    $,
     Component,
-    quote,
     placeOrderAction,
-    additionalValidators,
     redirectOnSuccessAction,
+    quote,
+    additionalValidators,
     checkoutDataResolver,
-    $t,
-    Messages
+    checkoutData,
+    Messages,
+    $t
 ) {
     'use strict';
 
@@ -41,21 +43,24 @@ define([
             
             // 解决账单地址（虚拟商品）
             checkoutDataResolver.resolveBillingAddress();
+            
+            // 监听支付方式变化
+            var self = this;
+            quote.paymentMethod.subscribe(function (method) {
+                self.isPlaceOrderActionAllowed(method !== null);
+            });
         },
         
         /**
-         * 检查是否选择了支付方式
-         * @returns {boolean}
+         * Place Order 按钮是否可用
          */
-        isPaymentSelected: function () {
-            return quote.paymentMethod() !== null;
-        },
+        isPlaceOrderActionAllowed: ko.observable(false),
         
         /**
          * 获取选中的支付方式数据
          * @returns {Object|null}
          */
-        getSelectedPaymentMethod: function () {
+        getData: function () {
             var method = quote.paymentMethod();
             if (method) {
                 return {
@@ -68,15 +73,23 @@ define([
         },
         
         /**
-         * Place Order
+         * 检查是否选择了支付方式
+         * @returns {boolean}
+         */
+        isPaymentSelected: function () {
+            return quote.paymentMethod() !== null;
+        },
+        
+        /**
+         * Place Order - 参考 payment/default.js 的实现
          */
         placeOrder: function (data, event) {
             var self = this;
-            
+
             if (event) {
                 event.preventDefault();
             }
-            
+
             // 1. 检查是否选择了支付方式
             if (!this.isPaymentSelected()) {
                 this.messageContainer.addErrorMessage({
@@ -84,32 +97,33 @@ define([
                 });
                 return false;
             }
-            
+
             // 2. 运行额外验证器
             if (!additionalValidators.validate()) {
                 return false;
             }
-            
-            // 3. 禁用按钮
-            this.isPlaceOrderActionAllowed(false);
-            
-            // 4. 调用 place-order action
-            $.when(placeOrderAction(this.getSelectedPaymentMethod(), this.messageContainer))
-                .done(function () {
+
+            // 3. 验证通过，禁用按钮
+            if (this.isPlaceOrderActionAllowed() === true) {
+                this.isPlaceOrderActionAllowed(false);
+
+                // 4. 调用 place-order action（参考 default.js）
+                $.when(
+                    placeOrderAction(this.getData(), this.messageContainer)
+                ).done(function () {
                     // 成功，重定向
-                    redirectOnSuccessAction.execute();
-                })
-                .fail(function () {
-                    // 失败，重新启用按钮
+                    if (self.redirectAfterPlaceOrder !== false) {
+                        redirectOnSuccessAction.execute();
+                    }
+                }).always(function () {
+                    // 重新启用按钮
                     self.isPlaceOrderActionAllowed(true);
                 });
-            
+
+                return true;
+            }
+
             return false;
-        },
-        
-        /**
-         * Place Order 按钮是否可用
-         */
-        isPlaceOrderActionAllowed: ko.observable(true)
+        }
     });
 });
