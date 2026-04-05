@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- 禁用原生进度条，由我们自定义 -->
+        <referenceBlock name="checkout.root" remove="false">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <!-- 移除原生 progressBar -->
+                        <item name="progressBar" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                        
+                        <!-- 禁用 estimation 块 -->
+                        <item name="estimation" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                            </item>
+                        </item>
+                        
+                        <!-- 修改 steps 配置：移除 shipping-step，只保留 billing-step (payment) -->
+                        <item name="steps" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <!-- 移除 shipping-step -->
+                                <item name="shipping-step" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                        
+                        <!-- 修改 sidebar：在 summary 前添加 place-order-button -->
+                        <item name="sidebar" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <!-- 添加统一的 Place Order 按钮 -->
+                                <item name="place-order-container" xsi:type="array">
+                                    <item name="sortOrder" xsi:type="string">5</item>
+                                    <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
+                                    <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
+                                    <item name="provider" xsi:type="string">checkout</item>
+                                    <item name="children" xsi:type="array">
+                                        <item name="errors" xsi:type="array">
+                                            <item name="component" xsi:type="string">Magento_Ui/js/view/messages</item>
+                                            <item name="displayArea" xsi:type="string">global_messages</item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

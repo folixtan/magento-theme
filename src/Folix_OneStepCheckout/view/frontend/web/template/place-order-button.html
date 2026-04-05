@@ -1,0 +1,28 @@
+<!--
+/**
+ * Folix One Step Checkout - Place Order Button Template
+ * 
+ * 统一的下单按钮，放在右侧摘要区底部
+ */
+-->
+<div class="folix-place-order-container" data-bind="scope:'place-order-container'">
+    <!-- 错误消息 -->
+    <div data-bind="foreach: { data: messageContainer().messages, as: 'message' }">
+        <div class="message-error error message" data-bind="attr: { 'data-ui-id': $parent.messageContainer().getId($index()) }">
+            <span data-bind="text: message.text"></span>
+        </div>
+    </div>
+    
+    <!-- Place Order 按钮 -->
+    <button type="submit"
+            id="folix-place-order-btn"
+            class="action primary checkout"
+            data-bind="
+                click: onClick,
+                attr: { title: $t('Place Order') },
+                enable: isPaymentSelected()
+            "
+            disabled>
+        <span data-bind="i18n: 'Place Order'"></span>
+    </button>
+</div>
