@@ -1,0 +1,30 @@
+<!--
+/**
+ * Folix One Step Checkout - Place Order Button Template
+ *
+ * @category    Folix
+ * @package     Folix_OneStepCheckout
+ */
+-->
+<div class="actions-toolbar place-order-toolbar" id="place-order-buttons-container">
+    <div class="primary">
+        <button class="action primary checkout"
+                data-role="one-step-place-order"
+                type="button"
+                data-bind="
+                    click: placeOrder,
+                    attr: {title: $t('Place Order')},
+                    enable: isPlaceOrderAllowed
+                ">
+            <span data-bind="i18n: 'Place Order'"></span>
+        </button>
+    </div>
+    <div class="secondary">
+        <span id="checkout-review-edit-label" data-bind="i18n: 'Forgot an Item?'"></span>
+        <a data-bind="attr: {href: cartUrl}"
+           aria-describedby="checkout-review-edit-label"
+           class="action edit">
+            <span data-bind="i18n: 'Edit Your Cart'"></span>
+        </a>
+    </div>
+</div>

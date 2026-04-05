@@ -1,0 +1,45 @@
+<!--
+/**
+ * Folix One Step Checkout - Sidebar Template
+ *
+ * 订单摘要 + Place Order 按钮
+ *
+ * @category    Folix
+ * @package     Folix_OneStepCheckout
+ */
+-->
+<div id="opc-sidebar"
+     class="opc-sidebar"
+     data-bind="afterRender:setModalElement, mageInit: {
+    'Magento_Ui/js/modal/modal':{
+        'type': 'custom',
+        'modalClass': 'opc-sidebar opc-summary-wrapper',
+        'wrapperClass': 'checkout-container',
+        'parentModalClass': '_has-modal-custom',
+        'responsive': true,
+        'responsiveClass': 'custom-slide',
+        'overlayClass': 'modal-custom-overlay',
+        'buttons': []
+    }}">
+
+    <!-- 订单摘要 -->
+    <div class="opc-block-summary" data-bind="blockLoader: isLoading">
+        <span data-bind="i18n: 'Order Summary'" class="title"></span>
+
+        <!-- ko foreach: elems() -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+        <!-- /ko -->
+
+        <!-- Place Order 按钮（一步结账核心） -->
+        <div class="place-order-wrapper" id="one-step-place-order">
+            <!-- Place Order 按钮将通过 JS 动态添加 -->
+        </div>
+    </div>
+
+    <!-- 配送信息（如果有的话） -->
+    <div class="opc-block-shipping-information">
+        <!-- ko foreach: getRegion('shipping-information') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</div>

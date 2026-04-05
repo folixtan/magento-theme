@@ -1393,12 +1393,12 @@
 
 //
 //  One Step Checkout - 一步结账样式
-//  应用于结账页面，自动隐藏配送步骤（虚拟商品）
+//  应用于结账页面
 //  _____________________________________________
 
 .checkout-index-index {
     //
-    //  隐藏不需要的元素（虚拟商品）
+    //  隐藏不需要的元素
     //  _____________________________________________
 
     // 隐藏进度条
@@ -1406,7 +1406,7 @@
         display: none !important;
     }
 
-    // 隐藏配送步骤（虚拟商品）
+    // 隐藏配送步骤
     .shipping-step {
         display: none !important;
     }
@@ -1416,21 +1416,26 @@
         display: none !important;
     }
 
+    // 隐藏每个支付方式内的 Place Order 按钮（统一放在右侧）
+    .payment-method-content .actions-toolbar {
+        display: none !important;
+    }
+
     //
     //  两栏布局
     //  _____________________________________________
 
-    .checkout-container {
+    // 主容器
+    .checkout-one-step {
         .lib-clearfix();
     }
 
     // 左侧主内容区
-    .opc-wrapper {
+    .checkout-main-content {
         width: 55%;
         float: left;
         padding-right: @indent__xl;
         box-sizing: border-box;
-        margin-bottom: @indent__l;
 
         @media (max-width: @screen__m) {
             width: 100%;
@@ -1451,7 +1456,7 @@
         }
     }
 
-    // 摘要面板 sticky
+    // 摘要面板
     .opc-block-summary {
         position: sticky;
         top: @indent__l;
@@ -1464,6 +1469,67 @@
         @media (max-width: @screen__m) {
             position: static;
             margin-bottom: @indent__l;
+        }
+    }
+
+    //
+    //  Place Order 按钮（右侧统一）
+    //  _____________________________________________
+
+    .place-order-wrapper {
+        margin-top: @indent__l;
+        padding-top: @indent__l;
+        border-top: 2px solid @folix-border;
+
+        .actions-toolbar {
+            .primary {
+                .action.primary.checkout {
+                    width: 100%;
+                    padding: @indent__l @indent__xl;
+                    background: @folix-gradient-secondary;
+                    color: #FFFFFF;
+                    border: none;
+                    border-radius: @folix-radius-md;
+                    font-size: 18px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    transition: all @folix-transition-smooth;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: @indent__s;
+
+                    &::before {
+                        content: '🔥';
+                        font-size: 20px;
+                    }
+
+                    &:hover {
+                        transform: translateY(-2px);
+                        box-shadow: @folix-shadow-secondary;
+                    }
+
+                    &:disabled {
+                        opacity: 0.6;
+                        cursor: not-allowed;
+                        transform: none;
+                    }
+                }
+            }
+
+            .secondary {
+                margin-top: @indent__m;
+                text-align: center;
+
+                .action.edit {
+                    color: @folix-primary;
+                    font-size: 13px;
+
+                    &:hover {
+                        color: @folix-secondary;
+                    }
+                }
+            }
         }
     }
 
@@ -1534,14 +1600,9 @@
         }
 
         .payment-method-content {
-            display: none;
             padding: @indent__l !important;
             border-top: 1px solid @folix-border !important;
             background: @folix-bg-card !important;
-
-            ._active + & {
-                display: block;
-            }
         }
 
         // 支付方式图标
@@ -1549,62 +1610,6 @@
             height: 28px;
             width: auto;
             margin-left: auto;
-        }
-
-        // 支付方式描述
-        .payment-method-description {
-            font-size: 12px;
-            color: @folix-text-muted;
-            margin-left: auto;
-        }
-    }
-
-    //
-    //  Place Order 按钮
-    //  _____________________________________________
-
-    .actions-toolbar {
-        .action.primary.checkout {
-            width: 100%;
-            padding: @indent__l @indent__xl;
-            background: @folix-gradient-secondary;
-            color: #FFFFFF;
-            border: none;
-            border-radius: @folix-radius-md;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all @folix-transition-smooth;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: @indent__s;
-            margin-top: @indent__l;
-
-            &::before {
-                content: '🔥';
-                font-size: 20px;
-            }
-
-            &:hover {
-                transform: translateY(-2px);
-                box-shadow: @folix-shadow-secondary;
-            }
-
-            &:disabled {
-                opacity: 0.6;
-                cursor: not-allowed;
-                transform: none;
-            }
-
-            @media (max-width: @screen__m) {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                border-radius: 0;
-                z-index: 100;
-            }
         }
     }
 
@@ -1629,7 +1634,7 @@
     }
 
     //
-    //  登录/注册区域保留
+    //  登录/注册区域
     //  _____________________________________________
 
     .authentication-wrapper {
@@ -1649,7 +1654,6 @@
     //  _____________________________________________
 
     @media (max-width: @screen__m) {
-        // 防止内容被底部固定按钮遮挡
         .page-wrapper {
             padding-bottom: 100px;
         }
@@ -1672,6 +1676,23 @@
 
             .grand.totals .amount .price {
                 font-size: 22px;
+            }
+        }
+
+        .place-order-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: @folix-bg-card;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            padding: @indent__m @indent__l;
+            z-index: 100;
+            margin-top: 0;
+            border-top: 1px solid @folix-border;
+
+            .actions-toolbar .primary .action.primary.checkout {
+                width: 100%;
             }
         }
     }

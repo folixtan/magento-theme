@@ -4,13 +4,10 @@
  * Folix One Step Checkout - Layout Configuration
  *
  * 实现一步结账：
- * 1. 隐藏进度条 (progressBar)
- * 2. 隐藏配送步骤 (shipping-step)
- * 3. 保留登录/注册 (authentication)
- * 4. 保留支付步骤 (billing-step)
- *
- * 注意：虚拟商品的后端处理由 Magento 内置逻辑处理 (quote.isVirtual())
- * 前端只需要隐藏不需要的 UI 元素即可
+ * 1. 使用自定义 onepage 模板（两列布局）
+ * 2. 使用自定义 sidebar 模板
+ * 3. 在 summary 区域添加 Place Order 按钮
+ * 4. 禁用不需要的组件
  *
  * @category    Folix
  * @package     Folix_OneStepCheckout
@@ -19,12 +16,16 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
 
-        <!-- 通过 referenceBlock 修改 jsLayout -->
+        <!-- 重写 checkout 主组件的模板 -->
         <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
                         <item name="checkout" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <!-- 使用自定义 onepage 模板 -->
+                                <item name="template" xsi:type="string">Folix_OneStepCheckout/onepage</item>
+                            </item>
                             <item name="children" xsi:type="array">
 
                                 <!-- 禁用进度条 -->
@@ -34,14 +35,14 @@
                                     </item>
                                 </item>
 
-                                <!-- 禁用 estimation (侧边栏运费估算) -->
+                                <!-- 禁用运费估算 -->
                                 <item name="estimation" xsi:type="array">
                                     <item name="config" xsi:type="array">
                                         <item name="componentDisabled" xsi:type="boolean">true</item>
                                     </item>
                                 </item>
 
-                                <!-- 配置 steps - 隐藏配送步骤 -->
+                                <!-- 配置 steps -->
                                 <item name="steps" xsi:type="array">
                                     <item name="children" xsi:type="array">
 
@@ -68,6 +69,24 @@
                                             </item>
                                         </item>
 
+                                    </item>
+                                </item>
+
+                                <!-- 配置 sidebar -->
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Folix_OneStepCheckout/sidebar</item>
+                                    </item>
+                                    <item name="children" xsi:type="array">
+                                        <!-- 在 summary 区域添加 Place Order 按钮 -->
+                                        <item name="place-order-button" xsi:type="array">
+                                            <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
+                                            <item name="sortOrder" xsi:type="string">100</item>
+                                            <item name="config" xsi:type="array">
+                                                <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
+                                                <item name="cartUrl" xsi:type="string" xsi:nil="true"/>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
 

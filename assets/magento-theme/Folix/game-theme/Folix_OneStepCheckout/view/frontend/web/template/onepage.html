@@ -1,0 +1,51 @@
+<!--
+/**
+ * Folix One Step Checkout - Main Template
+ *
+ * 两列布局：
+ * - 左侧：Account + Order Items + Payment Methods
+ * - 右侧：Order Summary + Place Order
+ *
+ * @category    Folix
+ * @package     Folix_OneStepCheckout
+ */
+-->
+<div class="checkout-one-step">
+    <!-- 左侧：主内容区 -->
+    <div class="checkout-main-content">
+
+        <!-- 登录/注册 -->
+        <!-- ko foreach: getRegion('authentication') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- 进度条（隐藏，但保留渲染） -->
+        <!-- ko foreach: getRegion('progressBar') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- 运费估算（隐藏） -->
+        <!-- ko foreach: getRegion('estimation') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- 消息区域 -->
+        <!-- ko foreach: getRegion('messages') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+
+        <!-- 步骤内容 -->
+        <div class="opc-wrapper">
+            <ol class="opc" id="checkoutSteps">
+            <!-- ko foreach: getRegion('steps') -->
+                <!-- ko template: getTemplate() --><!-- /ko -->
+            <!--/ko-->
+            </ol>
+        </div>
+    </div>
+
+    <!-- 右侧：订单摘要 -->
+    <!-- ko foreach: getRegion('sidebar') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
