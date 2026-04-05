@@ -4,7 +4,8 @@
 
 ## 实现方式
 
-通过 XML 布局在 `sidebar.children` 中添加 `place-order` 组件：
+### 1. XML 布局
+在 `sidebar.children` 中添加 `place-order` 组件：
 
 ```xml
 <item name="sidebar">
@@ -16,6 +17,18 @@
 </item>
 ```
 
+### 2. Place Order 按钮组件
+通过 `uiRegistry` 获取当前选中的支付方式组件，调用其 `placeOrder` 方法：
+
+```javascript
+placeOrder: function () {
+    var componentName = 'checkout.steps.billing-step.payment.payments-list.' + method.method;
+    registry.get(componentName, function (paymentComponent) {
+        paymentComponent.placeOrder();  // 调用支付方式组件的 placeOrder
+    });
+}
+```
+
 ## 核心文件
 
 ```
@@ -23,18 +36,12 @@ Folix_OneStepCheckout/
 ├── etc/module.xml
 ├── registration.php
 └── view/frontend/
-    ├── layout/checkout_index_index.xml    # XML 布局配置
-    ├── web/
-    │   ├── css/source/_folix-one-step-checkout.less  # 样式（隐藏支付方式按钮）
-    │   ├── js/view/place-order-button.js  # Place Order 组件
-    │   └── template/place-order-button.html
+    ├── layout/checkout_index_index.xml
+    └── web/
+        ├── css/source/_folix-one-step-checkout.less
+        ├── js/view/place-order-button.js
+        └── template/place-order-button.html
 ```
-
-## 关键设计
-
-1. **禁用 progressBar, estimation, shipping-step**（通过 XML config）
-2. **在 sidebar 中添加 place-order 组件**（放在摘要底部）
-3. **通过 CSS 隐藏每个支付方式内的 Place Order 按钮**
 
 ## 部署
 

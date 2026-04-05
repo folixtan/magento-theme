@@ -3,24 +3,10 @@
  * Folix One Step Checkout - Place Order Button Template
  * 
  * 放在 sidebar 中（摘要底部）
- * 
- * Magento sidebar.html 结构:
- * <div id="opc-sidebar">
- *     <!-- ko foreach: getRegion('summary') --><!-- /ko-->
- *     <div class="opc-block-shipping-information">
- *         <!-- ko foreach: getRegion('shipping-information') --><!-- /ko-->
- *     </div>
- * </div>
- * 
- * 我们在这里添加 place-order region，它会在 summary 和 shipping-information 下方渲染
+ * 直接调用选中支付方式组件的 placeOrder 方法
  */
 -->
-<div class="folix-place-order actions-toolbar" data-bind="afterRender: initPlaceOrder">
-    <!-- 错误消息 -->
-    <div class="message message-error error" data-bind="foreach: messageContainer().messages">
-        <span data-bind="text: $data.text"></span>
-    </div>
-    
+<div class="folix-place-order actions-toolbar">
     <!-- Place Order 按钮 -->
     <div class="primary">
         <button type="submit"
@@ -29,7 +15,7 @@
                 data-bind="
                     click: placeOrder,
                     attr: { title: $t('Place Order') },
-                    enable: isPaymentSelected()
+                    enable: isPlaceOrderActionAllowed()
                 ">
             <span data-bind="i18n: 'Place Order'"></span>
         </button>

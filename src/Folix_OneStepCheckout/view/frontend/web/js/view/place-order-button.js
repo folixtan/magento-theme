@@ -2,31 +2,23 @@
  * Folix One Step Checkout - Place Order Button
  * 
  * 放在 sidebar 的 place-order region 中（在摘要底部）
- * 继承原生 payment/default.js 的 placeOrder 逻辑
+ * 通过 uiRegistry 获取选中的支付方式组件，调用其 placeOrder 方法
  */
 define([
     'ko',
     'jquery',
     'uiComponent',
-    'Magento_Checkout/js/action/place-order',
-    'Magento_Checkout/js/action/redirect-on-success',
     'Magento_Checkout/js/model/quote',
-    'Magento_Checkout/js/model/payment/additional-validators',
     'Magento_Checkout/js/model/checkout-data-resolver',
-    'Magento_Checkout/js/checkout-data',
-    'Magento_Ui/js/model/messages',
+    'uiRegistry',
     'mage/translate'
 ], function (
     ko,
     $,
     Component,
-    placeOrderAction,
-    redirectOnSuccessAction,
     quote,
-    additionalValidators,
     checkoutDataResolver,
-    checkoutData,
-    Messages,
+    registry,
     $t
 ) {
     'use strict';
@@ -39,7 +31,6 @@ define([
         /** @inheritdoc */
         initialize: function () {
             this._super();
-            this.messageContainer = new Messages();
             
             // 解决账单地址（虚拟商品）
             checkoutDataResolver.resolveBillingAddress();
@@ -57,73 +48,56 @@ define([
         isPlaceOrderActionAllowed: ko.observable(false),
         
         /**
-         * 获取选中的支付方式数据
-         * @returns {Object|null}
+         * 获取当前选中的支付方式组件名称
+         * @returns {String|null}
          */
-        getData: function () {
+        getSelectedPaymentComponentName: function () {
             var method = quote.paymentMethod();
             if (method) {
-                return {
-                    'method': method.method,
-                    'po_number': null,
-                    'additional_data': null
-                };
+                // 支付方式组件路径: checkout.steps.billing-step.payment.payments-list.<method_code>
+                return 'checkout.steps.billing-step.payment.payments-list.' + method.method;
             }
             return null;
         },
         
         /**
-         * 检查是否选择了支付方式
-         * @returns {boolean}
-         */
-        isPaymentSelected: function () {
-            return quote.paymentMethod() !== null;
-        },
-        
-        /**
-         * Place Order - 参考 payment/default.js 的实现
+         * Place Order - 获取选中的支付方式组件，调用其 placeOrder 方法
          */
         placeOrder: function (data, event) {
             var self = this;
+            var componentName = this.getSelectedPaymentComponentName();
 
             if (event) {
                 event.preventDefault();
             }
 
-            // 1. 检查是否选择了支付方式
-            if (!this.isPaymentSelected()) {
-                this.messageContainer.addErrorMessage({
-                    message: $t('Please select a payment method.')
-                });
+            if (!componentName) {
+                // 没有选中支付方式，使用 messageContainer
+                this.showError($t('Please select a payment method.'));
                 return false;
             }
 
-            // 2. 运行额外验证器
-            if (!additionalValidators.validate()) {
-                return false;
-            }
-
-            // 3. 验证通过，禁用按钮
-            if (this.isPlaceOrderActionAllowed() === true) {
-                this.isPlaceOrderActionAllowed(false);
-
-                // 4. 调用 place-order action（参考 default.js）
-                $.when(
-                    placeOrderAction(this.getData(), this.messageContainer)
-                ).done(function () {
-                    // 成功，重定向
-                    if (self.redirectAfterPlaceOrder !== false) {
-                        redirectOnSuccessAction.execute();
-                    }
-                }).always(function () {
-                    // 重新启用按钮
-                    self.isPlaceOrderActionAllowed(true);
-                });
-
-                return true;
-            }
+            // 通过 registry 获取支付方式组件
+            registry.get(componentName, function (paymentComponent) {
+                if (paymentComponent && typeof paymentComponent.placeOrder === 'function') {
+                    // 调用支付方式组件的 placeOrder 方法
+                    // 这里传 null 给 data 参数，因为按钮事件不需要 data
+                    paymentComponent.placeOrder(null, null);
+                } else {
+                    self.showError($t('Unable to process payment.'));
+                }
+            });
 
             return false;
+        },
+        
+        /**
+         * 显示错误消息
+         * @param {String} message
+         */
+        showError: function (message) {
+            // 简单提示
+            alert(message);
         }
     });
 });
