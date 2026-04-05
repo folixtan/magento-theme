@@ -1,0 +1,36 @@
+<!--
+/**
+ * Folix One Step Checkout - Sidebar Template Override
+ * 
+ * 与原生 sidebar.html 完全相同，只是添加了 place-order region
+ */
+-->
+
+<div id="opc-sidebar"
+     data-bind="afterRender:setModalElement, mageInit: {
+    'Magento_Ui/js/modal/modal':{
+        'type': 'custom',
+        'modalClass': 'opc-sidebar opc-summary-wrapper',
+        'wrapperClass': 'checkout-container',
+        'parentModalClass': '_has-modal-custom',
+        'responsive': true,
+        'responsiveClass': 'custom-slide',
+        'overlayClass': 'modal-custom-overlay',
+        'buttons': []
+    }}">
+
+    <!-- ko foreach: getRegion('summary') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <!-- Folix: Place Order 按钮区域，放在 summary 后面 -->
+    <!-- ko foreach: getRegion('place-order') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+
+    <div class="opc-block-shipping-information">
+        <!-- ko foreach: getRegion('shipping-information') -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+        <!--/ko-->
+    </div>
+</div>

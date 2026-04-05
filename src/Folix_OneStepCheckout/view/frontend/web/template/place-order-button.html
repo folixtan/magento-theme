@@ -2,27 +2,33 @@
 /**
  * Folix One Step Checkout - Place Order Button Template
  * 
- * 统一的下单按钮，放在右侧摘要区底部
+ * 放在 sidebar 的 place-order region 中
  */
 -->
-<div class="folix-place-order-container" data-bind="scope:'place-order-container'">
-    <!-- 错误消息 -->
-    <div data-bind="foreach: { data: messageContainer().messages, as: 'message' }">
-        <div class="message-error error message" data-bind="attr: { 'data-ui-id': $parent.messageContainer().getId($index()) }">
-            <span data-bind="text: message.text"></span>
+<div class="folix-place-order actions-toolbar" data-bind="scope: 'sidebar.place-order'">
+    <!-- 错误消息显示 -->
+    <div class="message message-error error" 
+         data-bind="foreach: messageContainer().messages"
+         style="display: none;">
+        <div data-role="checkout-messages">
+            <div class="message-error error message">
+                <span data-bind="text: $data.text"></span>
+            </div>
         </div>
     </div>
     
     <!-- Place Order 按钮 -->
-    <button type="submit"
-            id="folix-place-order-btn"
-            class="action primary checkout"
-            data-bind="
-                click: onClick,
-                attr: { title: $t('Place Order') },
-                enable: isPaymentSelected()
-            "
-            disabled>
-        <span data-bind="i18n: 'Place Order'"></span>
-    </button>
+    <div class="primary">
+        <button type="submit"
+                id="folix-place-order-btn"
+                class="action primary checkout"
+                data-bind="
+                    click: placeOrder,
+                    attr: { title: $t('Place Order') },
+                    enable: isPaymentSelected(),
+                    css: { '._loading': !isPlaceOrderActionAllowed() }
+                ">
+            <span data-bind="i18n: 'Place Order'"></span>
+        </button>
+    </div>
 </div>
