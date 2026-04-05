@@ -3,12 +3,10 @@
 /**
  * Folix One Step Checkout
  * 
- * Magento XML 合并机制：结构相同就会合并/新增
- * 
- * 思路：
+ * 核心思路：
  * 1. 禁用 progressBar, estimation, shipping-step
- * 2. 在 payment.children.afterMethods 中添加 place-order 组件
- * 3. 由于 afterMethods 是在每个支付方式之后，Place Order 按钮会显示在支付方式列表下方
+ * 2. 在 sidebar.children 中添加 place-order 组件（放在摘要底部）
+ * 3. 通过 CSS 隐藏每个支付方式内的 Place Order 按钮
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -18,49 +16,43 @@
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
-                        <!-- 禁用 progressBar 和 estimation -->
                         <item name="checkout" xsi:type="array">
                             <item name="children" xsi:type="array">
+                                <!-- 禁用 progressBar -->
                                 <item name="progressBar" xsi:type="array">
                                     <item name="config" xsi:type="array">
                                         <item name="componentDisabled" xsi:type="boolean">true</item>
                                     </item>
                                 </item>
+                                <!-- 禁用 estimation -->
                                 <item name="estimation" xsi:type="array">
                                     <item name="config" xsi:type="array">
                                         <item name="componentDisabled" xsi:type="boolean">true</item>
                                     </item>
                                 </item>
-                            </item>
-                        </item>
-                        
-                        <!-- 禁用 shipping-step -->
-                        <item name="steps" xsi:type="array">
-                            <item name="children" xsi:type="array">
-                                <item name="shipping-step" xsi:type="array">
-                                    <item name="config" xsi:type="array">
-                                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                                <!-- 禁用 shipping-step -->
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                                <item name="componentDisabled" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
-                            </item>
-                        </item>
-                        
-                        <!-- 在 payment.children.afterMethods 中添加 place-order -->
-                        <!-- Magento 会合并，不会替换 -->
-                        <item name="steps" xsi:type="array">
-                            <item name="children" xsi:type="array">
-                                <item name="billing-step" xsi:type="array">
+                                <!-- 在 sidebar 中添加 place-order 组件（放在摘要底部） -->
+                                <item name="steps" xsi:type="array">
                                     <item name="children" xsi:type="array">
-                                        <item name="payment" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
                                             <item name="children" xsi:type="array">
-                                                <item name="afterMethods" xsi:type="array">
+                                                <item name="sidebar" xsi:type="array">
                                                     <item name="children" xsi:type="array">
                                                         <item name="place-order" xsi:type="array">
                                                             <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
-                                                            <item name="sortOrder" xsi:type="string">100</item>
                                                             <item name="config" xsi:type="array">
                                                                 <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
                                                             </item>
+                                                            <item name="sortOrder" xsi:type="string">100</item>
                                                         </item>
                                                     </item>
                                                 </item>

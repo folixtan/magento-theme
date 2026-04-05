@@ -5,85 +5,94 @@
 //  * Place Order 按钮统一显示在右侧摘要底部
 //  */
 
-// 隐藏每个支付方式内的 Place Order 按钮（因为已移到右侧摘要）
-.opc-sidebar {
+// ============================================
+// 隐藏每个支付方式内的 Place Order 按钮
+// ============================================
+
+// 隐藏所有支付方式内的 actions-toolbar（包含 Place Order 按钮）
+// 原生 checkmo.html 中 Place Order 按钮的父容器是 .payment-method-content > .actions-toolbar
+.opc-payment {
+    .payment-method-content {
+        > .actions-toolbar {
+            display: none !important;
+        }
+    }
+}
+
+// 或者更精确地隐藏 Place Order 按钮
+.payment-method {
     .actions-toolbar {
         .primary {
-            #payment {
-                .actions-toolbar {
-                    display: none !important;
+            .checkout {
+                display: none !important;
+            }
+        }
+    }
+}
+
+// ============================================
+// Folix Place Order 按钮样式（右侧摘要底部）
+// ============================================
+
+.opc-sidebar {
+    .folix-place-order {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid @color-gray-light3;
+
+        .primary {
+            width: 100%;
+
+            .checkout {
+                width: 100%;
+                padding: 18px;
+                font-size: 18px;
+                background: #ff6b35;
+                border-color: #ff6b35;
+                font-weight: 700;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+
+                &:hover {
+                    background: darken(#ff6b35, 10%);
+                    border-color: darken(#ff6b35, 10%);
+                }
+
+                &:disabled {
+                    background: #ccc;
+                    border-color: #ccc;
+                    cursor: not-allowed;
                 }
             }
         }
-    }
-}
 
-// 隐藏支付方法中的 "Continue" 按钮区域
-.payment-method-content {
-    > .actions-toolbar {
-        display: none !important;
-    }
-}
+        .message.error {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: #fff0f0;
+            border: 1px solid #ffcccc;
+            border-radius: 4px;
+            color: #d63031;
 
-// Folix Place Order 按钮样式
-.folix-place-order {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid @color-gray-light3;
-
-    .primary {
-        width: 100%;
-
-        .checkout {
-            width: 100%;
-            padding: 18px;
-            font-size: 18px;
-            background: #ff6b35;
-            border-color: #ff6b35;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-
-            &:hover {
-                background: darken(#ff6b35, 10%);
-                border-color: darken(#ff6b35, 10%);
-            }
-
-            &:disabled {
-                background: #ccc;
-                border-color: #ccc;
+            span {
+                display: block;
             }
         }
     }
-
-    .message.error {
-        margin-bottom: 15px;
-        padding: 10px 15px;
-        background: #fff0f0;
-        border: 1px solid #ffcccc;
-        border-radius: 4px;
-        color: #d63031;
-
-        span {
-            display: block;
-        }
-    }
 }
 
-// 隐藏原有的 checkout-agreement 按钮（如果有）
-.checkout-agreements-block {
-    & + .actions-toolbar {
-        display: none !important;
-    }
-}
+// ============================================
+// 响应式适配
+// ============================================
 
-// 响应式
 @media (max-width: @mobile-breakpoint) {
-    .folix-place-order {
-        .primary {
-            .checkout {
-                font-size: 16px;
-                padding: 15px;
+    .opc-sidebar {
+        .folix-place-order {
+            .primary {
+                .checkout {
+                    font-size: 16px;
+                    padding: 15px;
+                }
             }
         }
     }

@@ -1,7 +1,7 @@
 /**
  * Folix One Step Checkout - Place Order Button
  * 
- * 放在 sidebar 的 place-order region 中
+ * 放在 sidebar 的 place-order region 中（在摘要底部）
  * 调用原生 place-order action
  */
 define([
@@ -39,7 +39,7 @@ define([
             this._super();
             this.messageContainer = new Messages();
             
-            // 解决账单地址
+            // 解决账单地址（虚拟商品）
             checkoutDataResolver.resolveBillingAddress();
         },
         
@@ -52,7 +52,7 @@ define([
         },
         
         /**
-         * 获取选中的支付方式数据（格式与 payment/default.js 一致）
+         * 获取选中的支付方式数据
          * @returns {Object|null}
          */
         getSelectedPaymentMethod: function () {
@@ -100,19 +100,15 @@ define([
                     redirectOnSuccessAction.execute();
                 })
                 .fail(function () {
-                    // 失败，错误消息由 messageContainer 显示
-                })
-                .always(function () {
-                    // 重新启用按钮
+                    // 失败，重新启用按钮
                     self.isPlaceOrderActionAllowed(true);
                 });
             
-            return true;
+            return false;
         },
         
         /**
-         * 按钮是否允许点击
-         * @returns {boolean}
+         * Place Order 按钮是否可用
          */
         isPlaceOrderActionAllowed: ko.observable(true)
     });
