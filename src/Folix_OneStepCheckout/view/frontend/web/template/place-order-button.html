@@ -2,19 +2,13 @@
 /**
  * Folix One Step Checkout - Place Order Button Template
  * 
- * 放在 sidebar 的 place-order region 中
+ * 放在 summary 中，在商品列表后面显示
  */
 -->
-<div class="folix-place-order actions-toolbar" data-bind="scope: 'sidebar.place-order'">
-    <!-- 错误消息显示 -->
-    <div class="message message-error error" 
-         data-bind="foreach: messageContainer().messages"
-         style="display: none;">
-        <div data-role="checkout-messages">
-            <div class="message-error error message">
-                <span data-bind="text: $data.text"></span>
-            </div>
-        </div>
+<div class="folix-place-order actions-toolbar">
+    <!-- 错误消息 -->
+    <div class="message message-error error" data-bind="foreach: messageContainer().messages">
+        <span data-bind="text: $data.text"></span>
     </div>
     
     <!-- Place Order 按钮 -->
@@ -25,8 +19,7 @@
                 data-bind="
                     click: placeOrder,
                     attr: { title: $t('Place Order') },
-                    enable: isPaymentSelected(),
-                    css: { '._loading': !isPlaceOrderActionAllowed() }
+                    enable: isPaymentSelected()
                 ">
             <span data-bind="i18n: 'Place Order'"></span>
         </button>

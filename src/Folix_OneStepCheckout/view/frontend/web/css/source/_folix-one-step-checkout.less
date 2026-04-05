@@ -1,11 +1,8 @@
 //
 // Folix One Step Checkout - Styles
-// 一步结账模块样式
 //
 
-// =====================================================
-// 1. 隐藏原生 Place Order 按钮（每个支付方式内的）
-// =====================================================
+// 隐藏每个支付方式内的 Place Order 按钮
 .checkout-payment-method {
     .actions-toolbar {
         .action.primary.checkout {
@@ -14,17 +11,17 @@
     }
 }
 
-// =====================================================
-// 2. 右侧摘要区 Place Order 按钮
-// =====================================================
+// Place Order 按钮样式
 .folix-place-order {
-    padding: 20px 0 0 0;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid @color-gray80;
     
     .primary {
         width: 100%;
     }
     
-    #folix-place-order-btn {
+    .action.primary.checkout {
         width: 100%;
         padding: 16px;
         font-size: 18px;
@@ -33,7 +30,6 @@
         border: none;
         border-radius: 4px;
         color: @white;
-        cursor: pointer;
         
         &:hover {
             background: @folix-primary-dark;
@@ -41,38 +37,12 @@
         
         &:disabled {
             background: @color-gray80;
-            cursor: not-allowed;
             opacity: 0.6;
         }
-        
-        &._loading {
-            position: relative;
-            color: transparent;
-            
-            &:after {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                width: 20px;
-                height: 20px;
-                margin: -10px 0 0 -10px;
-                border: 2px solid @white;
-                border-radius: 50%;
-                border-top-color: transparent;
-                animation: spin 1s linear infinite;
-            }
-        }
-    }
-    
-    @keyframes spin {
-        to { transform: rotate(360deg); }
     }
 }
 
-// =====================================================
-// 3. 错误消息样式
-// =====================================================
+// 错误消息
 .message-error {
     margin-bottom: 10px;
     padding: 10px;
@@ -81,16 +51,12 @@
     color: #ed1c24;
 }
 
-// =====================================================
-// 4. 隐藏进度条（如果还没完全禁用）
-// =====================================================
+// 隐藏进度条
 .opc-progress-bar {
     display: none !important;
 }
 
-// =====================================================
-// 5. 隐藏配送信息（虚拟商品不需要）
-// =====================================================
+// 隐藏配送信息
 .opc-block-shipping-information {
     display: none;
 }

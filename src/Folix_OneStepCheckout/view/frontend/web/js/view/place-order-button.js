@@ -1,8 +1,8 @@
 /**
- * Folix One Step Checkout - Place Order Button Component
+ * Folix One Step Checkout - Place Order Button
  * 
- * 放在 sidebar 的 place-order region 中
- * 负责：调用 place-order action，触发下单
+ * 放在 sidebar.summary.children 中
+ * 调用原生 place-order action
  */
 define([
     'jquery',
@@ -38,14 +38,11 @@ define([
         initialize: function () {
             this._super();
             this.messageContainer = new Messages();
-            
-            // 解决账单地址（如果需要）
             checkoutDataResolver.resolveBillingAddress();
         },
         
         /**
-         * 是否选择了支付方式
-         * @returns {boolean}
+         * 检查是否选择了支付方式
          */
         isPaymentSelected: function () {
             return quote.paymentMethod() !== null;
@@ -53,7 +50,6 @@ define([
         
         /**
          * 获取选中的支付方式数据
-         * @returns {Object|null}
          */
         getSelectedPaymentMethod: function () {
             var method = quote.paymentMethod();
@@ -68,10 +64,7 @@ define([
         },
         
         /**
-         * Place Order 按钮点击处理
-         * @param {Object} data
-         * @param {Event} event
-         * @returns {boolean}
+         * Place Order
          */
         placeOrder: function (data, event) {
             var self = this;
@@ -80,7 +73,7 @@ define([
                 event.preventDefault();
             }
             
-            // 1. 检查是否选择了支付方式
+            // 验证支付方式
             if (!this.isPaymentSelected()) {
                 this.messageContainer.addErrorMessage({
                     message: $t('Please select a payment method.')
@@ -88,38 +81,26 @@ define([
                 return false;
             }
             
-            // 2. 获取支付数据
-            var paymentData = this.getSelectedPaymentMethod();
-            
-            // 3. 运行额外验证器（如邮箱验证等）
+            // 验证
             if (!additionalValidators.validate()) {
                 return false;
             }
             
-            // 4. 禁用按钮，防止重复点击
             this.isPlaceOrderActionAllowed(false);
             
-            // 5. 调用 place-order action
-            $.when(placeOrderAction(paymentData, this.messageContainer))
+            // 调用 place-order
+            $.when(placeOrderAction(this.getSelectedPaymentMethod(), this.messageContainer))
                 .done(function () {
-                    // 下单成功，重定向
                     redirectOnSuccessAction.execute();
                 })
-                .fail(function () {
-                    // 下单失败，错误消息由 messageContainer 显示
-                })
                 .always(function () {
-                    // 重新启用按钮
                     self.isPlaceOrderActionAllowed(true);
                 });
             
             return true;
         },
         
-        /**
-         * 按钮是否允许点击
-         * @returns {boolean}
-         */
+        /** @observable */
         isPlaceOrderActionAllowed: ko.observable(true)
     });
 });

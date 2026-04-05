@@ -1,13 +1,9 @@
 //
 // Folix One Step Checkout - Styles
-// 一步结账模块样式
 //
 
-// =====================================================
-// 1. 隐藏原生 Place Order 按钮（每个支付方式内的）
-// =====================================================
+// 隐藏每个支付方式内的 Place Order 按钮
 .checkout-payment-method {
-    // 隐藏支付方式内的 Place Order 按钮
     .actions-toolbar {
         .action.primary.checkout {
             display: none !important;
@@ -15,28 +11,25 @@
     }
 }
 
-// =====================================================
-// 2. 右侧摘要区 Place Order 按钮
-// =====================================================
-.folix-place-order-container {
-    padding: 20px 0;
+// Place Order 按钮样式
+.folix-place-order {
+    padding-top: 20px;
+    margin-top: 20px;
     border-top: 1px solid @color-gray80;
     
-    .message-error {
-        margin-bottom: 10px;
+    .primary {
+        width: 100%;
     }
     
-    #folix-place-order-btn {
+    .action.primary.checkout {
         width: 100%;
-        padding: 18px 24px;
-        font-size: 16px;
-        font-weight: @font-weight__semibold;
+        padding: 16px;
+        font-size: 18px;
+        font-weight: @font-weight__bold;
         background: @folix-primary;
         border: none;
         border-radius: 4px;
         color: @white;
-        cursor: pointer;
-        transition: background 0.3s ease;
         
         &:hover {
             background: @folix-primary-dark;
@@ -44,140 +37,26 @@
         
         &:disabled {
             background: @color-gray80;
-            cursor: not-allowed;
-            opacity: 0.5;
-        }
-        
-        &:after {
-            content: '';
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            margin-left: 8px;
-            vertical-align: middle;
-            background: url('../images/arrow-right.svg') no-repeat center;
-            background-size: contain;
+            opacity: 0.6;
         }
     }
 }
 
-// =====================================================
-// 3. 一步结账两列布局
-// =====================================================
-.checkout-container {
-    .opc-wrapper {
-        width: 60%;
-        float: left;
-        
-        @media (max-width: 1023px) {
-            width: 100%;
-            float: none;
-        }
-    }
-    
-    .opc-sidebar {
-        width: 35%;
-        margin-left: 5%;
-        float: left;
-        position: sticky;
-        top: 20px;
-        align-self: flex-start;
-        
-        @media (max-width: 1023px) {
-            width: 100%;
-            margin-left: 0;
-            position: static;
-        }
-        
-        .modal-inner-wrap {
-            background: @color-white;
-            padding: 24px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-    }
+// 错误消息
+.message-error {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff4f4;
+    border-left: 3px solid #ed1c24;
+    color: #ed1c24;
 }
 
-// =====================================================
-// 4. 步骤进度条样式调整（如果有）
-// =====================================================
+// 隐藏进度条
 .opc-progress-bar {
-    display: none !important; // 一步结账不需要进度条
+    display: none !important;
 }
 
-// =====================================================
-// 5. 支付方式样式调整
-// =====================================================
-.checkout-payment-method {
-    .payment-method {
-        background: @color-white;
-        border: 1px solid @color-gray80;
-        border-radius: 8px;
-        margin-bottom: 16px;
-        padding: 20px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        
-        &:hover {
-            border-color: @folix-primary;
-        }
-        
-        &._active {
-            border-color: @folix-primary;
-            box-shadow: 0 0 0 2px rgba(46, 139, 87, 0.1);
-        }
-        
-        .payment-method-title {
-            font-weight: @font-weight__semibold;
-            padding: 0 0 16px 0;
-            border-bottom: 1px solid @color-gray80;
-            margin-bottom: 16px;
-            
-            input[type="radio"] {
-                margin-right: 12px;
-            }
-        }
-        
-        .payment-method-content {
-            padding: 0;
-        }
-    }
-}
-
-// =====================================================
-// 6. 结算摘要样式
-// =====================================================
-.opc-block-summary {
-    background: @color-white;
-    border: 1px solid @color-gray80;
-    border-radius: 8px;
-    padding: 24px;
-    
-    > .title {
-        font-size: 18px;
-        font-weight: @font-weight__semibold;
-        margin-bottom: 20px;
-        color: @folix-text;
-    }
-    
-    .table-totals {
-        margin-bottom: 20px;
-    }
-    
-    .markup-quote {
-        font-weight: @font-weight__semibold;
-    }
-}
-
-// =====================================================
-// 7. 配送信息隐藏（虚拟商品不需要）
-// =====================================================
+// 隐藏配送信息
 .opc-block-shipping-information {
     display: none;
-}
-
-// =====================================================
-// 8. 认证/登录区域
-// =====================================================
-.authentication-wrapper {
-    margin-bottom: 24px;
 }
