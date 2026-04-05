@@ -1393,20 +1393,26 @@
 
 //
 //  One Step Checkout - 一步结账样式
+//  应用于结账页面，自动隐藏配送步骤（虚拟商品）
 //  _____________________________________________
 
-.checkout-one-step {
+.checkout-index-index {
     //
-    //  隐藏不需要的元素
+    //  隐藏不需要的元素（虚拟商品）
     //  _____________________________________________
 
     // 隐藏进度条
     .opc-progress-bar {
-        display: none;
+        display: none !important;
     }
 
     // 隐藏配送步骤（虚拟商品）
     .shipping-step {
+        display: none !important;
+    }
+
+    // 隐藏侧边栏运费估算
+    .block-estimation {
         display: none !important;
     }
 
@@ -1449,9 +1455,15 @@
     .opc-block-summary {
         position: sticky;
         top: @indent__l;
+        margin: 0;
+        background: @folix-bg-card;
+        border-radius: @folix-radius-lg;
+        box-shadow: @folix-shadow-md;
+        padding: @indent__l;
 
         @media (max-width: @screen__m) {
             position: static;
+            margin-bottom: @indent__l;
         }
     }
 
@@ -1459,7 +1471,15 @@
     //  支付方式网格（2列卡片布局）
     //  _____________________________________________
 
-    .payment-methods-list {
+    .checkout-payment-method {
+        .step-title {
+            border-bottom: 0;
+            margin-bottom: @indent__s;
+            padding-bottom: 0;
+        }
+    }
+
+    .payment-methods {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: @indent__m;
@@ -1540,29 +1560,11 @@
     }
 
     //
-    //  支付方式组标题
-    //  _____________________________________________
-
-    .payment-group-title {
-        font-size: 14px;
-        font-weight: 600;
-        color: @folix-text-secondary;
-        margin: @indent__l 0 @indent__m;
-        padding-bottom: @indent__s;
-        border-bottom: 1px solid @folix-border;
-
-        &::before {
-            content: '💳';
-            margin-right: @indent__s;
-        }
-    }
-
-    //
     //  Place Order 按钮
     //  _____________________________________________
 
-    .opc-block-summary {
-        .place-order-btn {
+    .actions-toolbar {
+        .action.primary.checkout {
             width: 100%;
             padding: @indent__l @indent__xl;
             background: @folix-gradient-secondary;
@@ -1594,9 +1596,30 @@
                 cursor: not-allowed;
                 transform: none;
             }
-        }
 
-        .grand.total {
+            @media (max-width: @screen__m) {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                border-radius: 0;
+                z-index: 100;
+            }
+        }
+    }
+
+    //
+    //  Grand Total 样式
+    //  _____________________________________________
+
+    .opc-block-summary {
+        .grand.totals {
+            .mark strong {
+                font-size: 18px;
+                font-weight: 700;
+                color: @folix-text-primary;
+            }
+
             .amount .price {
                 font-size: 28px;
                 font-weight: 700;
@@ -1606,178 +1629,49 @@
     }
 
     //
-    //  移动端底部固定按钮
+    //  登录/注册区域保留
     //  _____________________________________________
 
-    @media (max-width: @screen__m) {
-        .checkout-mobile-footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: @folix-bg-card;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
-            padding: @indent__m @indent__l;
-            z-index: 100;
-
-            .opc-block-summary {
-                position: static;
-                box-shadow: none;
-                padding: 0;
-                background: transparent;
-
-                > .title {
-                    display: none;
-                }
-
-                .items-in-cart,
-                .table-totals {
-                    display: none;
-                }
-
-                .place-order-btn {
-                    margin: 0;
-                    width: 100%;
-                }
-            }
-        }
-
-        // 防止内容被固定按钮遮挡
-        .page-wrapper {
-            padding-bottom: 100px;
-        }
-    }
-
-    //
-    //  Account 区域
-    //  _____________________________________________
-
-    .checkout-account {
+    .authentication-wrapper {
+        margin-bottom: @indent__l;
         background: @folix-bg-panel;
         border-radius: @folix-radius-lg;
         padding: @indent__l;
-        margin-bottom: @indent__l;
 
-        .step-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: @folix-text-primary;
-            margin-bottom: @indent__m;
-            display: flex;
-            align-items: center;
-            gap: @indent__s;
-
-            &::before {
-                content: '👤';
-                font-size: 20px;
-            }
-        }
-
-        .guest-email,
-        .logged-in-user {
-            display: flex;
-            align-items: center;
-            gap: @indent__m;
-
-            .email {
-                font-size: 14px;
-                color: @folix-text-secondary;
-            }
-
-            .action {
-                font-size: 13px;
-                color: @folix-primary;
-
-                &:hover {
-                    color: @folix-secondary;
-                }
-            }
+        .block-authentication {
+            background: transparent;
+            box-shadow: none;
         }
     }
 
     //
-    //  Order Items 区域
+    //  移动端优化
     //  _____________________________________________
 
-    .checkout-items {
-        background: @folix-bg-card;
-        border-radius: @folix-radius-lg;
-        padding: @indent__l;
-        margin-bottom: @indent__l;
-        box-shadow: @folix-shadow-sm;
+    @media (max-width: @screen__m) {
+        // 防止内容被底部固定按钮遮挡
+        .page-wrapper {
+            padding-bottom: 100px;
+        }
 
-        .step-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: @folix-text-primary;
-            margin-bottom: @indent__m;
-            display: flex;
-            align-items: center;
-            gap: @indent__s;
-
-            &::before {
-                content: '🎮';
-                font-size: 20px;
+        .opc-wrapper {
+            .step-title {
+                font-size: 18px;
             }
         }
 
-        .product-item {
-            display: flex;
-            gap: @indent__m;
-            padding: @indent__m 0;
-            border-bottom: 1px solid @folix-border-light;
-
-            &:last-child {
-                border-bottom: none;
+        .opc-block-summary {
+            > .title {
+                font-size: 16px;
             }
 
-            .product-image {
-                width: 80px;
-                height: 80px;
-                border-radius: @folix-radius-md;
-                overflow: hidden;
-                flex-shrink: 0;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
+            .minicart-items-wrapper {
+                max-height: 200px;
+                overflow-y: auto;
             }
 
-            .product-details {
-                flex: 1;
-
-                .product-name {
-                    font-weight: 600;
-                    color: @folix-text-primary;
-                    margin-bottom: @indent__xs;
-                }
-
-                .product-info {
-                    font-size: 12px;
-                    color: @folix-text-muted;
-                    margin-bottom: @indent__s;
-
-                    span {
-                        &::after {
-                            content: ' • ';
-                        }
-
-                        &:last-child::after {
-                            content: none;
-                        }
-                    }
-                }
-            }
-
-            .item-price {
-                font-weight: 600;
-                color: @folix-secondary;
-
-                .price {
-                    font-size: 16px;
-                }
+            .grand.totals .amount .price {
+                font-size: 22px;
             }
         }
     }

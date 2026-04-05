@@ -3,8 +3,14 @@
 /**
  * Folix One Step Checkout - Layout Configuration
  *
- * 实现一步结账：移除 progressBar 和 shipping-step
- * 保留 billing-step（支付）
+ * 实现一步结账：
+ * 1. 隐藏进度条 (progressBar)
+ * 2. 隐藏配送步骤 (shipping-step)
+ * 3. 保留登录/注册 (authentication)
+ * 4. 保留支付步骤 (billing-step)
+ *
+ * 注意：虚拟商品的后端处理由 Magento 内置逻辑处理 (quote.isVirtual())
+ * 前端只需要隐藏不需要的 UI 元素即可
  *
  * @category    Folix
  * @package     Folix_OneStepCheckout
@@ -12,7 +18,8 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <!-- 重写 checkout.root 的 jsLayout -->
+
+        <!-- 通过 referenceBlock 修改 jsLayout -->
         <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
@@ -27,14 +34,37 @@
                                     </item>
                                 </item>
 
-                                <!-- 配置 steps -->
+                                <!-- 禁用 estimation (侧边栏运费估算) -->
+                                <item name="estimation" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="componentDisabled" xsi:type="boolean">true</item>
+                                    </item>
+                                </item>
+
+                                <!-- 配置 steps - 隐藏配送步骤 -->
                                 <item name="steps" xsi:type="array">
                                     <item name="children" xsi:type="array">
 
-                                        <!-- 禁用整个 shipping-step -->
+                                        <!-- 禁用 shipping-step -->
                                         <item name="shipping-step" xsi:type="array">
                                             <item name="config" xsi:type="array">
                                                 <item name="componentDisabled" xsi:type="boolean">true</item>
+                                            </item>
+                                        </item>
+
+                                        <!-- 配置 billing-step -->
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <!-- 确保支付方式渲染器可用 -->
+                                                        <item name="renders" xsi:type="array">
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/list</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
                                             </item>
                                         </item>
 
@@ -48,7 +78,5 @@
             </arguments>
         </referenceBlock>
 
-        <!-- 移除进度条模板引用 -->
-        <remove name="checkout.progress"/>
     </body>
 </page>
