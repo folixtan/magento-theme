@@ -2,26 +2,18 @@
 
 虚拟商品的一步结账模块。
 
-## 支付渲染流程
-
-1. `payments-list` (list.js) → `Magento_Checkout/payment-methods/list`
-2. list.js 的 `createRenderer` 根据 `rendererList` 动态创建每个支付方式
-3. 每个支付方式渲染器默认是 `Magento_Checkout/js/view/payment/default`
-4. 每个支付方式模板（如 free.html）包含自己的 Place Order 按钮
-5. 按钮绑定到支付方式组件的 `placeOrder` 方法
-
 ## 实现方式
 
-1. **禁用 progressBar, estimation, shipping-step**
-2. **覆盖 sidebar.template** 为 Folix_OneStepCheckout/sidebar
-3. **在 sidebar.html 中添加 place-order region**
-4. **添加 place-order 组件** 到 sidebar.children
+利用 Magento XML 合并机制：
+- 结构相同时会合并，不会替换
+- 在 `payment.children.afterMethods.children` 中添加 `place-order` 组件
+- `afterMethods` region 在每个支付方式之后渲染
 
 ## 关键点
 
-- 必须复制完整的 sidebar.children 结构，否则会丢失 summary 和 shipping-information
-- place-order 组件调用 `placeOrderAction` 进行下单
-- 组件通过 `quote.paymentMethod()` 获取选中的支付方式
+1. **禁用 progressBar, estimation, shipping-step**
+2. **在 payment.afterMethods 中添加 place-order 组件**（Magento 会合并）
+3. **通过 CSS 隐藏每个支付方式内的 Place Order 按钮**
 
 ## 文件
 
@@ -34,9 +26,7 @@ Folix_OneStepCheckout/
     └── web/
         ├── css/source/_folix-one-step-checkout.less
         ├── js/view/place-order-button.js
-        └── template/
-            ├── sidebar.html
-            └── place-order-button.html
+        └── template/place-order-button.html
 ```
 
 ## 部署

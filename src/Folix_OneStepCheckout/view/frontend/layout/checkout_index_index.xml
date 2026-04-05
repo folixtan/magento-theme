@@ -3,7 +3,12 @@
 /**
  * Folix One Step Checkout
  * 
- * 注意：必须复制完整的 sidebar.children，否则会丢失 summary 和 shipping-information
+ * Magento XML 合并机制：结构相同就会合并/新增
+ * 
+ * 思路：
+ * 1. 禁用 progressBar, estimation, shipping-step
+ * 2. 在 payment.children.afterMethods 中添加 place-order 组件
+ * 3. 由于 afterMethods 是在每个支付方式之后，Place Order 按钮会显示在支付方式列表下方
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -40,35 +45,27 @@
                             </item>
                         </item>
                         
-                        <!-- 覆盖 sidebar -->
-                        <item name="sidebar" xsi:type="array">
-                            <item name="config" xsi:type="array">
-                                <item name="template" xsi:type="string">Folix_OneStepCheckout/sidebar</item>
-                            </item>
+                        <!-- 在 payment.children.afterMethods 中添加 place-order -->
+                        <!-- Magento 会合并，不会替换 -->
+                        <item name="steps" xsi:type="array">
                             <item name="children" xsi:type="array">
-                                <!-- 保留 summary -->
-                                <item name="summary" xsi:type="array">
-                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/summary</item>
-                                    <item name="displayArea" xsi:type="string">summary</item>
-                                    <item name="config" xsi:type="array">
-                                        <item name="template" xsi:type="string">Magento_Checkout/summary</item>
-                                    </item>
-                                </item>
-                                <!-- 添加 place-order -->
-                                <item name="place-order" xsi:type="array">
-                                    <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
-                                    <item name="displayArea" xsi:type="string">place-order</item>
-                                    <item name="sortOrder" xsi:type="string">100</item>
-                                    <item name="config" xsi:type="array">
-                                        <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
-                                    </item>
-                                </item>
-                                <!-- 保留 shipping-information -->
-                                <item name="shipping-information" xsi:type="array">
-                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/shipping-information</item>
-                                    <item name="displayArea" xsi:type="string">shipping-information</item>
-                                    <item name="config" xsi:type="array">
-                                        <item name="deps" xsi:type="string">checkout.steps.shipping-step.shippingAddress</item>
+                                <item name="billing-step" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="payment" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="afterMethods" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="place-order" xsi:type="array">
+                                                            <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
+                                                            <item name="sortOrder" xsi:type="string">100</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
                                     </item>
                                 </item>
                             </item>

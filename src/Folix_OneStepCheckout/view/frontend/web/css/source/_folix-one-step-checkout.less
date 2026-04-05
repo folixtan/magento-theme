@@ -1,62 +1,90 @@
-//
-// Folix One Step Checkout - Styles
-//
+// /**
+//  * Folix One Step Checkout - Styles
+//  * 
+//  * 游戏主题适配：隐藏支付方式内的 Place Order 按钮
+//  * Place Order 按钮统一显示在右侧摘要底部
+//  */
 
-// 隐藏每个支付方式内的 Place Order 按钮
-.checkout-payment-method {
+// 隐藏每个支付方式内的 Place Order 按钮（因为已移到右侧摘要）
+.opc-sidebar {
     .actions-toolbar {
-        .action.primary.checkout {
-            display: none !important;
+        .primary {
+            #payment {
+                .actions-toolbar {
+                    display: none !important;
+                }
+            }
         }
     }
 }
 
-// Place Order 按钮样式
+// 隐藏支付方法中的 "Continue" 按钮区域
+.payment-method-content {
+    > .actions-toolbar {
+        display: none !important;
+    }
+}
+
+// Folix Place Order 按钮样式
 .folix-place-order {
-    padding-top: 20px;
     margin-top: 20px;
-    border-top: 1px solid @color-gray80;
-    
+    padding-top: 20px;
+    border-top: 1px solid @color-gray-light3;
+
     .primary {
         width: 100%;
+
+        .checkout {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            background: #ff6b35;
+            border-color: #ff6b35;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            &:hover {
+                background: darken(#ff6b35, 10%);
+                border-color: darken(#ff6b35, 10%);
+            }
+
+            &:disabled {
+                background: #ccc;
+                border-color: #ccc;
+            }
+        }
     }
-    
-    .action.primary.checkout {
-        width: 100%;
-        padding: 16px;
-        font-size: 18px;
-        font-weight: @font-weight__bold;
-        background: @folix-primary;
-        border: none;
+
+    .message.error {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+        background: #fff0f0;
+        border: 1px solid #ffcccc;
         border-radius: 4px;
-        color: @white;
-        
-        &:hover {
-            background: @folix-primary-dark;
-        }
-        
-        &:disabled {
-            background: @color-gray80;
-            opacity: 0.6;
+        color: #d63031;
+
+        span {
+            display: block;
         }
     }
 }
 
-// 错误消息
-.message-error {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #fff4f4;
-    border-left: 3px solid #ed1c24;
-    color: #ed1c24;
+// 隐藏原有的 checkout-agreement 按钮（如果有）
+.checkout-agreements-block {
+    & + .actions-toolbar {
+        display: none !important;
+    }
 }
 
-// 隐藏进度条
-.opc-progress-bar {
-    display: none !important;
-}
-
-// 隐藏配送信息
-.opc-block-shipping-information {
-    display: none;
+// 响应式
+@media (max-width: @mobile-breakpoint) {
+    .folix-place-order {
+        .primary {
+            .checkout {
+                font-size: 16px;
+                padding: 15px;
+            }
+        }
+    }
 }
