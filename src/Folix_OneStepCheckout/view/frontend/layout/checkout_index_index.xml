@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Folix One Step Checkout - 在 summary 中添加 Place Order
+ * Folix One Step Checkout
+ * 
+ * 注意：必须复制完整的 sidebar.children，否则会丢失 summary 和 shipping-information
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <!-- 禁用 progressBar 和 estimation -->
         <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
+                        <!-- 禁用 progressBar 和 estimation -->
                         <item name="checkout" xsi:type="array">
                             <item name="children" xsi:type="array">
                                 <item name="progressBar" xsi:type="array">
@@ -44,19 +46,29 @@
                                 <item name="template" xsi:type="string">Folix_OneStepCheckout/sidebar</item>
                             </item>
                             <item name="children" xsi:type="array">
+                                <!-- 保留 summary -->
                                 <item name="summary" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/summary</item>
+                                    <item name="displayArea" xsi:type="string">summary</item>
                                     <item name="config" xsi:type="array">
-                                        <item name="template" xsi:type="string">Folix_OneStepCheckout/summary</item>
+                                        <item name="template" xsi:type="string">Magento_Checkout/summary</item>
                                     </item>
-                                    <item name="children" xsi:type="array">
-                                        <!-- 在 summary.children 中添加 place-order -->
-                                        <item name="place-order" xsi:type="array">
-                                            <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
-                                            <item name="sortOrder" xsi:type="string">100</item>
-                                            <item name="config" xsi:type="array">
-                                                <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
-                                            </item>
-                                        </item>
+                                </item>
+                                <!-- 添加 place-order -->
+                                <item name="place-order" xsi:type="array">
+                                    <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
+                                    <item name="displayArea" xsi:type="string">place-order</item>
+                                    <item name="sortOrder" xsi:type="string">100</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Folix_OneStepCheckout/place-order-button</item>
+                                    </item>
+                                </item>
+                                <!-- 保留 shipping-information -->
+                                <item name="shipping-information" xsi:type="array">
+                                    <item name="component" xsi:type="string">Magento_Checkout/js/view/shipping-information</item>
+                                    <item name="displayArea" xsi:type="string">shipping-information</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="deps" xsi:type="string">checkout.steps.shipping-step.shippingAddress</item>
                                     </item>
                                 </item>
                             </item>

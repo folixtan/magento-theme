@@ -1,7 +1,7 @@
 /**
  * Folix One Step Checkout - Place Order Button
  * 
- * 放在 sidebar.summary.children 中
+ * 放在 sidebar 的 place-order region 中
  * 调用原生 place-order action
  */
 define([
@@ -38,18 +38,22 @@ define([
         initialize: function () {
             this._super();
             this.messageContainer = new Messages();
+            
+            // 解决账单地址
             checkoutDataResolver.resolveBillingAddress();
         },
         
         /**
          * 检查是否选择了支付方式
+         * @returns {boolean}
          */
         isPaymentSelected: function () {
             return quote.paymentMethod() !== null;
         },
         
         /**
-         * 获取选中的支付方式数据
+         * 获取选中的支付方式数据（格式与 payment/default.js 一致）
+         * @returns {Object|null}
          */
         getSelectedPaymentMethod: function () {
             var method = quote.paymentMethod();
@@ -73,7 +77,7 @@ define([
                 event.preventDefault();
             }
             
-            // 验证支付方式
+            // 1. 检查是否选择了支付方式
             if (!this.isPaymentSelected()) {
                 this.messageContainer.addErrorMessage({
                     message: $t('Please select a payment method.')
@@ -81,26 +85,35 @@ define([
                 return false;
             }
             
-            // 验证
+            // 2. 运行额外验证器
             if (!additionalValidators.validate()) {
                 return false;
             }
             
+            // 3. 禁用按钮
             this.isPlaceOrderActionAllowed(false);
             
-            // 调用 place-order
+            // 4. 调用 place-order action
             $.when(placeOrderAction(this.getSelectedPaymentMethod(), this.messageContainer))
                 .done(function () {
+                    // 成功，重定向
                     redirectOnSuccessAction.execute();
                 })
+                .fail(function () {
+                    // 失败，错误消息由 messageContainer 显示
+                })
                 .always(function () {
+                    // 重新启用按钮
                     self.isPlaceOrderActionAllowed(true);
                 });
             
             return true;
         },
         
-        /** @observable */
+        /**
+         * 按钮是否允许点击
+         * @returns {boolean}
+         */
         isPlaceOrderActionAllowed: ko.observable(true)
     });
 });

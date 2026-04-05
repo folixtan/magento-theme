@@ -2,38 +2,41 @@
 
 虚拟商品的一步结账模块。
 
-## 核心理解
+## 支付渲染流程
 
-Magento Checkout 组件渲染流程：
-
-1. `onepage.phtml` → 初始化 `checkout` 组件
-2. `checkout` 组件 → template: `Magento_Checkout/onepage`
-3. `onepage.html` → 使用 `getRegion()` 渲染 children
-4. `sidebar` 组件 → template: `Magento_Checkout/sidebar`
-5. `sidebar.html` → 使用 `getRegion('summary')` 渲染
-6. `summary` 组件 → template: `Magento_Checkout/summary`
-7. **`summary.html` → 使用 `elems()` 自动渲染所有 children！**
-
-**关键点：不需要重写 sidebar.html 或 summary.html！**
+1. `payments-list` (list.js) → `Magento_Checkout/payment-methods/list`
+2. list.js 的 `createRenderer` 根据 `rendererList` 动态创建每个支付方式
+3. 每个支付方式渲染器默认是 `Magento_Checkout/js/view/payment/default`
+4. 每个支付方式模板（如 free.html）包含自己的 Place Order 按钮
+5. 按钮绑定到支付方式组件的 `placeOrder` 方法
 
 ## 实现方式
 
-通过 XML 在 `sidebar.children.summary.children` 中添加 `place-order` 组件：
-- summary.html 使用 `elems()` 自动渲染所有 children
-- Place Order 按钮会自动显示在 summary 中
+1. **禁用 progressBar, estimation, shipping-step**
+2. **覆盖 sidebar.template** 为 Folix_OneStepCheckout/sidebar
+3. **在 sidebar.html 中添加 place-order region**
+4. **添加 place-order 组件** 到 sidebar.children
 
-## 文件结构
+## 关键点
+
+- 必须复制完整的 sidebar.children 结构，否则会丢失 summary 和 shipping-information
+- place-order 组件调用 `placeOrderAction` 进行下单
+- 组件通过 `quote.paymentMethod()` 获取选中的支付方式
+
+## 文件
 
 ```
 Folix_OneStepCheckout/
-├── etc/module.xml              # 模块配置
-├── registration.php             # 模块注册
+├── etc/module.xml
+├── registration.php
 └── view/frontend/
-    ├── layout/checkout_index_index.xml   # 布局配置
+    ├── layout/checkout_index_index.xml
     └── web/
-        ├── css/source/_folix-one-step-checkout.less  # 样式
-        ├── js/view/place-order-button.js  # Place Order 按钮逻辑
-        └── template/place-order-button.html  # 按钮模板
+        ├── css/source/_folix-one-step-checkout.less
+        ├── js/view/place-order-button.js
+        └── template/
+            ├── sidebar.html
+            └── place-order-button.html
 ```
 
 ## 部署
