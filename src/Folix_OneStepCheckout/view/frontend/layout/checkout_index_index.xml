@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
- * Folix One Step Checkout - Checkout Layout Override
- * 
- * 虚拟商品的一步结账
- * 
- * 结构理解：
- * - components.checkout.template = Magento_Checkout/onepage
- * - onepage.html 使用 getRegion() 渲染 children
- * - sidebar.template = Magento_Checkout/sidebar
- * - sidebar.html 使用 getRegion('summary') 渲染 children.summary
- * - summary.template = Magento_Checkout/summary
- * - summary.html 使用 elems() 渲染所有 children
- * 
- * 所以：只需要在 sidebar.children.summary.children 中添加 place-order
- * 不需要重写任何模板！
+ * Folix One Step Checkout - 在 summary 中添加 Place Order
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="checkout.root">
+        <!-- 禁用 progressBar 和 estimation -->
+        <referenceBlock name="checkout.root">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">
                     <item name="components" xsi:type="array">
-                        <!-- 禁用 progressBar -->
                         <item name="checkout" xsi:type="array">
                             <item name="children" xsi:type="array">
                                 <item name="progressBar" xsi:type="array">
@@ -51,13 +38,18 @@
                             </item>
                         </item>
                         
-                        <!-- 在 summary.children 中添加 place-order -->
-                        <!-- 不需要覆盖 sidebar.template，因为 summary.html 使用 elems() 自动渲染 -->
+                        <!-- 覆盖 sidebar -->
                         <item name="sidebar" xsi:type="array">
+                            <item name="config" xsi:type="array">
+                                <item name="template" xsi:type="string">Folix_OneStepCheckout/sidebar</item>
+                            </item>
                             <item name="children" xsi:type="array">
                                 <item name="summary" xsi:type="array">
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Folix_OneStepCheckout/summary</item>
+                                    </item>
                                     <item name="children" xsi:type="array">
-                                        <!-- 添加 Place Order 按钮到 summary -->
+                                        <!-- 在 summary.children 中添加 place-order -->
                                         <item name="place-order" xsi:type="array">
                                             <item name="component" xsi:type="string">Folix_OneStepCheckout/js/view/place-order-button</item>
                                             <item name="sortOrder" xsi:type="string">100</item>
@@ -72,6 +64,6 @@
                     </item>
                 </argument>
             </arguments>
-        </referenceContainer>
+        </referenceBlock>
     </body>
 </page>

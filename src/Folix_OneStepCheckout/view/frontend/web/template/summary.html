@@ -1,0 +1,13 @@
+<!--
+/**
+ * Folix One Step Checkout - Summary Template
+ * 
+ * 在 itemsAfter 后添加 Place Order 按钮
+ */
+-->
+<div class="opc-block-summary" data-bind="blockLoader: isLoading">
+    <span data-bind="i18n: 'Order Summary'" class="title"></span>
+    <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</div>
