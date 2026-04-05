@@ -5,28 +5,29 @@
 ## 实现方式
 
 ### 1. XML 布局
-在 `sidebar.children` 中添加 `place-order` 组件：
+禁用 `progressBar`、`estimation`、`shipping-step`，在 `sidebar` 中添加 `place-order` 组件。
 
-```xml
-<item name="sidebar">
-    <item name="children">
-        <item name="place-order">
-            <item name="component">Folix_OneStepCheckout/js/view/place-order-button</item>
-        </item>
-    </item>
-</item>
-```
-
-### 2. Place Order 按钮组件
-通过 `uiRegistry` 获取当前选中的支付方式组件，调用其 `placeOrder` 方法：
+### 2. Step Navigator Mixin
+修改 `step-navigator.js`，跳过禁用的步骤：
 
 ```javascript
-placeOrder: function () {
-    var componentName = 'checkout.steps.billing-step.payment.payments-list.' + method.method;
-    registry.get(componentName, function (paymentComponent) {
-        paymentComponent.placeOrder();  // 调用支付方式组件的 placeOrder
-    });
-}
+stepNavigator.getVisibleSteps = function () {
+    // 只返回 isVisible() === true 的步骤
+};
+stepNavigator.next = function () {
+    // 跳到下一个可见步骤
+};
+```
+
+### 3. Place Order 按钮
+通过 `uiRegistry` 获取选中的支付方式组件，调用其 `placeOrder` 方法：
+
+```javascript
+registry.get('checkout.steps.billing-step.payment.payments-list.' + method.method, 
+    function (paymentComponent) {
+        paymentComponent.placeOrder();  // 调用原生 placeOrder
+    }
+);
 ```
 
 ## 核心文件
@@ -37,9 +38,12 @@ Folix_OneStepCheckout/
 ├── registration.php
 └── view/frontend/
     ├── layout/checkout_index_index.xml
+    ├── requirejs-config.js
     └── web/
         ├── css/source/_folix-one-step-checkout.less
-        ├── js/view/place-order-button.js
+        ├── js/
+        │   ├── mixin/step-navigator-mixin.js
+        │   └── view/place-order-button.js
         └── template/place-order-button.html
 ```
 
